@@ -1,0 +1,40 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from WineCellarService WSDL service -->
+
+  <service name="WineCellar" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://ws.wine.lka"/>
+      <parameter name="wsdlServiceElement" value="WineCellarService"/>
+      <parameter name="schemaQualified" value="http://dao.wine.lka,http://ws.wine.lka"/>
+      <parameter name="wsdlServicePort" value="WineCellar"/>
+      <parameter name="className" value="lka.wine.ws.WineCellarSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="WineCellar"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="multiply" qname="operNS:multiply" xmlns:operNS="http://ws.wine.lka" returnQName="retNS:multiplyReturn" xmlns:retNS="http://ws.wine.lka" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:x" xmlns:pns="http://ws.wine.lka" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:y" xmlns:pns="http://ws.wine.lka" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getVineyards" qname="operNS:getVineyards" xmlns:operNS="http://ws.wine.lka" returnQName="retNS:getVineyardsReturn" xmlns:retNS="http://ws.wine.lka" returnType="rtns:Vineyard" xmlns:rtns="http://dao.wine.lka" soapAction="" >
+      </operation>
+      <parameter name="allowedMethods" value="multiply getVineyards"/>
+
+      <typeMapping
+        xmlns:ns="http://dao.wine.lka"
+        qname="ns:Vineyard"
+        type="java:lka.wine.dao.Vineyard"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

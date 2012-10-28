@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://services.wine.lka" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://services.wine.lka" xmlns:intf="http://services.wine.lka" xmlns:tns1="http://dao.wine.lka" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://services.wine.lka" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://dao.wine.lka"/>
+   <element name="multiply">
+    <complexType>
+     <sequence>
+      <element name="x" type="xsd:int"/>
+      <element name="y" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="multiplyResponse">
+    <complexType>
+     <sequence>
+      <element name="multiplyReturn" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getVineyards">
+    <complexType/>
+   </element>
+   <element name="getVineyardsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getVineyardsReturn" type="tns1:Vineyard"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://dao.wine.lka" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="Vineyard">
+    <sequence>
+     <element name="_vineyard" nillable="true" type="xsd:string"/>
+     <element name="_vineyardId" type="xsd:int"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getVineyardsResponse">
+
+      <wsdl:part element="impl:getVineyardsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getVineyardsRequest">
+
+      <wsdl:part element="impl:getVineyards" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="multiplyResponse">
+
+      <wsdl:part element="impl:multiplyResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="multiplyRequest">
+
+      <wsdl:part element="impl:multiply" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="WineCellar">
+
+      <wsdl:operation name="multiply">
+
+         <wsdl:input message="impl:multiplyRequest" name="multiplyRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:multiplyResponse" name="multiplyResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getVineyards">
+
+         <wsdl:input message="impl:getVineyardsRequest" name="getVineyardsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getVineyardsResponse" name="getVineyardsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="WineCellarSoapBinding" type="impl:WineCellar">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="multiply">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="multiplyRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="multiplyResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getVineyards">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getVineyardsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getVineyardsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="WineCellarService">
+
+      <wsdl:port binding="impl:WineCellarSoapBinding" name="WineCellar">
+
+         <wsdlsoap:address location="http://localhost:8080/WineCellar/services/WineCellar"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

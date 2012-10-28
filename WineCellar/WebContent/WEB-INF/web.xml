@@ -2,12 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
   <display-name>WineCellar</display-name>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
+	<welcome-file>pages/main.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
     <display-name>Apache-Axis Servlet</display-name>
@@ -36,4 +31,15 @@
     <servlet-name>AdminServlet</servlet-name>
     <url-pattern>/servlet/AdminServlet</url-pattern>
   </servlet-mapping>
+  
+  
+  <servlet>
+  	<servlet-name>getVineyards</servlet-name>
+  	<servlet-class>lka.wine.servlets.VineyardServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>getVineyards</servlet-name>
+  	<url-pattern>/getVineyards</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

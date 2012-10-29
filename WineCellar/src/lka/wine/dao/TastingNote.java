@@ -7,7 +7,7 @@ public class TastingNote {
 	private int wineId;
 	private Date tastingDate;
 	private String reviewedBy;
-	private String reviewed;
+	private String review;
 	private int rating;
 	
 	public int getTastingNoteId() {
@@ -34,11 +34,11 @@ public class TastingNote {
 	public void setReviewedBy(String reviewedBy) {
 		this.reviewedBy = reviewedBy;
 	}
-	public String getReviewed() {
-		return reviewed;
+	public String getReview() {
+		return review;
 	}
-	public void setReviewed(String reviewed) {
-		this.reviewed = reviewed;
+	public void setReview(String review) {
+		this.review = review;
 	}
 	public int getRating() {
 		return rating;

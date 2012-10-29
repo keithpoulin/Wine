@@ -1,9 +1,10 @@
 package lka.wine.servlets;
 
 import lka.wine.dao.Vineyard;
-import lka.wine.services.WineCellar;
+import lka.wine.jdbc.VineyardsTable;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,13 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 public class VineyardServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		WineCellar wc = new WineCellar();
-		Vineyard[] vineyards = null;
+		List<Vineyard> vineyards = null;
 		StringBuilder sb = new StringBuilder();
 		try {
-			vineyards = wc.getVineyards();
+			vineyards = new VineyardsTable().select();
 		} catch (Exception ex) {
-			// TODO Auto-generated catch block
 			ex.printStackTrace();
 			sb.append(ex.getMessage() + "<br/>");
 		}

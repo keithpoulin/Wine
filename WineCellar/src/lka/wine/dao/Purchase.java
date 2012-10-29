@@ -5,19 +5,27 @@ import java.util.Date;
 
 public class Purchase {
 	private int purchaseId;
+	private int locationId;
 	private int wineId;
-	private Date purchateDate;
+	private Date purchaseDate;
 	private BigDecimal price;
 	private String pricePer;
-	private int qtyPurchaced;
+	private int qtyPurchased;
 	private String priceNotes;
 	private int bottlesOnHand;
 	private String invLocation;
+	
 	public int getPurchaseId() {
 		return purchaseId;
 	}
 	public void setPurchaseId(int purchaseId) {
 		this.purchaseId = purchaseId;
+	}
+	public int getLocationId() {
+		return locationId;
+	}
+	public void setLocationId(int locationId) {
+		this.locationId = locationId;
 	}
 	public int getWineId() {
 		return wineId;
@@ -25,11 +33,11 @@ public class Purchase {
 	public void setWineId(int wineId) {
 		this.wineId = wineId;
 	}
-	public Date getPurchateDate() {
-		return purchateDate;
+	public Date getPurchaseDate() {
+		return purchaseDate;
 	}
-	public void setPurchateDate(Date purchateDate) {
-		this.purchateDate = purchateDate;
+	public void setPurchaseDate(Date purchaseDate) {
+		this.purchaseDate = purchaseDate;
 	}
 	public BigDecimal getPrice() {
 		return price;
@@ -43,11 +51,11 @@ public class Purchase {
 	public void setPricePer(String pricePer) {
 		this.pricePer = pricePer;
 	}
-	public int getQtyPurchaced() {
-		return qtyPurchaced;
+	public int getQtyPurchased() {
+		return qtyPurchased;
 	}
-	public void setQtyPurchaced(int qtyPurchaced) {
-		this.qtyPurchaced = qtyPurchaced;
+	public void setQtyPurchased(int qtyPurchased) {
+		this.qtyPurchased = qtyPurchased;
 	}
 	public String getPriceNotes() {
 		return priceNotes;

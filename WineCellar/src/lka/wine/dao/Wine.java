@@ -13,8 +13,6 @@ public class Wine {
 	private String wineDescription;
 	private BigDecimal listPrice;
 	private String inventoryNotes;
-	private List<Purchase> purchases;
-	private List<TastingNote> tastingNotes;
 	
 	public int getWineId() {
 		return wineId;
@@ -70,17 +68,5 @@ public class Wine {
 	public void setInventoryNotes(String inventoryNotes) {
 		this.inventoryNotes = inventoryNotes;
 	}
-	public List<Purchase> getPurchases() {
-		return purchases;
-	}
-	public void setPurchases(List<Purchase> purchases) {
-		this.purchases = purchases;
-	}
-	public List<TastingNote> getTastingNotes() {
-		return tastingNotes;
-	}
-	public void setTastingNotes(List<TastingNote> tastingNotes) {
-		this.tastingNotes = tastingNotes;
-	}	
 
 }

@@ -1,6 +1,5 @@
 package lka.wine.servlets;
 
-import lka.wine.*;
 import lka.wine.dao.Vineyard;
 import lka.wine.services.WineCellar;
 
@@ -11,15 +10,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class VineyardServlet extends HttpServlet{
-	protected void doGet( HttpServletRequest request, HttpServletResponse response)
-	throws ServletException, IOException {
+public class VineyardServlet extends HttpServlet {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		WineCellar wc = new WineCellar();
-		Vineyard[] vineyards = wc.getVineyards();
-		
+		Vineyard[] vineyards = null;
 		StringBuilder sb = new StringBuilder();
-		for (Vineyard v : vineyards){
-			sb.append( v.get_vineyard() + "<br/>");
+		try {
+			vineyards = wc.getVineyards();
+		} catch (Exception ex) {
+			// TODO Auto-generated catch block
+			ex.printStackTrace();
+			sb.append(ex.getMessage() + "<br/>");
+		}
+
+		if (vineyards != null) {
+			for (Vineyard v : vineyards) {
+				sb.append(v.getVineyard() + "<br/>");
+			}
 		}
 		response.getWriter().write(sb.toString());
 	}

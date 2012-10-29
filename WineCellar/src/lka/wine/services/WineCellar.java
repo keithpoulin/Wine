@@ -11,31 +11,31 @@ public class WineCellar {
 		return x * y;
 	}
 	
-	public Vineyard[] getVineyards() {
+	public Vineyard[] getVineyards() throws Exception {
+		/*
 		List<Vineyard> vineyards = new ArrayList<Vineyard>();
 		Vineyard vineyard;
 		vineyard = new Vineyard();
-		vineyard.set_vineyardId(1);
-		vineyard.set_vineyard("MyVineyard");
+		vineyard.setVineyardId(1);
+		vineyard.setVineyard("MyVineyard");
 		vineyards.add(vineyard);
 
 		vineyard = new Vineyard();
-		vineyard.set_vineyardId(2);
-		vineyard.set_vineyard("MyVineyard2");
+		vineyard.setVineyardId(2);
+		vineyard.setVineyard("MyVineyard2");
 		vineyards.add(vineyard);
 
 		vineyard = new Vineyard();
-		vineyard.set_vineyardId(3);
-		vineyard.set_vineyard("MyVineyard3");
+		vineyard.setVineyardId(3);
+		vineyard.setVineyard("MyVineyard3");
 		vineyards.add(vineyard);
 
 		vineyard = new Vineyard();
-		vineyard.set_vineyardId(4);
-		vineyard.set_vineyard("MyVineyard4");
+		vineyard.setVineyardId(4);
+		vineyard.setVineyard("MyVineyard4");
 		vineyards.add(vineyard);
-
-		
-		return vineyards.toArray(new Vineyard[vineyards.size()]);
+		*/
+		List<Vineyard> vineyards =  new lka.wine.jdbc.Vineyard().getVineyards();	
+		return vineyards.toArray(new Vineyard[vineyards.size()]);		
 	}
-	
 }

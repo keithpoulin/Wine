@@ -4,7 +4,6 @@ package lka.wine.jdbc;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-
 /**
  * Class that manages the credentials for connecting to a database.<br>
  * <br>

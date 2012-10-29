@@ -11,3 +11,12 @@ h1{
 	text-shadow: 1px 1px rgba(0, 0, 0, .7);
 	padding: 10px;
 }
+
+div.main{
+	width: 250px;
+	float: left;
+}
+
+div.results{
+	width: 100%; 
+}

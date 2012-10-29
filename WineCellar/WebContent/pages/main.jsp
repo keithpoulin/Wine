@@ -7,9 +7,17 @@
 	
 	<body>
 		<h1>Poulin Wine Cellar</h1>
-		<button id="getVineyards">Get Vineyards</button>
 		
-		<div id="vineyards"></div>
+		<div id="vineyard" class="main">
+			<button id="getVineyards">Get Vineyards</button>
+			<div class="results" id="vineyards"></div>
+		</div>
+		
+		<div id="varietal" class="main">
+			<button id="getVarietals">Get Varietals</button>
+			<div class="results" id="varietals"></div>
+		</div>
+		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>
 		<script src="/js/lib/prefix-free.js" type="text/javascript"></script>

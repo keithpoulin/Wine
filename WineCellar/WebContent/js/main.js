@@ -5,38 +5,55 @@ $(document).ready(function(){
 
 function initializeEvents(){
 	$("#getVineyards").click(function(){
-		$("#vineyards").slideUp(200, function(){
-			getVineyards(null);
-		});		
+		$("#vineyards").html("");
+		getVineyards(null);	
+	});
+	
+	$("#getVarietals").click(function(){
+		$("#varietals").html("");
+		getVarietals(null);
 	});
 }
 
 function initializeAppearance(){
-	$("#getVineyards").button();
+	$("#getVarietals, #getVineyards").button();
+	
 }
 
-function getArticles(args){
+function getVarietals(args){
+	$("#varietals").html(pleaseWait());
 	$.ajax({
-		url: "http://www.benzawacki.com/article.jsp?num=all&index=0&dir=ascending",
+		url: "/getVarietals",
 		data: args,
 		success: function(resp){
-			$("#vineyards").html(resp);
+			$varietals = $("#varietals");
+			displayResults($varietals, resp);
+			$("#getVarietals").button('option', 'label', "Refresh Varietals");
+			$("#getVarietals").button("refresh");
 		}
 	});
 }
 
 function getVineyards(args){
+	$("#vineyards").html(pleaseWait());
 	$.ajax({
 		url: "/getVineyards",
 		data: args,
 		success: function(resp){
 			$vineyards = $("#vineyards");						
-			displayVineyards(resp);
+			displayResults($vineyards, resp);
+			$("#getVineyards").button('option', 'label', "Refresh Vineyards");
+			$("#getVineyards").button("refresh");
 		}
 	});
 }
 
-function displayVineyards(vineyards){
-	$("#vineyards").html(vineyards);
-	$vineyards.slideDown(500);
+function displayResults($target, content){
+	$target.html(content);
+	$target.hide();
+	$target.slideDown(600);
+}
+
+function pleaseWait(){
+	return "Getting Data. Please Wait...";
 }

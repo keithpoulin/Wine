@@ -1,7 +1,6 @@
 package lka.wine.dao;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 public class Wine {
 	private int wineId;

@@ -30,6 +30,8 @@ public class WinesTable extends AbstractTable<Wine> {
 	
 	@Override
 	protected void preGetObjects() throws Exception {
+		// Refresh the maps that are used to lookup related
+		// objects based on the ids.
 		List<Brand> brands = new BrandsTable().select();
 		brandsMap = new HashMap<Integer, Brand>();
 		for(Brand brand: brands) {
@@ -59,7 +61,15 @@ public class WinesTable extends AbstractTable<Wine> {
 	public Wine getObject(ResultSet rs) throws SQLException {
 		Wine Wine = new Wine();	
 		Wine.setWineId(rs.getInt("WineID"));
-		//Wine.setWineName(rs.getString("WineName"));
+		Wine.setVineyard(vineyardsMap.get(rs.getInt("VineyardID")));
+		Wine.setBrand(brandsMap.get(rs.getInt("BrandID")));
+		Wine.setVarietal(varietalsMap.get(rs.getInt("VarietalID")));
+		Wine.setRegion(regionsMap.get(rs.getInt("RegionID")));
+		Wine.setVintageYear(rs.getInt("VintageYear"));
+		Wine.setWineDescription(rs.getString("WineDescription"));
+		Wine.setListPrice(rs.getBigDecimal("ListPrice"));
+		Wine.setInventoryNotes(rs.getString("InventoryNotes"));
+
 		return Wine;
 	}
 

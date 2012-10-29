@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import lka.wine.dao.Brand;
-
 public abstract class AbstractTable<T> {
 
 	public abstract String getTableName();

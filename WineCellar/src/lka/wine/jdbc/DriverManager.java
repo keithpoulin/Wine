@@ -15,27 +15,27 @@ import java.sql.SQLException;
  */
 public class DriverManager {
 
-  private final static String _driverName;
-  private final static String _url;
+  private final static String driverName;
+  private final static String url;
 
 
   static {
 
-    _driverName = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    _url = System.getProperty("JDBC_CONNECTION_STRING");
+    driverName = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+    url = System.getProperty("JDBC_CONNECTION_STRING");
   }
 
   public static Connection getConnection()
       throws SQLException, ClassNotFoundException {
     loadDriver();
     Connection connection =
-        java.sql.DriverManager.getConnection(_url);
+        java.sql.DriverManager.getConnection(url);
     return connection;
   }
 
   protected static void loadDriver()
       throws ClassNotFoundException {
-    Class.forName(_driverName);
+    Class.forName(driverName);
   }
 
 }

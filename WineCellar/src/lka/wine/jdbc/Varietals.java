@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Varietals {
 
-	private final static String _selectAll = "SELECT * FROM Varietals";
+	private final static String selectAll = "SELECT * FROM Varietals";
 
 	public List<lka.wine.dao.Varietal> getVarietals() throws Exception {
 
@@ -18,7 +18,7 @@ public class Varietals {
 
 		try {
 			cn = DriverManager.getConnection();
-			cstmt = cn.prepareCall(_selectAll);
+			cstmt = cn.prepareCall(selectAll);
 			cstmt.execute();
 
 			return getVarietals(cstmt.getResultSet());

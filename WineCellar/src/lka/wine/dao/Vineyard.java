@@ -1,20 +1,20 @@
 package lka.wine.dao;
 
 public class Vineyard {
-	private int vineyardId_;
-	private String vineyard_;
+	private int vineyardId;
+	private String vineyard;
 
 	public int getVineyardId() {
-		return vineyardId_;
+		return vineyardId;
 	}
 	public void setVineyardId(int argVineyardId) {
-		this.vineyardId_ = argVineyardId;
+		this.vineyardId = argVineyardId;
 	}
 	public String getVineyard() {
-		return vineyard_;
+		return vineyard;
 	}
 	public void setVineyard(String argVineyard) {
-		this.vineyard_ = argVineyard;
+		this.vineyard = argVineyard;
 	}
 	
 }

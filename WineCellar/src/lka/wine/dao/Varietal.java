@@ -1,26 +1,26 @@
 package lka.wine.dao;
 
 public class Varietal {
-	private int varietalId_;
-	private String varietal_;
-	private String type_;
+	private int varietalId;
+	private String varietal;
+	private String type;
 	
 	public int getVarietalId() {
-		return varietalId_;
+		return varietalId;
 	}
 	public void setVarietalId(int varietalId) {
-		this.varietalId_ = varietalId;
+		this.varietalId = varietalId;
 	}
 	public String getVarietal() {
-		return varietal_;
+		return varietal;
 	}
 	public void setVarietal(String varietal) {
-		this.varietal_ = varietal;
+		this.varietal = varietal;
 	}
 	public String getType() {
-		return type_;
+		return type;
 	}
 	public void setType(String type) {
-		this.type_ = type;
+		this.type = type;
 	}
 }

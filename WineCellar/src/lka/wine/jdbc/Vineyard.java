@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Vineyard {
 
-	private final static String _selectAll = "SELECT * FROM Vineyards";
+	private final static String selectAll = "SELECT * FROM Vineyards";
 
 	public List<lka.wine.dao.Vineyard> getVineyards() throws Exception {
 
@@ -18,7 +18,7 @@ public class Vineyard {
 
 		try {
 			cn = DriverManager.getConnection();
-			cstmt = cn.prepareCall(_selectAll);
+			cstmt = cn.prepareCall(selectAll);
 			cstmt.execute();
 
 			return getVineyards(cstmt.getResultSet());

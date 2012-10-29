@@ -1,0 +1,13 @@
+body{
+	background-image: url(/images/backgrounds/gray-paper.png);
+	text-shadow: 1px 1px rgba(255, 255, 255, .7);
+}
+
+h1{
+	background-image: linear-gradient(top, #E3146E 0%, #780B07 100%);
+	text-align: center;
+	border-radius: 10px;
+	color: white;
+	text-shadow: 1px 1px rgba(0, 0, 0, .7);
+	padding: 10px;
+}

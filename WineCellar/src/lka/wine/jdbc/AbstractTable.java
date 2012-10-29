@@ -115,7 +115,6 @@ public abstract class AbstractTable<T> {
 	protected String getDeleteSql() {
 		String idColumnName = getIdColumnName();
 		StringBuilder sb = new StringBuilder();
-		String separator = "";
 		sb.append("DELETE ");
 		sb.append(getTableName());
 		sb.append(" WHERE ");

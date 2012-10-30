@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractTable<T> {
+public abstract class AbstractData<T> {
 
 	public abstract String getTableName();
 	public abstract String getIdColumnName();

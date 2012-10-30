@@ -7,7 +7,7 @@ import java.util.List;
 
 import lka.wine.dao.TastingNote;
 
-public class TastingNotesTable extends AbstractTable<TastingNote> {
+public class TastingNotesTable extends AbstractData<TastingNote> {
 
 	private final static String tableName = "TastingNotes";
 	private final static List<String> columnNames = Arrays.asList("TastingNoteID", "WineID", "TastingDate", "ReviewedBy", "Review", "Rating");

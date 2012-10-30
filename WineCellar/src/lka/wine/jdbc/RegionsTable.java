@@ -7,7 +7,7 @@ import java.util.List;
 
 import lka.wine.dao.Region;
 
-public class RegionsTable extends AbstractTable<Region> {
+public class RegionsTable extends AbstractData<Region> {
 
 	private final static String tableName = "Regions";
 	private final static List<String> columnNames = Arrays.asList("RegionID", "Region", "SubRegion");

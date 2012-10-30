@@ -14,7 +14,7 @@ import lka.wine.dao.Varietal;
 import lka.wine.dao.Vineyard;
 import lka.wine.dao.Wine;
 
-public class WinesTable extends AbstractTable<Wine> {
+public class WinesTable extends AbstractData<Wine> {
 
 	private final static String tableName = "Wines";
 	private final static List<String> columnNames = Arrays.asList(

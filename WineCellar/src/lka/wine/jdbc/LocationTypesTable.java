@@ -7,7 +7,7 @@ import java.util.List;
 
 import lka.wine.dao.LocationType;
 
-public class LocationTypesTable extends AbstractTable<LocationType> {
+public class LocationTypesTable extends AbstractData<LocationType> {
 
 	private final static String tableName = "LocationTypes";
 	private final static List<String> columnNames = Arrays.asList("LocationTypeID", "LocationType");

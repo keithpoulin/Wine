@@ -59,18 +59,18 @@ public class WinesTable extends AbstractData<Wine> {
 
 	@Override
 	public Wine getObject(ResultSet rs) throws SQLException {
-		Wine Wine = new Wine();	
-		Wine.setWineId(rs.getInt("WineID"));
-		Wine.setVineyard(vineyardsMap.get(rs.getInt("VineyardID")));
-		Wine.setBrand(brandsMap.get(rs.getInt("BrandID")));
-		Wine.setVarietal(varietalsMap.get(rs.getInt("VarietalID")));
-		Wine.setRegion(regionsMap.get(rs.getInt("RegionID")));
-		Wine.setVintageYear(rs.getInt("VintageYear"));
-		Wine.setWineDescription(rs.getString("WineDescription"));
-		Wine.setListPrice(rs.getBigDecimal("ListPrice"));
-		Wine.setInventoryNotes(rs.getString("InventoryNotes"));
+		Wine wine = new Wine();	
+		wine.setWineId(rs.getInt("WineID"));
+		wine.setVineyard(vineyardsMap.get(rs.getInt("VineyardID")));
+		wine.setBrand(brandsMap.get(rs.getInt("BrandID")));
+		wine.setVarietal(varietalsMap.get(rs.getInt("VarietalID")));
+		wine.setRegion(regionsMap.get(rs.getInt("RegionID")));
+		wine.setVintageYear(rs.getInt("VintageYear"));
+		wine.setWineDescription(rs.getString("WineDescription"));
+		wine.setListPrice(rs.getBigDecimal("ListPrice"));
+		wine.setInventoryNotes(rs.getString("InventoryNotes"));
 
-		return Wine;
+		return wine;
 	}
 
 	@Override

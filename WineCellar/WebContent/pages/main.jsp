@@ -17,6 +17,11 @@
 			<button id="getVarietals">Get Varietals</button>
 			<div class="results" id="varietals"></div>
 		</div>
+
+		<div id="wine" class="main">
+			<button id="getWines">Get Wines</button>
+			<div class="results" id="wines"></div>
+		</div>
 		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>

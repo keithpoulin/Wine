@@ -51,5 +51,13 @@
   	<url-pattern>/getVarietals</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  	<servlet-name>getWines</servlet-name>
+  	<servlet-class>lka.wine.servlets.WineServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>getWines</servlet-name>
+  	<url-pattern>/getWines</url-pattern>
+  </servlet-mapping>
   
 </web-app>

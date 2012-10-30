@@ -13,10 +13,15 @@ function initializeEvents(){
 		$("#varietals").html("");
 		getVarietals(null);
 	});
+	
+	$("#getWines").click(function(){
+		$("#wines").html("");
+		getWines(null);
+	});
 }
 
 function initializeAppearance(){
-	$("#getVarietals, #getVineyards").button();
+	$("#getVarietals, #getVineyards, #getWines").button();
 	
 }
 
@@ -48,6 +53,19 @@ function getVineyards(args){
 	});
 }
 
+function getWines(args){
+	$("#wines").html(pleaseWait());
+	$.ajax({
+		url: "/getWines",
+		data: args,
+		success: function(resp){
+			$wines = $("#wines");						
+			displayResults($wines, resp);
+			$("#getWines").button('option', 'label', "Refresh Wines");
+			$("#getWines").button("refresh");
+		}
+	});
+}
 function displayResults($target, content){
 	$target.html(content);
 	$target.hide();

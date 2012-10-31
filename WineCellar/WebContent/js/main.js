@@ -54,7 +54,7 @@ function initializeAppearance(){
 function getVarietals(args){
 	$("#varietals").html(msgPleaseWait());
 	$.ajax({
-		url: "/getVarietals",
+		url: "/getLookupData",
 		data: args,
 		dataType: "json",
 		success: function(resp){
@@ -69,7 +69,7 @@ function getVarietals(args){
 function getVineyards(args){
 	$("#vineyards").html(msgPleaseWait());
 	$.ajax({
-		url: "/getVineyards",
+		url: "/getLookupData",
 		data: args,
 		dataType: "json",
 		success: function(resp){
@@ -131,6 +131,7 @@ function getVarietalsArgs(){
 //	var param = $("#varietalParams").val();
 //	var value = $("#varietalParamValue").val();
 	var args = {};
+	args["lookupDataType"] = "Varietals";
 //	args[param.toLowerCase()] = value;
 	return args;
 }
@@ -139,6 +140,7 @@ function getVineyardsArgs(){
 //	var param = $("#vineyardParams").val();
 //	var value = $("#vineyardParamValue").val();
 	var args = {};
+	args["lookupDataType"] = "Vineyards";
 //	args[param.toLowerCase()] = value;
 	return args;
 }

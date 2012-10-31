@@ -31,26 +31,17 @@
     <servlet-name>AdminServlet</servlet-name>
     <url-pattern>/servlet/AdminServlet</url-pattern>
   </servlet-mapping>
-  
-  
+   
+
   <servlet>
-  	<servlet-name>getVineyards</servlet-name>
-  	<servlet-class>lka.wine.servlets.VineyardServlet</servlet-class>
+  	<servlet-name>getLookupData</servlet-name>
+  	<servlet-class>lka.wine.servlets.LookupDataServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>getVineyards</servlet-name>
-  	<url-pattern>/getVineyards</url-pattern>
+  	<servlet-name>getLookupData</servlet-name>
+  	<url-pattern>/getLookupData</url-pattern>
   </servlet-mapping>
-  
-  <servlet>
-  	<servlet-name>getVarietals</servlet-name>
-  	<servlet-class>lka.wine.servlets.VarietalServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>getVarietals</servlet-name>
-  	<url-pattern>/getVarietals</url-pattern>
-  </servlet-mapping>
-  
+
   <servlet>
   	<servlet-name>getWines</servlet-name>
   	<servlet-class>lka.wine.servlets.WineServlet</servlet-class>
@@ -76,15 +67,6 @@
   <servlet-mapping>
   	<servlet-name>getWineDetails</servlet-name>
   	<url-pattern>/getWineDetails</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-  	<servlet-name>getLookupData</servlet-name>
-  	<servlet-class>lka.wine.servlets.LookupDataServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>getLookupData</servlet-name>
-  	<url-pattern>/getLookupData</url-pattern>
   </servlet-mapping>
   
 </web-app>

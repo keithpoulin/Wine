@@ -77,5 +77,14 @@
   	<servlet-name>getWineDetails</servlet-name>
   	<url-pattern>/getWineDetails</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+  	<servlet-name>getLookupData</servlet-name>
+  	<servlet-class>lka.wine.servlets.LookupDataServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>getLookupData</servlet-name>
+  	<url-pattern>/getLookupData</url-pattern>
+  </servlet-mapping>
   
 </web-app>

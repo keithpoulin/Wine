@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 public class VineyardServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -23,11 +25,7 @@ public class VineyardServlet extends HttpServlet {
 			sb.append(ex.getMessage() + "<br/>");
 		}
 
-		if (vineyards != null) {
-			for (Vineyard v : vineyards) {
-				sb.append(v.getVineyard() + "<br/>");
-			}
-		}
-		response.getWriter().write(sb.toString());
+		Gson gson = new Gson();
+		response.getWriter().write(gson.toJson(vineyards));
 	}
 }

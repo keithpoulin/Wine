@@ -6,7 +6,7 @@
 	</head>
 	
 	<body>
-		<h1>Poulin Wine Cellar</h1>
+		<h1 id="title">Poulin Wine Cellar</h1>
 		
 		<div id="vineyard" class="main">
 			<button id="getVineyards">Get Vineyards</button>
@@ -30,6 +30,7 @@
 
 		<div id="wineDetail" class="main">
 			<button id="getWineDetails">Get Wine Details</button>
+			<br/><input id="wineDetailsArg_WineId" placeholder='wineId' value="117"/>
 			<div class="results" id="wineDetails"></div>
 		</div>
 

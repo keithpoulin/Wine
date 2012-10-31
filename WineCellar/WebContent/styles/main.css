@@ -3,13 +3,18 @@ body{
 	text-shadow: 1px 1px rgba(255, 255, 255, .7);
 }
 
-h1{
+#title{
 	background-image: linear-gradient(top, #E3146E 0%, #780B07 100%);
 	text-align: center;
 	border-radius: 10px;
 	color: white;
 	text-shadow: 1px 1px rgba(0, 0, 0, .7);
 	padding: 10px;
+}
+
+h1, h2, h3, h4, h5{
+	padding: 5px;
+	margin: 0px;
 }
 
 div.main{
@@ -20,3 +25,71 @@ div.main{
 div.results{
 	width: 100%; 
 }
+
+ul.results, ul.tastingNotes, ul.purchaseDetails{
+	list-style: none;
+	padding: 0px 0px 0px 5px;
+}
+
+ul.results p{
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+}
+
+ul.results li{
+	margin-bottom: 0px;
+	padding: 5px 5px 5px 5px;
+}
+
+ul.results li:hover{
+	background: lightskyblue;
+	cursor: default;
+}
+
+.red{
+	color: #9E0F3D;
+}
+
+.white{
+	color: gray;
+}
+
+span.brand{
+	
+}
+
+span.date{
+	font-weight: bold;
+}
+
+span.vineyard{
+	font-weight: bold;
+	font-size: 1.1em;
+}
+
+#wineDetails{
+	min-width: 510px;
+}
+
+ul.purchaseDetails, ul.tastingNotes{
+	float: left;
+	width: 250px;
+}
+
+ul.purchaseDetails li, ul.tastingNotes li{
+	padding: 5px;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	border-top: 1px dotted black;
+	
+}
+
+ul.purchaseDetails li:hover, ul.tastingNotes li:hover{
+	background: lightskyblue;
+}
+
+.purchaseDetails li p, .tastingNotes li p{
+	margin:0;
+	padding: 0;
+}
+

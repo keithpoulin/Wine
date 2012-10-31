@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import lka.wine.dao.Varietal;
 import lka.wine.jdbc.VarietalsTable;
 
@@ -24,11 +26,7 @@ public class VarietalServlet extends HttpServlet {
 			sb.append(ex.getMessage() + "<br/>");
 		}
 
-		if (varietals != null) {
-			for (Varietal v : varietals) {
-				sb.append(v.getVarietal() + "<br/>");
-			}
-		}
-		response.getWriter().write(sb.toString());
+		Gson gson = new Gson();
+		response.getWriter().write(gson.toJson(varietals));
 	}
 }

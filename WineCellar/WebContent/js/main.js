@@ -6,27 +6,27 @@ $(document).ready(function(){
 function initializeEvents(){
 	$("#getVineyards").click(function(){
 		$("#vineyards").html("");
-		getVineyards(null);	
+		getVineyards(getVineyardsArgs());	
 	});
 	
 	$("#getVarietals").click(function(){
 		$("#varietals").html("");
-		getVarietals(null);
+		getVarietals(getVarietalsArgs());
 	});
 	
 	$("#getWines").click(function(){
 		$("#wines").html("");
-		getWines(null);
+		getWines(getWinesArgs());
 	});
 
 	$("#getWineSummaries").click(function(){
 		$("#wineSummaries").html("");
-		getWineSummaries(null);
+		getWineSummaries(getWineSummariesArgs());
 	});
 
 	$("#getWineDetails").click(function(){
 		$("#wineDetails").html("");
-		getWineDetails(null);
+		getWineDetails(getWineDetailsArgs());
 	});
 }
 
@@ -35,13 +35,14 @@ function initializeAppearance(){
 }
 
 function getVarietals(args){
-	$("#varietals").html(pleaseWait());
+	$("#varietals").html(msgPleaseWait());
 	$.ajax({
 		url: "/getVarietals",
 		data: args,
+		dataType: "json",
 		success: function(resp){
 			$varietals = $("#varietals");
-			displayResults($varietals, resp);
+			displayVarietals($varietals, resp);
 			$("#getVarietals").button('option', 'label', "Refresh Varietals");
 			$("#getVarietals").button("refresh");
 		}
@@ -49,13 +50,14 @@ function getVarietals(args){
 }
 
 function getVineyards(args){
-	$("#vineyards").html(pleaseWait());
+	$("#vineyards").html(msgPleaseWait());
 	$.ajax({
 		url: "/getVineyards",
 		data: args,
+		dataType: "json",
 		success: function(resp){
 			$vineyards = $("#vineyards");						
-			displayResults($vineyards, resp);
+			displayVineyards($vineyards, resp);
 			$("#getVineyards").button('option', 'label', "Refresh Vineyards");
 			$("#getVineyards").button("refresh");
 		}
@@ -63,13 +65,14 @@ function getVineyards(args){
 }
 
 function getWines(args){
-	$("#wines").html(pleaseWait());
+	$("#wines").html(msgPleaseWait());
 	$.ajax({
 		url: "/getWines",
 		data: args,
+		dataType: "json",
 		success: function(resp){
 			$wines = $("#wines");						
-			displayResults($wines, resp);
+			displayWines($wines, resp);
 			$("#getWines").button('option', 'label', "Refresh Wines");
 			$("#getWines").button("refresh");
 		}
@@ -77,13 +80,14 @@ function getWines(args){
 }
 
 function getWineSummaries(args){
-	$("#wineSummaries").html(pleaseWait());
+	$("#wineSummaries").html(msgPleaseWait());
 	$.ajax({
 		url: "/getWineSummary",
 		data: args,
+		dataType: "json",
 		success: function(resp){
 			$wineSummaries = $("#wineSummaries");						
-			displayResults($wineSummaries, resp);
+			displayWineSummaries($wineSummaries, resp);
 			$("#getWineSummaries").button('option', 'label', "Refresh Wine Summary");
 			$("#getWineSummaries").button("refresh");
 		}
@@ -91,25 +95,251 @@ function getWineSummaries(args){
 }
 
 function getWineDetails(args){
-	$("#wineDetails").html(pleaseWait());
+	$("#wineDetails").html(msgPleaseWait());
 	$.ajax({
 		url: "/getWineDetails",
 		data: args,
+		dataType: "json",
 		success: function(resp){
 			$wineSummaries = $("#wineDetails");						
-			displayResults($wineSummaries, resp);
+			displayWineDetails($wineSummaries, resp);
 			$("#getWineDetails").button('option', 'label', "Refresh Wine Details");
 			$("#getWineDetails").button("refresh");
 		}
 	});
 }
 
-function displayResults($target, content){
-	$target.html(content);
+function getVarietalsArgs(){
+//	var param = $("#varietalParams").val();
+//	var value = $("#varietalParamValue").val();
+	var args = {};
+//	args[param.toLowerCase()] = value;
+	return args;
+}
+
+function getVineyardsArgs(){
+//	var param = $("#vineyardParams").val();
+//	var value = $("#vineyardParamValue").val();
+	var args = {};
+//	args[param.toLowerCase()] = value;
+	return args;
+}
+
+function getWinesArgs(){
+	var args = {};
+	/**
+	 * TODO: get params code goes here
+	 * 	args[param.toLowerCase()] = value;
+	 */
+	return args;
+}
+
+function getWineSummariesArgs(){
+	var args = {};
+	/**
+	 * TODO: get params code goes here;
+	 * 	args[param.toLowerCase()] = value;
+	 */
+	return args;
+}
+
+function getWineDetailsArgs(){
+	var args = {};
+	$wineId = $("#wineDetailsArg_WineId");
+	args["wineId"] = $wineId.val();
+	return args;
+}
+
+function displayVarietals($target, json){
+	var html = "<ul class='results'>";
+	if(json.length == 0){
+		html = msgNoResults();
+	} else {
+		for (var i=0; i<json.length; i++){
+			var r = json[i];
+			html += "<li>" + "<span class='varietal'>" + r.varietal + "(" + r.type + ")" + "</span>" + "</li>";
+		}
+		html += "</ul>";
+	}
+	$target.html(html);
 	$target.hide();
 	$target.slideDown(600);
 }
 
-function pleaseWait(){
+function displayVineyards($target, json){
+	var html = "<ul class='results'>";
+	if(json.length == 0){
+		html = msgNoResults();
+	} else {
+		for (var i=0; i<json.length; i++){
+			var r = json[i];
+			html += "<li>" + "<span class='vineyard'>" + r.vineyard + "</span>" + "</li>";
+		}
+		html += "</ul>";
+	}
+	$target.html(html);
+	$target.hide();
+	$target.slideDown(600);
+}
+
+function displayWines($target, json){
+	var html = "<ul class='results'>";
+	if(json.length == 0){
+		html = msgNoResults();
+	} else {
+		for (var i=0; i<json.length; i++){
+			var r = json[i];
+			console.log(r);
+			html += "<li>"   
+					+ "<p>" + "<span class='vineyard'>" + r.vineyard.vineyard + "</span>"
+					+ "<span class='vintageYear'>" + " (" + r.vintageYear + ")" + "</span>" + "</p>"
+					+ "<p>brand: " + getBrandHtml(r.brand) + "</p>"
+					+ "<p class='" + r.varietal.type.toLowerCase() + "'>" + "<span class='varietal'>" + r.varietal.varietal 
+					+ "<span class='varietalType'>" + " ("  + r.varietal.type + ")" + "</span>"  + "</span>" + "</p>"
+					+ "<p>" + getRegionHtml(r.region) + "</p>"					
+				+ "</li>";
+		}
+		html += "</ul>";
+	}
+	$target.html(html);
+	$target.hide();
+	$target.slideDown(600);
+}
+
+function displayWineSummaries($target, json){
+	var html = "<ul class='results'>";
+	if(json.length == 0){
+		html = msgNoResults();
+	} else {
+		for (var i=0; i<json.length; i++){
+			var r = json[i];
+			html += "<li>" + r + "</li>";
+		}
+		html += "</ul>";
+	}
+	$target.html(html);
+	$target.hide();
+	$target.slideDown(600);
+}
+
+function displayWineDetails($target, json){
+	var html = "";
+	if(json == null || json == undefined){
+		html = msgNoResults();
+	}else{
+		var tastingNotes = json.tastingNotes;
+		var purchaseDetails = json.purchaseDetails;
+		
+		html += "<ul class='tastingNotes'>";
+		html += "<h3>Tasting Notes</h3>"
+			+ "<h4>Average Rating: " + getAvgRating(tastingNotes) + "</h4>";
+		for (var i=0; i<tastingNotes.length; i++){
+			var note = tastingNotes[i];
+			html += "<li>"									
+				+ "<p>" + "<span class='date'>" + note.tastingDate + "</span>" + "</p>"
+				+ "<p>" + (note.reviewedBy != undefined ? ("Reviewed by: <span class='reviewers'>" + note.reviewedBy + "</span>" ) : "") + "</p>"
+				+ getTastingReviewHtml(note)
+				+ "<p>Rating: " + "<span class='rating'>" + note.rating + "</span>"
+				+ "</li>";
+		}
+		html += "</ul>";
+		html += "<ul class='purchaseDetails'>";
+		html += "<h3>Purchase Details</h3>"
+			+ "<h4>Bottles On Hand: " + getTotalBOH(purchaseDetails) + "</h4>";
+		for (var j=0; j< purchaseDetails.length; j++){
+			var buy = purchaseDetails[j];
+			html+= 
+				"<li>"
+				+ "<p>" + "<span class='date'>" + buy.purchaseDate + "</span>" + "</p>"
+				+ "<p>Purchased " + buy.qtyPurchased + " at " + "<span class='price'>$" + buy.price + "</span>" + " / " + "<span class='priceUnit'>" + buy.pricePer + "</span>" + "</p>"
+				+ getPriceNotesHtml(buy)
+				+ "<p class='inventory'>" + "Bottles On Hand: " + buy.qtyOnHand + "</p>"
+				+ "<p class='purchaseLocation'>" 
+					+ "<span class='name'>" + buy.locationName + "</span>" + "<br/>"
+					+ "<span class='city'>" + buy.locationCity + "</span>" + "<br/>"
+					+ "<span class='state'>" + buy.locationState + "</span>" + "<br/>"
+					+ "<span class='type'>" + buy.locationType + "</span>"
+				+ "</p>"
+			+ "</li>";
+		}
+		html +="</ul>";
+		
+	}
+	$target.html(html);
+	$target.hide();
+	$target.slideDown(600);
+}
+
+function getAvgRating(notes){
+	total = 0;
+	num = notes.length;
+	for (var i=0; i<notes.length; i++){
+		if (notes[i].rating == "0"){
+			num--;
+		}
+		total = total + notes[i].rating;
+	}
+	var avg = total/num;
+	
+	return avg.toFixed(1);
+}
+
+function getTotalBOH(purchaseDetails){
+	boh = 0;
+	for (var i=0; i<purchaseDetails.length; i++){
+		boh += purchaseDetails[i].qtyOnHand;
+	}
+	return boh;
+}
+
+function getTastingReviewHtml(note){
+	if ("review" in note){
+		return "<p class='review'>" + note.review + "</p>";
+	}else {
+		return  ""; //"<p class='review'>" + "</p>";
+	}
+}
+
+function getPriceNotesHtml(purchaseDetails){
+	if ("pricePer" in purchaseDetails){
+		return "<p class='purchaseDetails'>Price Notes: " + purchaseDetails.pricePer + "</p>";
+	}else {
+		return "<p class='purchaseDetails'>" + "</p>";
+	}
+}
+
+function getBrandHtml(brand){
+	html = "<span class='brand'>";
+	if (brand == undefined){
+		return html + "</span>";
+	}
+	if ("brandName" in brand){
+		html += brand.brandName;
+	}	
+	html += "</span>";
+	return html;
+	
+}
+
+function getRegionHtml(region){
+	var html = "<span class='region'>";
+	if (region == undefined){
+		return html + "</span>";
+	}
+	
+	if ("subRegion" in region){
+		html += region.region + " - " + "<span class='subRegion'>" + region.subRegion + "</span>"; 
+	} else{
+		html += region.region;
+	}
+	html += "</span>";
+	return html;
+}
+
+function msgNoResults(){
+	return "No results were found. Please try again.";
+}
+
+function msgPleaseWait(){
 	return "Getting Data. Please Wait...";
 }

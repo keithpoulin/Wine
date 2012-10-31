@@ -233,12 +233,12 @@ function displayWineSummaries($target, json){
 		for (var i=0; i<json.length; i++){
 			var r = json[i];
 			html += "<li wineid='" + r.wineId + "'>"   
-				+ "<p>" + "<span class='vineyard'>" + r.vineyard + "</span>"
+				+ "<p>" + "<span class='vineyard'>" + r.vineyard.vineyard + "</span>"
 				+ "<span class='vintageYear'>" + " (" + r.vintageYear + ")" + "</span>" + "</p>"
 				+ "<p>brand: " + getBrandHtml(r.brand) + "</p>"
-				+ "<p class='" + r.type.toLowerCase() + "'>" + "<span class='varietal'>" + r.varietal 
-				+ "<span class='varietalType'>" + " ("  + r.type + ")" + "</span>"  + "</span>" + "</p>"
-				+ "<p>" + r.region + " - " + "<span class='subRegion'>" + r.subRegion + "</span>" + "</p>"					
+				+ "<p class='" + r.varietal.type.toLowerCase() + "'>" + "<span class='varietal'>" + r.varietal.varietal 
+				+ "<span class='varietalType'>" + " ("  + r.varietal.type + ")" + "</span>"  + "</span>" + "</p>"
+				+ "<p>" + getRegionHtml(r.region) + "</p>"					
 				+ "<p>" + "<span class='varietalType'>" + r.pricePer + "</span>"
 				+ "<p>" + "<span class='varietalType'>" + accounting.formatMoney(r.avgPrice) + "</span>"
 				+ "<p>" + "<span class='varietalType'>" + accounting.formatMoney(r.listPrice) + "</span>"

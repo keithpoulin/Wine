@@ -232,7 +232,18 @@ function displayWineSummaries($target, json){
 	} else {
 		for (var i=0; i<json.length; i++){
 			var r = json[i];
-			html += "<li>" + r + "</li>";
+			html += "<li wineid='" + r.wineId + "'>"   
+				+ "<p>" + "<span class='vineyard'>" + r.vineyard + "</span>"
+				+ "<span class='vintageYear'>" + " (" + r.vintageYear + ")" + "</span>" + "</p>"
+				+ "<p>brand: " + getBrandHtml(r.brand) + "</p>"
+				+ "<p class='" + r.type.toLowerCase() + "'>" + "<span class='varietal'>" + r.varietal 
+				+ "<span class='varietalType'>" + " ("  + r.type + ")" + "</span>"  + "</span>" + "</p>"
+				+ "<p>" + r.region + " - " + "<span class='subRegion'>" + r.subRegion + "</span>" + "</p>"					
+				+ "<p>" + "<span class='varietalType'>" + r.pricePer + "</span>"
+				+ "<p>" + "<span class='varietalType'>" + r.avgPrice + "</span>"
+				+ "<p>" + "<span class='varietalType'>" + r.listPrice + "</span>"
+				+ "<p>" + "<span class='varietalType'>" + r.qtyOnHand + "</span>"
+				+ "</li>";
 		}
 		html += "</ul>";
 	}

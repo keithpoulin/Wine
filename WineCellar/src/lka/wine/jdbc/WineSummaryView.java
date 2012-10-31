@@ -12,7 +12,7 @@ public class WineSummaryView extends AbstractData<WineSummary> {
 	private final static String tableName = "vwWineSummary";
 	private final static List<String> columnNames = Arrays.asList(
 			"WineID", "VintageYear", "WineDescription", "ListPrice", 
-			"Vineyard", "BrandName", "Varietal", "Region", "SubRegion",
+			"Vineyard", "BrandName", "Varietal", "Type", "Region", "SubRegion",
 			"PricePer", "MinPrice", "AvgPrice", "MaxPrice", "Qty", "BottlesOnHand");
 	
 	@Override
@@ -25,6 +25,7 @@ public class WineSummaryView extends AbstractData<WineSummary> {
 		wineSummary.setVineyard(rs.getString("Vineyard"));
 		wineSummary.setBrandName(rs.getString("BrandName"));
 		wineSummary.setVarietal(rs.getString("Varietal"));
+		wineSummary.setType(rs.getString("Type"));
 		wineSummary.setRegion(rs.getString("Region"));
 		wineSummary.setSubRegion(rs.getString("SubRegion"));
 		wineSummary.setPricePer(rs.getString("PricePer"));

@@ -10,6 +10,7 @@ public class WineSummary {
 	private String vineyard;
 	private String brandName; 
 	private String varietal;
+	private String type;
 	private String region;
 	private String subRegion; 
 	private String pricePer;
@@ -18,6 +19,7 @@ public class WineSummary {
 	private BigDecimal maxPrice;
 	private int qty;
 	private int qtyOnHand;
+	
 	public int getWineId() {
 		return wineId;
 	}
@@ -59,6 +61,12 @@ public class WineSummary {
 	}
 	public void setVarietal(String varietal) {
 		this.varietal = varietal;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 	public String getRegion() {
 		return region;

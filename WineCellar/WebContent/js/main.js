@@ -23,10 +23,15 @@ function initializeEvents(){
 		$("#wineSummaries").html("");
 		getWineSummaries(null);
 	});
+
+	$("#getWineDetails").click(function(){
+		$("#wineDetails").html("");
+		getWineDetails(null);
+	});
 }
 
 function initializeAppearance(){
-	$("#getVarietals, #getVineyards, #getWines, #getWineSummaries").button();	
+	$("#getVarietals, #getVineyards, #getWines, #getWineSummaries, #getWineDetails").button();	
 }
 
 function getVarietals(args){
@@ -81,6 +86,20 @@ function getWineSummaries(args){
 			displayResults($wineSummaries, resp);
 			$("#getWineSummaries").button('option', 'label', "Refresh Wine Summary");
 			$("#getWineSummaries").button("refresh");
+		}
+	});
+}
+
+function getWineDetails(args){
+	$("#wineDetails").html(pleaseWait());
+	$.ajax({
+		url: "/getWineDetails",
+		data: args,
+		success: function(resp){
+			$wineSummaries = $("#wineDetails");						
+			displayResults($wineSummaries, resp);
+			$("#getWineDetails").button('option', 'label', "Refresh Wine Details");
+			$("#getWineDetails").button("refresh");
 		}
 	});
 }

@@ -1,11 +1,14 @@
 package lka.wine.jdbc;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
 import lka.wine.dao.Purchase;
+import lka.wine.dao.TastingNote;
 
 public class PurchasesTable extends AbstractData<Purchase> {
 
@@ -25,11 +28,11 @@ public class PurchasesTable extends AbstractData<Purchase> {
 		purchase.setPricePer(rs.getString("PricePer"));
 		purchase.setQtyPurchased(rs.getInt("QtyPurchased"));
 		purchase.setPriceNotes(rs.getString("PriceNotes"));
-		purchase.setBottlesOnHand(rs.getInt("BottlesOnHand"));
+		purchase.setQtyOnHand(rs.getInt("BottlesOnHand"));
 		purchase.setInvLocation(rs.getString("InvLocation"));
 		return purchase;
 	}
-
+	
 	@Override
 	public String getTableName() {
 		return tableName;

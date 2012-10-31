@@ -1,5 +1,7 @@
 package lka.wine.jdbc;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -24,6 +26,23 @@ public class TastingNotesTable extends AbstractData<TastingNote> {
 		return tastingNote;
 	}
 
+	public List<TastingNote> select(int wineId) throws Exception {
+		String sql = getSelectSql() + " WHERE WineID = ?";
+		Connection cn = null;
+		CallableStatement cstmt = null;
+
+		try {
+			cn = DriverManager.getConnection();
+			cstmt = cn.prepareCall(sql);
+			cstmt.setInt(1, wineId);
+			cstmt.execute();
+
+			return getObjects(cstmt.getResultSet());
+		} finally {
+			JdbcCloser.close(cn, cstmt);
+		}
+	}
+	
 	@Override
 	public String getTableName() {
 		return tableName;

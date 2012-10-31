@@ -12,7 +12,7 @@ public class Purchase {
 	private String pricePer;
 	private int qtyPurchased;
 	private String priceNotes;
-	private int bottlesOnHand;
+	private int qtyOnHand;
 	private String invLocation;
 	
 	public int getPurchaseId() {
@@ -63,11 +63,11 @@ public class Purchase {
 	public void setPriceNotes(String priceNotes) {
 		this.priceNotes = priceNotes;
 	}
-	public int getBottlesOnHand() {
-		return bottlesOnHand;
+	public int getQtyOnHand() {
+		return qtyOnHand;
 	}
-	public void setBottlesOnHand(int bottlesOnHand) {
-		this.bottlesOnHand = bottlesOnHand;
+	public void setQtyOnHand(int qtyOnHand) {
+		this.qtyOnHand = qtyOnHand;
 	}
 	public String getInvLocation() {
 		return invLocation;

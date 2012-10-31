@@ -28,6 +28,11 @@
 			<div class="results" id="wineSummaries"></div>
 		</div>
 
+		<div id="wineDetail" class="main">
+			<button id="getWineDetails">Get Wine Details</button>
+			<div class="results" id="wineDetails"></div>
+		</div>
+
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>
 		<script src="/js/lib/prefix-free.js" type="text/javascript"></script>

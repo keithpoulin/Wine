@@ -32,16 +32,18 @@ public class WineDetailsServlet extends HttpServlet {
 			sb.append(ex.getMessage() + "<br/>");
 		}
 		
-		List<PurchaseDetail> purchaseDetails = wineDetails.getPurchaseDetails();;
-		List<TastingNote> tastingNotes = wineDetails.getTastingNotes();;
+		//List<PurchaseDetail> purchaseDetails = wineDetails.getPurchaseDetails();;
+		//List<TastingNote> tastingNotes = wineDetails.getTastingNotes();;
 
 		Gson gson = new Gson();
-		JsonObject result = new JsonObject();
-		JsonElement notes = gson.toJsonTree(tastingNotes);
-		JsonElement purchase = gson.toJsonTree(purchaseDetails);
-		result.add("tastingNotes", notes);
-		result.add("purchaseDetails", purchase);
+		//JsonObject result = new JsonObject();
+		//JsonElement notes = gson.toJsonTree(tastingNotes);
+		//JsonElement purchase = gson.toJsonTree(purchaseDetails);
+		//result.add("tastingNotes", notes);
+		//result.add("purchaseDetails", purchase);
 		
-		response.getWriter().write(gson.toJson(result));
+		//response.getWriter().write(gson.toJson(result));
+		response.getWriter().write(gson.toJson(wineDetails));
+
 	}
 }

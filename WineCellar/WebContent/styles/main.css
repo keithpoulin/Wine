@@ -69,17 +69,27 @@ span.vineyard{
 
 #wineDetails{
 	min-width: 510px;
+	height: 100%;
 }
 
-ul.purchaseDetails, ul.tastingNotes{
+
+
+#wineDetailPurchases, #wineDetailNotes{
 	float: left;
 	width: 250px;
 }
 
+#wineDetail ul{
+	overflow: auto;
+	border: 1px solid black;
+	padding-right: 5px;
+	margin: 2px;
+}
+
 ul.purchaseDetails li, ul.tastingNotes li{
 	padding: 5px;
-	border-left: 1px solid black;
-	border-right: 1px solid black;
+	border-left: 0px solid black;
+	border-right: 0px solid black;
 	border-top: 1px dotted black;
 	
 }
@@ -93,3 +103,6 @@ ul.purchaseDetails li:hover, ul.tastingNotes li:hover{
 	padding: 0;
 }
 
+#wine div ul li:hover{
+	cursor: pointer !important;
+}

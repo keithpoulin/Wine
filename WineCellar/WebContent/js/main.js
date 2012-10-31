@@ -240,8 +240,8 @@ function displayWineSummaries($target, json){
 				+ "<span class='varietalType'>" + " ("  + r.type + ")" + "</span>"  + "</span>" + "</p>"
 				+ "<p>" + r.region + " - " + "<span class='subRegion'>" + r.subRegion + "</span>" + "</p>"					
 				+ "<p>" + "<span class='varietalType'>" + r.pricePer + "</span>"
-				+ "<p>" + "<span class='varietalType'>" + r.avgPrice + "</span>"
-				+ "<p>" + "<span class='varietalType'>" + r.listPrice + "</span>"
+				+ "<p>" + "<span class='varietalType'>" + accounting.formatMoney(r.avgPrice) + "</span>"
+				+ "<p>" + "<span class='varietalType'>" + accounting.formatMoney(r.listPrice) + "</span>"
 				+ "<p>" + "<span class='varietalType'>" + r.qtyOnHand + "</span>"
 				+ "</li>";
 		}

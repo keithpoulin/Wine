@@ -3,6 +3,14 @@ body{
 	text-shadow: 1px 1px rgba(255, 255, 255, .7);
 }
 
+.invisible{
+	opacity: 0;
+}
+
+#vineyard, #varietal, #wine, #wineDetail{
+	display: none;
+}
+
 #title{
 	background-image: linear-gradient(top, #E3146E 0%, #780B07 100%);
 	text-align: center;
@@ -18,8 +26,8 @@ h1, h2, h3, h4, h5{
 }
 
 div.main{
-	width: 250px;
 	float: left;
+	width:300;
 }
 
 div.results{
@@ -31,7 +39,7 @@ ul.results, ul.tastingNotes, ul.purchaseDetails{
 	padding: 0px 0px 0px 5px;
 }
 
-ul.results p{
+ul.results p, .wineSummary p{
 	padding: 0px 0px 0px 0px;
 	margin: 0px 0px 0px 0px;
 }
@@ -67,23 +75,68 @@ span.vineyard{
 	font-size: 1.1em;
 }
 
-#wineDetails{
-	min-width: 510px;
-	height: 100%;
+p.message{
+	text-align: center;
 }
 
+#wineDetails{
+	width: 500px;
+	min-height: 50px;
+	float: left;
+}
 
+#wineDetails div.wineSummary{
+	text-align: center;
+	margin-left: 10px;
+	margin-right: 10px;
+	border-bottom: 3px groove red;
+}
 
 #wineDetailPurchases, #wineDetailNotes{
 	float: left;
 	width: 250px;
+	box-sizing: border-box;
+	padding: 0px 10px 0px 10px;
 }
 
-#wineDetail ul{
+#wineDetails div:first-of-type{
+	
+}
+
+.inStock{
+	background: limegreen;
+}
+
+li.selected, #wineDetails{
+	background: lightgray;
+}
+
+li.selected{
+	font-size: 1.2em;
+}
+
+#wineSummaries li{
+	font-size: 1em;
+	transition: all .1s;
+}
+
+#wineSummaries li:not(.selected):hover{
+	font-size: 1.2em;
+}
+
+#wineSummaries li:hover{
+	cursor: pointer;
+}
+
+#wineDetails ul{
 	overflow: auto;
-	border: 1px solid black;
+	border: 0px solid black;
 	padding-right: 5px;
 	margin: 2px;
+}
+
+#wineDetails ul li:first-child{
+	border: 0px;
 }
 
 ul.purchaseDetails li, ul.tastingNotes li{
@@ -91,7 +144,6 @@ ul.purchaseDetails li, ul.tastingNotes li{
 	border-left: 0px solid black;
 	border-right: 0px solid black;
 	border-top: 1px dotted black;
-	
 }
 
 ul.purchaseDetails li:hover, ul.tastingNotes li:hover{

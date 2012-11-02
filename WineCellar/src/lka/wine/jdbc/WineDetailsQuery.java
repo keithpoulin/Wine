@@ -14,10 +14,9 @@ public class WineDetailsQuery {
 		List<TastingNote> tastingNotes = new TastingNotesTable().select(wineId);
 		List<PurchaseDetail> purchaseDetails = new PurchaseDetailsView().select(wineId);
 		return getWineDetails(tastingNotes, purchaseDetails);
-
 	}
+	
 	public List<WineDetails> select() throws Exception {	
-
 		List<TastingNote> tastingNotes = new TastingNotesTable().select();
 		List<PurchaseDetail> purchaseDetails = new PurchaseDetailsView().select();
 		return getWineDetails(tastingNotes, purchaseDetails);

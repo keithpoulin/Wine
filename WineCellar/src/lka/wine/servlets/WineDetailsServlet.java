@@ -21,28 +21,24 @@ public class WineDetailsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		
-		int wineId = Integer.parseInt( request.getParameter("wineId") );
+		String wineId = request.getParameter("wineId");
 		
-		WineDetails wineDetails = null;
+		List<WineDetails> wineDetails = null;
 		StringBuilder sb = new StringBuilder();
 		try {
-			wineDetails = new WineDetailsQuery().select(wineId);
+			if(wineId == null) {
+				wineDetails = new WineDetailsQuery().select();				
+			}
+			else {
+				wineDetails = new WineDetailsQuery().select(Integer.parseInt(wineId));
+			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			sb.append(ex.getMessage() + "<br/>");
 		}
 		
-		//List<PurchaseDetail> purchaseDetails = wineDetails.getPurchaseDetails();;
-		//List<TastingNote> tastingNotes = wineDetails.getTastingNotes();;
-
 		Gson gson = new Gson();
-		//JsonObject result = new JsonObject();
-		//JsonElement notes = gson.toJsonTree(tastingNotes);
-		//JsonElement purchase = gson.toJsonTree(purchaseDetails);
-		//result.add("tastingNotes", notes);
-		//result.add("purchaseDetails", purchase);
-		
-		//response.getWriter().write(gson.toJson(result));
+
 		response.getWriter().write(gson.toJson(wineDetails));
 
 	}

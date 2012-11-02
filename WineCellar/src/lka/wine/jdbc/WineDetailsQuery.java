@@ -11,44 +11,50 @@ import lka.wine.dao.WineDetails;
 
 public class WineDetailsQuery {
 	public List<WineDetails> select(int wineId) throws Exception {	
-		List<WineDetails> wineDetails =  new ArrayList<WineDetails>();
-		WineDetails wd = new WineDetails();
-		wd.setWineId(wineId);
-		wd.setTastingNotes(new TastingNotesTable().select(wineId));
-		wd.setPurchaseDetails(new PurchaseDetailsView().select(wineId));	
-		wineDetails.add(wd);
-		return wineDetails;
+		List<TastingNote> tastingNotes = new TastingNotesTable().select(wineId);
+		List<PurchaseDetail> purchaseDetails = new PurchaseDetailsView().select(wineId);
+		return getWineDetails(tastingNotes, purchaseDetails);
+
 	}
 	public List<WineDetails> select() throws Exception {	
 
 		List<TastingNote> tastingNotes = new TastingNotesTable().select();
 		List<PurchaseDetail> purchaseDetails = new PurchaseDetailsView().select();
+		return getWineDetails(tastingNotes, purchaseDetails);
+	}
+	
+	protected List<WineDetails> getWineDetails(List<TastingNote> tastingNotes, List<PurchaseDetail> purchaseDetails) {
 		Map<Integer, WineDetails> wineDetails = new HashMap<Integer, WineDetails>();
 		
-		for(TastingNote tastingNote : tastingNotes) {
-			Integer wineId = Integer.valueOf(tastingNote.getWineId());
-			WineDetails wd = wineDetails.get(wineId);
-			if(wd == null) {
-				wd = new WineDetails();
-				wd.setWineId(wineId);
-				wd.setPurchaseDetails(new ArrayList<PurchaseDetail>());
-				wd.setTastingNotes(new ArrayList<TastingNote>());
-				wineDetails.put(wineId, wd);
+		if(tastingNotes != null) {
+			for(TastingNote tastingNote : tastingNotes) {
+				Integer wineId = Integer.valueOf(tastingNote.getWineId());
+				WineDetails wd = wineDetails.get(wineId);
+				if(wd == null) {
+					wd = new WineDetails();
+					wd.setWineId(wineId);
+					wd.setPurchaseDetails(new ArrayList<PurchaseDetail>());
+					wd.setTastingNotes(new ArrayList<TastingNote>());
+					wineDetails.put(wineId, wd);
+				}
+				wd.getTastingNotes().add(tastingNote);
 			}
-			wd.getTastingNotes().add(tastingNote);
 		}
-		for(PurchaseDetail purchaseDetail : purchaseDetails) {
-			Integer wineId = Integer.valueOf(purchaseDetail.getWineId());
-			WineDetails wd = wineDetails.get(wineId);
-			if(wd == null) {
-				wd = new WineDetails();
-				wd.setWineId(wineId);
-				wd.setPurchaseDetails(new ArrayList<PurchaseDetail>());
-				wd.setTastingNotes(new ArrayList<TastingNote>());
-				wineDetails.put(wineId, wd);
+		
+		if(purchaseDetails != null) {
+			for(PurchaseDetail purchaseDetail : purchaseDetails) {
+				Integer wineId = Integer.valueOf(purchaseDetail.getWineId());
+				WineDetails wd = wineDetails.get(wineId);
+				if(wd == null) {
+					wd = new WineDetails();
+					wd.setWineId(wineId);
+					wd.setPurchaseDetails(new ArrayList<PurchaseDetail>());
+					wd.setTastingNotes(new ArrayList<TastingNote>());
+					wineDetails.put(wineId, wd);
+				}
+				wd.getPurchaseDetails().add(purchaseDetail);
 			}
-			wd.getPurchaseDetails().add(purchaseDetail);
 		}
-		return new ArrayList<WineDetails>(wineDetails.values());
+		return new ArrayList<WineDetails>(wineDetails.values());	
 	}
 }

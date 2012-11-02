@@ -229,8 +229,8 @@ function displayWineDetails($target, json){
 	if(json == null || json == undefined){
 		html = msgNoResults();
 	}else{
-		var tastingNotes = json.tastingNotes;
-		var purchaseDetails = json.purchaseDetails;
+		var tastingNotes = json[0].tastingNotes;
+		var purchaseDetails = json[0].purchaseDetails;
 		html += "<div id='wineDetailNotes'><h3>Tasting Notes</h3>"
 			+ "<h4>Average Rating: " + getAvgRating(tastingNotes) + "</h4>";
 		html += "<ul class='tastingNotes'>";		

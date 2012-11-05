@@ -6,24 +6,38 @@
 	</head>
 	
 	<body>
-		<h1 id="title">Poulin Wine Cellar</h1>
-
-		<div id="wineSummary" class="main">
-			<button id="getWineSummaries">Get Wine List</button>
-			<ul class="results" id="wineSummaries"></ul>
+		<div id="header" class="">
+			<h1 id="title">Poulin Wine Cellar</h1>
+		</div>	
+		<div id="main" class="">			
+			<fieldset id="search">
+				<legend>Search</legend> 
+				<input type="checkbox" id="filterBoh" />
+				<label for="filterBoh">In Stock</label>
+				
+				<select multiple="multiple" id="filterVineyards"></select>
+			</fieldset>
+			<ul class="results" id="wineSummaries"></ul>			
+			<div class="results invisible" id="wineDetails"></div>
+						
+			<!-- Hidden and currently unused elements below here-->	
+			<div id="wineDetail" class="main hidden">
+				<button id="getWineDetails">Get Wine Details</button>
+				<br/><input id="wineDetailsArg_WineId" placeholder='wineId' value="117"/>			
+			</div>
+			<button id="getWineSummaries" class="hidden">Get Wine List</button>	
+			<!-- End of unused elements -->		
 		</div>
-
-		<div id="wineDetail" class="main">
-			<button id="getWineDetails">Get Wine Details</button>
-			<br/><input id="wineDetailsArg_WineId" placeholder='wineId' value="117"/>			
+		<div id="footer" class="">
+		
 		</div>
-		<div class="results invisible" id="wineDetails"></div>
-
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>
 		<script src="/js/lib/prefix-free.js" type="text/javascript"></script>
 		<script src="/js/lib/accounting.min.js" type="text/javascript"></script>
+		<script src="/js/lib/jquery.overscroll.min.js" type="text/javascript"></script>
 		<script src="/js/data.js" type="text/javascript"></script>
+		<script src="/js/filter.js" type="text/javascript"></script>
 		<script src="/js/main.js" type="text/javascript"></script>
 	</body>
 </html>

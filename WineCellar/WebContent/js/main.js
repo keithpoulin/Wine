@@ -9,9 +9,12 @@ function initializeData(){
 	 * TODO: Finish the Data "class" (data.js) and implement it here. 
 	 */
 	data = new Data();
+	filterManager = new FilterManager($("#wineSummaries"));
 }
 
 function initializeEvents(){
+	$("#wineSummaries").overscroll();
+	
 	$("#getVineyards").click(function(){
 		$("#vineyards").html("");
 		getVineyards(getVineyardsArgs());	
@@ -36,26 +39,18 @@ function initializeEvents(){
 		$("#wineDetails").html("");
 		getWineDetails(getWineDetailsArgs());
 	});
-	
-	var $scrollingDiv = $("#wineDetails");
-	var origTop = $scrollingDiv.offset().top;
-	var wineSummaryTop = $("#wineSummary").offset().top;
-	var offset = wineSummaryTop - origTop;
-	$scrollingDiv.css({"marginTop": wineSummaryTop + "px"});
-	
-	$(window).scroll(function(){			
-		if ($(window).scrollTop() > origTop){
-			$scrollingDiv
-				.stop()
-				.animate({"marginTop": ($(window).scrollTop() + offset) + "px"}, 0 );
-		} else {
-			$scrollingDiv
-			.stop()
-			.animate({"marginTop": wineSummaryTop - 4 + "px"}, 0 );
-		}	
+		
+	$("#wineSummaries").on("overscroll:driftend", function(){
+		$(this).mouseout();
 	});
-	$(window).resize(function(){
-		setWineDetailsListHeight();
+	
+	$("#filterBoh").click(function(){
+		if ($(this).is(":checked")){
+			filterManager.filters.inStock.enable();
+		}else{
+			filterManager.filters.inStock.disable();
+		}
+		filterManager.applyAll();
 	});
 }
 
@@ -64,13 +59,14 @@ function setWineDetailsListHeight(){
 }
 
 function initializeAppearance(){
-	$("#getVarietals, #getVineyards, #getWines, #getWineSummaries, #getWineDetails").button();
+	$("#getVarietals, #getVineyards, #getWines, #getWineSummaries, #getWineDetails, #filterBoh").button();
 	if (data.wineSummaries.length > 0){
 		displayWineSummaries($("#wineSummaries"), JSON.parse(localStorage.wineSummaries));
 	}else {
 		getWineSummaries();
 	}
 	
+	setFilterVineyards();
 }
 
 function getWineSummaries(args){
@@ -202,7 +198,7 @@ function displayWineSummaries($target, json){
 		for (var i=0; i<json.length; i++){
 			var r = json[i];
 			html += "<li wineid='" + r.wineId + "'>"   
-				+ "<p>" + "<span class='vineyard'>" + r.vineyard.vineyard + "</span>"
+				+ "<p>" + "<span class='vineyard' vineyardId=" + r.vineyard.vineyardId + ">" + r.vineyard.vineyard + "</span>"
 				+ "<span class='vintageYear'>" + " (" + r.vintageYear + ")" + "</span>" + "</p>"
 				+ "<p>brand: " + getBrandHtml(r.brand) + "</p>"
 				+ "<p class='" + r.varietal.type.toLowerCase() + "'>" + "<span class='varietal'>" + r.varietal.varietal 
@@ -229,8 +225,8 @@ function displayWineDetails($target, json){
 	if(json == null || json == undefined){
 		html = msgNoResults();
 	}else{
-		var tastingNotes = json[0].tastingNotes;
-		var purchaseDetails = json[0].purchaseDetails;
+		var tastingNotes = json.tastingNotes;
+		var purchaseDetails = json.purchaseDetails;
 		html += "<div id='wineDetailNotes'><h3>Tasting Notes</h3>"
 			+ "<h4>Average Rating: " + getAvgRating(tastingNotes) + "</h4>";
 		html += "<ul class='tastingNotes'>";		
@@ -367,13 +363,14 @@ function setWineSummariesEvents(){
 		$("#wineSummaries li.selected").removeClass("selected");
 		$("#wineDetails").removeClass("invisible");
 		$(this).addClass("selected");
-		$("body").stop().animate({scrollTop:  $(this).offset().top - $("#wineSummary").offset().top + "px"}, 500);
+		$("#wineSummaries").stop().animate({scrollTop:  $(this).position().top + $("#wineSummaries").scrollTop() - 25 + "px"}, 500);
 		
 		if (!data.hasWineDetail(wineId)) {
 			getWineDetails({wineId: wineId});
 		}else {
 			displayWineDetails($("#wineDetails"), data.getWineDetail(wineId));
-		}				
+		}	
+		
 	});
 }
 
@@ -393,3 +390,37 @@ function msgNoResults(){
 function msgPleaseWait(){
 	return "<p class='message'>Getting Data. Please Wait...</p>";
 }
+
+function setFilterVineyards(){
+	$vineyards = $("#filterVineyards");
+	for (var i=0; i< data.vineyards.length; i++){
+		var vineyard = data.vineyards[i];
+		$vineyards.append(
+			$("<option>").html(vineyard.vineyard).val(vineyard.vineyardId)
+		);
+	}
+	setFilterVineyardsEvents();
+}
+
+function setFilterVineyardsEvents(){
+	$("#filterVineyards").change(function(){
+		var filter = filterManager.filters.vineyards;
+		filter.reset();
+		if ($("#filterVineyards").val() != null){
+			for ( var i=0; i< $("#filterVineyards").val().length; i++){
+				var val = $("#filterVineyards").val()[i];
+//				var selector = "li:has(p span.vineyard:not([vineyardId='" + val + "']))";
+				var selector = "li:has(p span.vineyard[vineyardId='" + val + "'])";
+				filter.addFilter(selector);
+				filter.enable();
+			}
+		}else{
+//			selector = "li";
+//			filter.filter= selector;
+			filter.disable();
+		}
+		filterManager.applyAll();
+		console.log(filter);
+	});
+}
+

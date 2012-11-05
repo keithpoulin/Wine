@@ -1,10 +1,66 @@
+.invisible{
+	opacity: 0;
+}
+
+.hidden{
+	display: none !important;
+}
+
+.border{
+	border: 1px solid black;
+}
+
+.border.px2{
+	border-width: 2px;
+}
+
+.border.red{
+	border-color: red;
+}
+
+.border.blue{
+	border-color: red;
+}
+
+.border.dotted{
+	border-style: dotted;
+}
+
+.border.dashed{
+	border-style: dashed;
+}
+
 body{
 	background-image: url(/images/backgrounds/gray-paper.png);
 	text-shadow: 1px 1px rgba(255, 255, 255, .7);
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
 }
 
-.invisible{
-	opacity: 0;
+#header{
+	position: absolute;
+	width: 100%;
+	height: 4em;	
+	box-sizing: border-box;
+}
+
+#main{
+	position: absolute;
+	width: 100%;
+	top: 4em;
+	bottom: 2em;
+	box-sizing: border-box;
+}
+
+#footer{
+	position: absolute;
+	width: 100%;
+	bottom: 0px;
+	height: 2em;
+	box-sizing: border-box;
 }
 
 #vineyard, #varietal, #wine, #wineDetail{
@@ -18,6 +74,7 @@ body{
 	color: white;
 	text-shadow: 1px 1px rgba(0, 0, 0, .7);
 	padding: 10px;
+	position: relative;
 }
 
 h1, h2, h3, h4, h5{
@@ -36,7 +93,8 @@ div.results{
 
 ul.results, ul.tastingNotes, ul.purchaseDetails{
 	list-style: none;
-	padding: 0px 0px 0px 5px;
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
 }
 
 ul.results p, .wineSummary p{
@@ -80,9 +138,12 @@ p.message{
 }
 
 #wineDetails{
+	position: relative;
+	top: 25px;
 	width: 500px;
 	min-height: 50px;
 	float: left;
+	
 }
 
 #wineDetails div.wineSummary{
@@ -109,10 +170,19 @@ p.message{
 
 li.selected, #wineDetails{
 	background: lightgray;
+	margin-right: -5px;
 }
 
 li.selected{
 	font-size: 1.2em;
+}
+
+#wineSummaries{
+	max-height: 100%;
+	position: relative;
+	overflow: auto;
+	width: 300px;
+	float: left;
 }
 
 #wineSummaries li{
@@ -157,4 +227,9 @@ ul.purchaseDetails li:hover, ul.tastingNotes li:hover{
 
 #wine div ul li:hover{
 	cursor: pointer !important;
+}
+
+#search{
+	float: left;
+	width: 400px;
 }

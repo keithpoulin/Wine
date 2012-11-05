@@ -2,7 +2,7 @@ function FilterManager($parent){
 	this.$list = $parent;
 	this.filters = {
 			inStock: new Filter(false, "li:not(:has(p[class='inStock']))", $parent, "hide"),
-			vineyards: new Filter(true, "li.none", $parent, "show")
+			vineyards: new Filter(false, "li.none", $parent, "show")
 	};
 }
 
@@ -12,11 +12,14 @@ FilterManager.prototype.applyAll = function(){
 	for (key in this.filters){		
 		var filter = this.filters[key];
 		if (filter.type.toLowerCase() == "show"){			
-			if (filter.enabled){
+			if (filter.enabled && filter.filter.length >0){
 				filter.apply();
 				enabled = true;
 			}
 		}		
+	}
+	if (!enabled){
+		this.$list.find("li").show();
 	}
 	for (key in this.filters){		
 		var filter = this.filters[key];

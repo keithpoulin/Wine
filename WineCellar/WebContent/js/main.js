@@ -68,7 +68,7 @@ function setWineDetailsListHeight(){
 }
 
 function initializeAppearance(){
-	$("#getVarietals, #getVineyards, #getWines, #getWineSummaries, #getWineDetails, #filterBoh").button();
+	$("#getVarietals, #getVineyards, #getWines, #getWineSummaries, #getWineDetails, #filterBoh, button").button();
 	if (data.wineSummaries.length > 0){
 		displayWineSummaries($("#wineSummaries"), JSON.parse(localStorage.wineSummaries));
 	}else {
@@ -277,6 +277,7 @@ function displayWineDetails($target, json){
 	$target.show();
 	setWineDetailsListHeight();
 	highlightInventory($("#wineDetails"));
+	$("#wineDetailNotes, #wineDetailPurchases").overscroll();
 }
 
 function getRating(note){

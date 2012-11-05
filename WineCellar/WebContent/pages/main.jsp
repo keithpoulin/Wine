@@ -10,14 +10,18 @@
 			<h1 id="title">Poulin Wine Cellar</h1>
 		</div>	
 		<div id="main" class="">			
-			<button id="refreshData">Update Data</button>
-			<fieldset id="search">
-				<legend>Search</legend> 
-				<input type="checkbox" id="filterBoh" />
-				<label for="filterBoh">In Stock</label>
+			<div id="navigation">
+				<fieldset id="search">
+					<legend>Search</legend> 
+					
+					<label for="filterVineyards">Vineyards</label>			
+					<select multiple="multiple" id="filterVineyards"></select>
+					
+					<input type="checkbox" id="filterBoh" />
+					<label for="filterBoh">In Stock</label>					
+				</fieldset>
 				
-				<select multiple="multiple" id="filterVineyards"></select>
-			</fieldset>
+			</div>
 			<ul class="results" id="wineSummaries"></ul>			
 			<div class="results invisible" id="wineDetails"></div>
 						
@@ -30,7 +34,7 @@
 			<!-- End of unused elements -->		
 		</div>
 		<div id="footer" class="">
-		
+			<button id="refreshData">Update Data</button>
 		</div>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>

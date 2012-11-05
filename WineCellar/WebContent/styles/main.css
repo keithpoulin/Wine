@@ -40,6 +40,10 @@ body{
 	right: 0;
 }
 
+legend{
+	font-weight: bold;
+}
+
 #header{
 	position: absolute;
 	width: 100%;
@@ -61,6 +65,8 @@ body{
 	bottom: 0px;
 	height: 2em;
 	box-sizing: border-box;
+	
+	text-align: right;
 }
 
 #vineyard, #varietal, #wine, #wineDetail{
@@ -181,7 +187,7 @@ li.selected{
 	max-height: 100%;
 	position: relative;
 	overflow: auto;
-	width: 300px;
+	width: 250px;
 	float: left;
 }
 
@@ -229,7 +235,17 @@ ul.purchaseDetails li:hover, ul.tastingNotes li:hover{
 	cursor: pointer !important;
 }
 
-#search{
+#navigation{
 	float: left;
-	width: 400px;
+	width: 175px;
+	margin-right: 5px;
+}
+
+#navigation fieldset{
+	background: white;
+}
+
+fieldset{
+	padding: 5px;
+	margin: 0px;
 }

@@ -9,6 +9,9 @@ function initializeData(){
 	 * TODO: Finish the Data "class" (data.js) and implement it here. 
 	 */
 	data = new Data();
+	data.callback = function(){
+		setFilterVineyards();
+	};
 	filterManager = new FilterManager($("#wineSummaries"));
 }
 
@@ -51,6 +54,12 @@ function initializeEvents(){
 			filterManager.filters.inStock.disable();
 		}
 		filterManager.applyAll();
+	});
+	
+	$("#updateData").click(function(){
+		localStorage.clear();
+		data.updateAll();
+		
 	});
 }
 

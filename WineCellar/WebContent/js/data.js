@@ -1,5 +1,6 @@
 function UpdateManager(data){
-	this.count = 0; 
+	this.count = 0;
+	this.data = data;
 }
 
 UpdateManager.prototype.start = function(){
@@ -11,7 +12,8 @@ UpdateManager.prototype.end = function(){
 		this.count --;
 	}
 	if (this.count == 0){
-		data.refresh();
+		this.data.refresh();
+		this.data.callback();
 	}
 };
 
@@ -23,6 +25,14 @@ function Data(){
 	this.wineSummaries = ("wineSummaries" in localStorage) ? (JSON.parse(localStorage.wineSummaries)) : [] ;
 	this.wineDetails = ("wineDetails" in localStorage) ? (JSON.parse(localStorage.wineDetails)) : [] ;
 	this.lastUpdate = ("lastUpdate" in localStorage) ? localStorage.lastUpdate : 0 ;
+	this.callback = function(){};
+	
+	if (this.varietals.length == 0 ||
+	this.vineyards.length == 0||
+	this.wineDetails.length == 0 ||this.wines.length == 0 ||
+	this.wineSummaries.length == 0){
+		this.updateAll();
+	}
 }
 
 Data.prototype.updateAll = function(){
@@ -32,19 +42,19 @@ Data.prototype.updateAll = function(){
 };
 
 Data.prototype.sortAll = function(){
-	this.varietals.sort(sort_by("varietals", false, function(a){return a.toUpperCase();}));
+	this.varietals.sort(sort_by("varietal", false, function(a){return a.toUpperCase();}));
 	this.vineyards.sort(sort_by("vineyard", false, function(a){return a.toUpperCase();}));
-	this.wines.sort(sort_by("brand", false, function(a){return a.toUpperCase();}));
-	this.wineSummaries.sort(sort_by("brand", false, function(a){return a.toUpperCase();}));
-}
+//	this.wines.sort(sort_by("brand", false, function(a){return a.toUpperCase();}));
+//	this.wineSummaries.sort(sort_by("brand", false, function(a){return a.toUpperCase();}));
+};
 
  window.sort_by = function(field, reverse, primer){
-   var key = function (x) {return primer ? primer(x[field]) : x[field]};
+   var key = function (x) {return primer ? primer(x[field]) : x[field];};
 
    return function (a,b) {
        var A = key(a), B = key(b);
        return ((A < B) ? -1 : (A > B) ? +1 : 0) * [-1,1][+!!reverse];                  
-   }
+   };
 };
 
 function updateAll(){
@@ -63,7 +73,7 @@ Data.prototype.refresh = function(){
 	this.wineDetails = ("wineDetails" in localStorage) ? (JSON.parse(localStorage.wineDetails)) : [] ;
 	this.lastUpdate = ("lastUpdate" in localStorage) ? localStorage.lastUpdate : 0 ;
 	
-	this.sortAll();
+//	this.sortAll();
 	console.log("refreshed Data");
 };
 

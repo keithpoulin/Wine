@@ -10,6 +10,7 @@
 			<h1 id="title">Poulin Wine Cellar</h1>
 		</div>	
 		<div id="main" class="">			
+			<button id="refreshData">Update Data</button>
 			<fieldset id="search">
 				<legend>Search</legend> 
 				<input type="checkbox" id="filterBoh" />

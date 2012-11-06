@@ -27,6 +27,8 @@ function Data(){
 	this.lastUpdate = ("lastUpdate" in localStorage) ? localStorage.lastUpdate : 0 ;
 	this.callback = function(){};
 	
+	this.$wineSummaries = null;
+	
 	if (this.varietals.length == 0 ||
 	this.vineyards.length == 0||
 	this.wineDetails.length == 0 ||this.wines.length == 0 ||
@@ -40,20 +42,63 @@ Data.prototype.updateAll = function(){
 	localStorage.lastUpdate = new Date().getTime();
 	this.refresh();
 };
+Data.prototype.setDisplayWineSummaries = function(funct){
+	this.displayWineSummaries = function(){funct(this.$wineSummaries, this.wineSummaries);};
+};
+Data.prototype.displayWineSummaries = function(){};
 
 Data.prototype.sortAll = function(){
-	this.varietals.sort(sort_by("varietal", false, function(a){return a.toUpperCase();}));
-	this.vineyards.sort(sort_by("vineyard", false, function(a){return a.toUpperCase();}));
-//	this.wines.sort(sort_by("brand", false, function(a){return a.toUpperCase();}));
-//	this.wineSummaries.sort(sort_by("brand", false, function(a){return a.toUpperCase();}));
+	this.varietals.sort(sort_by("varietal", true, function(a){return a.toUpperCase();}));
+	this.vineyards.sort(sort_by("vineyard", true, function(a){return a.toUpperCase();}));
+	this.wineSummaries.sort(sort_WineSummaries("brandName", true, function(a){return a.toUpperCase();}));
 };
 
- window.sort_by = function(field, reverse, primer){
-   var key = function (x) {return primer ? primer(x[field]) : x[field];};
+Data.prototype.sortWineSummaries = function(field, descending, display){
+	this.wineSummaries.sort(sort_WineSummaries(field, descending, function(a){return typeof(a) == "string" ? a.toUpperCase() : Number(a);}));
+	if (display){
+		this.displayWineSummaries();
+	}
+//	this.save();
+};
 
+window.sort_WineSummaries = function(field, reverse, primer){
+	var key = function (x) {
+		if (x != undefined){
+			if (field == "brandName"){
+				x = x["brand"];
+			}else if(field=="region" || field == "subRegion"){
+				x = x["region"];
+			}else if (field=="varietal" || field=="type"){
+				x = x["varietal"];
+			}else if(field == "vineyard"){
+				x = x["vineyard"];
+			}
+			if (x[field] == undefined){
+				return "";
+			}
+		}else{
+			return "";
+		}		
+		return primer ? primer(x[field]) : x[field];
+	};
+	
+	return function (a,b) {
+		var A = key(a), B = key(b);
+		return ((A < B) ? -1 : (A > B) ? +1 : 0) * [-1,1][+!!reverse];                  
+	};
+};
+
+window.sort_by = function(field, reverse, primer){
+	 var key = function (x) {		 
+		 if (x[field] == undefined){
+			 return "";
+		 }
+		 return primer ? primer(x[field]) : x[field];
+   };
+   
    return function (a,b) {
-       var A = key(a), B = key(b);
-       return ((A < B) ? -1 : (A > B) ? +1 : 0) * [-1,1][+!!reverse];                  
+	   var A = key(a), B = key(b);
+	   return ((A < B) ? -1 : (A > B) ? +1 : 0) * [-1,1][+!!reverse];                  
    };
 };
 
@@ -73,7 +118,9 @@ Data.prototype.refresh = function(){
 	this.wineDetails = ("wineDetails" in localStorage) ? (JSON.parse(localStorage.wineDetails)) : [] ;
 	this.lastUpdate = ("lastUpdate" in localStorage) ? localStorage.lastUpdate : 0 ;
 	
-//	this.sortAll();
+	this.sortWineSummaries("vineyard", true);
+	this.save();
+	this.callback();
 	console.log("refreshed Data");
 };
 
@@ -104,9 +151,9 @@ Data.prototype.addWineDetails = function(args){
 Data.prototype.save = function(){
 	for (key in this){
 		if (this.hasOwnProperty(key)){
-			if (key != "lastUpdate"){
+			if (key != "lastUpdate" && key != "$wineSummaries" && key != "callback" && key != "displayWineSummaries"){
 				localStorage[key] = JSON.stringify(this[key]);
-			}else{
+			}else if (key == "lastUpdate"){
 				localStorage[key] = this[key];
 			}
 		}	
@@ -251,6 +298,69 @@ function updateWineDetails(args){
 		}
 	});
 }
+
+Data.prototype.getTotalBoh = function(){
+	var total = 0;
+	for (var i=0; i<this.wineSummaries.length; i++){
+		var wine = this.wineSummaries[i];
+		if (wine.qtyOnHand != undefined && wine.qtyOnHand != null && typeof(wine.qtyOnHand) == "number"){
+			total = total + wine.qtyOnHand;
+		}
+	}
+	return total;
+}
+
+Data.prototype.getTotalVarietals = function(){
+	return this.varietals.length;
+}
+
+Data.prototype.getTotalVineyards = function(){
+	return this.vineyards.length;
+}
+
+Data.prototype.getTotalWineDetailInfo = function(){
+	var bottles = 0;
+	var cost = 0;
+	var ratingTotal = 0;
+	var ratingCount = 0;
+	var totalPurchases = 0;
+	var totalTastings = 0;
+	var totalBoh = 0;
+	for (var i=0; i<this.wineDetails.length; i++){
+		var wineDetail = this.wineDetails[i];
+		for (var j=0; j<wineDetail.purchaseDetails.length; j++){
+			var purchase = wineDetail.purchaseDetails[j];
+			if (purchase.pricePer.toLowerCase() == "bottle"){
+				bottles = bottles + purchase.qtyPurchased;
+				if (purchase.price != undefined){
+					cost = cost + purchase.price;
+				}
+				totalBoh = totalBoh + purchase.qtyOnHand;
+			}
+		}
+		totalPurchases = totalPurchases + wineDetail.purchaseDetails.length;
+		for (var k=0; k<wineDetail.tastingNotes.length; k++){
+			var note = wineDetail.tastingNotes[k];
+			if (note.rating >0){
+				ratingTotal = ratingTotal + note.rating;
+				ratingCount++;
+				totalTastings++;
+			}
+		}
+	}
+	return {
+		totalBottles: bottles,
+		totalCost: cost.toFixed(2),
+		ratingTotal: ratingTotal,
+		ratingCount: ratingCount,
+		avgRating: (ratingTotal/ratingCount).toFixed(2),
+		totalPurchases: totalPurchases,
+		totalTastings: totalTastings,
+		avgBottlesPerPurchase: (bottles/totalPurchases).toFixed(2),
+		avgCost: (cost/bottles).toFixed(2),
+		totalBoh: totalBoh
+	};
+};
 
 function lsVarietals(){
 	return ("varietals" in localStorage) ? (JSON.parse(localStorage.varietals)) : null ; 

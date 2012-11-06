@@ -40,6 +40,11 @@ body{
 	right: 0;
 }
 
+p{
+	padding: 0;
+	margin: 0;	
+}
+
 legend{
 	font-weight: bold;
 }
@@ -146,7 +151,7 @@ p.message{
 #wineDetails{
 	position: relative;
 	top: 25px;
-	width: 500px;
+	width: 400px;
 	min-height: 50px;
 	float: left;
 	
@@ -161,7 +166,7 @@ p.message{
 
 #wineDetailPurchases, #wineDetailNotes{
 	float: left;
-	width: 250px;
+	width: 200px;
 	box-sizing: border-box;
 	padding: 0px 10px 0px 10px;
 }
@@ -171,7 +176,8 @@ p.message{
 }
 
 .inStock{
-	background: limegreen;
+	color: green;
+	font-weight: bold;
 }
 
 li.selected, #wineDetails{
@@ -237,7 +243,7 @@ ul.purchaseDetails li:hover, ul.tastingNotes li:hover{
 
 #navigation{
 	float: left;
-	width: 175px;
+	width: 225px;
 	margin-right: 5px;
 }
 
@@ -245,7 +251,24 @@ ul.purchaseDetails li:hover, ul.tastingNotes li:hover{
 	background: white;
 }
 
+#filterVineyards{
+	width: 100%;
+}
+
 fieldset{
 	padding: 5px;
 	margin: 0px;
+}
+
+#stats p{
+	font-weight: bold;
+	position: relative;
+	margin-bottom: 3px;
+	border-bottom: 1px dotted black;
+}
+
+#stats p span{
+	font-weight: normal;
+	position: absolute;
+	right: 2px
 }

@@ -12,13 +12,44 @@
 		<div id="main" class="">			
 			<div id="navigation">
 				<fieldset id="search">
-					<legend>Search</legend> 
+					<legend>Filter</legend> 
 					
 					<label for="filterVineyards">Vineyards</label>			
 					<select multiple="multiple" id="filterVineyards"></select>
-					
+					<br/>
 					<input type="checkbox" id="filterBoh" />
-					<label for="filterBoh">In Stock</label>					
+					<label for="filterBoh">In Stock</label>		
+				</fieldset>
+				
+				<fieldset>
+					<legend>Sort</legend>
+					<select id="sort">
+						<option value="qtyOnHand">Bottles on Hand</option>
+						<option value="brandName">Brand</option>
+						<option value="avgPrice">Price - Average</option>
+						<option value="maxPrice">Price - Maximum</option>
+						<option value="minPrice">Price - Minimum</option>
+						<option value="region">Region</option>
+						<option value="subRegion">Sub Region</option>
+						<option value="varietal">Varietal</option>
+						<option value="type">Varietal Type</option>
+						<option value="vineyard" selected="selected">Vineyard</option>
+						<option value="vintageYear">Year</option>
+					</select>	
+					<input type="checkbox" id="reverseSort"/>
+					<label for="reverseSort" >Reverse</label>
+				</fieldset>
+				
+				<fieldset id="stats">
+					<legend>Stats</legend>
+					<p>Bottles On Hand: <span id="totalBottlesOnHand"></span></p>
+					<p>Varietals: <span id="totalVarietals"></span></p>
+					<p>Vineyards: <span id="totalVineyards"></span></p>
+					<p>Bottles Purchased: <span id="totalBottlesPurchased"></span></p>
+					<p>Avg. Price: <span id="totalAveragePrice"></span></p>
+					<p>Avg. Rating: <span id="totalAverageRating"></span></p>
+					<p>Total Expenditure: <span id="totalCost"></span></p>
+					
 				</fieldset>
 				
 			</div>

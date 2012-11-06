@@ -10,6 +10,7 @@ function initializeData(){
 	 */
 	data = new Data();
 	data.callback = function(){
+		data.displayWineSummaries();
 		setFilterVineyards();
 		setStats();
 	};
@@ -65,12 +66,16 @@ function initializeEvents(){
 	});
 	
 	$("#updateData").click(function(){
-		localStorage.clear();
+		clearWineCache();
 		data.updateAll();
 	});
 	
 	$("#sort, #reverseSort").on("change", function(){
 		data.sortWineSummaries($("#sort").val(), !$("#reverseSort").is(":checked"), true);
+	});
+	
+	$("#clearCache").click(function(){
+		clearWineCache();
 	});
 }
 
@@ -455,5 +460,16 @@ function setFilterVineyardsEvents(){
 		filterManager.applyAll();
 		console.log(filter);
 	});
+}
+
+function clearWineCache(){
+	localStorage.removeItem("wines");
+	localStorage.removeItem("varietals");
+	localStorage.removeItem("vineyards");
+	localStorage.removeItem("wineSummaries");
+	localStorage.removeItem("wineDetails");
+	localStorage.removeItem("lastUpdate");
+	localStorage.removeItem("callback");
+	localStorage.removeItem("$wineSummaries");
 }
 

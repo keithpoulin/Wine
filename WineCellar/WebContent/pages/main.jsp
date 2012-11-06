@@ -52,6 +52,13 @@
 					
 				</fieldset>
 				
+				<fieldset id-"settings">
+					<legend>Settings</legend>
+					<button id="updateData">Update Data</button>
+					<button id="clearCache">Clear Cache</button>
+					
+				</fieldset>
+				
 			</div>
 			<ul class="results" id="wineSummaries"></ul>			
 			<div class="results invisible" id="wineDetails"></div>
@@ -65,7 +72,7 @@
 			<!-- End of unused elements -->		
 		</div>
 		<div id="footer" class="">
-			<button id="refreshData">Update Data</button>
+
 		</div>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>

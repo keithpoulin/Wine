@@ -10,6 +10,9 @@ public class WineSummary extends Wine {
 	private BigDecimal maxPrice;
 	private int qty;
 	private int qtyOnHand;
+	private int minRating; 
+	private BigDecimal avgRating;
+	private int maxRating;
 	
 	public String getPricePer() {
 		return pricePer;
@@ -46,6 +49,24 @@ public class WineSummary extends Wine {
 	}
 	public void setQtyOnHand(int qtyOnHand) {
 		this.qtyOnHand = qtyOnHand;
+	}
+	public int getMinRating() {
+		return minRating;
+	}
+	public void setMinRating(int minRating) {
+		this.minRating = minRating;
+	}
+	public BigDecimal getAvgRating() {
+		return avgRating;
+	}
+	public void setAvgRating(BigDecimal avgRating) {
+		this.avgRating = avgRating;
+	}
+	public int getMaxRating() {
+		return maxRating;
+	}
+	public void setMaxRating(int maxRating) {
+		this.maxRating = maxRating;
 	}
 	
 }

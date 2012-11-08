@@ -13,7 +13,7 @@ public class WineSummaryView extends AbstractData<WineSummary> {
 
 	private final static String tableName = "vwWineSummary";
 	private final static List<String> additionalColumnNames = Arrays.asList(
-			"PricePer", "MinPrice", "AvgPrice", "MaxPrice", "Qty", "BottlesOnHand");	
+			"PricePer", "MinPrice", "AvgPrice", "MaxPrice", "Qty", "BottlesOnHand", "MinRating", "AvgRating", "MaxRating");	
 	private final static WinesView baseData = new WinesView();
 	private final static List<String> columnNames;
 	static {
@@ -32,6 +32,9 @@ public class WineSummaryView extends AbstractData<WineSummary> {
 		wineSummary.setMaxPrice(rs.getBigDecimal("MaxPrice"));
 		wineSummary.setQty(rs.getInt("Qty"));
 		wineSummary.setQtyOnHand(rs.getInt("BottlesOnHand"));
+		wineSummary.setMinRating(rs.getInt("MinRating"));
+		wineSummary.setAvgRating(rs.getBigDecimal("AvgRating"));
+		wineSummary.setMaxRating(rs.getInt("MaxRating"));
 
 		return wineSummary;
 	}

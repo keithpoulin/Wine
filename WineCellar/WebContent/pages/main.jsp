@@ -11,19 +11,17 @@
 		</div>	
 		<div id="main" class="">			
 			<div id="navigation">
-				<fieldset id="search">
-					<legend>Filter</legend> 
-					
-					<label for="filterVineyards">Vineyards</label>			
-					<select multiple="multiple" id="filterVineyards"></select>
-					<br/>
-					<input type="checkbox" id="filterBoh" />
-					<label for="filterBoh">In Stock</label>		
-				</fieldset>
+				<div id="toolbar">
+					<input type="checkbox" id="toggleSort" for="#sort"/><label for="toggleSort">Sort</label>
+					<input type="checkbox" id="toggleSearch" for="#search"/><label for="toggleSearch">Filter</label>
+					<input type="checkbox" id="toggleStats" for="#stats" checked="checked" /><label for="toggleStats">Stats</label>
+					<input type="checkbox" id="toggleSettings" for="#settings"/><label for="toggleSettings">Settings</label>
+				</div>
 				
-				<fieldset>
+				<fieldset id="sort">
 					<legend>Sort</legend>
-					<select id="sort">
+					<select id="sortField">
+						<option value="avgRating">Avg Rating</option>
 						<option value="qtyOnHand">Bottles on Hand</option>
 						<option value="brandName">Brand</option>
 						<option value="avgPrice">Price - Average</option>
@@ -40,6 +38,31 @@
 					<label for="reverseSort" >Reverse</label>
 				</fieldset>
 				
+				<fieldset id="search">
+					<legend>Filter</legend> 
+					
+					<button id="removeAllFilters">Show All</button> 
+					<br/>
+					<label for="filterVarietals">Varietals</label>
+					<select multiple="multiple" id="filterVarietals"></select>
+					<br/>
+					
+					<label for="filterVineyards">Vineyards</label>			
+					<select multiple="multiple" id="filterVineyards"></select>
+					<br/>
+					
+					<label for="filterBrands">Brands</label>
+					<select multiple="multiple" id="filterBrands"></select>
+					<br/>
+					
+					<label for="filterRegions">Regions</label>
+					<select id="filterRegions" multiple="multiple"></select>
+					<br/>
+					
+					<input type="checkbox" id="filterBoh" />
+					<label for="filterBoh">In Stock</label>		
+				</fieldset>
+				
 				<fieldset id="stats">
 					<legend>Stats</legend>
 					<p>Bottles On Hand: <span id="totalBottlesOnHand"></span></p>
@@ -49,14 +72,12 @@
 					<p>Avg. Price: <span id="totalAveragePrice"></span></p>
 					<p>Avg. Rating: <span id="totalAverageRating"></span></p>
 					<p>Total Expenditure: <span id="totalCost"></span></p>
-					
 				</fieldset>
 				
-				<fieldset id-"settings">
+				<fieldset id="settings">
 					<legend>Settings</legend>
 					<button id="updateData">Update Data</button>
 					<button id="clearCache">Clear Cache</button>
-					
 				</fieldset>
 				
 			</div>

@@ -2,7 +2,10 @@ function FilterManager($parent){
 	this.$list = $parent;
 	this.filters = {
 			inStock: new Filter(false, "li:not(:has(p[class='inStock']))", $parent, "hide"),
-			vineyards: new Filter(false, "li.none", $parent, "show")
+			vineyards: new Filter(false, "li.none", $parent, "show"),
+			brands: new Filter(false, "li.none", $parent, "show"),
+			regions: new Filter(false, "li.none", $parent, "show"),
+			varietals: new Filter(false, "li.none", $parent, "show")
 	};
 }
 
@@ -36,13 +39,14 @@ FilterManager.prototype.applyAll = function(){
 	}
 };
 
-FilterManager.removeAll = function(){
-	this.$list.find("li").show();
-};
-
-function removeAllFilters(){
-	$("#wineSummaries li").show();
-	
+FilterManager.prototype.disableAll = function(){
+	for(key in this.filters){
+		if (this.filters.hasOwnProperty(key)){
+			this.filters[key].disable();
+		}
+	}
+//	this.$list.find("li").show();
+	this.applyAll();
 }
 
 function Filter(setting, selector, $parent, type){

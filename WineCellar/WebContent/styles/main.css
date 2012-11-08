@@ -60,7 +60,7 @@ legend{
 	position: absolute;
 	width: 100%;
 	top: 4em;
-	bottom: 2em;
+	bottom: 0em;
 	box-sizing: border-box;
 }
 
@@ -68,7 +68,7 @@ legend{
 	position: absolute;
 	width: 100%;
 	bottom: 0px;
-	height: 2em;
+	height: 0em;
 	box-sizing: border-box;
 	
 	text-align: right;
@@ -119,7 +119,7 @@ ul.results li{
 }
 
 ul.results li:hover{
-	background: lightskyblue;
+	/* background: lightskyblue; */
 	cursor: default;
 }
 
@@ -154,7 +154,6 @@ p.message{
 	width: 400px;
 	min-height: 50px;
 	float: left;
-	
 }
 
 #wineDetails div.wineSummary{
@@ -169,6 +168,12 @@ p.message{
 	width: 200px;
 	box-sizing: border-box;
 	padding: 0px 10px 0px 10px;
+}
+
+ul.tastingNotes, ul.purchaseDetails{
+	height: 250px;
+	max-height: 300px;
+	overflow: auto;
 }
 
 #wineDetails div:first-of-type{
@@ -193,7 +198,7 @@ li.selected{
 	max-height: 100%;
 	position: relative;
 	overflow: auto;
-	width: 250px;
+	width: 275px;
 	float: left;
 }
 
@@ -202,8 +207,12 @@ li.selected{
 	transition: all .1s;
 }
 
-#wineSummaries li:not(.selected):hover{
-	font-size: 1.2em;
+.hover{
+	background: lightskyblue; 
+}
+
+#wineSummaries li:not(.selected).hover{
+	/* font-size: 1.2em; */
 }
 
 #wineSummaries li:hover{
@@ -211,10 +220,12 @@ li.selected{
 }
 
 #wineDetails ul{
-	overflow: auto;
 	border: 0px solid black;
 	padding-right: 5px;
 	margin: 2px;
+	max-height: 300px;
+	overflow: auto;
+	overflow-scrolling:touch;
 }
 
 #wineDetails ul li:first-child{
@@ -228,9 +239,7 @@ ul.purchaseDetails li, ul.tastingNotes li{
 	border-top: 1px dotted black;
 }
 
-ul.purchaseDetails li:hover, ul.tastingNotes li:hover{
-	background: lightskyblue;
-}
+
 
 .purchaseDetails li p, .tastingNotes li p{
 	margin:0;
@@ -243,7 +252,7 @@ ul.purchaseDetails li:hover, ul.tastingNotes li:hover{
 
 #navigation{
 	float: left;
-	width: 225px;
+	width: 260px;
 	margin-right: 5px;
 }
 
@@ -251,8 +260,13 @@ ul.purchaseDetails li:hover, ul.tastingNotes li:hover{
 	background: white;
 }
 
-#filterVineyards{
+#search select{
 	width: 100%;
+	margin-bottom: 10px;
+}
+
+#search label{
+	font-weight: bold;
 }
 
 fieldset{
@@ -272,3 +286,8 @@ fieldset{
 	position: absolute;
 	right: 2px
 }
+
+#toolbar{
+	text-align: center;
+}
+

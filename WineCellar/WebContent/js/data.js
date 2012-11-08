@@ -25,6 +25,9 @@ function Data(){
 	this.wineSummaries = ("wineSummaries" in localStorage) ? (JSON.parse(localStorage.wineSummaries)) : [] ;
 	this.wineDetails = ("wineDetails" in localStorage) ? (JSON.parse(localStorage.wineDetails)) : [] ;
 	this.lastUpdate = ("lastUpdate" in localStorage) ? localStorage.lastUpdate : 0 ;
+	this.regions = ("regions" in localStorage) ? (JSON.parse(localStorage.regions)) : [] ;
+	this.brands = ("brands" in localStorage) ? (JSON.parse(localStorage.brands)) : [] ;
+	
 	this.callback = function(){};
 	
 	this.$wineSummaries = null;
@@ -50,7 +53,9 @@ Data.prototype.displayWineSummaries = function(){};
 Data.prototype.sortAll = function(){
 	this.varietals.sort(sort_by("varietal", true, function(a){return a.toUpperCase();}));
 	this.vineyards.sort(sort_by("vineyard", true, function(a){return a.toUpperCase();}));
-	this.wineSummaries.sort(sort_WineSummaries("brandName", true, function(a){return a.toUpperCase();}));
+	this.regions.sort(sort_by("region", true, function(a){return a.toUpperCase();}));
+	this.brands.sort(sort_by("brandName", true, function(a){return a.toUpperCase();}));
+	this.wineSummaries.sort(sort_WineSummaries("vineyard", true, function(a){return a.toUpperCase();}));
 };
 
 Data.prototype.sortWineSummaries = function(field, descending, display){
@@ -108,6 +113,8 @@ function updateAll(){
 	updateWines();
 	updateWineSummaries();
 	updateWineDetails();
+	updateRegions();
+	updateBrands();
 }
 
 Data.prototype.refresh = function(){
@@ -117,8 +124,11 @@ Data.prototype.refresh = function(){
 	this.wineSummaries = ("wineSummaries" in localStorage) ? (JSON.parse(localStorage.wineSummaries)) : [] ;
 	this.wineDetails = ("wineDetails" in localStorage) ? (JSON.parse(localStorage.wineDetails)) : [] ;
 	this.lastUpdate = ("lastUpdate" in localStorage) ? localStorage.lastUpdate : 0 ;
+	this.regions = ("regions" in localStorage) ? (JSON.parse(localStorage.regions)) : [] ;
+	this.brands = ("brands" in localStorage) ? (JSON.parse(localStorage.brands)) : [] ;
 	
-	this.sortWineSummaries("vineyard", true);
+//	this.sortWineSummaries("vineyard", true);
+	this.sortAll();
 	this.save();
 	this.callback();
 	console.log("refreshed Data");
@@ -227,6 +237,95 @@ function isWineDetailInlocalStorage(args){
 	return false;
 }
 
+
+function getWineSummaries(args){
+	$("#wineSummaries").html(msgPleaseWait());
+	$("#wineDetails").addClass("invisible");
+	args == undefined ? args = {} : args;
+	$.ajax({
+		url: "/getWineSummary",
+		data: args,
+		dataType: "json",
+		success: function(resp){
+			localStorage.wineSummaries = JSON.stringify(resp);					
+			displayWineSummaries($("#wineSummaries"), resp);
+			data.refresh();
+		}
+	});
+}
+
+function getWineDetails(args){
+	$("#wineDetails").html(msgPleaseWait());
+	args == undefined ? args = {} : args;
+	$.ajax({
+		url: "/getWineDetails",
+		data: args,
+		dataType: "json",
+		success: function(resp){
+			data.addWineDetails({data: resp});
+			displayWineDetails($("#wineDetails"), resp);
+		}
+	});
+}
+
+function getLookupArgs(type){
+	var args = {};
+	args["lookupDataType"] = type;
+	return args;
+}
+
+function getVarietalsArgs(){
+	var args = {};
+	args["lookupDataType"] = "Varietals";
+	return args;
+}
+
+function getVineyardsArgs(){
+	var args = {};
+	args["lookupDataType"] = "Vineyards";
+	return args;
+}
+
+function getWinesArgs(){
+	var args = {};
+	/**
+	 * TODO: get params code goes here
+	 * 	args[param.toLowerCase()] = value;
+	 */
+	return args;
+}
+
+function getWineSummariesArgs(){
+	var args = {};
+	/**
+	 * TODO: get params code goes here;
+	 * 	args[param.toLowerCase()] = value;
+	 */
+	return args;
+}
+
+function getWineDetailsArgs(){
+	var args = {};
+	$wineId = $("#wineDetailsArg_WineId");
+	args["wineId"] = $wineId.val();
+	return args;
+}
+
+function updateBrands(args){
+	updateManager.start();
+	args == undefined ? args = {} : args;
+	args["lookupDataType"] = getLookupArgs("brands").lookupDataType;
+	$.ajax({
+		url: "/getLookupData",
+		data: args,
+		dataType: "json",
+		success: function(resp){
+			localStorage.brands = JSON.stringify(resp);
+			updateManager.end();
+		}
+	});
+}
+
 function updateVarietals(args){
 	updateManager.start();
 	args == undefined ? args = {} : args;
@@ -237,6 +336,21 @@ function updateVarietals(args){
 		dataType: "json",
 		success: function(resp){
 			localStorage.varietals = JSON.stringify(resp);
+			updateManager.end();
+		}
+	});
+}
+
+function updateRegions(args){
+	updateManager.start();
+	args == undefined ? args = {} : args;
+	args["lookupDataType"] = getLookupArgs("regions").lookupDataType;
+	$.ajax({
+		url: "/getLookupData",
+		data: args,
+		dataType: "json",
+		success: function(resp){
+			localStorage.regions = JSON.stringify(resp);
 			updateManager.end();
 		}
 	});

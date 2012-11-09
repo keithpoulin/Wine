@@ -1,5 +1,6 @@
 package lka.wine.jdbc;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -86,6 +87,21 @@ public class WinesTable extends AbstractData<Wine> {
 	@Override
 	public List<String> getColumnNames() {
 		return columnNames;
+	}
+
+	@Override
+	public int setInsertParameters(CallableStatement cstmt, Wine obj)
+			throws SQLException {
+		int index = 1;
+		cstmt.setInt(index++, obj.getVineyard().getVineyardId());
+		cstmt.setInt(index++, obj.getBrand().getBrandId());
+		cstmt.setInt(index++, obj.getVarietal().getVarietalId());
+		cstmt.setInt(index++, obj.getRegion().getRegionId());
+		cstmt.setInt(index++, obj.getVintageYear());
+		cstmt.setString(index++, obj.getWineDescription());
+		cstmt.setBigDecimal(index++, obj.getListPrice());
+		cstmt.setString(index++, obj.getInventoryNotes());
+		return index;		
 	}
 
 }

@@ -1,5 +1,6 @@
 package lka.wine.jdbc;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -34,6 +35,15 @@ public class RegionsTable extends AbstractData<Region> {
 	@Override
 	public List<String> getColumnNames() {
 		return columnNames;
+	}
+
+	@Override
+	public int setInsertParameters(CallableStatement cstmt, Region obj)
+			throws SQLException {
+		int index = 1;
+		cstmt.setString(index++, obj.getRegion());
+		cstmt.setString(index++, obj.getSubRegion());
+		return index;
 	}
 
 }

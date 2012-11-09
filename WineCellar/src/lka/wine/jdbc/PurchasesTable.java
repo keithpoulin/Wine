@@ -48,4 +48,20 @@ public class PurchasesTable extends AbstractData<Purchase> {
 		return columnNames;
 	}
 
+	@Override
+	public int setInsertParameters(CallableStatement cstmt, Purchase obj)
+			throws SQLException {
+		int index = 1;
+		cstmt.setInt(index++, obj.getLocationId());		
+		cstmt.setInt(index++, obj.getWineId());		
+		cstmt.setDate(index++, new java.sql.Date(obj.getPurchaseDate().getTime()));		
+		cstmt.setBigDecimal(index++, obj.getPrice());		
+		cstmt.setString(index++, obj.getPricePer());		
+		cstmt.setInt(index++, obj.getQtyPurchased());		
+		cstmt.setString(index++, obj.getPriceNotes());		
+		cstmt.setInt(index++, obj.getQtyOnHand());		
+		cstmt.setString(index++, obj.getInvLocation());		
+		return index;
+	}
+
 }

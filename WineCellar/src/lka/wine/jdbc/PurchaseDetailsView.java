@@ -70,4 +70,23 @@ public class PurchaseDetailsView extends AbstractData<PurchaseDetail> {
 		return columnNames;
 	}
 
+	@Override
+	public int setInsertParameters(CallableStatement cstmt, PurchaseDetail obj)
+			throws SQLException {
+		int index = 1;
+		cstmt.setInt(index++, obj.getWineId());		
+		cstmt.setDate(index++, new java.sql.Date(obj.getPurchaseDate().getTime()));		
+		cstmt.setBigDecimal(index++, obj.getPrice());		
+		cstmt.setString(index++, obj.getPricePer());		
+		cstmt.setInt(index++, obj.getQtyPurchased());		
+		cstmt.setString(index++, obj.getPriceNotes());		
+		cstmt.setInt(index++, obj.getQtyOnHand());		
+		cstmt.setString(index++, obj.getInvLocation());		
+		cstmt.setString(index++, obj.getLocationName());		
+		cstmt.setString(index++, obj.getLocationCity());		
+		cstmt.setString(index++, obj.getLocationState());		
+		cstmt.setString(index++, obj.getLocationType());
+		return index;
+	}
+
 }

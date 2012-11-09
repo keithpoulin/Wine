@@ -13,6 +13,7 @@ public abstract class AbstractData<T> {
 	public abstract String getIdColumnName();
 	public abstract List<String> getColumnNames();
 	public abstract T getObject(ResultSet rs) throws SQLException;
+	public abstract int setInsertParameters(CallableStatement cstmt, T obj) throws SQLException;
 	
 	public List<T> select() throws Exception {
 
@@ -28,6 +29,21 @@ public abstract class AbstractData<T> {
 		} finally {
 			JdbcCloser.close(cn, cstmt);
 		}
+	}
+	
+	public int insert(T obj) throws Exception {
+		Connection cn = null;
+		CallableStatement cstmt = null;
+
+		try {
+			cn = DriverManager.getConnection();
+			cstmt = cn.prepareCall(getInsertSql());
+			cstmt.execute();
+			return cstmt.getUpdateCount();
+
+		} finally {
+			JdbcCloser.close(cn, cstmt);
+		}		
 	}
 	
 	protected List<T> getObjects(ResultSet rs)
@@ -80,10 +96,12 @@ public abstract class AbstractData<T> {
 		}
 		sb.append(") VALUES (");
 		separator = "";
-		for(int i = 1; i < columnNames.size(); i++) {
-			sb.append(separator);
-			sb.append("?");		
-			separator = ", ";
+		for (String columnName : columnNames) {
+			if (columnName.compareToIgnoreCase(idColumnName) != 0) {
+				sb.append(separator);
+				sb.append("?");		
+				separator = ", ";
+			}
 		}
 		sb.append(")");
 		return sb.toString();

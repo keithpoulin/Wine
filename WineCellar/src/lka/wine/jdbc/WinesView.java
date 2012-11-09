@@ -1,5 +1,6 @@
 package lka.wine.jdbc;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -70,6 +71,27 @@ public class WinesView extends AbstractData<Wine> {
 	@Override
 	public List<String> getColumnNames() {
 		return columnNames;
+	}
+
+	@Override
+	public int setInsertParameters(CallableStatement cstmt, Wine obj)
+			throws SQLException {
+		int index = 1;
+		cstmt.setInt(index++, obj.getVintageYear());
+		cstmt.setString(index++, obj.getWineDescription());
+		cstmt.setBigDecimal(index++, obj.getListPrice());
+		cstmt.setString(index++, obj.getInventoryNotes());
+		cstmt.setInt(index++, obj.getVineyard().getVineyardId());
+		cstmt.setString(index++, obj.getVineyard().getVineyard());
+		cstmt.setInt(index++, obj.getBrand().getBrandId());
+		cstmt.setString(index++, obj.getBrand().getBrandName());
+		cstmt.setInt(index++, obj.getVarietal().getVarietalId());
+		cstmt.setString(index++, obj.getVarietal().getVarietal());
+		cstmt.setString(index++, obj.getVarietal().getType());
+		cstmt.setInt(index++, obj.getRegion().getRegionId());
+		cstmt.setString(index++, obj.getRegion().getRegion());
+		cstmt.setString(index++, obj.getRegion().getSubRegion());
+		return index;	
 	}
 
 }

@@ -1,5 +1,6 @@
 package lka.wine.jdbc;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -36,6 +37,17 @@ public class LocationsTable extends AbstractData<Location> {
 	@Override
 	public List<String> getColumnNames() {
 		return columnNames;
+	}
+
+	@Override
+	public int setInsertParameters(CallableStatement cstmt, Location obj)
+			throws SQLException {
+		int index = 1;
+		cstmt.setString(index++, obj.getLocationName());
+		cstmt.setString(index++, obj.getLocationCity());
+		cstmt.setString(index++, obj.getLocationState());
+		cstmt.setInt(index++, obj.getLocationTypeId());
+		return index;
 	}
 
 }

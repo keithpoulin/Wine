@@ -58,4 +58,16 @@ public class TastingNotesTable extends AbstractData<TastingNote> {
 		return columnNames;
 	}
 
+	@Override
+	public int setInsertParameters(CallableStatement cstmt, TastingNote obj)
+			throws SQLException {
+		int index = 1;
+		cstmt.setInt(index++, obj.getWineId());
+		cstmt.setDate(index++, new java.sql.Date(obj.getTastingDate().getTime()));
+		cstmt.setString(index++, obj.getReviewedBy());
+		cstmt.setString(index++, obj.getReview());
+		cstmt.setInt(index++, obj.getRating());
+		return index;
+	}
+
 }

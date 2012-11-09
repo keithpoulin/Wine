@@ -69,4 +69,45 @@ public class LookupDataServlet extends HttpServlet {
 		}
 
 	}
+
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		try {
+			Gson gson = new Gson();
+			LookupDataType lookupDataType = LookupDataType.valueOf(request
+					.getParameter("lookupDataType").toUpperCase());
+			String data = request.getParameter("data");
+			switch (lookupDataType) {
+			case BRANDS:
+				Brand brand = gson.fromJson(data, Brand.class);
+				new BrandsTable().insert(brand);				
+				break;
+			case LOCATIONS:
+				Location location = gson.fromJson(data, Location.class);
+				new LocationsTable().insert(location);				
+				break;
+			case LOCATION_TYPES:
+				LocationType locationType = gson.fromJson(data, LocationType.class);
+				new LocationTypesTable().insert(locationType);				
+				break;
+			case REGIONS:
+				Region region = gson.fromJson(data, Region.class);
+				new RegionsTable().insert(region);				
+				break;
+			case VARIETALS:
+				Varietal varietal = gson.fromJson(data, Varietal.class);
+				new VarietalsTable().insert(varietal);				
+				break;
+			case VINEYARDS:
+				Vineyard vineyard = gson.fromJson(data, Vineyard.class);
+				new VineyardsTable().insert(vineyard);				
+				break;
+			default:
+				// TODO: Handle error
+			}
+		} catch (Exception ex) {
+			// TODO: Handle error
+		}
+
+	}
 }

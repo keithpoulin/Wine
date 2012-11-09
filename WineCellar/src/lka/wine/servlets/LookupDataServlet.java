@@ -11,28 +11,35 @@ import javax.servlet.http.HttpServletResponse;
 import lka.wine.dao.Brand;
 import lka.wine.dao.Location;
 import lka.wine.dao.LocationType;
+import lka.wine.dao.Purchase;
 import lka.wine.dao.Region;
+import lka.wine.dao.TastingNote;
 import lka.wine.dao.Varietal;
 import lka.wine.dao.Vineyard;
 import lka.wine.jdbc.BrandsTable;
 import lka.wine.jdbc.LocationTypesTable;
 import lka.wine.jdbc.LocationsTable;
+import lka.wine.jdbc.PurchasesTable;
 import lka.wine.jdbc.RegionsTable;
+import lka.wine.jdbc.TastingNotesTable;
 import lka.wine.jdbc.VarietalsTable;
 import lka.wine.jdbc.VineyardsTable;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
 public class LookupDataServlet extends HttpServlet {
 	protected enum LookupDataType {
-		BRANDS, LOCATIONS, LOCATION_TYPES, REGIONS, VARIETALS, VINEYARDS
+		BRANDS, LOCATIONS, LOCATION_TYPES, PURCHASES, REGIONS, TASTING_NOTES, VARIETALS, VINEYARDS
 	}
 
+	private static final String dateFormat = "MMM dd, yyyy";
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		try {
-			Gson gson = new Gson();
+			//Gson gson = new Gson();
+			Gson gson = new GsonBuilder().setDateFormat(dateFormat).create();
 			LookupDataType lookupDataType = LookupDataType.valueOf(request
 					.getParameter("lookupDataType").toUpperCase());
 			switch (lookupDataType) {
@@ -49,9 +56,17 @@ public class LookupDataServlet extends HttpServlet {
 						.select();
 				response.getWriter().write(gson.toJson(locationTypes));
 				break;
+			case PURCHASES:
+				List<Purchase> purchases = new PurchasesTable().select();
+				response.getWriter().write(gson.toJson(purchases));
+				break;
 			case REGIONS:
 				List<Region> regions = new RegionsTable().select();
 				response.getWriter().write(gson.toJson(regions));
+				break;
+			case TASTING_NOTES:
+				List<TastingNote> tastingNotes = new TastingNotesTable().select();
+				response.getWriter().write(gson.toJson(tastingNotes));
 				break;
 			case VARIETALS:
 				List<Varietal> varietals = new VarietalsTable().select();
@@ -73,7 +88,9 @@ public class LookupDataServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		try {
-			Gson gson = new Gson();
+			//Gson gson = new Gson();
+			Gson gson = new GsonBuilder().setDateFormat(dateFormat).create();
+
 			LookupDataType lookupDataType = LookupDataType.valueOf(request
 					.getParameter("lookupDataType").toUpperCase());
 			String data = request.getParameter("data");
@@ -90,9 +107,17 @@ public class LookupDataServlet extends HttpServlet {
 				LocationType locationType = gson.fromJson(data, LocationType.class);
 				new LocationTypesTable().insert(locationType);				
 				break;
+			case PURCHASES:
+				Purchase purchase = gson.fromJson(data, Purchase.class);
+				new PurchasesTable().insert(purchase);				
+				break;
 			case REGIONS:
 				Region region = gson.fromJson(data, Region.class);
 				new RegionsTable().insert(region);				
+				break;
+			case TASTING_NOTES:
+				TastingNote tastingNote = gson.fromJson(data, TastingNote.class);
+				new TastingNotesTable().insert(tastingNote);				
 				break;
 			case VARIETALS:
 				Varietal varietal = gson.fromJson(data, Varietal.class);

@@ -107,6 +107,7 @@ public class LookupDataServlet extends HttpServlet {
 			}
 		} catch (Exception ex) {
 			// TODO: Handle error
+			ex = ex;
 		}
 
 	}

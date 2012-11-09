@@ -38,6 +38,7 @@ public abstract class AbstractData<T> {
 		try {
 			cn = DriverManager.getConnection();
 			cstmt = cn.prepareCall(getInsertSql());
+			setInsertParameters(cstmt, obj);
 			cstmt.execute();
 			return cstmt.getUpdateCount();
 
@@ -84,7 +85,7 @@ public abstract class AbstractData<T> {
 		String idColumnName = getIdColumnName();
 		StringBuilder sb = new StringBuilder();
 		String separator = "";
-		sb.append("INSET INTO ");
+		sb.append("INSERT INTO ");
 		sb.append(getTableName());
 		sb.append("(");
 		for (String columnName : columnNames) {

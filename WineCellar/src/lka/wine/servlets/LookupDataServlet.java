@@ -16,6 +16,7 @@ import lka.wine.dao.Region;
 import lka.wine.dao.TastingNote;
 import lka.wine.dao.Varietal;
 import lka.wine.dao.Vineyard;
+import lka.wine.dao.Wine;
 import lka.wine.jdbc.BrandsTable;
 import lka.wine.jdbc.LocationTypesTable;
 import lka.wine.jdbc.LocationsTable;
@@ -24,6 +25,7 @@ import lka.wine.jdbc.RegionsTable;
 import lka.wine.jdbc.TastingNotesTable;
 import lka.wine.jdbc.VarietalsTable;
 import lka.wine.jdbc.VineyardsTable;
+import lka.wine.jdbc.WinesTable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -31,7 +33,7 @@ import com.google.gson.JsonObject;
 
 public class LookupDataServlet extends HttpServlet {
 	protected enum LookupDataType {
-		BRANDS, LOCATIONS, LOCATION_TYPES, PURCHASES, REGIONS, TASTING_NOTES, VARIETALS, VINEYARDS
+		BRANDS, LOCATIONS, LOCATION_TYPES, PURCHASES, REGIONS, TASTING_NOTES, VARIETALS, VINEYARDS, WINES
 	}
 
 	private static final String dateFormat = "MMM dd, yyyy";
@@ -75,6 +77,10 @@ public class LookupDataServlet extends HttpServlet {
 			case VINEYARDS:
 				List<Vineyard> vineyards = new VineyardsTable().select();
 				response.getWriter().write(gson.toJson(vineyards));
+				break;
+			case WINES:
+				List<Wine> wines = new WinesTable().select();
+				response.getWriter().write(gson.toJson(wines));
 				break;
 			default:
 				// TODO: Handle error
@@ -126,6 +132,10 @@ public class LookupDataServlet extends HttpServlet {
 			case VINEYARDS:
 				Vineyard vineyard = gson.fromJson(data, Vineyard.class);
 				new VineyardsTable().insert(vineyard);				
+				break;
+			case WINES:
+				Wine wine = gson.fromJson(data, Wine.class);
+				new WinesTable().insert(wine);				
 				break;
 			default:
 				// TODO: Handle error

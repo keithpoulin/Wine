@@ -37,7 +37,7 @@ public class VineyardsTable extends AbstractData<Vineyard> {
 	}
 
 	@Override
-	public int setInsertParameters(CallableStatement cstmt, Vineyard obj)
+	public int setParameters(CallableStatement cstmt, Vineyard obj)
 			throws SQLException {
 		int index = 1;
 		cstmt.setString(index++, obj.getVineyard());

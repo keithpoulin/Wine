@@ -59,7 +59,7 @@ public class TastingNotesTable extends AbstractData<TastingNote> {
 	}
 
 	@Override
-	public int setInsertParameters(CallableStatement cstmt, TastingNote obj)
+	public int setParameters(CallableStatement cstmt, TastingNote obj)
 			throws SQLException {
 		int index = 1;
 		cstmt.setInt(index++, obj.getWineId());

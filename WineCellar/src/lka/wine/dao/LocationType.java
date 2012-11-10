@@ -1,6 +1,6 @@
 package lka.wine.dao;
 
-public class LocationType {
+public class LocationType extends AbstractDao {
 	private int locationTypeId;
 	private String locationType;
 	
@@ -15,6 +15,10 @@ public class LocationType {
 	}
 	public void setLocationType(String locationType) {
 		this.locationType = locationType;
+	}
+	@Override
+	public int getId() {
+		return getLocationTypeId();
 	}
 	
 }

@@ -1,6 +1,6 @@
 package lka.wine.dao;
 
-public class Brand {
+public class Brand extends AbstractDao {
 	private int brandId;
 	private String brandName;
 	
@@ -15,5 +15,9 @@ public class Brand {
 	}
 	public void setBrandName(String brandName) {
 		this.brandName = brandName;
+	}
+	@Override
+	public int getId() {
+		return getBrandId();
 	}
 }

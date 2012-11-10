@@ -2,7 +2,7 @@ package lka.wine.dao;
 
 import java.math.BigDecimal;
 
-public class Wine {
+public class Wine extends AbstractDao {
 	private int wineId;
 	private Vineyard vineyard;
 	private Brand brand;
@@ -66,6 +66,10 @@ public class Wine {
 	}
 	public void setInventoryNotes(String inventoryNotes) {
 		this.inventoryNotes = inventoryNotes;
+	}
+	@Override
+	public int getId() {
+		return getWineId();
 	}
 
 }

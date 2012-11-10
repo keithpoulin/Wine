@@ -38,7 +38,7 @@ public class VarietalsTable extends AbstractData<Varietal> {
 	}
 
 	@Override
-	public int setInsertParameters(CallableStatement cstmt, Varietal obj)
+	public int setParameters(CallableStatement cstmt, Varietal obj)
 			throws SQLException {
 		int index = 1;
 		cstmt.setString(index++, obj.getVarietal());

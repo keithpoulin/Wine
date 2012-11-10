@@ -37,7 +37,7 @@ public class LocationTypesTable extends AbstractData<LocationType> {
 	}
 
 	@Override
-	public int setInsertParameters(CallableStatement cstmt, LocationType obj)
+	public int setParameters(CallableStatement cstmt, LocationType obj)
 			throws SQLException {
 		int index = 1;
 		cstmt.setString(index++, obj.getLocationType());	

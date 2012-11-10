@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import lka.wine.dao.AbstractDao;
 
 public abstract class AbstractData<T> {
 
@@ -13,7 +14,7 @@ public abstract class AbstractData<T> {
 	public abstract String getIdColumnName();
 	public abstract List<String> getColumnNames();
 	public abstract T getObject(ResultSet rs) throws SQLException;
-	public abstract int setInsertParameters(CallableStatement cstmt, T obj) throws SQLException;
+	public abstract int setParameters(CallableStatement cstmt, T obj) throws SQLException;
 	
 	public List<T> select() throws Exception {
 
@@ -38,7 +39,45 @@ public abstract class AbstractData<T> {
 		try {
 			cn = DriverManager.getConnection();
 			cstmt = cn.prepareCall(getInsertSql());
-			setInsertParameters(cstmt, obj);
+			setParameters(cstmt, obj);
+			cstmt.execute();
+			return cstmt.getUpdateCount();
+
+		} finally {
+			JdbcCloser.close(cn, cstmt);
+		}		
+	}
+	
+	public int update(T obj) throws Exception {
+		Connection cn = null;
+		CallableStatement cstmt = null;
+
+		try {
+			cn = DriverManager.getConnection();
+			cstmt = cn.prepareCall(getUpdateSql());
+			int index = setParameters(cstmt, obj);
+			cstmt.setInt(index++, ((AbstractDao)obj).getId());
+			cstmt.execute();
+			return cstmt.getUpdateCount();
+
+		} finally {
+			JdbcCloser.close(cn, cstmt);
+		}		
+	}
+	
+	public int delete(T obj) throws Exception {
+		return delete (((AbstractDao)obj).getId());
+	}
+
+	
+	public int delete(int id) throws Exception {
+		Connection cn = null;
+		CallableStatement cstmt = null;
+
+		try {
+			cn = DriverManager.getConnection();
+			cstmt = cn.prepareCall(getDeleteSql());
+			cstmt.setInt(1, id);
 			cstmt.execute();
 			return cstmt.getUpdateCount();
 

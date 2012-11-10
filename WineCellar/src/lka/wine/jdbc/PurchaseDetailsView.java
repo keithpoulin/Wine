@@ -71,7 +71,7 @@ public class PurchaseDetailsView extends AbstractData<PurchaseDetail> {
 	}
 
 	@Override
-	public int setInsertParameters(CallableStatement cstmt, PurchaseDetail obj)
+	public int setParameters(CallableStatement cstmt, PurchaseDetail obj)
 			throws SQLException {
 		int index = 1;
 		cstmt.setInt(index++, obj.getWineId());		

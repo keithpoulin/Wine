@@ -90,7 +90,7 @@ public class WinesTable extends AbstractData<Wine> {
 	}
 
 	@Override
-	public int setInsertParameters(CallableStatement cstmt, Wine obj)
+	public int setParameters(CallableStatement cstmt, Wine obj)
 			throws SQLException {
 		int index = 1;
 		cstmt.setInt(index++, obj.getVineyard().getVineyardId());

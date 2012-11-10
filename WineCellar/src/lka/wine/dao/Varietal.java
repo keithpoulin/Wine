@@ -1,6 +1,6 @@
 package lka.wine.dao;
 
-public class Varietal {
+public class Varietal extends AbstractDao {
 	private int varietalId;
 	private String varietal;
 	private String type;
@@ -22,5 +22,9 @@ public class Varietal {
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+	@Override
+	public int getId() {
+		return getVarietalId();
 	}
 }

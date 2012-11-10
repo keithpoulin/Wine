@@ -1,6 +1,6 @@
 package lka.wine.dao;
 
-public class Vineyard {
+public class Vineyard extends AbstractDao {
 	private int vineyardId;
 	private String vineyard;
 
@@ -15,6 +15,10 @@ public class Vineyard {
 	}
 	public void setVineyard(String argVineyard) {
 		this.vineyard = argVineyard;
+	}
+	@Override
+	public int getId() {
+		return getVineyardId();
 	}
 	
 }

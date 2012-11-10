@@ -1,6 +1,6 @@
 package lka.wine.dao;
 
-public class Region {
+public class Region extends AbstractDao {
 	private int regionId;
 	private String region;
 	private String subRegion;
@@ -22,6 +22,10 @@ public class Region {
 	}
 	public void setSubRegion(String subRegion) {
 		this.subRegion = subRegion;
+	}
+	@Override
+	public int getId() {
+		return getRegionId();
 	}
 	
 }

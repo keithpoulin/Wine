@@ -3,7 +3,7 @@ package lka.wine.dao;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Purchase {
+public class Purchase extends AbstractDao {
 	private int purchaseId;
 	private int locationId;
 	private int wineId;
@@ -74,6 +74,10 @@ public class Purchase {
 	}
 	public void setInvLocation(String invLocation) {
 		this.invLocation = invLocation;
+	}
+	@Override
+	public int getId() {
+		return getPurchaseId();
 	}
 	
 }

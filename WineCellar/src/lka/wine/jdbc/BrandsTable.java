@@ -37,7 +37,7 @@ public class BrandsTable extends AbstractData<Brand> {
 	}
 
 	@Override
-	public int setInsertParameters(CallableStatement cstmt, Brand obj)
+	public int setParameters(CallableStatement cstmt, Brand obj)
 			throws SQLException {
 		int index = 1;
 		cstmt.setString(index++, obj.getBrandName());

@@ -56,9 +56,9 @@ public class WineSummaryView extends AbstractData<WineSummary> {
 	}
 
 	@Override
-	public int setInsertParameters(CallableStatement cstmt, WineSummary obj)
+	public int setParameters(CallableStatement cstmt, WineSummary obj)
 			throws SQLException {
-		int index = baseData.setInsertParameters(cstmt, obj);
+		int index = baseData.setParameters(cstmt, obj);
 		cstmt.setString(index++, obj.getPricePer());
 		cstmt.setBigDecimal(index++, obj.getMinPrice());
 		cstmt.setBigDecimal(index++, obj.getAvgPrice());

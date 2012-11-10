@@ -40,7 +40,7 @@ public class LocationsTable extends AbstractData<Location> {
 	}
 
 	@Override
-	public int setInsertParameters(CallableStatement cstmt, Location obj)
+	public int setParameters(CallableStatement cstmt, Location obj)
 			throws SQLException {
 		int index = 1;
 		cstmt.setString(index++, obj.getLocationName());

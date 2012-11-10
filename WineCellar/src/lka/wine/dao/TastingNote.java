@@ -2,7 +2,7 @@ package lka.wine.dao;
 
 import java.util.Date;
 
-public class TastingNote {
+public class TastingNote extends AbstractDao {
 	private int tastingNoteId;
 	private int wineId;
 	private Date tastingDate;
@@ -45,6 +45,10 @@ public class TastingNote {
 	}
 	public void setRating(int rating) {
 		this.rating = rating;
+	}
+	@Override
+	public int getId() {
+		return getTastingNoteId();
 	}
 	
 }

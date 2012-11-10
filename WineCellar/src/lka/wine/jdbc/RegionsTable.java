@@ -38,7 +38,7 @@ public class RegionsTable extends AbstractData<Region> {
 	}
 
 	@Override
-	public int setInsertParameters(CallableStatement cstmt, Region obj)
+	public int setParameters(CallableStatement cstmt, Region obj)
 			throws SQLException {
 		int index = 1;
 		cstmt.setString(index++, obj.getRegion());

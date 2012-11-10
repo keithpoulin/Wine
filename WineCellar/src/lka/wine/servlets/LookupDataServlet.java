@@ -91,7 +91,7 @@ public class LookupDataServlet extends HttpServlet {
 
 	}
 
-	protected void doPost(HttpServletRequest request,
+	protected void doPut(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		try {
 			//Gson gson = new Gson();
@@ -144,6 +144,102 @@ public class LookupDataServlet extends HttpServlet {
 			// TODO: Handle error
 			ex = ex;
 		}
+	}
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		try {
+			//Gson gson = new Gson();
+			Gson gson = new GsonBuilder().setDateFormat(dateFormat).create();
 
+			LookupDataType lookupDataType = LookupDataType.valueOf(request
+					.getParameter("lookupDataType").toUpperCase());
+			String data = request.getParameter("data");
+			switch (lookupDataType) {
+			case BRANDS:
+				Brand brand = gson.fromJson(data, Brand.class);
+				new BrandsTable().update(brand);				
+				break;
+			case LOCATIONS:
+				Location location = gson.fromJson(data, Location.class);
+				new LocationsTable().update(location);				
+				break;
+			case LOCATION_TYPES:
+				LocationType locationType = gson.fromJson(data, LocationType.class);
+				new LocationTypesTable().update(locationType);				
+				break;
+			case PURCHASES:
+				Purchase purchase = gson.fromJson(data, Purchase.class);
+				new PurchasesTable().update(purchase);				
+				break;
+			case REGIONS:
+				Region region = gson.fromJson(data, Region.class);
+				new RegionsTable().update(region);				
+				break;
+			case TASTING_NOTES:
+				TastingNote tastingNote = gson.fromJson(data, TastingNote.class);
+				new TastingNotesTable().update(tastingNote);				
+				break;
+			case VARIETALS:
+				Varietal varietal = gson.fromJson(data, Varietal.class);
+				new VarietalsTable().update(varietal);				
+				break;
+			case VINEYARDS:
+				Vineyard vineyard = gson.fromJson(data, Vineyard.class);
+				new VineyardsTable().update(vineyard);				
+				break;
+			case WINES:
+				Wine wine = gson.fromJson(data, Wine.class);
+				new WinesTable().update(wine);				
+				break;
+			default:
+				// TODO: Handle error
+			}
+		} catch (Exception ex) {
+			// TODO: Handle error
+			ex = ex;
+		}
+	}
+	
+	protected void doDelete(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		try {
+			LookupDataType lookupDataType = LookupDataType.valueOf(request
+					.getParameter("lookupDataType").toUpperCase());
+			int id = Integer.parseInt(request.getParameter("id"));
+			switch (lookupDataType) {
+			case BRANDS:
+				new BrandsTable().delete(id);				
+				break;
+			case LOCATIONS:
+				new LocationsTable().delete(id);				
+				break;
+			case LOCATION_TYPES:
+				new LocationTypesTable().delete(id);				
+				break;
+			case PURCHASES:
+				new PurchasesTable().delete(id);				
+				break;
+			case REGIONS:
+				new RegionsTable().delete(id);				
+				break;
+			case TASTING_NOTES:
+				new TastingNotesTable().delete(id);				
+				break;
+			case VARIETALS:
+				new VarietalsTable().delete(id);				
+				break;
+			case VINEYARDS:
+				new VineyardsTable().delete(id);				
+				break;
+			case WINES:
+				new WinesTable().delete(id);				
+				break;
+			default:
+				// TODO: Handle error
+			}
+		} catch (Exception ex) {
+			// TODO: Handle error
+			ex = ex;
+		}
 	}
 }

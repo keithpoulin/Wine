@@ -49,7 +49,7 @@ public class PurchasesTable extends AbstractData<Purchase> {
 	}
 
 	@Override
-	public int setInsertParameters(CallableStatement cstmt, Purchase obj)
+	public int setParameters(CallableStatement cstmt, Purchase obj)
 			throws SQLException {
 		int index = 1;
 		cstmt.setInt(index++, obj.getLocationId());		

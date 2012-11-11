@@ -1,6 +1,6 @@
 package lka.wine.jdbc;
 
-import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -74,23 +74,23 @@ public class WinesView extends AbstractData<Wine> {
 	}
 
 	@Override
-	public int setParameters(CallableStatement cstmt, Wine obj)
+	public int setParameters(PreparedStatement pstmt, Wine obj)
 			throws SQLException {
 		int index = 1;
-		cstmt.setInt(index++, obj.getVintageYear());
-		cstmt.setString(index++, obj.getWineDescription());
-		cstmt.setBigDecimal(index++, obj.getListPrice());
-		cstmt.setString(index++, obj.getInventoryNotes());
-		cstmt.setInt(index++, obj.getVineyard().getVineyardId());
-		cstmt.setString(index++, obj.getVineyard().getVineyard());
-		cstmt.setInt(index++, obj.getBrand().getBrandId());
-		cstmt.setString(index++, obj.getBrand().getBrandName());
-		cstmt.setInt(index++, obj.getVarietal().getVarietalId());
-		cstmt.setString(index++, obj.getVarietal().getVarietal());
-		cstmt.setString(index++, obj.getVarietal().getType());
-		cstmt.setInt(index++, obj.getRegion().getRegionId());
-		cstmt.setString(index++, obj.getRegion().getRegion());
-		cstmt.setString(index++, obj.getRegion().getSubRegion());
+		pstmt.setInt(index++, obj.getVintageYear());
+		pstmt.setString(index++, obj.getWineDescription());
+		pstmt.setBigDecimal(index++, obj.getListPrice());
+		pstmt.setString(index++, obj.getInventoryNotes());
+		pstmt.setInt(index++, obj.getVineyard().getVineyardId());
+		pstmt.setString(index++, obj.getVineyard().getVineyard());
+		pstmt.setInt(index++, obj.getBrand().getBrandId());
+		pstmt.setString(index++, obj.getBrand().getBrandName());
+		pstmt.setInt(index++, obj.getVarietal().getVarietalId());
+		pstmt.setString(index++, obj.getVarietal().getVarietal());
+		pstmt.setString(index++, obj.getVarietal().getType());
+		pstmt.setInt(index++, obj.getRegion().getRegionId());
+		pstmt.setString(index++, obj.getRegion().getRegion());
+		pstmt.setString(index++, obj.getRegion().getSubRegion());
 		return index;	
 	}
 

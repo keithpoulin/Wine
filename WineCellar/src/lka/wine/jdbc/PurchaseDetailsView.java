@@ -1,14 +1,12 @@
 package lka.wine.jdbc;
 
-import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
-import lka.wine.dao.LocationType;
-import lka.wine.dao.Purchase;
 import lka.wine.dao.PurchaseDetail;
 
 public class PurchaseDetailsView extends AbstractData<PurchaseDetail> {
@@ -41,17 +39,17 @@ public class PurchaseDetailsView extends AbstractData<PurchaseDetail> {
 	public List<PurchaseDetail> select(int wineId) throws Exception {
 		String sql = getSelectSql() + " WHERE WineID = ?";
 		Connection cn = null;
-		CallableStatement cstmt = null;
+		PreparedStatement pstmt = null;
 
 		try {
 			cn = DriverManager.getConnection();
-			cstmt = cn.prepareCall(sql);
-			cstmt.setInt(1, wineId);
-			cstmt.execute();
+			pstmt = cn.prepareStatement(sql);
+			pstmt.setInt(1, wineId);
+			pstmt.execute();
 
-			return getObjects(cstmt.getResultSet());
+			return getObjects(pstmt.getResultSet());
 		} finally {
-			JdbcCloser.close(cn, cstmt);
+			JdbcCloser.close(cn, pstmt);
 		}
 	}
 
@@ -71,21 +69,21 @@ public class PurchaseDetailsView extends AbstractData<PurchaseDetail> {
 	}
 
 	@Override
-	public int setParameters(CallableStatement cstmt, PurchaseDetail obj)
+	public int setParameters(PreparedStatement pstmt, PurchaseDetail obj)
 			throws SQLException {
 		int index = 1;
-		cstmt.setInt(index++, obj.getWineId());		
-		cstmt.setDate(index++, new java.sql.Date(obj.getPurchaseDate().getTime()));		
-		cstmt.setBigDecimal(index++, obj.getPrice());		
-		cstmt.setString(index++, obj.getPricePer());		
-		cstmt.setInt(index++, obj.getQtyPurchased());		
-		cstmt.setString(index++, obj.getPriceNotes());		
-		cstmt.setInt(index++, obj.getQtyOnHand());		
-		cstmt.setString(index++, obj.getInvLocation());		
-		cstmt.setString(index++, obj.getLocationName());		
-		cstmt.setString(index++, obj.getLocationCity());		
-		cstmt.setString(index++, obj.getLocationState());		
-		cstmt.setString(index++, obj.getLocationType());
+		pstmt.setInt(index++, obj.getWineId());		
+		pstmt.setDate(index++, new java.sql.Date(obj.getPurchaseDate().getTime()));		
+		pstmt.setBigDecimal(index++, obj.getPrice());		
+		pstmt.setString(index++, obj.getPricePer());		
+		pstmt.setInt(index++, obj.getQtyPurchased());		
+		pstmt.setString(index++, obj.getPriceNotes());		
+		pstmt.setInt(index++, obj.getQtyOnHand());		
+		pstmt.setString(index++, obj.getInvLocation());		
+		pstmt.setString(index++, obj.getLocationName());		
+		pstmt.setString(index++, obj.getLocationCity());		
+		pstmt.setString(index++, obj.getLocationState());		
+		pstmt.setString(index++, obj.getLocationType());
 		return index;
 	}
 

@@ -100,46 +100,49 @@ public class LookupDataServlet extends HttpServlet {
 			LookupDataType lookupDataType = LookupDataType.valueOf(request
 					.getParameter("lookupDataType").toUpperCase());
 			String data = request.getParameter("data");
+			int id = 0;
 			switch (lookupDataType) {
 			case BRANDS:
 				Brand brand = gson.fromJson(data, Brand.class);
-				new BrandsTable().insert(brand);				
+				id = new BrandsTable().insert(brand);				
 				break;
 			case LOCATIONS:
 				Location location = gson.fromJson(data, Location.class);
-				new LocationsTable().insert(location);				
+				id = new LocationsTable().insert(location);				
 				break;
 			case LOCATION_TYPES:
 				LocationType locationType = gson.fromJson(data, LocationType.class);
-				new LocationTypesTable().insert(locationType);				
+				id = new LocationTypesTable().insert(locationType);				
 				break;
 			case PURCHASES:
 				Purchase purchase = gson.fromJson(data, Purchase.class);
-				new PurchasesTable().insert(purchase);				
+				id = new PurchasesTable().insert(purchase);				
 				break;
 			case REGIONS:
 				Region region = gson.fromJson(data, Region.class);
-				new RegionsTable().insert(region);				
+				id = new RegionsTable().insert(region);				
 				break;
 			case TASTING_NOTES:
 				TastingNote tastingNote = gson.fromJson(data, TastingNote.class);
-				new TastingNotesTable().insert(tastingNote);				
+				id = new TastingNotesTable().insert(tastingNote);				
 				break;
 			case VARIETALS:
 				Varietal varietal = gson.fromJson(data, Varietal.class);
-				new VarietalsTable().insert(varietal);				
+				id = new VarietalsTable().insert(varietal);				
 				break;
 			case VINEYARDS:
 				Vineyard vineyard = gson.fromJson(data, Vineyard.class);
-				new VineyardsTable().insert(vineyard);				
+				id = new VineyardsTable().insert(vineyard);				
 				break;
 			case WINES:
 				Wine wine = gson.fromJson(data, Wine.class);
-				new WinesTable().insert(wine);				
+				id = new WinesTable().insert(wine);				
 				break;
 			default:
 				// TODO: Handle error
 			}
+			response.getWriter().write(gson.toJson(id));
+			
 		} catch (Exception ex) {
 			// TODO: Handle error
 			ex = ex;

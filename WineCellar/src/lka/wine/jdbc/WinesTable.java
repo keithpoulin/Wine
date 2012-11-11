@@ -1,14 +1,12 @@
 package lka.wine.jdbc;
 
-import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.amazonaws.services.ec2.model.Region;
 
 import lka.wine.dao.Brand;
 import lka.wine.dao.Varietal;
@@ -90,17 +88,17 @@ public class WinesTable extends AbstractData<Wine> {
 	}
 
 	@Override
-	public int setParameters(CallableStatement cstmt, Wine obj)
+	public int setParameters(PreparedStatement pstmt, Wine obj)
 			throws SQLException {
 		int index = 1;
-		cstmt.setInt(index++, obj.getVineyard().getVineyardId());
-		cstmt.setInt(index++, obj.getBrand().getBrandId());
-		cstmt.setInt(index++, obj.getVarietal().getVarietalId());
-		cstmt.setInt(index++, obj.getRegion().getRegionId());
-		cstmt.setInt(index++, obj.getVintageYear());
-		cstmt.setString(index++, obj.getWineDescription());
-		cstmt.setBigDecimal(index++, obj.getListPrice());
-		cstmt.setString(index++, obj.getInventoryNotes());
+		pstmt.setInt(index++, obj.getVineyard().getVineyardId());
+		pstmt.setInt(index++, obj.getBrand().getBrandId());
+		pstmt.setInt(index++, obj.getVarietal().getVarietalId());
+		pstmt.setInt(index++, obj.getRegion().getRegionId());
+		pstmt.setInt(index++, obj.getVintageYear());
+		pstmt.setString(index++, obj.getWineDescription());
+		pstmt.setBigDecimal(index++, obj.getListPrice());
+		pstmt.setString(index++, obj.getInventoryNotes());
 		return index;		
 	}
 

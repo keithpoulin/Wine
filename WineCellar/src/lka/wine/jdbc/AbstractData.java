@@ -1,9 +1,10 @@
 package lka.wine.jdbc;
 
-import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import lka.wine.dao.AbstractDao;
@@ -14,54 +15,57 @@ public abstract class AbstractData<T> {
 	public abstract String getIdColumnName();
 	public abstract List<String> getColumnNames();
 	public abstract T getObject(ResultSet rs) throws SQLException;
-	public abstract int setParameters(CallableStatement cstmt, T obj) throws SQLException;
+	public abstract int setParameters(PreparedStatement pstmt, T obj) throws SQLException;
 	
 	public List<T> select() throws Exception {
 
 		Connection cn = null;
-		CallableStatement cstmt = null;
+		PreparedStatement pstmt = null;
 
 		try {
 			cn = DriverManager.getConnection();
-			cstmt = cn.prepareCall(getSelectSql());
-			cstmt.execute();
+			pstmt = cn.prepareCall(getSelectSql());
+			pstmt.execute();
 
-			return getObjects(cstmt.getResultSet());
+			return getObjects(pstmt.getResultSet());
 		} finally {
-			JdbcCloser.close(cn, cstmt);
+			JdbcCloser.close(cn, pstmt);
 		}
 	}
 	
 	public int insert(T obj) throws Exception {
 		Connection cn = null;
-		CallableStatement cstmt = null;
+		PreparedStatement pstmt = null;
 
 		try {
 			cn = DriverManager.getConnection();
-			cstmt = cn.prepareCall(getInsertSql());
-			setParameters(cstmt, obj);
-			cstmt.execute();
-			return cstmt.getUpdateCount();
+			pstmt = cn.prepareStatement(getInsertSql(), Statement.RETURN_GENERATED_KEYS);
+			setParameters(pstmt, obj);
+			pstmt.executeUpdate();
+			
+			ResultSet keys = pstmt.getGeneratedKeys();	      
+			keys.next();
+		    return keys.getInt(1);
 
 		} finally {
-			JdbcCloser.close(cn, cstmt);
+			JdbcCloser.close(cn, pstmt);
 		}		
 	}
 	
 	public int update(T obj) throws Exception {
 		Connection cn = null;
-		CallableStatement cstmt = null;
+		PreparedStatement pstmt = null;
 
 		try {
 			cn = DriverManager.getConnection();
-			cstmt = cn.prepareCall(getUpdateSql());
-			int index = setParameters(cstmt, obj);
-			cstmt.setInt(index++, ((AbstractDao)obj).getId());
-			cstmt.execute();
-			return cstmt.getUpdateCount();
+			pstmt = cn.prepareCall(getUpdateSql());
+			int index = setParameters(pstmt, obj);
+			pstmt.setInt(index++, ((AbstractDao)obj).getId());
+			pstmt.execute();
+			return pstmt.getUpdateCount();
 
 		} finally {
-			JdbcCloser.close(cn, cstmt);
+			JdbcCloser.close(cn, pstmt);
 		}		
 	}
 	
@@ -72,17 +76,17 @@ public abstract class AbstractData<T> {
 	
 	public int delete(int id) throws Exception {
 		Connection cn = null;
-		CallableStatement cstmt = null;
+		PreparedStatement pstmt = null;
 
 		try {
 			cn = DriverManager.getConnection();
-			cstmt = cn.prepareCall(getDeleteSql());
-			cstmt.setInt(1, id);
-			cstmt.execute();
-			return cstmt.getUpdateCount();
+			pstmt = cn.prepareCall(getDeleteSql());
+			pstmt.setInt(1, id);
+			pstmt.execute();
+			return pstmt.getUpdateCount();
 
 		} finally {
-			JdbcCloser.close(cn, cstmt);
+			JdbcCloser.close(cn, pstmt);
 		}		
 	}
 	

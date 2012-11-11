@@ -1,13 +1,12 @@
 package lka.wine.jdbc;
 
-import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import lka.wine.dao.Wine;
 import lka.wine.dao.WineSummary;
 
 public class WineSummaryView extends AbstractData<WineSummary> {
@@ -56,18 +55,18 @@ public class WineSummaryView extends AbstractData<WineSummary> {
 	}
 
 	@Override
-	public int setParameters(CallableStatement cstmt, WineSummary obj)
+	public int setParameters(PreparedStatement pstmt, WineSummary obj)
 			throws SQLException {
-		int index = baseData.setParameters(cstmt, obj);
-		cstmt.setString(index++, obj.getPricePer());
-		cstmt.setBigDecimal(index++, obj.getMinPrice());
-		cstmt.setBigDecimal(index++, obj.getAvgPrice());
-		cstmt.setBigDecimal(index++, obj.getMaxPrice());
-		cstmt.setInt(index++, obj.getQty());
-		cstmt.setInt(index++, obj.getQtyOnHand());
-		cstmt.setInt(index++, obj.getMinRating());
-		cstmt.setBigDecimal(index++, obj.getAvgRating());
-		cstmt.setInt(index++, obj.getMaxRating());
+		int index = baseData.setParameters(pstmt, obj);
+		pstmt.setString(index++, obj.getPricePer());
+		pstmt.setBigDecimal(index++, obj.getMinPrice());
+		pstmt.setBigDecimal(index++, obj.getAvgPrice());
+		pstmt.setBigDecimal(index++, obj.getMaxPrice());
+		pstmt.setInt(index++, obj.getQty());
+		pstmt.setInt(index++, obj.getQtyOnHand());
+		pstmt.setInt(index++, obj.getMinRating());
+		pstmt.setBigDecimal(index++, obj.getAvgRating());
+		pstmt.setInt(index++, obj.getMaxRating());
 		return index;
 	}
 

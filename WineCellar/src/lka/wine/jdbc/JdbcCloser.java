@@ -16,10 +16,10 @@ import java.sql.*;
 public class JdbcCloser {
 
 
-  public static void close(Connection cn, CallableStatement cstmt) {
+  public static void close(Connection cn, PreparedStatement pstmt) {
     try {
-      if (cstmt != null) {
-        cstmt.close();
+      if (pstmt != null) {
+        pstmt.close();
       }
       if (cn != null) {
         cn.close();

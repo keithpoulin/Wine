@@ -1,6 +1,6 @@
 package lka.wine.jdbc;
 
-import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,17 +29,17 @@ public class TastingNotesTable extends AbstractData<TastingNote> {
 	public List<TastingNote> select(int wineId) throws Exception {
 		String sql = getSelectSql() + " WHERE WineID = ?";
 		Connection cn = null;
-		CallableStatement cstmt = null;
+		PreparedStatement pstmt = null;
 
 		try {
 			cn = DriverManager.getConnection();
-			cstmt = cn.prepareCall(sql);
-			cstmt.setInt(1, wineId);
-			cstmt.execute();
+			pstmt = cn.prepareStatement(sql);
+			pstmt.setInt(1, wineId);
+			pstmt.execute();
 
-			return getObjects(cstmt.getResultSet());
+			return getObjects(pstmt.getResultSet());
 		} finally {
-			JdbcCloser.close(cn, cstmt);
+			JdbcCloser.close(cn, pstmt);
 		}
 	}
 	
@@ -59,14 +59,14 @@ public class TastingNotesTable extends AbstractData<TastingNote> {
 	}
 
 	@Override
-	public int setParameters(CallableStatement cstmt, TastingNote obj)
+	public int setParameters(PreparedStatement pstmt, TastingNote obj)
 			throws SQLException {
 		int index = 1;
-		cstmt.setInt(index++, obj.getWineId());
-		cstmt.setDate(index++, new java.sql.Date(obj.getTastingDate().getTime()));
-		cstmt.setString(index++, obj.getReviewedBy());
-		cstmt.setString(index++, obj.getReview());
-		cstmt.setInt(index++, obj.getRating());
+		pstmt.setInt(index++, obj.getWineId());
+		pstmt.setDate(index++, new java.sql.Date(obj.getTastingDate().getTime()));
+		pstmt.setString(index++, obj.getReviewedBy());
+		pstmt.setString(index++, obj.getReview());
+		pstmt.setInt(index++, obj.getRating());
 		return index;
 	}
 

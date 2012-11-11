@@ -1,14 +1,12 @@
 package lka.wine.jdbc;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
 import lka.wine.dao.Purchase;
-import lka.wine.dao.TastingNote;
 
 public class PurchasesTable extends AbstractData<Purchase> {
 
@@ -49,18 +47,18 @@ public class PurchasesTable extends AbstractData<Purchase> {
 	}
 
 	@Override
-	public int setParameters(CallableStatement cstmt, Purchase obj)
+	public int setParameters(PreparedStatement pstmt, Purchase obj)
 			throws SQLException {
 		int index = 1;
-		cstmt.setInt(index++, obj.getLocationId());		
-		cstmt.setInt(index++, obj.getWineId());		
-		cstmt.setDate(index++, new java.sql.Date(obj.getPurchaseDate().getTime()));		
-		cstmt.setBigDecimal(index++, obj.getPrice());		
-		cstmt.setString(index++, obj.getPricePer());		
-		cstmt.setInt(index++, obj.getQtyPurchased());		
-		cstmt.setString(index++, obj.getPriceNotes());		
-		cstmt.setInt(index++, obj.getQtyOnHand());		
-		cstmt.setString(index++, obj.getInvLocation());		
+		pstmt.setInt(index++, obj.getLocationId());		
+		pstmt.setInt(index++, obj.getWineId());		
+		pstmt.setDate(index++, new java.sql.Date(obj.getPurchaseDate().getTime()));		
+		pstmt.setBigDecimal(index++, obj.getPrice());		
+		pstmt.setString(index++, obj.getPricePer());		
+		pstmt.setInt(index++, obj.getQtyPurchased());		
+		pstmt.setString(index++, obj.getPriceNotes());		
+		pstmt.setInt(index++, obj.getQtyOnHand());		
+		pstmt.setString(index++, obj.getInvLocation());		
 		return index;
 	}
 

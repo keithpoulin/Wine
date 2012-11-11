@@ -1,6 +1,6 @@
 package lka.wine.jdbc;
 
-import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -37,10 +37,10 @@ public class BrandsTable extends AbstractData<Brand> {
 	}
 
 	@Override
-	public int setParameters(CallableStatement cstmt, Brand obj)
+	public int setParameters(PreparedStatement pstmt, Brand obj)
 			throws SQLException {
 		int index = 1;
-		cstmt.setString(index++, obj.getBrandName());
+		pstmt.setString(index++, obj.getBrandName());
 		return index;
 	}
 

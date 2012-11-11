@@ -265,7 +265,7 @@ ul.purchaseDetails li, ul.tastingNotes li{
 	margin-bottom: 10px;
 }
 
-#search label{
+#search label.bold{
 	font-weight: bold;
 }
 

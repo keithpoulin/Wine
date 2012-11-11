@@ -459,13 +459,19 @@ function setFilterRegions(){
 }
 
 function setFilterVineyardsEvents(){
-	$("#filterVineyards").change(function(){
+	$("#filterVineyards, input[name='vineyardsFilter']").change(function(){
 		var filter = filterManager.filters.vineyards;
 		filter.reset();
+		filter.setType($("input[name='vineyardsFilter']:checked").val());
 		if ($("#filterVineyards").val() != null){
 			for ( var i=0; i< $("#filterVineyards").val().length; i++){
 				var val = $("#filterVineyards").val()[i];
-				var selector = "li:has(p span.vineyard[vineyardId='" + val + "'])";
+				var selector = "";
+				if (filter.type == "show"){
+					selector = "li:has(p span.vineyard[vineyardId='" + val + "'])";
+				}else{
+					selector = "li:not(:has(p span.vineyard[vineyardId='" + val + "']))";
+				}
 				filter.addFilter(selector);
 				filter.enable();
 			}
@@ -477,13 +483,19 @@ function setFilterVineyardsEvents(){
 }
 
 function setFilterBrandsEvents(){
-	$("#filterBrands").change(function(){
+	$("#filterBrands, input[name='brandsFilter']").change(function(){
 		var filter = filterManager.filters.brands;
 		filter.reset();
+		filter.setType($("input[name='brandsFilter']:checked").val());
 		if ($("#filterBrands").val() != null){
 			for ( var i=0; i< $("#filterBrands").val().length; i++){
 				var val = $("#filterBrands").val()[i];
-				var selector = "li:has(p span.brand[brandId='" + val + "'])";
+				var selector = "";
+				if (filter.type == "show"){
+					var selector = "li:has(p span.brand[brandId='" + val + "'])";
+				}else{
+					selector = "li:not(:has(p span.brand[brandId='" + val + "']))";
+				}
 				filter.addFilter(selector);
 				filter.enable();
 			}
@@ -495,13 +507,19 @@ function setFilterBrandsEvents(){
 }
 
 function setFilterVarietalsEvents(){
-	$("#filterVarietals").change(function(){
+	$("#filterVarietals, input[name='varietalsFilter']").change(function(){
 		var filter = filterManager.filters.varietals;
 		filter.reset();
+		filter.setType($("input[name='varietalsFilter']:checked").val());
 		if ($("#filterVarietals").val() != null){
 			for ( var i=0; i< $("#filterVarietals").val().length; i++){
 				var val = $("#filterVarietals").val()[i];
-				var selector = "li:has(p span.varietal[varietalId='" + val + "'])";
+				var selector = "";				
+				if(filter.type == "show"){
+					selector = "li:has(p span.varietal[varietalId='" + val + "'])";
+				}else{
+					selector = "li:not(:has(p span.varietal[varietalId='" + val + "']))";
+				}
 				filter.addFilter(selector);
 				filter.enable();
 			}
@@ -513,13 +531,19 @@ function setFilterVarietalsEvents(){
 }
 
 function setFilterRegionsEvents(){
-	$("#filterRegions").change(function(){
+	$("#filterRegions, input[name='regionsFilter']").change(function(){
 		var filter = filterManager.filters.regions;
 		filter.reset();
+		filter.setType($("input[name='regionsFilter']:checked").val());
 		if ($("#filterRegions").val() != null){
 			for ( var i=0; i< $("#filterRegions").val().length; i++){
 				var val = $("#filterRegions").val()[i];
-				var selector = "li:has(p span.region[regionId='" + val + "'])";
+				var selector = "";
+				if(filter.type == "show"){
+					selector = "li:has(p span.region[regionId='" + val + "'])";
+				}else{
+					selector = "li:not(:has(p span.region[regionId='" + val + "']))";
+				}
 				filter.addFilter(selector);
 				filter.enable();
 			}

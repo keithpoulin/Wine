@@ -56,6 +56,10 @@ function Filter(setting, selector, $parent, type){
 	 this.type = type;
 }
 
+Filter.prototype.setType = function(type){
+	this.type = type;
+}
+
 Filter.prototype.addFilter = function(selector){
 	this.filter.push(selector);
 };

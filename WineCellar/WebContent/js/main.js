@@ -204,7 +204,7 @@ function displayWineSummaries($target, json){
 			html += "<li wineid='" + r.wineId + "'>"   
 				+ "<p>" + "<span class='vineyard' vineyardId=" + r.vineyard.vineyardId + ">" + r.vineyard.vineyard + "</span>"
 				+ "<span class='vintageYear'>" + " (" + r.vintageYear + ")" + "</span>" + "</p>"
-				+ "<p>brand: " + getBrandHtml(r.brand) + "</p>"
+				+ (hasBrand(r) ? "<p>" + getBrandHtml(r.brand) + "</p>" : "")
 				+ "<p class='" + r.varietal.type.toLowerCase() + "'>" 
 					+ "<span class='varietal' varietalId='" + r.varietal.varietalId + "'>" + r.varietal.varietal 
 					+ "<span class='varietalType'>" + " ("  + r.varietal.type + ")" + "</span>"  + "</span>" 
@@ -235,8 +235,8 @@ function displayWineDetails($target, json){
 	}else{
 		var tastingNotes = json.tastingNotes;
 		var purchaseDetails = json.purchaseDetails;
-		html += "<div id='wineDetailNotes'><h3>Tasting Notes</h3>"
-			+ "<h4>Average Rating: " + getAvgRating(tastingNotes) + "</h4>";
+		html += "<div id='wineDetailNotes'><h3>Tasting Notes</h3>";
+//			+ "<h4>Average Rating: " + getAvgRating(tastingNotes) + "</h4>";
 		html += "<ul class='tastingNotes'>";		
 		for (var i=0; i<tastingNotes.length; i++){
 			var note = tastingNotes[i];
@@ -248,8 +248,8 @@ function displayWineDetails($target, json){
 				+ "</li>";
 		}
 		html += "</ul></div>";
-		html += "<div id='wineDetailPurchases'><h3>Purchase Details</h3>"
-			+ "<h4>Bottles On Hand: " + "<span class='inventory'>" + getTotalBOH(purchaseDetails) + "</span>" + "</h4>";
+		html += "<div id='wineDetailPurchases'><h3>Purchase Details</h3>";
+//			+ "<h4>Bottles On Hand: " + "<span class='inventory'>" + getTotalBOH(purchaseDetails) + "</span>" + "</h4>";
 		html += "<ul class='purchaseDetails'>";		
 		for (var j=0; j< purchaseDetails.length; j++){
 			var buy = purchaseDetails[j];

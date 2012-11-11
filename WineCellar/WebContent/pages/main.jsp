@@ -43,22 +43,22 @@
 					
 					<button id="removeAllFilters">Show All</button> 
 					<br/>
-					<label for="filterVarietals" class="bold">Varietals</label>
-					<input type="radio" name="varietalsFilter" id="varietalsFilterAdd" value="show" checked="checked"/><label for="varietalsFilterAdd">Add</label>
-					<input type="radio" name="varietalsFilter" id="varietalsFilterOnly" value="hide"/><label for="varietalsFilterOnly">Only</label>
-					<select multiple="multiple" id="filterVarietals"></select>
-					<br/>
-					
 					<label for="filterVineyards" class="bold">Vineyards</label>
 					<input type="radio" name="vineyardsFilter" id="vineyardsFilterAdd" value="show" checked="checked"/><label for="vineyardsFilterAdd">Add</label>
 					<input type="radio" name="vineyardsFilter" id="vineyardsFilterOnly" value="hide"/><label for="vineyardsFilterOnly">Only</label>			
 					<select multiple="multiple" id="filterVineyards"></select>
 					<br/>
-					
+
 					<label for="filterBrands" class="bold">Brands</label>
 					<input type="radio" name="brandsFilter" id="brandsFilterAdd" value="show" checked="checked"/><label for="brandsFilterAdd">Add</label>
 					<input type="radio" name="brandsFilter" id="brandsFilterOnly" value="hide"/><label for="brandsFilterOnly">Only</label>
 					<select multiple="multiple" id="filterBrands"></select>
+					<br/>
+					
+					<label for="filterVarietals" class="bold">Varietals</label>
+					<input type="radio" name="varietalsFilter" id="varietalsFilterAdd" value="show"/><label for="varietalsFilterAdd">Add</label>
+					<input type="radio" name="varietalsFilter" id="varietalsFilterOnly" value="hide" checked="checked"/><label for="varietalsFilterOnly">Only</label>
+					<select multiple="multiple" id="filterVarietals"></select>
 					<br/>
 					
 					<label for="filterRegions" class="bold">Regions</label>

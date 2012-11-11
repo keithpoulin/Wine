@@ -432,6 +432,15 @@ Data.prototype.getTotalVineyards = function(){
 	return this.vineyards.length;
 }
 
+function hasBrand(wineSummary){
+	console.log(wineSummary.brand);
+	if (wineSummary.brand == null || wineSummary.brand == undefined || wineSummary.brand.brandId == 0){
+		return false;
+	}else{
+		return true;
+	}
+}
+
 Data.prototype.getTotalWineDetailInfo = function(){
 	var bottles = 0;
 	var cost = 0;

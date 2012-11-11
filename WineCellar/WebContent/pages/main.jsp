@@ -43,24 +43,32 @@
 					
 					<button id="removeAllFilters">Show All</button> 
 					<br/>
-					<label for="filterVarietals">Varietals</label>
-					<select multiple="multiple" id="filterVarietals"></select>
-					<br/>
-					
-					<label for="filterVineyards">Vineyards</label>			
+					<label for="filterVineyards" class="bold">Vineyards</label>
+					<input type="radio" name="vineyardsFilter" id="vineyardsFilterAdd" value="show" checked="checked"/><label for="vineyardsFilterAdd">Add</label>
+					<input type="radio" name="vineyardsFilter" id="vineyardsFilterOnly" value="hide"/><label for="vineyardsFilterOnly">Only</label>			
 					<select multiple="multiple" id="filterVineyards"></select>
 					<br/>
-					
-					<label for="filterBrands">Brands</label>
+
+					<label for="filterBrands" class="bold">Brands</label>
+					<input type="radio" name="brandsFilter" id="brandsFilterAdd" value="show" checked="checked"/><label for="brandsFilterAdd">Add</label>
+					<input type="radio" name="brandsFilter" id="brandsFilterOnly" value="hide"/><label for="brandsFilterOnly">Only</label>
 					<select multiple="multiple" id="filterBrands"></select>
 					<br/>
 					
-					<label for="filterRegions">Regions</label>
+					<label for="filterVarietals" class="bold">Varietals</label>
+					<input type="radio" name="varietalsFilter" id="varietalsFilterAdd" value="show"/><label for="varietalsFilterAdd">Add</label>
+					<input type="radio" name="varietalsFilter" id="varietalsFilterOnly" value="hide" checked="checked"/><label for="varietalsFilterOnly">Only</label>
+					<select multiple="multiple" id="filterVarietals"></select>
+					<br/>
+					
+					<label for="filterRegions" class="bold">Regions</label>
+					<input type="radio" name="regionsFilter" id="regionsFilterAdd" value="show" checked="checked"/><label for="regionsFilterAdd">Add</label>
+					<input type="radio" name="regionsFilter" id="regionsFilterOnly" value="hide"/><label for="regionsFilterOnly">Only</label>
 					<select id="filterRegions" multiple="multiple"></select>
 					<br/>
 					
 					<input type="checkbox" id="filterBoh" />
-					<label for="filterBoh">In Stock</label>		
+					<label for="filterBoh" class="bold">In Stock</label>		
 				</fieldset>
 				
 				<fieldset id="stats">
@@ -76,8 +84,13 @@
 				
 				<fieldset id="settings">
 					<legend>Settings</legend>
+					<input type="checkbox" id="useAdvancedSettings"/>
 					<button id="updateData">Update Data</button>
 					<button id="clearCache">Clear Cache</button>
+					<br/>
+					<label for="userEmail">Email: </label><input id="userEmail" />
+					<br/>
+					<label for="Name">Name: </label><input id="userName" />
 				</fieldset>
 				
 			</div>
@@ -92,9 +105,7 @@
 			<button id="getWineSummaries" class="hidden">Get Wine List</button>	
 			<!-- End of unused elements -->		
 		</div>
-		<div id="footer" class="">
-
-		</div>
+		<div id="footer" class=""></div>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>
 		<script src="/js/lib/prefix-free.js" type="text/javascript"></script>

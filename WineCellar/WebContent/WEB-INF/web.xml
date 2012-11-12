@@ -68,5 +68,14 @@
   	<servlet-name>getWineDetails</servlet-name>
   	<url-pattern>/getWineDetails</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+  	<servlet-name>getImage</servlet-name>
+  	<servlet-class>lka.wine.servlets.ImageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>getImage</servlet-name>
+  	<url-pattern>/getImage</url-pattern>
+  </servlet-mapping>
   
 </web-app>

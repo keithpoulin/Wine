@@ -1,7 +1,6 @@
 package lka.wine.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,13 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.*;
 
-import lka.wine.dao.PurchaseDetail;
-import lka.wine.dao.TastingNote;
 import lka.wine.dao.WineDetails;
 import lka.wine.jdbc.WineDetailsQuery;
 
 
 public class WineDetailsServlet extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		

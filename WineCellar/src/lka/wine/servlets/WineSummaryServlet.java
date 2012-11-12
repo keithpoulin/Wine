@@ -14,6 +14,11 @@ import lka.wine.dao.WineSummary;
 import lka.wine.jdbc.WineSummaryView;
 
 public class WineSummaryServlet extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		List<WineSummary> wineSummaries = null;

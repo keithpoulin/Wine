@@ -29,9 +29,13 @@ import lka.wine.jdbc.WinesTable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 
 public class LookupDataServlet extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	protected enum LookupDataType {
 		BRANDS, LOCATIONS, LOCATION_TYPES, PURCHASES, REGIONS, TASTING_NOTES, VARIETALS, VINEYARDS, WINES
 	}
@@ -145,7 +149,6 @@ public class LookupDataServlet extends HttpServlet {
 			
 		} catch (Exception ex) {
 			// TODO: Handle error
-			ex = ex;
 		}
 	}
 	protected void doPost(HttpServletRequest request,
@@ -199,7 +202,6 @@ public class LookupDataServlet extends HttpServlet {
 			}
 		} catch (Exception ex) {
 			// TODO: Handle error
-			ex = ex;
 		}
 	}
 	
@@ -242,7 +244,6 @@ public class LookupDataServlet extends HttpServlet {
 			}
 		} catch (Exception ex) {
 			// TODO: Handle error
-			ex = ex;
 		}
 	}
 }

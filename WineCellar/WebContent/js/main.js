@@ -732,15 +732,17 @@ function submitTastingNote($dialog){
 	};
 	console.log(arg);
 	
+	var data = {
+		lookupDataType: "TASTING_NOTES",	
+		data: arg
+	};
+	
 	var argString = JSON.stringify(arg);
 	console.log(argString);
 	$.ajax({
 		url: "/getLookupData",
 		type: "PUT",
-		data: {
-			data: argString,
-			lookupDataType: "TASTING_NOTES"
-		}, 
+		data: JSON.stringify(data), 
 		success: function(tastingId){
 			alert(tastingId);
 			clearForm($("#tastingNoteForm"));

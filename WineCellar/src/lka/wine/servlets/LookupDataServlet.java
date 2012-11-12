@@ -1,5 +1,6 @@
 package lka.wine.servlets;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
 
@@ -27,6 +28,7 @@ import lka.wine.jdbc.VarietalsTable;
 import lka.wine.jdbc.VineyardsTable;
 import lka.wine.jdbc.WinesTable;
 
+import com.amazonaws.util.json.JSONObject;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -97,13 +99,18 @@ public class LookupDataServlet extends HttpServlet {
 
 	protected void doPut(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException {
-		try {
-			//Gson gson = new Gson();
+		try {			
+			StringBuffer sb = new StringBuffer();
+			String line = null;
+			BufferedReader reader = request.getReader();
+			while ((line = reader.readLine()) != null) {
+				sb.append(line);
+			}
+			JSONObject jsonObject = new JSONObject(sb.toString());
+			LookupDataType lookupDataType = LookupDataType.valueOf((String)jsonObject.get("lookupDataType"));
+			String data = ((JSONObject)jsonObject.get("data")).toString();
+				
 			Gson gson = new GsonBuilder().setDateFormat(dateFormat).create();
-
-			LookupDataType lookupDataType = LookupDataType.valueOf(request
-					.getParameter("lookupDataType").toUpperCase());
-			String data = request.getParameter("data");
 			int id = 0;
 			switch (lookupDataType) {
 			case BRANDS:
@@ -152,15 +159,21 @@ public class LookupDataServlet extends HttpServlet {
 		    throw new ServletException(ex);
 		}
 	}
+	
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException {
 		try {
-			//Gson gson = new Gson();
-			Gson gson = new GsonBuilder().setDateFormat(dateFormat).create();
+			StringBuffer sb = new StringBuffer();
+			String line = null;
+			BufferedReader reader = request.getReader();
+			while ((line = reader.readLine()) != null) {
+				sb.append(line);
+			}
+			JSONObject jsonObject = new JSONObject(sb.toString());
+			LookupDataType lookupDataType = LookupDataType.valueOf((String)jsonObject.get("lookupDataType"));
+			String data = ((JSONObject)jsonObject.get("data")).toString();
 
-			LookupDataType lookupDataType = LookupDataType.valueOf(request
-					.getParameter("lookupDataType").toUpperCase());
-			String data = request.getParameter("data");
+			Gson gson = new GsonBuilder().setDateFormat(dateFormat).create();
 			switch (lookupDataType) {
 			case BRANDS:
 				Brand brand = gson.fromJson(data, Brand.class);
@@ -210,9 +223,16 @@ public class LookupDataServlet extends HttpServlet {
 	protected void doDelete(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		try {
-			LookupDataType lookupDataType = LookupDataType.valueOf(request
-					.getParameter("lookupDataType").toUpperCase());
-			int id = Integer.parseInt(request.getParameter("id"));
+			StringBuffer sb = new StringBuffer();
+			String line = null;
+			BufferedReader reader = request.getReader();
+			while ((line = reader.readLine()) != null) {
+				sb.append(line);
+			}
+			JSONObject jsonObject = new JSONObject(sb.toString());
+			LookupDataType lookupDataType = LookupDataType.valueOf((String)jsonObject.get("lookupDataType"));
+			int id = Integer.parseInt((String)jsonObject.get("id"));
+			
 			switch (lookupDataType) {
 			case BRANDS:
 				new BrandsTable().delete(id);				

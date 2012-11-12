@@ -95,7 +95,13 @@
 				
 			</div>
 			<ul class="results" id="wineSummaries"></ul>			
-			<div class="results invisible" id="wineDetails"></div>
+			<div class="results hidden" id="wineDetails">
+				<div class="header">
+					<button id="wineDetailsBackButton" class="backButton" enabled="disabled">Back</button>
+					<button id="wineDetailsEditButton" class="editButton">Edit</button>
+				</div>
+				<div class="content"></div>
+			</div>
 						
 			<!-- Hidden and currently unused elements below here-->	
 			<div id="wineDetail" class="main hidden">

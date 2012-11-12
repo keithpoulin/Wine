@@ -30,6 +30,23 @@
 	border-style: dashed;
 }
 
+.clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+ 
+.clearfix {
+	display: inline-block;
+}
+
+.clear{
+	clear:both;
+}
+
 body{
 	background-image: url(/images/backgrounds/gray-paper.png);
 	text-shadow: 1px 1px rgba(255, 255, 255, .7);
@@ -93,6 +110,12 @@ h1, h2, h3, h4, h5{
 	margin: 0px;
 }
 
+#wineDetails h1, h2, h3, h4, h5{
+	text-align: center;
+	padding: 0px;
+	font-weight: normal;
+}
+
 div.main{
 	float: left;
 	width:300;
@@ -154,6 +177,7 @@ p.message{
 	width: 400px;
 	min-height: 50px;
 	float: left;
+	padding: 5px;
 }
 
 #wineDetails div.wineSummary{
@@ -165,7 +189,7 @@ p.message{
 
 #wineDetailPurchases, #wineDetailNotes{
 	float: left;
-	width: 200px;
+	width: 50%;
 	box-sizing: border-box;
 	padding: 0px 10px 0px 10px;
 }
@@ -232,6 +256,10 @@ li.selected{
 	border: 0px;
 }
 
+#wineDetailNotes h3, #wineDetailPurchases h3{
+	font-weight: bold;
+}
+
 ul.purchaseDetails li, ul.tastingNotes li{
 	padding: 5px;
 	border-left: 0px solid black;
@@ -244,6 +272,20 @@ ul.purchaseDetails li, ul.tastingNotes li{
 .purchaseDetails li p, .tastingNotes li p{
 	margin:0;
 	padding: 0;
+}
+
+#wineDetails button.backButton{
+	float: left;
+}
+
+#wineDetails button.editButton{
+	float: right;
+}
+
+#wineDetails div.header{
+	height: 1.5em;
+	background-image: linear-gradient(top, #E3146E 0%, #780B07 100%);
+	
 }
 
 #wine div ul li:hover{
@@ -291,3 +333,7 @@ fieldset{
 	text-align: center;
 }
 
+img.bottleImg{
+	float: right;
+	margin-bottom: 5px;
+}

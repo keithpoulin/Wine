@@ -183,6 +183,15 @@ Data.prototype.getWineDetail = function(wineId){
 	return null;
 };
 
+Data.prototype.getWineSummary = function(wineId){
+	for (var i=0; i< this.wineSummaries.length; i++){
+		if (Number(this.wineSummaries[i].wineId) == Number(wineId)){
+			return this.wineSummaries[i];
+		}
+	}
+	return null;
+};
+
 Data.prototype.hasWineDetail = function(args){
 	var wineId = null;
 	if ( typeof(args) == "string" || typeof(args) == "number"){
@@ -219,7 +228,6 @@ function addWineDetailsToLS(details){
 };
 
 function isWineDetailInlocalStorage(args){
-	console.log(args);
 	var wineId = null;
 	if ("wineId" in args){
 		wineId = args.wineId;
@@ -433,7 +441,6 @@ Data.prototype.getTotalVineyards = function(){
 }
 
 function hasBrand(wineSummary){
-	console.log(wineSummary.brand);
 	if (wineSummary.brand == null || wineSummary.brand == undefined || wineSummary.brand.brandId == 0){
 		return false;
 	}else{

@@ -30,6 +30,11 @@ function initializeData(){
 function initializeEvents(){
 	$("#wineSummaries").overscroll();
 	
+	$("#userName, #userEmail").blur(function(){
+		data[$(this).attr("id")] = $(this).val();
+		data.save();
+	});
+	
 	$("#getVineyards").click(function(){
 		$("#vineyards").html("");
 		getVineyards(getVineyardsArgs());	
@@ -102,6 +107,10 @@ function initializeEvents(){
 	$("#lightbox").click(function(){
 		$(this).empty().hide();
 	});
+	
+	$("#useAdvancedSettings").change(function(){
+		advancedSettings();
+	});
 }
 
 function setWineDetailsListHeight(){
@@ -133,13 +142,28 @@ function initializeAppearance(){
 	$("#tastingNoteForm").dialog({
 		autoOpen: false,
 		title: "New Tasting Note",
-		buttons: { Ok: function(){submitTastingNote($(this));}, Cancel: function(){$(this).dialog("close")} }
+		buttons: { Ok: function(){
+				submitTastingNote($(this));
+			}, Cancel: function(){
+				clearForm($(this)); 
+				$(this).dialog("close");
+			} 
+		}, open: function(){
+			$("#reviewedBy").val(data.userName);
+		}
 	});
 	
 	$("#purchaseDetailForm").dialog({
 		autoOpen: false,
 		title: "New Purchase",
-		buttons: { Ok: function(){submitPurchase($(this));}, Cancel: function() { $( this ).dialog( "close" ); } }
+		buttons: { Ok: function(){
+				submitPurchase($(this));
+			}, Cancel: function() { 
+				clearForm($(this)); $( this ).dialog( "close" ); 
+			} 
+		}, open: function(){
+			
+		}
 	});
 	
 	$("input.datepicker").datepicker({dateFormat: "M dd, yy"});
@@ -164,13 +188,18 @@ function initializeAppearance(){
 		}
 	});
 	
+	$("#userName").val(data.userName);
+	$("#userEmail").val(data.userEmail);
+	
 	setFilterVineyards();
 	setFilterBrands();
 	setFilterRegions();
 	setFilterVarietals();
 }
 
-
+function clearForm($form){
+	$form.find("input, select").val("");
+}
 
 function setStats(){
 	var wineInfo = data.getTotalWineDetailInfo();
@@ -269,6 +298,7 @@ function displayWineSummaries($target, json){
 	$("#getWineSummaries").button('option', 'label', "Refresh Wine Summary");
 	$("#getWineSummaries").button("refresh");
 	filterManager.applyAll();
+	advancedSettings();
 }
 
 function displayWineDetails($target, details){
@@ -649,6 +679,49 @@ function setWineDetailsEvents(){
 	});
 }
 
+/*
+ *private int purchaseId;
+	private int locationId;
+	private int wineId;
+	private Date purchaseDate;
+	private BigDecimal price;
+	private String pricePer;
+	private int qtyPurchased;
+	private String priceNotes;
+	private int qtyOnHand;
+	private String invLocation;
+	
+ */
+
+function submitPurchase($dialog){
+	var arg = {
+			wineId: $("#wineSummaries li[class='selected']").attr("wineId"),
+			purchaseDate: $("#purchaseDate").val(),
+			purchasePrice: $("#purchasePrice").val(),
+			pricePer: $("#purchaseUnit").val(),
+			qtyPurchased: $("#purchaseQty").val(),
+			priceNotes: $("#purchaseUnit").val(),
+			invLocation: 0, 	//needs to be updated
+			locationId: 0 		//needs to be updated
+		};
+		console.log(arg);
+		
+		var argString = JSON.stringify(arg);
+		console.log(argString);
+		$.ajax({
+			url: "/getLookupData",
+			type: "PUT",
+			data: {
+				data: argString,
+				lookupDataType: "PURCHASES"
+			}, 
+			success: function(tastingId){
+				alert(tastingId);
+				clearForm($("#tastingNoteForm"));
+			}
+		});
+}
+
 function submitTastingNote($dialog){
 	var arg = {
 		wineId: $("#wineSummaries li[class='selected']").attr("wineId"),
@@ -670,11 +743,15 @@ function submitTastingNote($dialog){
 		}, 
 		success: function(tastingId){
 			alert(tastingId);
+			clearForm($("#tastingNoteForm"));
 		}
 	});
 }
 
-function submitPurchase($dialog){
-	
+function advancedSettings(){
+	if ($("#useAdvancedSettings").is(":checked")){
+		$("#search input:radio, #search input:radio + label").show();
+	}else{
+		$("#search input:radio, #search input:radio + label").hide();
+	}
 }
-

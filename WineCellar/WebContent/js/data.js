@@ -27,6 +27,8 @@ function Data(){
 	this.lastUpdate = ("lastUpdate" in localStorage) ? localStorage.lastUpdate : 0 ;
 	this.regions = ("regions" in localStorage) ? (JSON.parse(localStorage.regions)) : [] ;
 	this.brands = ("brands" in localStorage) ? (JSON.parse(localStorage.brands)) : [] ;
+	this.userName = ("userName" in localStorage) ? (localStorage.userName) : "" ;
+	this.userEmail = ("userEmail" in localStorage) ? (localStorage.userEmail) : "" ;
 	
 	this.callback = function(){};
 	
@@ -161,9 +163,9 @@ Data.prototype.addWineDetails = function(args){
 Data.prototype.save = function(){
 	for (key in this){
 		if (this.hasOwnProperty(key)){
-			if (key != "lastUpdate" && key != "$wineSummaries" && key != "callback" && key != "displayWineSummaries"){
+			if (key != "lastUpdate" && key != "$wineSummaries" && key != "callback" && key != "displayWineSummaries" && key != "userName" && key != "userEmail"){
 				localStorage[key] = JSON.stringify(this[key]);
-			}else if (key == "lastUpdate"){
+			}else if (key == "lastUpdate" || key == "userName" || key == "userEmail"){
 				localStorage[key] = this[key];
 			}
 		}	

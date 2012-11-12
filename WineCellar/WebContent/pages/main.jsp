@@ -85,13 +85,13 @@
 				
 				<fieldset id="settings">
 					<legend>Settings</legend>
-					<input type="checkbox" id="useAdvancedSettings"/>
+					<input type="checkbox" id="useAdvancedSettings"/><label for="useAdvancedSettings">Advanced Mode</label><br/>
 					<button id="updateData">Update Data</button>
-					<button id="clearCache">Clear Cache</button>
+					<button id="clearCache" class="hidden">Clear Cache</button>
 					<br/>
 					<label for="userEmail">Email: </label><input id="userEmail" />
 					<br/>
-					<label for="Name">Name: </label><input id="userName" />
+					<label for="userName">Name: </label><input id="userName" />
 				</fieldset>
 				
 			</div>
@@ -137,7 +137,15 @@
 		</div>
 		<div id="purchaseDetailForm">
 			<label for="purchaseQty">Qty: </label><input id="purchaseQty" />
-			<label for="purchaseDetailDate">Date: </label><input id="purchaseDetailDate" class="datepicker"/>
+			<label for="purchaseUnit">Unit: </label><input id="purchaseUnit" />
+			<label for="purchaseDate">Date: </label><input id="purchaseDate" class="datepicker"/>
+			<label for="listPrice">List Price: </label><input id="listPrice" />
+			<label for="purchasePrice">Purchase Price: </label><input id="purchasePrice" />
+			<label for="locationName">Location Name: </label><input id="locationName" />
+			<label for="locationType">Location Type: </label><input id="locationType" />
+			<label for="locationCity">City: </label><input id="locationCity" />
+			<label for="locationState">State: </label><input id="locationState" />
+			
 		</div>
 		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>

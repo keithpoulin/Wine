@@ -120,7 +120,7 @@ function initializeAppearance(){
 		});
 	}
 	
-	$("#getVarietals, #getVineyards, #getWines, #getWineSummaries, #getWineDetails").button();
+	$("#getVarietals, #getVineyards, #getWines, #getWineSummaries, #getWineDetails, #wineDetailsBackButton, #wineDetailsEditButton").button();
 	$("#toolbar").buttonset();
 	$("#toggleSearch").button( {icons: {primary:'ui-icon-search'}, text: false });
 	$("#toggleSort").button( {icons: {primary:'ui-icon-transferthick-e-w'}, text: false });
@@ -298,9 +298,9 @@ function displayWineDetails($target, details){
 				+ getPriceNotesHtml(buy)
 				+ "<p class='inventory'>" + "Bottles On Hand: " + buy.qtyOnHand + "</p>"
 				+ "<p class='purchaseLocation'>" 
-					+ "<span class='name'>" + buy.locationName + "</span>" + "<br/>"
-					+ "<span class='city'>" + buy.locationCity + "</span>" + "<br/>"
-					+ "<span class='state'>" + buy.locationState + "</span>" + "<br/>"
+					+ ((buy.locationName != undefined && buy.locationName != "") ? "<span class='name'>" + buy.locationName + "</span>" + "<br/>" : "")
+					+  ((buy.locationCity != undefined && buy.locationCity != "") ?"<span class='city'>" + buy.locationCity + "</span>" + "<br/>" : "")
+					+  ((buy.locationState != undefined && buy.locationState != "") ? "<span class='state'>" + buy.locationState + "</span>" + "<br/>" : "")
 					+ "<span class='type'>" + buy.locationType + "</span>"
 				+ "</p>"
 			+ "</li>";

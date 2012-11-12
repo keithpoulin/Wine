@@ -98,6 +98,10 @@ function initializeEvents(){
 	$("#wineDetailsBackButton").click(function(){
 		$("#wineDetails").addClass("hidden");
 	});
+	
+	$("#lightbox").click(function(){
+		$(this).empty().hide();
+	});
 }
 
 function setWineDetailsListHeight(){
@@ -106,11 +110,15 @@ function setWineDetailsListHeight(){
 
 function initializeAppearance(){
 	if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPod/i)){
+		$("#navigation").width( $("#navigation").width() * 1.5 );
 		var screenWidth = $(window).width();
 		var navWidth = $("#navigation").width();
 		
+		$("#lightbox").hide();
+		
 		$("#wineSummaries").width(screenWidth - navWidth - 30);
 		
+		$("body").css({fontSize: "180%"});
 		$("#wineDetails").css({
 			position: "absolute",
 			left: "0",
@@ -118,6 +126,8 @@ function initializeAppearance(){
 			width: "100%",
 			height: "100%"
 		});
+		
+		$("#stats").slideUp().slideDown();
 	}
 	
 	$("#getVarietals, #getVineyards, #getWines, #getWineSummaries, #getWineDetails, #wineDetailsBackButton, #wineDetailsEditButton").button();
@@ -257,7 +267,7 @@ function displayWineDetails($target, details){
 		html += "<h2>" + "<span class='vineyard' vineyardId=" + r.vineyard.vineyardId + ">" + r.vineyard.vineyard + "</span>"
 		+ "<span class='vintageYear'>" + " (" + r.vintageYear + ")" + "</span>" + "</h2>"
 		+ (hasBrand(r) ? "<h3>" + getBrandHtml(r.brand) + "</h3>" : "")
-		+ "<img class='bottleImg' alt='bottle' height=200 width=200 src='/images/bottle.png'/>"
+		+ "<img class='bottleImg' alt='bottle' wineId='" + details.wineId + "' src='/getImage?wineId=" + details.wineId + "'/>"
 		+ "<p class='" + r.varietal.type.toLowerCase() + "'>" 
 			+ "<span class='varietal' varietalId='" + r.varietal.varietalId + "'>" + r.varietal.varietal 
 			+ "<span class='varietalType'>" + " ("  + r.varietal.type + ")" + "</span>"  + "</span>" 
@@ -314,6 +324,7 @@ function displayWineDetails($target, details){
 	$target.show();
 	setWineDetailsListHeight();
 	highlightInventory($("#wineDetails"));
+	setWineDetailsEvents();
 }
 
 function getRating(note){
@@ -602,5 +613,15 @@ function clearWineCache(){
 	localStorage.removeItem("lastUpdate");
 	localStorage.removeItem("callback");
 	localStorage.removeItem("$wineSummaries");
+}
+
+function setWineDetailsEvents(){
+	$("#wineDetails img.bottleImg").click(function(){
+		var $clone = $(this).clone();
+		var summary = data.getWineSummary($(this).attr("wineId"));
+		console.log(summary);
+		$("#lightbox").empty().append($clone).show();
+		$("#lightbox").append( "<p>" + summary.vineyard.vineyard + " (" + summary.vintageYear + ") </p>" );
+	});
 }
 

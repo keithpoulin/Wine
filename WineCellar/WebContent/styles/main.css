@@ -55,6 +55,7 @@ body{
 	bottom: 0;
 	left: 0;
 	right: 0;
+	margin:0px;
 }
 
 p{
@@ -344,4 +345,24 @@ fieldset{
 img.bottleImg{
 	float: right;
 	margin-bottom: 5px;
+	max-height: 200px;
+	max-widgh: 200px;
+}
+
+#lightbox{
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background: rgba(0,0,0,.8);
+	text-align: center;
+	display: none;
+	color: white;
+	text-shadow: 0px 0px;
+}
+
+#lightbox img{
+	max-height: 100%;
+	max-width: 100%;
+	float: none;
+	margin-top: 10em;
 }

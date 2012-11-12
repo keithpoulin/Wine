@@ -98,7 +98,7 @@
 			<ul class="results" id="wineSummaries"></ul>			
 			<div class="results hidden" id="wineDetails">
 				<div class="header">
-					<button id="wineDetailsBackButton" class="backButton" enabled="disabled">Back</button>
+					<button id="wineDetailsBackButton" class="backButton">Back</button>
 					<button id="wineDetailsEditButton" class="editButton">Edit</button>
 				</div>
 				<div class="content"></div>
@@ -116,6 +116,29 @@
 		<div id="footer" class=""></div>
 		
 		<div id="lightbox"></div>
+		<div id="tastingNoteForm">
+			<label for="reviewedBy">Reviewed By: </label><input id="reviewedBy" /> <br/>
+			<label for="tastingDate">Date: </label><input id="tastingDate" class="datepicker" />
+			<label for="tastingNote">Note: </label><input id="tastingNote" /> <br/>
+			<label for="tastingRating">Rating: </label>
+			<select id="tastingRating">
+				<option value=10>10</option>
+				<option value=9>9</option>
+				<option value=8>8</option>
+				<option value=7>7</option>
+				<option value=6>6</option>
+				<option value=5>5</option>
+				<option value=4>4</option>
+				<option value=3>3</option>
+				<option value=2>2</option>
+				<option value=1>1</option>
+				<option value=0>N/A</option>
+			</select>
+		</div>
+		<div id="purchaseDetailForm">
+			<label for="purchaseQty">Qty: </label><input id="purchaseQty" />
+			<label for="purchaseDetailDate">Date: </label><input id="purchaseDetailDate" class="datepicker"/>
+		</div>
 		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>

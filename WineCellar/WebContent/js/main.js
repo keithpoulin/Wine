@@ -130,6 +130,20 @@ function initializeAppearance(){
 		$("#stats").slideUp().slideDown();
 	}
 	
+	$("#tastingNoteForm").dialog({
+		autoOpen: false,
+		title: "New Tasting Note",
+		buttons: { Ok: function(){submitTastingNote($(this));}, Cancel: function(){$(this).dialog("close")} }
+	});
+	
+	$("#purchaseDetailForm").dialog({
+		autoOpen: false,
+		title: "New Purchase",
+		buttons: { Ok: function(){submitPurchase($(this));}, Cancel: function() { $( this ).dialog( "close" ); } }
+	});
+	
+	$("input.datepicker").datepicker({dateFormat: "M dd, yy"});
+	
 	$("#getVarietals, #getVineyards, #getWines, #getWineSummaries, #getWineDetails, #wineDetailsBackButton, #wineDetailsEditButton").button();
 	$("#toolbar").buttonset();
 	$("#toggleSearch").button( {icons: {primary:'ui-icon-search'}, text: false });
@@ -285,7 +299,7 @@ function displayWineDetails($target, details){
 		
 		var tastingNotes = details.tastingNotes;
 		var purchaseDetails = details.purchaseDetails;
-		html += "<div id='wineDetailNotes'><h3>Tasting Notes</h3>";
+		html += "<div id='wineDetailNotes'><h3>Tasting Notes<br/><button id='addNewTastingNoteButton'>+ Note</button></h3>";
 		html += "<ul class='tastingNotes'>";		
 		for (var i=0; i<tastingNotes.length; i++){
 			var note = tastingNotes[i];
@@ -297,7 +311,7 @@ function displayWineDetails($target, details){
 				+ "</li>";
 		}
 		html += "</ul></div>";
-		html += "<div id='wineDetailPurchases'><h3>Purchase Details</h3>";
+		html += "<div id='wineDetailPurchases'><h3>Purchase Details<br/><button id='addNewPurchaseButton'>+ Purchase</button></h3>";
 		html += "<ul class='purchaseDetails'>";		
 		for (var j=0; j< purchaseDetails.length; j++){
 			var buy = purchaseDetails[j];
@@ -623,5 +637,44 @@ function setWineDetailsEvents(){
 		$("#lightbox").empty().append($clone).show();
 		$("#lightbox").append( "<p>" + summary.vineyard.vineyard + " (" + summary.vintageYear + ") </p>" );
 	});
+	
+	$("#addNewTastingNoteButton").click(function(){
+		$("#tastingNoteForm").dialog("open");
+		$("#tastingNoteForm").click();
+	});
+	
+	$("#addNewPurchaseButton").click(function(){
+		$("#purchaseDetailForm").dialog("open");
+		$("#purchaseDetailForm").click();
+	});
+}
+
+function submitTastingNote($dialog){
+	var arg = {
+		wineId: $("#wineSummaries li[class='selected']").attr("wineId"),
+		tastingDate: $("#tastingDate").val(),
+		reviewedBy: $("#reviewedBy").val(),
+		review: $("#tastingNote").val(),
+		rating: $("#tastingRating").val() 
+	};
+	console.log(arg);
+	
+	var argString = JSON.stringify(arg);
+	console.log(argString);
+	$.ajax({
+		url: "/getLookupData",
+		type: "PUT",
+		data: {
+			data: argString,
+			lookupDataType: "TASTING_NOTES"
+		}, 
+		success: function(tastingId){
+			alert(tastingId);
+		}
+	});
+}
+
+function submitPurchase($dialog){
+	
 }
 

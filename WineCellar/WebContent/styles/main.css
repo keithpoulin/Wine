@@ -177,7 +177,7 @@ p.message{
 	width: 400px;
 	min-height: 50px;
 	float: left;
-	padding: 5px;
+	padding: 0px;
 }
 
 #wineDetails div.wineSummary{
@@ -274,6 +274,10 @@ ul.purchaseDetails li, ul.tastingNotes li{
 	padding: 0;
 }
 
+button.backButton, button.editButton{
+	margin:7px;
+}
+
 #wineDetails button.backButton{
 	float: left;
 }
@@ -286,6 +290,10 @@ ul.purchaseDetails li, ul.tastingNotes li{
 	height: 3.5em;
 	background-image: linear-gradient(top, #E3146E 0%, #780B07 100%);
 	
+}
+
+#wineDetails div.content{
+	padding: 15px;
 }
 
 #wine div ul li:hover{

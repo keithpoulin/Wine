@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Strings;
+
 import lka.wine.dao.Brand;
 import lka.wine.dao.Varietal;
 import lka.wine.dao.Vineyard;
@@ -65,9 +67,9 @@ public class WinesTable extends AbstractData<Wine> {
 		wine.setVarietal(varietalsMap.get(rs.getInt("VarietalID")));
 		wine.setRegion(regionsMap.get(rs.getInt("RegionID")));
 		wine.setVintageYear(rs.getInt("VintageYear"));
-		wine.setWineDescription(rs.getString("WineDescription"));
+		wine.setWineDescription(Strings.nullToEmpty(rs.getString("WineDescription")));
 		wine.setListPrice(rs.getBigDecimal("ListPrice"));
-		wine.setInventoryNotes(rs.getString("InventoryNotes"));
+		wine.setInventoryNotes(Strings.nullToEmpty(rs.getString("InventoryNotes")));
 
 		return wine;
 	}

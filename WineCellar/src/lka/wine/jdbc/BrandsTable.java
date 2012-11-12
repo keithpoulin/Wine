@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
+import com.google.common.base.Strings;
+
 import lka.wine.dao.Brand;
 
 public class BrandsTable extends AbstractData<Brand> {
@@ -17,7 +19,7 @@ public class BrandsTable extends AbstractData<Brand> {
 	public Brand getObject(ResultSet rs) throws SQLException {
 		Brand brand = new Brand();	
 		brand.setBrandId(rs.getInt("BrandID"));
-		brand.setBrandName(rs.getString("BrandName"));
+		brand.setBrandName(Strings.nullToEmpty(rs.getString("BrandName")));
 		return brand;
 	}
 

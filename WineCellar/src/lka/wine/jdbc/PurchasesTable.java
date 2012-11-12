@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
+import com.google.common.base.Strings;
+
 import lka.wine.dao.Purchase;
 
 public class PurchasesTable extends AbstractData<Purchase> {
@@ -23,11 +25,11 @@ public class PurchasesTable extends AbstractData<Purchase> {
 		purchase.setWineId(rs.getInt("WineID"));
 		purchase.setPurchaseDate(rs.getDate("PurchaseDate"));
 		purchase.setPrice(rs.getBigDecimal("Price"));
-		purchase.setPricePer(rs.getString("PricePer"));
+		purchase.setPricePer(Strings.nullToEmpty(rs.getString("PricePer")));
 		purchase.setQtyPurchased(rs.getInt("QtyPurchased"));
-		purchase.setPriceNotes(rs.getString("PriceNotes"));
+		purchase.setPriceNotes(Strings.nullToEmpty(rs.getString("PriceNotes")));
 		purchase.setQtyOnHand(rs.getInt("BottlesOnHand"));
-		purchase.setInvLocation(rs.getString("InvLocation"));
+		purchase.setInvLocation(Strings.nullToEmpty(rs.getString("InvLocation")));
 		return purchase;
 	}
 	

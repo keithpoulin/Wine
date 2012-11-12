@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.google.common.base.Strings;
+
 import lka.wine.dao.WineSummary;
 
 public class WineSummaryView extends AbstractData<WineSummary> {
@@ -26,7 +28,7 @@ public class WineSummaryView extends AbstractData<WineSummary> {
 		WineSummary wineSummary = new WineSummary();	
 
 		baseData.initObject(rs, wineSummary);
-		wineSummary.setPricePer(rs.getString("PricePer"));
+		wineSummary.setPricePer(Strings.nullToEmpty(rs.getString("PricePer")));
 		wineSummary.setMinPrice(rs.getBigDecimal("MinPrice"));
 		wineSummary.setAvgPrice(rs.getBigDecimal("AvgPrice"));
 		wineSummary.setMaxPrice(rs.getBigDecimal("MaxPrice"));

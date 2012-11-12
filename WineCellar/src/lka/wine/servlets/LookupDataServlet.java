@@ -42,7 +42,7 @@ public class LookupDataServlet extends HttpServlet {
 
 	private static final String dateFormat = "MMM dd, yyyy";
 	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+			HttpServletResponse response) throws ServletException {
 		try {
 			//Gson gson = new Gson();
 			Gson gson = new GsonBuilder().setDateFormat(dateFormat).create();
@@ -96,7 +96,7 @@ public class LookupDataServlet extends HttpServlet {
 	}
 
 	protected void doPut(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+			HttpServletResponse response) throws ServletException {
 		try {
 			//Gson gson = new Gson();
 			Gson gson = new GsonBuilder().setDateFormat(dateFormat).create();
@@ -147,12 +147,13 @@ public class LookupDataServlet extends HttpServlet {
 			}
 			response.getWriter().write(gson.toJson(id));
 			
-		} catch (Exception ex) {
-			// TODO: Handle error
+		} 
+		catch (Exception ex) {
+		    throw new ServletException(ex);
 		}
 	}
 	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+			HttpServletResponse response) throws ServletException {
 		try {
 			//Gson gson = new Gson();
 			Gson gson = new GsonBuilder().setDateFormat(dateFormat).create();
@@ -200,8 +201,9 @@ public class LookupDataServlet extends HttpServlet {
 			default:
 				// TODO: Handle error
 			}
-		} catch (Exception ex) {
-			// TODO: Handle error
+		} 
+		catch (Exception ex) {
+		    throw new ServletException(ex);
 		}
 	}
 	
@@ -242,8 +244,9 @@ public class LookupDataServlet extends HttpServlet {
 			default:
 				// TODO: Handle error
 			}
-		} catch (Exception ex) {
-			// TODO: Handle error
+		} 
+		catch (Exception ex) {
+		    throw new ServletException(ex);
 		}
 	}
 }

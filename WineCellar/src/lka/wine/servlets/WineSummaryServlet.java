@@ -1,6 +1,5 @@
 package lka.wine.servlets;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -8,10 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
 import lka.wine.dao.WineSummary;
 import lka.wine.jdbc.WineSummaryView;
+
+import com.google.gson.Gson;
 
 public class WineSummaryServlet extends HttpServlet {
 	/**
@@ -20,17 +19,15 @@ public class WineSummaryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		List<WineSummary> wineSummaries = null;
-		StringBuilder sb = new StringBuilder();
+			HttpServletResponse response) throws ServletException {
 		try {
+			List<WineSummary> wineSummaries = null;
 			wineSummaries = new WineSummaryView().select();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			sb.append(ex.getMessage() + "<br/>");
+			Gson gson = new Gson();
+			response.getWriter().write(gson.toJson(wineSummaries));		
 		}
-
-		Gson gson = new Gson();
-		response.getWriter().write(gson.toJson(wineSummaries));
+		catch (Exception ex) {
+		    throw new ServletException(ex);
+		}
 	}
 }

@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
+import com.google.common.base.Strings;
+
 import lka.wine.dao.PurchaseDetail;
 
 public class PurchaseDetailsView extends AbstractData<PurchaseDetail> {
@@ -26,13 +28,13 @@ public class PurchaseDetailsView extends AbstractData<PurchaseDetail> {
 		purchaseDetail.setPrice(rs.getBigDecimal("Price"));
 		purchaseDetail.setPricePer(rs.getString("PricePer"));
 		purchaseDetail.setQtyPurchased(rs.getInt("QtyPurchased"));
-		purchaseDetail.setPriceNotes(rs.getString("PriceNotes"));
+		purchaseDetail.setPriceNotes(Strings.nullToEmpty(rs.getString("PriceNotes")));
 		purchaseDetail.setQtyOnHand(rs.getInt("BottlesOnHand"));
-		purchaseDetail.setInvLocation(rs.getString("InvLocation"));
-		purchaseDetail.setLocationName(rs.getString("LocationName"));
-		purchaseDetail.setLocationCity(rs.getString("LocationCity"));
-		purchaseDetail.setLocationState(rs.getString("LocationState"));
-		purchaseDetail.setLocationType(rs.getString("LocationType"));
+		purchaseDetail.setInvLocation(Strings.nullToEmpty(rs.getString("InvLocation")));
+		purchaseDetail.setLocationName(Strings.nullToEmpty(rs.getString("LocationName")));
+		purchaseDetail.setLocationCity(Strings.nullToEmpty(rs.getString("LocationCity")));
+		purchaseDetail.setLocationState(Strings.nullToEmpty(rs.getString("LocationState")));
+		purchaseDetail.setLocationType(Strings.nullToEmpty(rs.getString("LocationType")));
 		return purchaseDetail;
 	}
 	

@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
+import com.google.common.base.Strings;
+
 import lka.wine.dao.Region;
 
 public class RegionsTable extends AbstractData<Region> {
@@ -17,8 +19,8 @@ public class RegionsTable extends AbstractData<Region> {
 	public Region getObject(ResultSet rs) throws SQLException {
 		Region region = new Region();	
 		region.setRegionId(rs.getInt("RegionID"));
-		region.setRegion(rs.getString("Region"));
-		region.setSubRegion(rs.getString("SubRegion"));
+		region.setRegion(Strings.nullToEmpty(rs.getString("Region")));
+		region.setSubRegion(Strings.nullToEmpty(rs.getString("SubRegion")));
 		return region;
 	}
 

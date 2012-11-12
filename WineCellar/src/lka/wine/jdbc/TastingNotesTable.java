@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
+import com.google.common.base.Strings;
+
 import lka.wine.dao.TastingNote;
 
 public class TastingNotesTable extends AbstractData<TastingNote> {
@@ -20,8 +22,8 @@ public class TastingNotesTable extends AbstractData<TastingNote> {
 		tastingNote.setTastingNoteId(rs.getInt("TastingNoteID"));
 		tastingNote.setWineId(rs.getInt("WineID"));
 		tastingNote.setTastingDate(rs.getDate("TastingDate"));
-		tastingNote.setReviewedBy(rs.getString("ReviewedBy"));
-		tastingNote.setReview(rs.getString("Review"));
+		tastingNote.setReviewedBy(Strings.nullToEmpty(rs.getString("ReviewedBy")));
+		tastingNote.setReview(Strings.nullToEmpty(rs.getString("Review")));
 		tastingNote.setRating(rs.getInt("Rating"));
 		return tastingNote;
 	}

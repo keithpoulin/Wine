@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
+import com.google.common.base.Strings;
+
 import lka.wine.dao.Location;
 
 public class LocationsTable extends AbstractData<Location> {
@@ -17,9 +19,9 @@ public class LocationsTable extends AbstractData<Location> {
 	public Location getObject(ResultSet rs) throws SQLException {
 		Location location = new Location();	
 		location.setLocationId(rs.getInt("LocationID"));
-		location.setLocationName(rs.getString("LocationName"));
-		location.setLocationCity(rs.getString("LocationCity"));
-		location.setLocationState(rs.getString("LocationState"));
+		location.setLocationName(Strings.nullToEmpty(rs.getString("LocationName")));
+		location.setLocationCity(Strings.nullToEmpty(rs.getString("LocationCity")));
+		location.setLocationState(Strings.nullToEmpty(rs.getString("LocationState")));
 		location.setLocationTypeId(rs.getInt("LocationTypeID"));
 		return location;
 	}

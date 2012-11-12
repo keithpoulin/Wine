@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
+import com.google.common.base.Strings;
+
 import lka.wine.dao.Vineyard;
 
 public class VineyardsTable extends AbstractData<Vineyard> {
@@ -17,7 +19,7 @@ public class VineyardsTable extends AbstractData<Vineyard> {
 	public Vineyard getObject(ResultSet rs) throws SQLException {
 		Vineyard vineyard = new Vineyard();	
 		vineyard.setVineyardId(rs.getInt("VineyardID"));
-		vineyard.setVineyard(rs.getString("Vineyard"));
+		vineyard.setVineyard(Strings.nullToEmpty(rs.getString("Vineyard")));
 		return vineyard;
 	}
 

@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
+import com.google.common.base.Strings;
+
 import lka.wine.dao.Varietal;;
 
 public class VarietalsTable extends AbstractData<Varietal> {
@@ -17,8 +19,8 @@ public class VarietalsTable extends AbstractData<Varietal> {
 	public Varietal getObject(ResultSet rs) throws SQLException {
 		Varietal varietal = new Varietal();	
 		varietal.setVarietalId(rs.getInt("VarietalID"));
-		varietal.setVarietal(rs.getString("Varietal"));
-		varietal.setType(rs.getString("Type"));
+		varietal.setVarietal(Strings.nullToEmpty(rs.getString("Varietal")));
+		varietal.setType(Strings.nullToEmpty(rs.getString("Type")));
 		return varietal;
 	}
 

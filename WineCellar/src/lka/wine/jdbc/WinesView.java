@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
+import com.google.common.base.Strings;
+
 import lka.wine.dao.Brand;
 import lka.wine.dao.Region;
 import lka.wine.dao.Varietal;
@@ -31,21 +33,21 @@ public class WinesView extends AbstractData<Wine> {
 	public void initObject(ResultSet rs, Wine wine) throws SQLException {
 		Vineyard vineyard = new Vineyard();
 		vineyard.setVineyardId(rs.getInt("VineyardID"));
-		vineyard.setVineyard(rs.getString("Vineyard"));
+		vineyard.setVineyard(Strings.nullToEmpty(rs.getString("Vineyard")));
 
 		Brand brand = new Brand();
 		brand.setBrandId(rs.getInt("BrandID"));
-		brand.setBrandName(rs.getString("BrandName"));
+		brand.setBrandName(Strings.nullToEmpty(rs.getString("BrandName")));
 		
 		Varietal varietal = new Varietal();
 		varietal.setVarietalId(rs.getInt("VarietalID"));
-		varietal.setVarietal(rs.getString("Varietal"));
-		varietal.setType(rs.getString("Type"));
+		varietal.setVarietal(Strings.nullToEmpty(rs.getString("Varietal")));
+		varietal.setType(Strings.nullToEmpty(rs.getString("Type")));
 		
 		Region region = new Region();
 		region.setRegionId(rs.getInt("RegionID"));
-		region.setRegion(rs.getString("Region"));
-		region.setSubRegion(rs.getString("SubRegion"));
+		region.setRegion(Strings.nullToEmpty(rs.getString("Region")));
+		region.setSubRegion(Strings.nullToEmpty(rs.getString("SubRegion")));
 		
 		wine.setWineId(rs.getInt("WineID"));
 		wine.setVintageYear(rs.getInt("VintageYear"));

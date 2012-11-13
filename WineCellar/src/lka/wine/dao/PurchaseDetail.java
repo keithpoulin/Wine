@@ -13,10 +13,7 @@ public class PurchaseDetail {
 	private String priceNotes;
 	private int qtyOnHand;
 	private String invLocation;
-	private String locationName;
-	private String locationCity;
-	private String locationState;
-	private String locationType;
+	private Location location;
 	
 	public int getPurchaseId() {
 		return purchaseId;
@@ -72,29 +69,10 @@ public class PurchaseDetail {
 	public void setInvLocation(String invLocation) {
 		this.invLocation = invLocation;
 	}
-	public String getLocationName() {
-		return locationName;
+	public Location getLocation() {
+		return location;
 	}
-	public void setLocationName(String locationName) {
-		this.locationName = locationName;
+	public void setLocation(Location location) {
+		this.location = location;
 	}
-	public String getLocationCity() {
-		return locationCity;
-	}
-	public void setLocationCity(String locationCity) {
-		this.locationCity = locationCity;
-	}
-	public String getLocationState() {
-		return locationState;
-	}
-	public void setLocationState(String locationState) {
-		this.locationState = locationState;
-	}
-	public String getLocationType() {
-		return locationType;
-	}
-	public void setLocationType(String locationType) {
-		this.locationType = locationType;
-	}
-
 }

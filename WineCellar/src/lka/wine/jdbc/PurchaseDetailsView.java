@@ -9,6 +9,8 @@ import java.util.List;
 
 import com.google.common.base.Strings;
 
+import lka.wine.dao.Location;
+import lka.wine.dao.LocationType;
 import lka.wine.dao.PurchaseDetail;
 
 public class PurchaseDetailsView extends AbstractData<PurchaseDetail> {
@@ -16,12 +18,17 @@ public class PurchaseDetailsView extends AbstractData<PurchaseDetail> {
 	private final static String tableName = "vwPurchaseDetails";
 	private final static List<String> columnNames = Arrays.asList(
 			"PurchaseID", "WineID", "PurchaseDate", "Price", "PricePer", "QtyPurchased",
-			"PriceNotes", "BottlesOnHand", "InvLocation", "LocationName", "LocationCity",
-			"LocationState", "LocationType");
+			"PriceNotes", "BottlesOnHand", "InvLocation", "LocationID", "LocationName", 
+			"LocationCity", "LocationState", "LocationTypeID", "LocationType");
 
 	@Override
 	public PurchaseDetail getObject(ResultSet rs) throws SQLException {
 		PurchaseDetail purchaseDetail = new PurchaseDetail();	
+		Location location = new Location();
+		LocationType locationType = new LocationType();
+		location.setLocationType(locationType);
+		purchaseDetail.setLocation(location);
+				
 		purchaseDetail.setPurchaseId(rs.getInt("PurchaseID"));
 		purchaseDetail.setWineId(rs.getInt("WineID"));
 		purchaseDetail.setPurchaseDate(rs.getDate("PurchaseDate"));
@@ -31,10 +38,11 @@ public class PurchaseDetailsView extends AbstractData<PurchaseDetail> {
 		purchaseDetail.setPriceNotes(Strings.nullToEmpty(rs.getString("PriceNotes")));
 		purchaseDetail.setQtyOnHand(rs.getInt("BottlesOnHand"));
 		purchaseDetail.setInvLocation(Strings.nullToEmpty(rs.getString("InvLocation")));
-		purchaseDetail.setLocationName(Strings.nullToEmpty(rs.getString("LocationName")));
-		purchaseDetail.setLocationCity(Strings.nullToEmpty(rs.getString("LocationCity")));
-		purchaseDetail.setLocationState(Strings.nullToEmpty(rs.getString("LocationState")));
-		purchaseDetail.setLocationType(Strings.nullToEmpty(rs.getString("LocationType")));
+		location.setLocationName(Strings.nullToEmpty(rs.getString("LocationName")));
+		location.setLocationCity(Strings.nullToEmpty(rs.getString("LocationCity")));
+		location.setLocationState(Strings.nullToEmpty(rs.getString("LocationState")));
+		locationType.setLocationTypeId(rs.getInt("LocationTypeID"));
+		locationType.setLocationType(Strings.nullToEmpty(rs.getString("LocationType")));
 		return purchaseDetail;
 	}
 	
@@ -82,10 +90,10 @@ public class PurchaseDetailsView extends AbstractData<PurchaseDetail> {
 		pstmt.setString(index++, obj.getPriceNotes());		
 		pstmt.setInt(index++, obj.getQtyOnHand());		
 		pstmt.setString(index++, obj.getInvLocation());		
-		pstmt.setString(index++, obj.getLocationName());		
-		pstmt.setString(index++, obj.getLocationCity());		
-		pstmt.setString(index++, obj.getLocationState());		
-		pstmt.setString(index++, obj.getLocationType());
+		pstmt.setString(index++, obj.getLocation().getLocationName());		
+		pstmt.setString(index++, obj.getLocation().getLocationCity());		
+		pstmt.setString(index++, obj.getLocation().getLocationState());		
+		pstmt.setString(index++, obj.getLocation().getLocationType().getLocationType());
 		return index;
 	}
 

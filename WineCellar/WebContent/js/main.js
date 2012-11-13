@@ -299,7 +299,7 @@ function displayWines($target, json){
 function displayWineSummaries($target, json){
 	var html = "";
 	if(json.length == 0){
-		html = msgNoResults();
+		html = msgPleaseWait();
 	} else {
 		for (var i=0; i<json.length; i++){
 			var r = json[i];

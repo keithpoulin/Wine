@@ -371,7 +371,7 @@ img.bottleImg:hover{
 	cursor: pointer;
 }
 
-#purchaseDetailForm {
+#purchaseDetailForm, #tastingNoteForm {
 	text-align: right;
 }
 

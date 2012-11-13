@@ -117,9 +117,9 @@
 		
 		<div id="lightbox"></div>
 		<div id="tastingNoteForm">
-			<label for="reviewedBy">Reviewed By: </label><input id="reviewedBy" /> <br/>
-			<label for="tastingDate">Date: </label><input id="tastingDate" class="datepicker" />
-			<label for="tastingNote">Note: </label><input id="tastingNote" /> <br/>
+			<label for="reviewedBy">Reviewed By: </label><input id="reviewedBy" /><br/>
+			<label for="tastingDate">Date: </label><input id="tastingDate" class="datepicker" /><br/>
+			<label for="tastingNote">Note: </label><input id="tastingNote" /><br/>
 			<label for="tastingRating">Rating: </label>
 			<select id="tastingRating">
 				<option value=10>10</option>

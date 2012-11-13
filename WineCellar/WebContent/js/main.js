@@ -380,10 +380,10 @@ function displayWineDetails($target, details){
 				+ getPriceNotesHtml(buy)
 				+ "<p class='inventory'>" + "Bottles On Hand: " + buy.qtyOnHand + "</p>"
 				+ "<p class='purchaseLocation'>" 
-					+ ((buy.locationName != undefined && buy.locationName != "") ? "<span class='name'>" + buy.locationName + "</span>" + "<br/>" : "")
-					+  ((buy.locationCity != undefined && buy.locationCity != "") ?"<span class='city'>" + buy.locationCity + "</span>" + "<br/>" : "")
-					+  ((buy.locationState != undefined && buy.locationState != "") ? "<span class='state'>" + buy.locationState + "</span>" + "<br/>" : "")
-					+ "<span class='type'>" + buy.locationType + "</span>"
+					+ ((buy.location != undefined && buy.location.locationName != undefined && buy.location.locationName != "") ? "<span class='name'>" + buy.location.locationName + "</span>" + "<br/>" : "")
+					+ ((buy.location != undefined && buy.location.locationCity != undefined && buy.location.locationCity != "") ?"<span class='city'>" + buy.location.locationCity + "</span>" + "<br/>" : "")
+					+ ((buy.location != undefined && buy.location.locationState != undefined && buy.location.locationState != "") ? "<span class='state'>" + buy.location.locationState + "</span>" + "<br/>" : "")
+					+ ((buy.location != undefined && buy.location.locationType != undefined && buy.location.locationType.locationType != undefined && buy.location.locationType.locationType != "") ? "<span class='type'>" + buy.location.locationType.locationType + "</span>" : "")					
 				+ "</p>"
 			+ "</li>";
 		}

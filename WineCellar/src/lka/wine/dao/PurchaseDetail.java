@@ -13,6 +13,7 @@ public class PurchaseDetail {
 	private String priceNotes;
 	private int qtyOnHand;
 	private String invLocation;
+	private int locationId;
 	private Location location;
 	
 	public int getPurchaseId() {
@@ -68,6 +69,12 @@ public class PurchaseDetail {
 	}
 	public void setInvLocation(String invLocation) {
 		this.invLocation = invLocation;
+	}
+	public int getLocationId() {
+		return locationId;
+	}
+	public void setLocationId(int locationId) {
+		this.locationId = locationId;
 	}
 	public Location getLocation() {
 		return location;

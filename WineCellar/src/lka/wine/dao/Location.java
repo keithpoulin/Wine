@@ -5,6 +5,7 @@ public class Location extends AbstractDao {
 	private String locationName;
 	private String locationCity;
 	private String locationState;
+	private int locationTypeId;
 	private LocationType locationType;
 	
 	public int getLocationId() {
@@ -30,6 +31,12 @@ public class Location extends AbstractDao {
 	}
 	public void setLocationState(String locationState) {
 		this.locationState = locationState;
+	}
+	public int getLocationTypeId() {
+		return locationTypeId;
+	}
+	public void setLocationTypeId(int locationTypeId) {
+		this.locationTypeId = locationTypeId;
 	}
 	public LocationType getLocationType() {
 		return locationType;

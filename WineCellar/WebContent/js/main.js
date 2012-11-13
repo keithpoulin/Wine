@@ -143,7 +143,19 @@ function initializeAppearance(){
 		autoOpen: false,
 		title: "New Tasting Note",
 		buttons: { Ok: function(){
-				submitTastingNote($(this));
+				var arg = {
+					wineId: Number($("#wineSummaries li[class='selected']").attr("wineId")),
+					tastingDate: $("#tastingDate").val(),
+					reviewedBy: $("#reviewedBy").val(),
+					review: $("#tastingNote").val(),
+					rating: Number($("#tastingRating").val()) 
+				};
+				
+				data.submitTastingNote(arg, function(){
+					$("#wineSummaries li[wineId='" + arg.wineId + "']").click();
+				});
+				clearForm($(this)); 
+				$( this ).dialog( "close" );
 			}, Cancel: function(){
 				clearForm($(this)); 
 				$(this).dialog("close");
@@ -157,9 +169,25 @@ function initializeAppearance(){
 		autoOpen: false,
 		title: "New Purchase",
 		buttons: { Ok: function(){
-				submitPurchase($(this));
+			var arg = {
+					wineId: Number($("#wineSummaries li[class='selected']").attr("wineId")),
+					purchaseDate: $("#purchaseDate").val(),
+					price: Number($("#purchasePrice").val()),
+					pricePer: $("#purchaseUnit").val(),
+					qtyPurchased: Number($("#purchaseQty").val()),
+					qtyOnHand: Number($("#purchaseQty").val()),
+					priceNotes: $("#purchaseUnit").val(),
+					invLocation: 0, 	//needs to be updated
+					locationId: 0 		//needs to be updated
+				};
+				data.submitPurchase(arg, function(){
+					$("#wineSummaries li[wineId='" + arg.wineId + "']").click();
+				});
+				clearForm($(this)); 
+				$( this ).dialog( "close" ); 
 			}, Cancel: function() { 
-				clearForm($(this)); $( this ).dialog( "close" ); 
+				clearForm($(this)); 
+				$( this ).dialog( "close" ); 
 			} 
 		}, open: function(){
 			
@@ -207,9 +235,9 @@ function setStats(){
 	$("#totalVarietals").html(data.getTotalVarietals());
 	$("#totalVineyards").html(data.getTotalVineyards());
 	$("#totalBottlesPurchased").html(wineInfo.totalBottles);
-	$("#totalAveragePrice").html(accounting.formatMoney(wineInfo.avgCost));
+	$("#totalAveragePrice").html(accounting.formatMoney(Number(wineInfo.avgCost)));
 	$("#totalAverageRating").html(wineInfo.avgRating);
-	$("#totalCost").html(accounting.formatMoney(wineInfo.totalCost));
+	$("#totalCost").html(accounting.formatMoney(Number(wineInfo.totalCost)));
 }
 
 function displayVarietals($target, json){
@@ -282,7 +310,7 @@ function displayWineSummaries($target, json){
 					+ "<span class='varietalType'>" + " ("  + r.varietal.type + ")" + "</span>"  + "</span>" 
 				+ "</p>"
 				+ "<p>" + getRegionHtml(r.region) + "</p>"					
-				+ "<p>" + "Avg. Price: " + "<span class='price avgPrice'>" + accounting.formatMoney(r.avgPrice) + "</span>" + " / " + "<span class='priceUnit'>" + r.pricePer + "</span>" +"</p>"
+				+ "<p>" + "Avg. Price: " + "<span class='price avgPrice'>" + accounting.formatMoney(Number(r.avgPrice)) + "</span>" + " / " + "<span class='priceUnit'>" + r.pricePer + "</span>" +"</p>"
 				+ "<p>" + getListPriceHtml(r, "List Price: ") + "</p>"
 				+ "<p>Avg Rating: " + getAvgRatingHtml(r) + "</p>"
 				+ "<p>" + "Bottles On Hand: " + "<span class='inventory'>" + r.qtyOnHand + "</span>" + "</p>"
@@ -321,7 +349,7 @@ function displayWineDetails($target, details){
 		+ "<p>Avg Rating: " + getAvgRatingHtml(r) + "</p>"
 		+ "<p>" + "Bottles On Hand: " + "<span class='inventory'>" + r.qtyOnHand + "</span>" + "</p>"
 		+ "<br/>"
-		+ "<p>" + "Avg. Price: " + "<span class='price avgPrice'>" + accounting.formatMoney(r.avgPrice) + "</span>" + " / " + "<span class='priceUnit'>" + r.pricePer + "</span>" +"</p>"
+		+ "<p>" + "Avg. Price: " + "<span class='price avgPrice'>" + accounting.formatMoney(Number(r.avgPrice)) + "</span>" + " / " + "<span class='priceUnit'>" + r.pricePer + "</span>" +"</p>"
 		+ "<p>" + getListPriceHtml(r, "List Price: ") + "</p>"
 		+"<hr class='clear'/>"
 		+ "";
@@ -348,7 +376,7 @@ function displayWineDetails($target, details){
 			html+= 
 				"<li>"
 				+ "<p>" + "<span class='date'>" + buy.purchaseDate + "</span>" + "</p>"
-				+ "<p>Purchased " + buy.qtyPurchased + " at " + "<span class='price'>$" + buy.price + "</span>" + " / " + "<span class='priceUnit'>" + buy.pricePer + "</span>" + "</p>"
+				+ "<p>Purchased " + buy.qtyPurchased + " at " + "<span class='price'>$" + Number(buy.price) + "</span>" + " / " + "<span class='priceUnit'>" + buy.pricePer + "</span>" + "</p>"
 				+ getPriceNotesHtml(buy)
 				+ "<p class='inventory'>" + "Bottles On Hand: " + buy.qtyOnHand + "</p>"
 				+ "<p class='purchaseLocation'>" 
@@ -417,7 +445,7 @@ function getListPriceHtml(record, label){
 	if (record.listPrice == undefined){
 		return "<span class='price listPrice'>" + "</span>";
 	} else {
-		return label + "<span class='price listPrice'>" + accounting.formatMoney(record.listPrice) + "</span>";
+		return label + "<span class='price listPrice'>" + accounting.formatMoney(Number(record.listPrice)) + "</span>";
 	}
 }
 
@@ -561,11 +589,11 @@ function setFilterVineyardsEvents(){
 				var val = $("#filterVineyards").val()[i];
 				var selector = "";
 				if (filter.type == "show"){
-					selector = "li:has(p span.vineyard[vineyardId='" + val + "'])";
+					selector = "p span.vineyard[vineyardId='" + val + "']";
 				}else{
-					selector = "li:not(:has(p span.vineyard[vineyardId='" + val + "']))";
+					selector = "p span.vineyard[vineyardId='" + val + "']";
 				}
-				filter.addFilter(selector);
+				filter.addField(selector);
 				filter.enable();
 			}
 		}else{
@@ -585,11 +613,11 @@ function setFilterBrandsEvents(){
 				var val = $("#filterBrands").val()[i];
 				var selector = "";
 				if (filter.type == "show"){
-					selector = "li:has(p span.brand[brandId='" + val + "'])";
+					selector = "p span.brand[brandId='" + val + "']";
 				}else{
-					selector = "li:not(:has(p span.brand[brandId='" + val + "']))";
+					selector = "p span.brand[brandId='" + val + "']";
 				}
-				filter.addFilter(selector);
+				filter.addField(selector);
 				filter.enable();
 			}
 		}else{
@@ -609,11 +637,11 @@ function setFilterVarietalsEvents(){
 				var val = $("#filterVarietals").val()[i];
 				var selector = "";				
 				if(filter.type == "show"){
-					selector = "li:has(p span.varietal[varietalId='" + val + "'])";
+					selector = "p span.varietal[varietalId='" + val + "']";
 				}else{
-					selector = "li:not(:has(p span.varietal[varietalId='" + val + "']))";
+					selector = "p span.varietal[varietalId='" + val + "']";
 				}
-				filter.addFilter(selector);
+				filter.addField(selector);
 				filter.enable();
 			}
 		}else{
@@ -633,11 +661,11 @@ function setFilterRegionsEvents(){
 				var val = $("#filterRegions").val()[i];
 				var selector = "";
 				if(filter.type == "show"){
-					selector = "li:has(p span.region[regionId='" + val + "'])";
+					selector = "p span.region[regionId='" + val + "']";
 				}else{
-					selector = "li:not(:has(p span.region[regionId='" + val + "']))";
+					selector = "p span.region[regionId='" + val + "']";
 				}
-				filter.addFilter(selector);
+				filter.addField(selector);
 				filter.enable();
 			}
 		}else{
@@ -676,77 +704,6 @@ function setWineDetailsEvents(){
 	$("#addNewPurchaseButton").click(function(){
 		$("#purchaseDetailForm").dialog("open");
 		$("#purchaseDetailForm").click();
-	});
-}
-
-/*
- *private int purchaseId;
-	private int locationId;
-	private int wineId;
-	private Date purchaseDate;
-	private BigDecimal price;
-	private String pricePer;
-	private int qtyPurchased;
-	private String priceNotes;
-	private int qtyOnHand;
-	private String invLocation;
-	
- */
-
-function submitPurchase($dialog){
-	var arg = {
-			wineId: $("#wineSummaries li[class='selected']").attr("wineId"),
-			purchaseDate: $("#purchaseDate").val(),
-			purchasePrice: $("#purchasePrice").val(),
-			pricePer: $("#purchaseUnit").val(),
-			qtyPurchased: $("#purchaseQty").val(),
-			priceNotes: $("#purchaseUnit").val(),
-			invLocation: 0, 	//needs to be updated
-			locationId: 0 		//needs to be updated
-		};
-		console.log(arg);
-		
-		var argString = JSON.stringify(arg);
-		console.log(argString);
-		$.ajax({
-			url: "/getLookupData",
-			type: "PUT",
-			data: {
-				data: argString,
-				lookupDataType: "PURCHASES"
-			}, 
-			success: function(tastingId){
-				alert(tastingId);
-				clearForm($("#tastingNoteForm"));
-			}
-		});
-}
-
-function submitTastingNote($dialog){
-	var arg = {
-		wineId: $("#wineSummaries li[class='selected']").attr("wineId"),
-		tastingDate: $("#tastingDate").val(),
-		reviewedBy: $("#reviewedBy").val(),
-		review: $("#tastingNote").val(),
-		rating: $("#tastingRating").val() 
-	};
-	console.log(arg);
-	
-	var data = {
-		lookupDataType: "TASTING_NOTES",	
-		data: arg
-	};
-	
-	var argString = JSON.stringify(arg);
-	console.log(argString);
-	$.ajax({
-		url: "/getLookupData",
-		type: "PUT",
-		data: JSON.stringify(data), 
-		success: function(tastingId){
-			alert(tastingId);
-			clearForm($("#tastingNoteForm"));
-		}
 	});
 }
 

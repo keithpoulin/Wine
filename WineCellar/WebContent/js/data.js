@@ -424,23 +424,16 @@ function updateWineDetails(args){
 }
 
 Data.prototype.getTotalBoh = function(){
-	var total = 0;
-	for (var i=0; i<this.wineSummaries.length; i++){
-		var wine = this.wineSummaries[i];
-		if (wine.qtyOnHand != undefined && wine.qtyOnHand != null && typeof(wine.qtyOnHand) == "number"){
-			total = total + wine.qtyOnHand;
-		}
-	}
-	return total;
-}
+	return this.getTotalWineDetailInfo().totalBoh;
+};
 
 Data.prototype.getTotalVarietals = function(){
 	return this.varietals.length;
-}
+};
 
 Data.prototype.getTotalVineyards = function(){
 	return this.vineyards.length;
-}
+};
 
 function hasBrand(wineSummary){
 	if (wineSummary.brand == null || wineSummary.brand == undefined || wineSummary.brand.brandId == 0){
@@ -463,18 +456,20 @@ Data.prototype.getTotalWineDetailInfo = function(){
 		for (var j=0; j<wineDetail.purchaseDetails.length; j++){
 			var purchase = wineDetail.purchaseDetails[j];
 			if (purchase.pricePer.toLowerCase() == "bottle"){
-				bottles = bottles + purchase.qtyPurchased;
+				bottles = bottles + Number(purchase.qtyPurchased);
 				if (purchase.price != undefined){
-					cost = cost + purchase.price;
+					cost = cost + Number(purchase.price);
 				}
-				totalBoh = totalBoh + purchase.qtyOnHand;
+				if (purchase.qtyOnHand != undefined){
+					totalBoh = totalBoh + Number(purchase.qtyOnHand);
+				}
 			}
 		}
 		totalPurchases = totalPurchases + wineDetail.purchaseDetails.length;
 		for (var k=0; k<wineDetail.tastingNotes.length; k++){
 			var note = wineDetail.tastingNotes[k];
-			if (note.rating >0){
-				ratingTotal = ratingTotal + note.rating;
+			if (Number(note.rating) >0){
+				ratingTotal = ratingTotal + Number(note.rating);
 				ratingCount++;
 				totalTastings++;
 			}
@@ -492,6 +487,89 @@ Data.prototype.getTotalWineDetailInfo = function(){
 		avgCost: (cost/bottles).toFixed(2),
 		totalBoh: totalBoh
 	};
+};
+
+Data.prototype.getPurchaseDetail = function(purchaseId){
+	for (var i=0; i< this.wineDetails.length; i++){
+		for (var j=0; j< this.wineDetails[i].purchaseDetails.length; j++){
+			var purchaseDetail = this.wineDetails[i].purchaseDetails[j];
+			if (purchaseDetail.purchaseId == purchaseId){
+				return purchaseDetail;
+			}
+		}
+	}
+	return null;
+};
+
+Data.prototype.getTastingNote = function(tastingNoteId){
+	for (var i=0; i < this.wineDetails.length; i++){
+		for (var j=0; j < this.wineDetails[i].tastingNotes.length; j++){
+			var tastingNote = this.wineDetails[i].tastingNotes[j];
+			if (tastingNote.tastingNoteId == tastingNoteId){
+				return tastingNote;
+			}
+		}
+	}
+	return null;
+};
+
+Data.prototype.submitPurchase = function (purchase, callback){
+	if (callback == undefined){
+		callback = function(){};
+	}
+	var arg = {
+		lookupDataType: "PURCHASES",	
+		data: purchase
+	};
+	var datasource = this;
+	var updateId = function(purchaseId){
+		datasource.getPurchaseDetail(0).purchaseId = purchaseId;
+		datasource.save();
+		datasource.refresh();
+	};
+	$.ajax({
+		url: "/getLookupData",
+		type: "PUT",
+		data: JSON.stringify(arg),
+		success: function(purchaseId){
+			updateId(purchaseId);
+			callback(purchaseId);
+			console.log("entered purchase detail id " + purchaseId);
+		}
+	});
+	
+	var wineDetail = this.getWineDetail(purchase.wineId);
+	purchase.purchaseId = 0;
+	wineDetail.purchaseDetails.push(purchase);
+};
+
+Data.prototype.submitTastingNote = function (note, callback){
+	if (callback == undefined){
+		callback = function(){};
+	}
+	var datasource = this;
+	var updateId = function(tastingId){
+		datasource.getTastingNote(0).tastingNoteId = tastingId;
+		datasource.save();
+		datasource.refresh();
+	};
+	var arg = {
+		lookupDataType: "TASTING_NOTES",	
+		data: note
+	};
+	$.ajax({
+		url: "/getLookupData",
+		type: "PUT",
+		data: JSON.stringify(arg), 
+		success: function(tastingId){	
+			updateId(tastingId);
+			callback(tastingId);
+			console.log("entered tasting note id " + tastingId);
+		}
+	});
+	var wineDetail = this.getWineDetail(note.wineId);
+	note.tastingNoteId = 0;
+	wineDetail.tastingNotes.push(note);
 };
 
 function lsVarietals(){

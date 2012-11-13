@@ -45,14 +45,14 @@
 					<button id="removeAllFilters">Show All</button> 
 					<br/>
 					<label for="filterVineyards" class="bold">Vineyards</label>
-					<input type="radio" name="vineyardsFilter" id="vineyardsFilterAdd" value="show" checked="checked"/><label for="vineyardsFilterAdd">Add</label>
-					<input type="radio" name="vineyardsFilter" id="vineyardsFilterOnly" value="hide"/><label for="vineyardsFilterOnly">Only</label>			
+					<input type="radio" name="vineyardsFilter" id="vineyardsFilterAdd" value="show" /><label for="vineyardsFilterAdd">Add</label>
+					<input type="radio" name="vineyardsFilter" id="vineyardsFilterOnly" value="hide" checked="checked"/><label for="vineyardsFilterOnly">Only</label>			
 					<select multiple="multiple" id="filterVineyards"></select>
 					<br/>
 
 					<label for="filterBrands" class="bold">Brands</label>
-					<input type="radio" name="brandsFilter" id="brandsFilterAdd" value="show" checked="checked"/><label for="brandsFilterAdd">Add</label>
-					<input type="radio" name="brandsFilter" id="brandsFilterOnly" value="hide"/><label for="brandsFilterOnly">Only</label>
+					<input type="radio" name="brandsFilter" id="brandsFilterAdd" value="show" /><label for="brandsFilterAdd">Add</label>
+					<input type="radio" name="brandsFilter" id="brandsFilterOnly" value="hide" checked="checked"/><label for="brandsFilterOnly">Only</label>
 					<select multiple="multiple" id="filterBrands"></select>
 					<br/>
 					
@@ -63,8 +63,8 @@
 					<br/>
 					
 					<label for="filterRegions" class="bold">Regions</label>
-					<input type="radio" name="regionsFilter" id="regionsFilterAdd" value="show" checked="checked"/><label for="regionsFilterAdd">Add</label>
-					<input type="radio" name="regionsFilter" id="regionsFilterOnly" value="hide"/><label for="regionsFilterOnly">Only</label>
+					<input type="radio" name="regionsFilter" id="regionsFilterAdd" value="show" /><label for="regionsFilterAdd">Add</label>
+					<input type="radio" name="regionsFilter" id="regionsFilterOnly" value="hide" checked="checked"/><label for="regionsFilterOnly">Only</label>
 					<select id="filterRegions" multiple="multiple"></select>
 					<br/>
 					
@@ -79,8 +79,8 @@
 					<p>Vineyards: <span id="totalVineyards"></span></p>
 					<p>Bottles Purchased: <span id="totalBottlesPurchased"></span></p>
 					<p>Avg. Price: <span id="totalAveragePrice"></span></p>
-					<p>Avg. Rating: <span id="totalAverageRating"></span></p>
 					<p>Total Expenditure: <span id="totalCost"></span></p>
+					<p>Avg. Rating: <span id="totalAverageRating"></span></p>
 				</fieldset>
 				
 				<fieldset id="settings">

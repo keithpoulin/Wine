@@ -7,23 +7,13 @@ function FilterManager($parent){
 			regions: new Filter(false, "li.none", $parent, "show"),
 			varietals: new Filter(false, "li.none", $parent, "show")
 	};
+	this.filters.inStock.addField("p[class='inStock']");
 }
 
 FilterManager.prototype.applyAll = function(){
-	this.$list.find("li").hide();
+	this.$list.find("li").show();
 	var enabled = false;
-	for (key in this.filters){		
-		var filter = this.filters[key];
-		if (filter.type.toLowerCase() == "show"){			
-			if (filter.enabled && filter.filter.length >0){
-				filter.apply();
-				enabled = true;
-			}
-		}		
-	}
-	if (!enabled){
-		this.$list.find("li").show();
-	}
+	
 	for (key in this.filters){		
 		var filter = this.filters[key];
 		if (filter.type.toLowerCase() == "hide"){
@@ -37,6 +27,23 @@ FilterManager.prototype.applyAll = function(){
 	if (!enabled){
 		this.$list.find("li").show();
 	}
+	
+	for (key in this.filters){		
+		var filter = this.filters[key];
+		if (filter.type.toLowerCase() == "show"){			
+			if (filter.enabled){
+				filter.apply();
+				enabled = true;
+			}
+		}		
+	}
+	if (!enabled){
+		this.$list.find("li").show();
+	}
+	
+	if (this.filters.inStock.enabled){
+		this.filters.inStock.apply();
+	}
 };
 
 FilterManager.prototype.disableAll = function(){
@@ -47,34 +54,52 @@ FilterManager.prototype.disableAll = function(){
 	}
 //	this.$list.find("li").show();
 	this.applyAll();
-}
+};
 
 function Filter(setting, selector, $parent, type){
 	 this.enabled = setting;
 	 this.filter= [selector];
 	 this.$list = $parent;
 	 this.type = type;
+	 this.fields = [];
 }
 
 Filter.prototype.setType = function(type){
 	this.type = type;
-}
+};
 
 Filter.prototype.addFilter = function(selector){
 	this.filter.push(selector);
 };
 
+Filter.prototype.addField = function(field){
+	this.fields.push(field);
+};
+
+Filter.prototype.getFilter = function(){
+	var string = "li";
+	if (this.type == "show"){
+		string += ":has(" + this.fields.join(", ") + ")";
+	}else{
+		string += ":not(:has(" + this.fields.join(", ") + "))";
+	}
+	return string;
+};
+
+
 Filter.prototype.getResults = function(){
 	var $result = $("");
 	
 	for (var i=0; i<this.filter.length; i++){
-		$result = $result.add($(this.$list.find(this.filter[i])));
+//		$result = $result.add($(this.$list.find(this.filter[i])));
 	}
+	$result = $result.add($(this.$list.find(this.getFilter())));
 	return $result;
 };
 
 Filter.prototype.reset = function(){
 	this.filter = [];
+	this.fields = [];
 };
 
 Filter.prototype.setEnabled = function(enabled){

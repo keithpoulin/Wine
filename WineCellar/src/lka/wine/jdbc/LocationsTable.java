@@ -8,11 +8,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Strings;
-
-import lka.wine.dao.Brand;
 import lka.wine.dao.Location;
 import lka.wine.dao.LocationType;
+
+import com.google.common.base.Strings;
 
 public class LocationsTable extends AbstractData<Location> {
 

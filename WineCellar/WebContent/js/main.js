@@ -16,6 +16,7 @@ function initializeData(){
 		setFilterRegions();
 		setFilterVarietals();
 		setStats();
+		setLocationsDropdown();
 	};
 	data.$wineSummaries = $("#wineSummaries");
 	data.setDisplayWineSummaries(displayWineSummaries);
@@ -162,7 +163,7 @@ function initializeAppearance(){
 			} 
 		}, open: function(){
 			$("#reviewedBy").val(data.userName);
-		}
+		}, width: 400
 	});
 	
 	$("#purchaseDetailForm").dialog({
@@ -178,7 +179,7 @@ function initializeAppearance(){
 					qtyOnHand: Number($("#purchaseQty").val()),
 					priceNotes: $("#purchaseUnit").val(),
 					invLocation: 0, 	//needs to be updated
-					locationId: 0 		//needs to be updated
+					locationId: $("#purchaseLocation").val() 
 				};
 				data.submitPurchase(arg, function(){
 					$("#wineSummaries li[wineId='" + arg.wineId + "']").click();
@@ -191,7 +192,7 @@ function initializeAppearance(){
 			} 
 		}, open: function(){
 			
-		}
+		}, width: 400
 	});
 	
 	$("input.datepicker").datepicker({dateFormat: "M dd, yy"});
@@ -223,6 +224,7 @@ function initializeAppearance(){
 	setFilterBrands();
 	setFilterRegions();
 	setFilterVarietals();
+	setLocationsDropdown();
 }
 
 function clearForm($form){
@@ -373,6 +375,7 @@ function displayWineDetails($target, details){
 		html += "<ul class='purchaseDetails'>";		
 		for (var j=0; j< purchaseDetails.length; j++){
 			var buy = purchaseDetails[j];
+			var location = buy.location == undefined ? data.getLocation(buy.locationId) : buy.location;
 			html+= 
 				"<li>"
 				+ "<p>" + "<span class='date'>" + buy.purchaseDate + "</span>" + "</p>"
@@ -380,10 +383,10 @@ function displayWineDetails($target, details){
 				+ getPriceNotesHtml(buy)
 				+ "<p class='inventory'>" + "Bottles On Hand: " + buy.qtyOnHand + "</p>"
 				+ "<p class='purchaseLocation'>" 
-					+ ((buy.location != undefined && buy.location.locationName != undefined && buy.location.locationName != "") ? "<span class='name'>" + buy.location.locationName + "</span>" + "<br/>" : "")
-					+ ((buy.location != undefined && buy.location.locationCity != undefined && buy.location.locationCity != "") ?"<span class='city'>" + buy.location.locationCity + "</span>" + "<br/>" : "")
-					+ ((buy.location != undefined && buy.location.locationState != undefined && buy.location.locationState != "") ? "<span class='state'>" + buy.location.locationState + "</span>" + "<br/>" : "")
-					+ ((buy.location != undefined && buy.location.locationType != undefined && buy.location.locationType.locationType != undefined && buy.location.locationType.locationType != "") ? "<span class='type'>" + buy.location.locationType.locationType + "</span>" : "")					
+					+ ((location.locationName != undefined && location.locationName != "") ? "<span class='name'>" + location.locationName + "</span>" + "<br/>" : "")
+					+ ((location.locationCity != undefined && location.locationCity != "") ?"<span class='city'>" + location.locationCity + "</span>" + "<br/>" : "")
+					+ ((location.locationState != undefined && location.locationState != "") ? "<span class='state'>" + location.locationState + "</span>" + "<br/>" : "")
+					+ ((location.locationType != undefined && location.locationType.locationType != undefined && location.locationType.locationType != "") ? "<span class='type'>" + location.locationType.locationType + "</span>" : "")					
 				+ "</p>"
 			+ "</li>";
 		}
@@ -674,6 +677,31 @@ function setFilterRegionsEvents(){
 		filterManager.applyAll();
 		console.log(filter);
 	});
+}
+
+function setLocationsDropdown(){
+	$("#purchaseLocation").empty();
+	for(var i=0; i< data.locations.length; i++){
+		$("#purchaseLocation").append(
+				$("<option>").attr("value", data.locations[i].locationId)
+					.html(getLocationsHtml(data.locations[i]))
+			);
+	}
+	function getLocationsHtml(location){
+		if (( location.locationCity == undefined || location.locationCity == null || location.locationCity == "" ) 
+			&& (location.locationState == undefined || location.locationState == "" || location.locationCity == null) ){
+			return location.locationName;
+		}
+		else if((location.locationCity != "" && location.locationCity != null && location.locationCity != undefined)
+				&& (location.locationState == undefined || location.locationState == "" || location.locationCity == null) ){
+			return location.locationName + " - " + locationCity;
+		}else if(location.locationCity == "" || location.locationCity == null || location.locationCity == undefined){
+			return location.locationName + " - " + location.locationState;
+		}else{
+			return location.locationName + " - " + location.locationCity + ", " + location.locationState;
+		}
+	}
+	
 }
 
 function clearWineCache(){

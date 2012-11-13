@@ -29,6 +29,8 @@ function Data(){
 	this.brands = ("brands" in localStorage) ? (JSON.parse(localStorage.brands)) : [] ;
 	this.userName = ("userName" in localStorage) ? (localStorage.userName) : "" ;
 	this.userEmail = ("userEmail" in localStorage) ? (localStorage.userEmail) : "" ;
+	this.locations = ("locations" in localStorage) ? (JSON.parse(localStorage.locations)) : [] ;
+	
 	
 	this.callback = function(){};
 	
@@ -58,6 +60,7 @@ Data.prototype.sortAll = function(){
 	this.regions.sort(sort_by("region", true, function(a){return a.toUpperCase();}));
 	this.brands.sort(sort_by("brandName", true, function(a){return a.toUpperCase();}));
 	this.wineSummaries.sort(sort_WineSummaries("vineyard", true, function(a){return a.toUpperCase();}));
+	this.locations.sort(sort_by("locationName", true, function(a){return a.toUpperCase();}));
 };
 
 Data.prototype.sortWineSummaries = function(field, descending, display){
@@ -117,6 +120,7 @@ function updateAll(){
 	updateWineDetails();
 	updateRegions();
 	updateBrands();
+	updateLocations();
 }
 
 Data.prototype.refresh = function(){
@@ -128,8 +132,8 @@ Data.prototype.refresh = function(){
 	this.lastUpdate = ("lastUpdate" in localStorage) ? localStorage.lastUpdate : 0 ;
 	this.regions = ("regions" in localStorage) ? (JSON.parse(localStorage.regions)) : [] ;
 	this.brands = ("brands" in localStorage) ? (JSON.parse(localStorage.brands)) : [] ;
-	
-//	this.sortWineSummaries("vineyard", true);
+	this.locations = ("locations" in localStorage) ? (JSON.parse(localStorage.locations)) : [] ;
+
 	this.sortAll();
 	this.save();
 	this.callback();
@@ -174,6 +178,15 @@ Data.prototype.save = function(){
 
 Data.prototype.resetWineDetails = function(){
 	this.wineDetails = [];
+};
+
+Data.prototype.getLocation = function(id){
+	for (var i=0; i< this.locations.length; i++){
+		if (Number(this.locations[i].locationId) == Number(id)){
+			return this.locations[i];
+		}
+	}
+	return null;
 };
 
 Data.prototype.getWineDetail = function(wineId){
@@ -246,7 +259,6 @@ function isWineDetailInlocalStorage(args){
 	}
 	return false;
 }
-
 
 function getWineSummaries(args){
 	$("#wineSummaries").html(msgPleaseWait());
@@ -361,6 +373,21 @@ function updateRegions(args){
 		dataType: "json",
 		success: function(resp){
 			localStorage.regions = JSON.stringify(resp);
+			updateManager.end();
+		}
+	});
+}
+
+function updateLocations(args){
+	updateManager.start();
+	args == undefined ? args = {} : args;
+	args["lookupDataType"] = getLookupArgs("locations").lookupDataType;
+	$.ajax({
+		url: "/getLookupData",
+		data: args,
+		dataType: "json",
+		success: function(resp){
+			localStorage.locations = JSON.stringify(resp);
 			updateManager.end();
 		}
 	});

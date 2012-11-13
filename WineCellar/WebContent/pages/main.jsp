@@ -136,15 +136,16 @@
 			</select>
 		</div>
 		<div id="purchaseDetailForm">
-			<label for="purchaseQty">Qty: </label><input id="purchaseQty" />
-			<label for="purchaseUnit">Unit: </label><input id="purchaseUnit" />
-			<label for="purchaseDate">Date: </label><input id="purchaseDate" class="datepicker"/>
-			<label for="listPrice">List Price: </label><input id="listPrice" />
-			<label for="purchasePrice">Purchase Price: </label><input id="purchasePrice" />
-			<label for="locationName">Location Name: </label><input id="locationName" />
-			<label for="locationType">Location Type: </label><input id="locationType" />
-			<label for="locationCity">City: </label><input id="locationCity" />
-			<label for="locationState">State: </label><input id="locationState" />
+			<label for="purchaseQty">Qty: </label><input id="purchaseQty" /><br/>
+			<label for="purchaseUnit">Unit: </label><input id="purchaseUnit" /><br/>
+			<label for="purchaseDate">Date: </label><input id="purchaseDate" class="datepicker"/><br/>
+			<label for="listPrice">List Price: </label><input id="listPrice" /><br/>
+			<label for="purchasePrice">Purchase Price: </label><input id="purchasePrice" /><br/>
+<!-- 			<label for="locationName">Location Name: </label><input id="locationName" /> -->
+<!-- 			<label for="locationType">Location Type: </label><input id="locationType" /> -->
+<!-- 			<label for="locationCity">City: </label><input id="locationCity" /> -->
+<!-- 			<label for="locationState">State: </label><input id="locationState" /> -->
+			<select id="purchaseLocation"></select>
 			
 		</div>
 		

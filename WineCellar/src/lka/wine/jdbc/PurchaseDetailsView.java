@@ -38,6 +38,7 @@ public class PurchaseDetailsView extends AbstractData<PurchaseDetail> {
 		purchaseDetail.setPriceNotes(Strings.nullToEmpty(rs.getString("PriceNotes")));
 		purchaseDetail.setQtyOnHand(rs.getInt("BottlesOnHand"));
 		purchaseDetail.setInvLocation(Strings.nullToEmpty(rs.getString("InvLocation")));
+		location.setLocationId(rs.getInt("LocationID"));
 		location.setLocationName(Strings.nullToEmpty(rs.getString("LocationName")));
 		location.setLocationCity(Strings.nullToEmpty(rs.getString("LocationCity")));
 		location.setLocationState(Strings.nullToEmpty(rs.getString("LocationState")));

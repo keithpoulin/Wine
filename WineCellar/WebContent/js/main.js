@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	$("#main").fadeOut(0);
 	initializeData();
 	initializeEvents();
 	initializeAppearance();
@@ -136,6 +137,7 @@ function initializeAppearance(){
 			width: "100%",
 			height: "100%"
 		});
+		$("#wineDetails").appendTo("body");
 		
 		$("#stats").slideUp().slideDown();
 	}
@@ -225,6 +227,7 @@ function initializeAppearance(){
 	setFilterRegions();
 	setFilterVarietals();
 	setLocationsDropdown();
+	$("#main").fadeIn(500);
 }
 
 function clearForm($form){

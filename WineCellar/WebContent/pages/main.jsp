@@ -100,6 +100,7 @@
 				<div class="header">
 					<button id="wineDetailsBackButton" class="backButton">Back</button>
 					<button id="wineDetailsEditButton" class="editButton">Edit</button>
+					<h2>Wine Details</h2>
 				</div>
 				<div class="content"></div>
 			</div>

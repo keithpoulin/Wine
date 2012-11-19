@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	$("#main").fadeOut(0);
+	initializeTemplates();
 	initializeData();
 	initializeEvents();
 	initializeAppearance();
@@ -27,6 +28,10 @@ function initializeData(){
 	}catch(e){
 		console.log(e);
 	}
+}
+
+function initializeTemplates(){
+	window.t_wineSummary = Handlebars.compile($("#t_wineSummary").html());
 }
 
 function initializeEvents(){
@@ -314,22 +319,24 @@ function displayWineSummaries($target, json){
 	if(json.length == 0){
 		html = msgPleaseWait();
 	} else {
-		for (var i=0; i<json.length; i++){
+		for (var i=0; i<data.wineSummaries.length; i++){
 			var r = json[i];
-			html += "<li wineid='" + r.wineId + "'>"   
-				+ "<p>" + "<span class='vineyard' vineyardId=" + r.vineyard.vineyardId + ">" + r.vineyard.vineyard + "</span>"
-				+ "<span class='vintageYear'>" + " (" + r.vintageYear + ")" + "</span>" + "</p>"
-				+ (hasBrand(r) ? "<p>" + getBrandHtml(r.brand) + "</p>" : "")
-				+ "<p class='" + r.varietal.type.toLowerCase() + "'>" 
-					+ "<span class='varietal' varietalId='" + r.varietal.varietalId + "'>" + r.varietal.varietal 
-					+ "<span class='varietalType'>" + " ("  + r.varietal.type + ")" + "</span>"  + "</span>" 
-				+ "</p>"
-				+ "<p>" + getRegionHtml(r.region) + "</p>"					
-				+ "<p>" + "Avg. Price: " + "<span class='price avgPrice'>" + accounting.formatMoney(Number(r.avgPrice)) + "</span>" + " / " + "<span class='priceUnit'>" + r.pricePer + "</span>" +"</p>"
-				+ "<p>" + getListPriceHtml(r, "List Price: ") + "</p>"
-				+ "<p>Avg Rating: " + getAvgRatingHtml(r) + "</p>"
-				+ "<p>" + "Bottles On Hand: " + "<span class='inventory'>" + r.qtyOnHand + "</span>" + "</p>"
-				+ "</li>";
+			var summary = data.wineSummaries[i];
+			html += t_wineSummary(summary);
+//			html += "<li wineid='" + r.wineId + "'>"   
+//				+ "<p>" + "<span class='vineyard' vineyardId=" + r.vineyard.vineyardId + ">" + r.vineyard.vineyard + "</span>"
+//				+ "<span class='vintageYear'>" + " (" + r.vintageYear + ")" + "</span>" + "</p>"
+//				+ (hasBrand(r) ? "<p>" + getBrandHtml(r.brand) + "</p>" : "")
+//				+ "<p class='" + r.varietal.type.toLowerCase() + "'>" 
+//					+ "<span class='varietal' varietalId='" + r.varietal.varietalId + "'>" + r.varietal.varietal 
+//					+ "<span class='varietalType'>" + " ("  + r.varietal.type + ")" + "</span>"  + "</span>" 
+//				+ "</p>"
+//				+ "<p>" + getRegionHtml(r.region) + "</p>"					
+//				+ "<p>" + "Avg. Price: " + "<span class='price avgPrice'>" + accounting.formatMoney(Number(r.avgPrice)) + "</span>" + " / " + "<span class='priceUnit'>" + r.pricePer + "</span>" +"</p>"
+//				+ "<p>" + getListPriceHtml(r, "List Price: ") + "</p>"
+//				+ "<p>Avg Rating: " + getAvgRatingHtml(r) + "</p>"
+//				+ "<p>" + "Bottles On Hand: " + "<span class='inventory'>" + r.qtyOnHand + "</span>" + "</p>"
+//				+ "</li>";
 		}
 	}
 	

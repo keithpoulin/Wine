@@ -147,11 +147,11 @@ ul.results li:hover{
 	cursor: default;
 }
 
-.red{
+.red, .Red, .RED{
 	color: #9E0F3D;
 }
 
-.white{
+.white, .White, .WHITE{
 	color: gray;
 }
 

@@ -157,6 +157,9 @@
 		<script src="/js/lib/prefix-free.js" type="text/javascript"></script>
 		<script src="/js/lib/accounting.min.js" type="text/javascript"></script>
 		<script src="/js/lib/jquery.overscroll.min.js" type="text/javascript"></script>
+		<script src="/js/lib/handlebars.js" type="text/javascript"></script>
+		<jsp:include page="/templates/templates.jsp" />
+		
 		<script src="/js/data.js" type="text/javascript"></script>
 		<script src="/js/filter.js" type="text/javascript"></script>
 		<script src="/js/main.js" type="text/javascript"></script>

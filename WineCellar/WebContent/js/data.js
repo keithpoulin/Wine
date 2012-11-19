@@ -468,7 +468,7 @@ function updateWineCellar(args){
 }
 
 Data.prototype.getTotalBoh = function(){
-	return this.getTotalWineDetailInfo().totalBoh;
+	return this.getWineCellarStats().totalBoh;
 };
 
 Data.prototype.getTotalVarietals = function(){
@@ -487,53 +487,6 @@ function hasBrand(wineSummary){
 	}
 }
 
-/*
-Data.prototype.getTotalWineDetailInfo = function(){
-	var bottles = 0;
-	var cost = 0;
-	var ratingTotal = 0;
-	var ratingCount = 0;
-	var totalPurchases = 0;
-	var totalTastings = 0;
-	var totalBoh = 0;
-	for (var i=0; i<this.wineDetails.length; i++){
-		var wineDetail = this.wineDetails[i];
-		for (var j=0; j<wineDetail.purchaseDetails.length; j++){
-			var purchase = wineDetail.purchaseDetails[j];
-			if (purchase.pricePer.toLowerCase() == "bottle"){
-				bottles = bottles + Number(purchase.qtyPurchased);
-				if (purchase.price != undefined){
-					cost = cost + Number(purchase.price);
-				}
-				if (purchase.qtyOnHand != undefined){
-					totalBoh = totalBoh + Number(purchase.qtyOnHand);
-				}
-			}
-		}
-		totalPurchases = totalPurchases + wineDetail.purchaseDetails.length;
-		for (var k=0; k<wineDetail.tastingNotes.length; k++){
-			var note = wineDetail.tastingNotes[k];
-			if (Number(note.rating) >0){
-				ratingTotal = ratingTotal + Number(note.rating);
-				ratingCount++;
-				totalTastings++;
-			}
-		}
-	}
-	return {
-		totalBottles: bottles,
-		totalCost: cost.toFixed(2),
-		ratingTotal: ratingTotal,
-		ratingCount: ratingCount,
-		avgRating: (ratingTotal/ratingCount).toFixed(2),
-		totalPurchases: totalPurchases,
-		totalTastings: totalTastings,
-		avgBottlesPerPurchase: (bottles/totalPurchases).toFixed(2),
-		avgCost: (cost/bottles).toFixed(2),
-		totalBoh: totalBoh
-	};
-};
-*/
 Data.prototype.getWineCellarStats = function(){
 	var bottles = 0;
 	var cost = 0;

@@ -30,6 +30,7 @@ function Data(){
 	this.userName = ("userName" in localStorage) ? (localStorage.userName) : "" ;
 	this.userEmail = ("userEmail" in localStorage) ? (localStorage.userEmail) : "" ;
 	this.locations = ("locations" in localStorage) ? (JSON.parse(localStorage.locations)) : [] ;
+	this.wineCellar = ("wineCellar" in localStorage) ? (JSON.parse(localStorage.wineCellar)) : [] ;
 	
 	
 	this.callback = function(){};
@@ -39,7 +40,7 @@ function Data(){
 	if (this.varietals.length == 0 ||
 	this.vineyards.length == 0||
 	this.wineDetails.length == 0 ||this.wines.length == 0 ||
-	this.wineSummaries.length == 0){
+	this.wineSummaries.length == 0 || this.wineCellar.length == 0){
 		this.updateAll();
 	}
 }
@@ -121,6 +122,7 @@ function updateAll(){
 	updateRegions();
 	updateBrands();
 	updateLocations();
+	updateWineCellar();
 }
 
 Data.prototype.refresh = function(){
@@ -133,6 +135,7 @@ Data.prototype.refresh = function(){
 	this.regions = ("regions" in localStorage) ? (JSON.parse(localStorage.regions)) : [] ;
 	this.brands = ("brands" in localStorage) ? (JSON.parse(localStorage.brands)) : [] ;
 	this.locations = ("locations" in localStorage) ? (JSON.parse(localStorage.locations)) : [] ;
+	this.wineCellar = ("wineCellar" in localStorage) ? (JSON.parse(localStorage.wineCellar)) : [] ;
 
 	this.sortAll();
 	this.save();
@@ -449,6 +452,20 @@ function updateWineDetails(args){
 		}
 	});
 }
+function updateWineCellar(args){
+	args == undefined ? args = {} : args;
+	args["dataType"] = "wine_cellar";
+	updateManager.start();
+	$.ajax({
+		url: "/WineCellar",
+		data: args,
+		dataType: "json",
+		success: function(resp){
+			localStorage.wineCellar = JSON.stringify(resp);
+			updateManager.end();
+		}
+	});
+}
 
 Data.prototype.getTotalBoh = function(){
 	return this.getTotalWineDetailInfo().totalBoh;
@@ -470,6 +487,7 @@ function hasBrand(wineSummary){
 	}
 }
 
+/*
 Data.prototype.getTotalWineDetailInfo = function(){
 	var bottles = 0;
 	var cost = 0;
@@ -502,6 +520,50 @@ Data.prototype.getTotalWineDetailInfo = function(){
 			}
 		}
 	}
+	return {
+		totalBottles: bottles,
+		totalCost: cost.toFixed(2),
+		ratingTotal: ratingTotal,
+		ratingCount: ratingCount,
+		avgRating: (ratingTotal/ratingCount).toFixed(2),
+		totalPurchases: totalPurchases,
+		totalTastings: totalTastings,
+		avgBottlesPerPurchase: (bottles/totalPurchases).toFixed(2),
+		avgCost: (cost/bottles).toFixed(2),
+		totalBoh: totalBoh
+	};
+};
+*/
+Data.prototype.getWineCellarStats = function(){
+	var bottles = 0;
+	var cost = 0;
+	var ratingTotal = 0;
+	var ratingCount = 0;
+	var totalPurchases = 0;
+	var totalTastings = 0;
+	var totalBoh = 0;
+	for (var i=0; i<this.wineCellar.purchases.length; i++){
+		var purchase = this.wineCellar.purchases[i];
+		if (purchase.pricePer.toLowerCase() == "bottle"){
+			bottles = bottles + Number(purchase.qtyPurchased);
+			if (purchase.price != undefined){
+				cost = cost + Number(purchase.price) * Number(purchase.qtyPurchased);
+			}
+			if (purchase.qtyOnHand != undefined){
+				totalBoh = totalBoh + Number(purchase.qtyOnHand);
+			}
+		}
+		totalPurchases++;
+	}
+	for (var k=0; k<this.wineCellar.tastingNotes.length; k++){
+		var note = this.wineCellar.tastingNotes[k];
+		if (Number(note.rating) >0){
+			ratingTotal = ratingTotal + Number(note.rating);
+			ratingCount++;
+			totalTastings++;
+		}
+	}
+
 	return {
 		totalBottles: bottles,
 		totalCost: cost.toFixed(2),

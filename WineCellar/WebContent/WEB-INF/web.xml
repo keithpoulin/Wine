@@ -70,6 +70,16 @@
   </servlet-mapping>
 
   <servlet>
+  	<servlet-name>WineCellar</servlet-name>
+  	<servlet-class>lka.wine.servlets.WineCellarServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>WineCellar</servlet-name>
+  	<url-pattern>/WineCellar</url-pattern>
+  </servlet-mapping>
+
+
+  <servlet>
   	<servlet-name>getImage</servlet-name>
   	<servlet-class>lka.wine.servlets.ImageServlet</servlet-class>
   </servlet>

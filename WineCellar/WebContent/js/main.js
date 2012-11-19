@@ -235,7 +235,17 @@ function clearForm($form){
 }
 
 function setStats(){
+	/*
 	var wineInfo = data.getTotalWineDetailInfo();
+	$("#totalBottlesOnHand").html(data.getTotalBoh());
+	$("#totalVarietals").html(data.getTotalVarietals());
+	$("#totalVineyards").html(data.getTotalVineyards());
+	$("#totalBottlesPurchased").html(wineInfo.totalBottles);
+	$("#totalAveragePrice").html(accounting.formatMoney(Number(wineInfo.avgCost)));
+	$("#totalAverageRating").html(wineInfo.avgRating);
+	$("#totalCost").html(accounting.formatMoney(Number(wineInfo.totalCost)));
+	*/
+	var wineInfo = data.getWineCellarStats();
 	$("#totalBottlesOnHand").html(data.getTotalBoh());
 	$("#totalVarietals").html(data.getTotalVarietals());
 	$("#totalVineyards").html(data.getTotalVineyards());

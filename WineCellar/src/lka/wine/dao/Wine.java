@@ -4,6 +4,10 @@ import java.math.BigDecimal;
 
 public class Wine extends AbstractDao {
 	private int wineId;
+	private int vineyardId;
+	private int brandId;
+	private int varietalId;
+	private int regionId;
 	private Vineyard vineyard;
 	private Brand brand;
 	private Varietal varietal;
@@ -18,6 +22,30 @@ public class Wine extends AbstractDao {
 	}
 	public void setWineId(int wineId) {
 		this.wineId = wineId;
+	}
+	public int getVineyardId() {
+		return vineyardId;
+	}
+	public void setVineyardId(int vineyardId) {
+		this.vineyardId = vineyardId;
+	}
+	public int getBrandId() {
+		return brandId;
+	}
+	public void setBrandId(int brandId) {
+		this.brandId = brandId;
+	}
+	public int getVarietalId() {
+		return varietalId;
+	}
+	public void setVarietalId(int varietalId) {
+		this.varietalId = varietalId;
+	}
+	public int getRegionId() {
+		return regionId;
+	}
+	public void setRegionId(int regionId) {
+		this.regionId = regionId;
 	}
 	public Vineyard getVineyard() {
 		return vineyard;

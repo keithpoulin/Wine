@@ -24,90 +24,96 @@ WineCellar.prototype.toJson = function() {
 
 WineCellar.prototype.getBrand = function(id){
 	if (this.brandMap == undefined || this.brandMap == null) {
-		this.brandMap = new Map(this.brands, "brandId");
+		this.brandMap = this.brands.toMap(function getKey(obj) { return obj.brandId; });
 	}
-	var brand = this.brandMap.get(id);
+	var brand = this.brandMap[id];
 	return brand;
 };
 
 WineCellar.prototype.getLocation = function(id){
 	if (this.locationMap == undefined || this.locationMap == null) {
-		this.locationMap = new Map(this.locations, "locationId");
+		this.locationMap = this.locations.toMap(function getKey(obj) { return obj.locationId; });
 	}
-	var location = this.locationMap.get(id);
+	var location = this.locationMap[id];
 	return location;
 };
 
 WineCellar.prototype.getLocationType = function(id){
 	if (this.locationTypeMap == undefined || this.locationMap == null) {
-		this.locationTypeMap = new Map(this.locationTypes, "locationTypeId");
+		this.locationTypeMap = this.locationTypes.toMap(function getKey(obj) { return obj.locationTypeId; });
 	}
-	var locationType = this.locationTypeMap.get(id);
+	var locationType = this.locationTypeMap[id];
 	return locationType;
 };
 
 WineCellar.prototype.getPurchase = function(id){
 	if (this.purchaseMap == undefined || this.purchaseMap == null) {
-		this.purchaseMap = new Map(this.purchases, "purchaseId");
+		this.purchaseMap = this.purchases.toMap(function getKey(obj) { return obj.purchaseId; });
 	}
-	var purchase = this.purchaseMap.get(id);
+	var purchase = this.purchaseMap[id];
 	return purchase;
 };
 
 WineCellar.prototype.getRegion = function(id){
 	if (this.regionMap == undefined || this.regionMap == null) {
-		this.regionMap = new Map(this.regions, "regionId");
+		this.regionMap = this.regions.toMap(function getKey(obj) { return obj.regionId; });
 	}
-	var region = this.regionMap.get(id);
+	var region = this.regionMap[id];
 	return region;
 };
 
 WineCellar.prototype.getTastingNote = function(id){
 	if (this.tastingNoteMap == undefined || this.tastingNoteMap == null) {
-		this.tastingNoteMap = new Map(this.tastingNotes, "tastingNoteId");
+		this.tastingNoteMap = this.tastingNotes.toMap(function getKey(obj) { return obj.tastingNoteId; });
 	}
-	var tastingNote = this.tastingNoteMap.get(id);
+	var tastingNote = this.tastingNoteMap[id];
 	return tastingNote;
 };
 
 WineCellar.prototype.getVarietal = function(id){
 	if (this.varietalMap == undefined || this.varietalMap == null) {
-		this.varietalMap = new Map(this.varietals, "varietalId");
+		this.varietalMap = this.varietals.toMap(function getKey(obj) { return obj.varietalId; });
 	}
-	var varietal = this.varietalMap.get(id);
+	var varietal = this.varietalMap[id];
 	return varietal;
 };
 
 WineCellar.prototype.getVineyard = function(id){
 	if (this.vineyardMap == undefined || this.vineyardMap == null) {
-		this.vineyardMap = new Map(this.vineyards, "vineyardId");
+		this.vineyardMap = this.vineyards.toMap(function getKey(obj) { return obj.vineyardId; });
 	}
-	var vineyard = this.vineyardMap.get(id);
+	var vineyard = this.vineyardMap[id];
 	return vineyard;
 };
 
 WineCellar.prototype.getWine = function(id){
 	if (this.wineMap == undefined || this.wineMap == null) {
-		this.wineMap = new Map(this.wines, "wineId");
+		this.wineMap = this.wines.toMap(function getKey(obj) { return obj.wineId; });
 	}
-	var wine = this.wineMap.get(id);
+	var wine = this.wineMap[id];
 	return wine;
 };
 
+WineCellar.prototype.refreshMaps = function(){
+	this.brandMap = null;
+	this.locationMap = null;
+	this.locationTypeMap = null;
+	this.purchaseMap = null;
+	this.regionMap = null;
+	this.tastingNoteMap = null;
+	this.varietalMap = null;
+	this.vineyardMap = null;
+	this.wineMap = null;
+};
+
+
 /*
- * Map
+ * Extend Array
  */
-var Map = function(objects, keyPropertyName) {
-	for (var i=0; i< objects.length; i++){
-		this[objects[i][keyPropertyName]] = objects[i];	
-	}	
-};
-Map.prototype.put = function(key, value) {
-	this[key] = value;
-};
-Map.prototype.get = function(key) {
-	return this[key];
-};
-Map.prototype.remove = function(key) {
-	delete this[key];
+Array.prototype.toMap = function(getKey) {
+	var map = {};
+	for (var i=0; i< this.length; i++){
+		map[getKey(this[i])] = this[i];	
+	}
+	return map;
 };

@@ -165,7 +165,7 @@ WineCellar.prototype.getWineQtyOnHand = function(wineId, pricePer){
 	return qtyOnHand;
 };
 
-WineCellar.prototype.getAvgRating = function(wineId){
+WineCellar.prototype.getWineAvgRating = function(wineId){
 	var totalRating = 0;
 	var ratingCount = 0;
 	var tastingNotes = this.getWineTastingNotes(wineId);
@@ -300,7 +300,7 @@ var WineSummary = function(wineCellar, wine) {
 	this.pricePer = "bottle";
 	this.avgPrice = wineCellar.getWineAvgPrice(wine.wineId, this.pricePer);
 	this.qtyOnHand = wineCellar.getWineQtyOnHand(wine.wineId, this.pricePer);
-	this.avgRating = wineCellar.getAvgRating(wine.wineId);
+	this.avgRating = wineCellar.getWineAvgRating(wine.wineId);
 };
 
 

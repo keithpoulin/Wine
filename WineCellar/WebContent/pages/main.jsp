@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>Wine Cellar</title>
 		<link rel="stylesheet" href="/styles/main.css" />
 		<link rel="stylesheet" href="/styles/jquery-ui-active/jquery-ui.css" />
 	</head>

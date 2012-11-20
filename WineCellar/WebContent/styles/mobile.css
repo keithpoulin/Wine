@@ -1,0 +1,17 @@
+.hidden{
+	display:none;
+}
+
+.floatLeft{
+	float: left;
+}
+
+.floatRight{
+	float:right;
+}
+
+.ui-content .ui-listview
+    {
+        margin-top: 5px !important;
+        margin-bottom: 5px !important;
+    } 

@@ -126,6 +126,11 @@ function setWineDetailsListHeight(){
 
 function initializeAppearance(){
 	if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPod/i)){
+		var conf = confirm("Use Mobile Site?");
+		if (conf){
+			window.location = "/mobile";
+		}
+		
 		$("#navigation").width( $("#navigation").width() * 1.5 );
 		var screenWidth = $(window).width();
 		var navWidth = $("#navigation").width();

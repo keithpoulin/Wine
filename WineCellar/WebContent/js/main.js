@@ -320,7 +320,7 @@ function displayWineSummaries($target, json){
 		html = msgPleaseWait();
 	} else {
 		for (var i=0; i<data.wineSummaries.length; i++){
-			var r = json[i];
+//			var r = json[i];
 			var summary = data.wineSummaries[i];
 			html += t_wineSummary(summary);
 //			html += "<li wineid='" + r.wineId + "'>"   

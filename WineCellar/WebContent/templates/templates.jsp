@@ -18,11 +18,11 @@
 	<jsp:include page="m_WineDetail.html" />
 </div>
 
-<div class="hidden" id="t_m_tastingNote" type="text/x-handlebars-template">
+<div class="hidden" id="t_m_TastingNotes" type="text/x-handlebars-template">
 	<jsp:include page="m_TastingNotes.html" />
 </div>
 
-<div class="hidden" id="t_m_purchaseDetail" type="text/x-handlebars-template">
+<div class="hidden" id="t_m_PurchaseDetails" type="text/x-handlebars-template">
 	<jsp:include page="m_PurchaseDetails.html" />
 </div>
 

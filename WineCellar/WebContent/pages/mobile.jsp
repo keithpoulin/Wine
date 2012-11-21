@@ -39,12 +39,19 @@
 		<!-- Start of #page_WineDetails -->
 		<div data-role="page" id="page_WineDetails" data-theme="a" data-add-back-btn="true">
 			<div data-role="header" >
-				<a data-rel="back" data-icon="arrow-l" href="#page_WineSummaries" data-theme="b">Back</a>
+				<a data-icon="arrow-l" href="#page_WineSummaries" data-theme="b" data-transition="slide" data-direction="reverse">Back</a>
 				<h1>WineDetails</h1>
 				<a href="#page_EditDetail" data-theme="b">Edit</a>
 			</div>
 			<div data-role="content" data-theme="a">	
 				<div id="wineDetail"></div>
+				<div id="purchaseDetails" data-role="collapsible" data-content-theme="c">
+					<h3>Purchase Details</h3>
+					<ul data-role="listview"></ul>
+				</div>
+				<div id="tastingNotes" data-role="collapsible">
+					<h3>Tasting Notes</h3>
+				</div>
 			</div>
 		</div><!-- /page_WineDetails -->
 		

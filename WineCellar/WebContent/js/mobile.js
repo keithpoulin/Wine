@@ -30,14 +30,24 @@ function initializeEvents(){
 	
 	$("#wineSummaries li").click(function(){
 		var wineId = $(this).attr("wineid");
-		console.log(wineId);
 		displayWineDetail($("#wineDetail"), wineId);
 	});
+	
 }
 
 function displayWineDetail($target, wineId){
 	$target.html( t_wineDetail(data.getWineSummary(wineId)) );
+	$("#purchaseDetails").trigger("collapse");
+	var list =  t_purchaseDetails(data.getWineDetail(wineId));
+	$("#purchaseDetails").find("ul").html( list );
+	try{
+		$("#purchaseDetails").find("ul").listview("refresh", true);
+	}catch(e){
+		
+	}
 }
+
+
 
 function displayWineSummaries($target, json){
 	var html = "";

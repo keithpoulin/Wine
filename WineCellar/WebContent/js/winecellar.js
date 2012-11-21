@@ -165,7 +165,7 @@ WineCellar.prototype.getWineQtyOnHand = function(wineId, pricePer){
 	return qtyOnHand;
 };
 
-WineCellar.prototype.getAvgRating = function(wineId){
+WineCellar.prototype.getWineAvgRating = function(wineId){
 	var totalRating = 0;
 	var ratingCount = 0;
 	var tastingNotes = this.getWineTastingNotes(wineId);
@@ -189,6 +189,53 @@ WineCellar.prototype.getWineSummaries = function(){
 		}
 	}
 	return wineSummaries;
+};
+
+WineCellar.prototype.getWineCellarStats = function(){
+	var bottles = 0;
+	var cost = 0;
+	var ratingTotal = 0;
+	var ratingCount = 0;
+	var totalPurchases = 0;
+	var totalTastings = 0;
+	var totalBoh = 0;
+
+	for (var i=0; i<this.purchases.length; i++){
+		var purchase = this.purchases[i];
+		if (purchase.pricePer.toLowerCase() == "bottle"){
+			bottles = bottles + Number(purchase.qtyPurchased);
+			if (purchase.price != undefined && purchase.qtyPurchased != undefined){
+				cost = cost + Number(purchase.price) * Number(purchase.qtyPurchased);
+			}
+			if (purchase.qtyOnHand != undefined){
+				totalBoh = totalBoh + Number(purchase.qtyOnHand);
+			}
+		}
+		totalPurchases++;
+	}
+	for (var k=0; k<this.wineCellar.tastingNotes.length; k++){
+		var note = this.wineCellar.tastingNotes[k];
+		if (Number(note.rating) >0){
+			ratingTotal = ratingTotal + Number(note.rating);
+			ratingCount++;
+			totalTastings++;
+		}
+	}
+	
+	
+	var wineCellarStats = new WineCellarStats();
+	wineCellarStats.totalBottles = bottles;
+	wineCellarStats.totalCost = cost.toFixed(2);
+	wineCellarStats.ratingTotal = ratingTotal;
+	wineCellarStats.ratingCount = ratingCount;
+	wineCellarStats.avgRating = (ratingTotal/ratingCount).toFixed(2);
+	wineCellarStats.totalPurchases = totalPurchases;
+	wineCellarStats.totalTastings = totalTastings;
+	wineCellarStats.avgBottlesPerPurchase = (bottles/totalPurchases).toFixed(2);
+	wineCellarStats.avgCost = (cost/bottles).toFixed(2);
+	wineCellarStats.totalBoh = totalBoh;
+
+	return wineCellarStats;
 };
 
 /*
@@ -300,12 +347,27 @@ var WineSummary = function(wineCellar, wine) {
 	this.pricePer = "bottle";
 	this.avgPrice = wineCellar.getWineAvgPrice(wine.wineId, this.pricePer);
 	this.qtyOnHand = wineCellar.getWineQtyOnHand(wine.wineId, this.pricePer);
-	this.avgRating = wineCellar.getAvgRating(wine.wineId);
+	this.avgRating = wineCellar.getWineAvgRating(wine.wineId);
 };
 
+/*
+ * WineCellarStats
+ */
+var WineCellarStats = function() {	
+	this.totalBottles;
+	this.totalCost;
+	this.ratingTotal;
+	this.ratingCount;
+	this.avgRating;
+	this.totalPurchases;
+	this.totalTastings;
+	this.avgBottlesPerPurchase;
+	this.avgCost;
+	this.totalBoh;
+};
 
 /*
- * Extend Array
+ * Array extensions
  */
 Array.prototype.toMap = function(getKey) {
 	var map = {};

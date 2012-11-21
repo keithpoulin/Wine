@@ -1,0 +1,47 @@
+<img class="bottleImg" alt="bottle" wineId="{{wineId}}" src="getImage?wineId={{wineId}}" />
+
+<h2>
+	<span class="vineyard" vineyardId="{{vineyard.vineyardId}}">{{vineyard.vineyard}}</span>
+	{{#if vintageYear}}
+		<span class="vinetageYear">&nbsp;({{vintageYear}})</span>
+	{{/if}}	
+</h2>
+
+<p class="{{varietal.type}}">
+	<span class="varietal" varietalId="{{varietal.varietalId}}">{{varietal.varietal}}</span><span class="varietalType">&nbsp;({{varietal.type}})</span>
+</p>
+
+{{#if region.region}}
+<p class="region">
+	{{region.region}}
+	{{#if region.subRegion}}
+		&nbsp;-&nbsp;<span class="subRegion">{{region.subRegion}}</span>
+	{{/if}}	
+</p>
+{{/if}}
+
+<p class="rating maxRating">
+	Max Rating:&nbsp;{{rating maxRating}}
+</p>
+
+<p class="rating minRating">
+	Max Rating:&nbsp;{{rating minRating}}
+</p>
+
+<p class="rating avgRating">
+	Avg Rating:&nbsp;{{rating avgRating}}
+</p>
+
+<p>
+	Bottles On Hand:&nbsp;<span class="inventory">{{qtyOnHand}}</span>
+</p>
+
+<p class="price avgPrice">
+	Avg Price:&nbsp;{{money avgPrice}} 
+</p>
+
+<p class="price listPrice">
+	List Price:&nbsp;{{money listPrice}}
+</p>
+
+<br class="clear"/>

@@ -4,6 +4,7 @@
 		<title>Wine Cellar</title>
 		<link rel="stylesheet" href="/styles/main.css" />
 		<link rel="stylesheet" href="/styles/jquery-ui-active/jquery-ui.css" />
+		<jsp:include page="/templates/templates.jsp" />
 	</head>
 	
 	<body>
@@ -156,10 +157,10 @@
 		<!-- <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script> -->
 		<script src="/js/lib/jquery-ui-1.9.1.custom.js" type="text/javascript"></script>
 		<script src="/js/lib/prefix-free.js" type="text/javascript"></script>
-		<script src="/js/lib/accounting.min.js" type="text/javascript"></script>
+		<!-- <script src="/js/lib/accounting.min.js" type="text/javascript"></script> -->
 		<script src="/js/lib/jquery.overscroll.min.js" type="text/javascript"></script>
-		<script src="/js/lib/handlebars.js" type="text/javascript"></script>
-		<jsp:include page="/templates/templates.jsp" />
+		
+		
 		
 		<script src="/js/data.js" type="text/javascript"></script>
 		<script src="/js/filter.js" type="text/javascript"></script>

@@ -35,7 +35,7 @@ function displayWineSummaries($target, json){
 		
 		for (var i=0; i<data.wineSummaries.length; i++){
 			var summary = data.wineSummaries[i];
-			summary.detailPage = "#two";
+			summary.detailPage = "#page_WineDetails";
 			html += t_wineSummary(summary);
 		}
 	}

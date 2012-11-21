@@ -5,29 +5,22 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="/styles/mobile.css" />
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+		<jsp:include page="/templates/templates.jsp" />
 	</head>
 	
 	<body>
 		
 		<!-- Start of first page: #one -->
-		<div data-role="page" id="one">
-		
+		<div data-role="page" id="page_WineSummaries">
 			<div data-role="header">
-				<h1>Wine Cellar</h1>
+				<a href="#two" data-icon="arrow-l" data-theme="b">Back</a>
+				<h1>Wine Summaries</h1>
+				<a href="#popup" data-icon="plus" data-theme="b" data-rel="dialog">Add</a>
 			</div><!-- /header -->
 		
 			<div data-role="content" >	
-				<h2>Wine Summary List</h2>
-				
-				<p>
-					This page requires that you have data already loaded into <code>localStorage</code>. 
-				</p>	
 				<div id="buttonDiv"><button id="updateData" data-icon="refresh" data-role="button">Update Data</button></div>
 				<ul data-role="listview" id="wineSummaries" data-theme="d" data-divider-theme="d"><li>test</li></ul>
-		
-				<h3>Show internal pages:</h3>
-				<p><a href="#two" data-role="button">Show page "two"</a></p>	
-				<p><a href="#popup" data-role="button" data-rel="dialog" data-transition="pop">Show page "popup" (as a dialog)</a></p>
 			</div><!-- /content -->
 			
 			<div data-role="footer" data-theme="d">
@@ -35,19 +28,16 @@
 			</div><!-- /footer -->
 		</div><!-- /page one -->
 		
-		
-		<!-- Start of second page: #two -->
-		<div data-role="page" id="two" data-theme="a">
-		
+		<!-- Start of second page: #page_WineDetails -->
+		<div data-role="page" id="page_WineDetails" data-theme="a">
 			<div data-role="header">
-				<h1>Two</h1>
+				<a href="#page_WineSummaries" data-icon="arrow-l" data-theme="b" data-direction="reverse" data-transition="slide">Back</a>
+				<h1>WineDetails</h1>
+				<a href="#page_EditDetail" data-theme="b">Edit</a>
 			</div><!-- /header -->
 		
 			<div data-role="content" data-theme="a">	
-				<h2>Two</h2>
-				<p>I have an id of "two" on my page container. I'm the second page container in this multi-page template.</p>	
-				<p>Notice that the theme is different for this page because we've added a few <code>data-theme</code> swatch assigments here to show off how flexible it is. You can add any content or widget to these pages, but we're keeping these simple.</p>	
-				<p><a href="#one" data-direction="reverse" data-role="button" data-theme="b">Back to page "one"</a></p>	
+				<h2>Edit Wine Details</h2>
 				
 			</div><!-- /content -->
 			
@@ -75,16 +65,11 @@
 			</div><!-- /footer -->
 		</div><!-- /page popup -->
 				
-	
-
-		
-
 
 		<script src="/js/lib/jquery-1.8.2.js" type="text/javascript"></script>
 		<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 		<script src="/js/lib/handlebars.js" type="text/javascript"></script>
-		<jsp:include page="/templates/templates.jsp" />
-		
+
 		<script src="/js/data.js" type="text/javascript"></script>
 		<script src="/js/filter.js" type="text/javascript"></script>
 		<script src="/js/winecellar.js" type="text/javascript"></script>

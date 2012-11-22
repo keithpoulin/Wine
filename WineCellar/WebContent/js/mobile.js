@@ -45,7 +45,7 @@ function displayWineDetail($target, wineId){
 	$("#tastingNotes").find("ul").html( tastingNotes );
 	
 	try{
-		$("#purchaseDetails").find("ul").listview("refresh", true);
+		$("#purchaseDetails, #tastingNotes").find("ul").listview("refresh", true);
 	}catch(e){
 		
 	}

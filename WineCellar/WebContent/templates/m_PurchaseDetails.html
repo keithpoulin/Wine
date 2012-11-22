@@ -1,6 +1,10 @@
 {{#if purchaseDetails}}
 	{{#each purchaseDetails}}
 		<li purchaseId="{{purchaseId}}">			
+			<p class="date">
+				{{purchaseDate}}
+			</p>
+			
 			<p>
 				<span class="price" >{{money price}}</span> / {{pricePer}} 		
 			</p>

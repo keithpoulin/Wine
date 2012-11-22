@@ -1,12 +1,12 @@
 {{#if tastingNotes}}
 	{{#each tastingNotes}}
 	<li>
-		<p class="rating">Rating:&nbsp;{{formatRating rating}}</p>
 		<p class="date">{{tastingDate}}</p>
+		<p class="rating">Rating:&nbsp;{{formatRating rating}}</p>
 		<p class="review">{{review}}</p>
 		<p class="reviewAuthor">-{{reviewedBy}}</p>
 	</li>
 	{{/each}}
 {{else}}
-
+	<p>No tastings yet... grab a corkscrew!</p>
 {{/if}}

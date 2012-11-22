@@ -62,6 +62,12 @@ public class WinesTable extends AbstractData<Wine> {
 	public Wine getObject(ResultSet rs) throws SQLException {
 		Wine wine = new Wine();	
 		wine.setWineId(rs.getInt("WineID"));
+
+		wine.setVineyardId(rs.getInt("VineyardID"));
+		wine.setBrandId(rs.getInt("BrandID"));
+		wine.setVarietalId(rs.getInt("VarietalID"));
+		wine.setRegionId(rs.getInt("RegionID"));
+		
 		wine.setVineyard(vineyardsMap.get(rs.getInt("VineyardID")));
 		wine.setBrand(brandsMap.get(rs.getInt("BrandID")));
 		wine.setVarietal(varietalsMap.get(rs.getInt("VarietalID")));

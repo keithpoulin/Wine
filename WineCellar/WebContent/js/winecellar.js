@@ -86,7 +86,7 @@ WineCellar.prototype.getVineyard = function(vineyardId){
 	return vineyard;
 };
 
-WineCellar.prototype.getWine = function(idwineId){
+WineCellar.prototype.getWine = function(wineId){
 	if (this.wineMap == undefined || this.wineMap == null) {
 		this.wineMap = this.wines.toMap(function getKey(obj) { return obj.wineId; });
 	}
@@ -98,12 +98,14 @@ WineCellar.prototype.getWineTastingNotes = function(wineId){
 	if (this.wineTastingNotesMappedArray == undefined || this.wineTastingNotesMappedArray == null) {
 		this.wineTastingNotesMappedArray = this.tastingNotes.toMappedArray(function getKey(obj) { return obj.wineId; }, function getValueKey(obj) { return obj.tastingNoteId; });
 	}
-	var tastingNoteIds = this.wineTastingNotesMappedArray[wineId];
 	var tastingNotes = [];
-	for (var i=0; i< tastingNoteIds.length; i++){
-		var tastingNote = this.getTastingNote(tastingNoteIds[i]);
-		if(tastingNote != undefined) {
-			tastingNotes.push(tastingNote);
+	var tastingNoteIds = this.wineTastingNotesMappedArray[wineId];
+	if(tastingNoteIds != undefined ) {
+		for (var i=0; i< tastingNoteIds.length; i++){
+			var tastingNote = this.getTastingNote(tastingNoteIds[i]);
+			if(tastingNote != undefined) {
+				tastingNotes.push(tastingNote);
+			}
 		}
 	}
 	return tastingNotes;
@@ -145,7 +147,7 @@ WineCellar.prototype.getWineAvgPrice = function(wineId, pricePer){
 	var purchases = this.getWinePurchases(wineId);
 	for (var i=0; i< purchases.length; i++){
 		var purchase = purchases[i];
-		if(purchase.pricePer == pricePer) {
+		if(purchase.pricePer.toUpperCase() == pricePer.toUpperCase()) {
 			totalPrice += (purchase.price * purchase.qtyPurchased);
 			totalQuantity +=purchase.qtyPurchased;
 		}
@@ -159,7 +161,7 @@ WineCellar.prototype.getWineQtyOnHand = function(wineId, pricePer){
 	for (var i=0; i< purchases.length; i++){
 		var purchase = purchases[i];
 		if(purchase.pricePer == pricePer) {
-			qtyOnHand += bottlesOnHand;
+			qtyOnHand += qtyOnHand;
 		}
 	}
 	return qtyOnHand;
@@ -179,6 +181,26 @@ WineCellar.prototype.getWineAvgRating = function(wineId){
 	return totalRating/ratingCount;
 };
 
+WineCellar.prototype.getWineCellarInventory = function(){
+
+	var wineCellarInventory = {};
+	for (var i=0; i< this.purchases.length; i++){
+		var purchase = this.purchases[i];
+		var wineInventory = wineCellarInventory[purchase.wineId];
+		if (wineInventory == undefined) {
+			wineInventory = new WineInventory(purchase.wineId);
+			wineCellarInventory[purchase.wineId] = wineInventory;
+		}
+		if(purchase.qtyPurchased != undefined && purchase.qtyPurchased != null) {
+			wineInventory.qtyPurchased += purchase.qtyPurchased;
+		}
+		if(purchase.qtyOnHand != undefined && purchase.qtyOnHand != null) {
+			wineInventory.qtyOnHand += purchase.qtyOnHand;
+		}
+	}
+	return wineCellarInventory;
+};
+
 WineCellar.prototype.getWineSummaries = function(){
 	var wineSummaries = [];
 	for (var i=0; i< this.wines.length; i++){
@@ -186,6 +208,21 @@ WineCellar.prototype.getWineSummaries = function(){
 		if(wine != undefined && wine != null) {
 			var wineSummary = new WineSummary(this, wine);
 			wineSummaries.push(wineSummary);
+		}
+	}
+	return wineSummaries;
+};
+
+WineCellar.prototype.getUntastedWineSummaries = function(){
+	var wineSummaries = [];
+	var wineCellarInventory = this.getWineCellarInventory();
+	for(var key in wineCellarInventory) {
+		if(wineCellarInventory.hasOwnProperty(key)) {
+		    var wineInventory =  wineCellarInventory[key];
+	    	if(wineInventory.qtyPurchased == wineInventory.qtyOnHand) {
+				var wineSummary = new WineSummary(this, this.getWine(wineInventory.wineId));
+				wineSummaries.push(wineSummary);    		
+	    	}
 		}
 	}
 	return wineSummaries;
@@ -213,8 +250,8 @@ WineCellar.prototype.getWineCellarStats = function(){
 		}
 		totalPurchases++;
 	}
-	for (var k=0; k<this.wineCellar.tastingNotes.length; k++){
-		var note = this.wineCellar.tastingNotes[k];
+	for (var k=0; k<this.tastingNotes.length; k++){
+		var note = this.tastingNotes[k];
 		if (Number(note.rating) >0){
 			ratingTotal = ratingTotal + Number(note.rating);
 			ratingCount++;
@@ -268,7 +305,7 @@ var LocationType = function(locationTypeId, locationType) {
 /*
  * LocationType
  */
-var Purchase = function(purchaseId, locationId, wineId, purchaseDate, price, pricePer, qtyPurchased, priceNotes, bottlesOnHand, invLocation) {
+var Purchase = function(purchaseId, locationId, wineId, purchaseDate, price, pricePer, qtyPurchased, priceNotes, qtyOnHand, invLocation) {
 	this.purchaseId = purchaseId;
 	this.locationId = locationId;
 	this.wineId = wineId;
@@ -277,7 +314,7 @@ var Purchase = function(purchaseId, locationId, wineId, purchaseDate, price, pri
 	this.pricePer = pricePer;
 	this.qtyPurchased = qtyPurchased;
 	this.priceNotes = priceNotes;
-	this.bottlesOnHand = bottlesOnHand;
+	this.qtyOnHand = qtyOnHand;
 	this.invLocation = invLocation;
 };
 
@@ -364,6 +401,15 @@ var WineCellarStats = function() {
 	this.avgBottlesPerPurchase;
 	this.avgCost;
 	this.totalBoh;
+};
+
+/*
+ * WineInventory
+ */
+var WineInventory = function(wineId) {	
+	this.wineId = wineId;
+	this.qtyPurchased = 0;
+	this.qtyOnHand = 0;
 };
 
 /*

@@ -123,6 +123,14 @@ function updateAll(){
 	updateBrands();
 	updateLocations();
 	updateWineCellar();
+	
+	// The following is a test harness for the WineCellar object
+	var wineCellar = WineCellar.fromJson(localStorage.wineCellar);
+	//var winePurchases = wineCellar.getWinePurchases(68);
+	//var wineStats = wineCellar.getWineCellarStats();
+	//var wineCellarInventory = wineCellar.getWineCellarInventory();
+	var untastedWineSummaries = wineCellar.getUntastedWineSummaries();
+	
 }
 
 Data.prototype.refresh = function(){

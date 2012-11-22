@@ -1,12 +1,18 @@
-
-{{#each purchaseDetails}}
-	<li>
-		<p class="price" >
-			{{money this.price}}			
-		</p>
-		
-		<p>
-			{{this.pricePer}}
-		</p>
-	</li>
-{{/each}}
+{{#if purchaseDetails}}
+	{{#each purchaseDetails}}
+		<li purchaseId="{{purchaseId}}">			
+			<p>
+				<span class="price" >{{money price}}</span> / {{pricePer}} 		
+			</p>
+			<p>
+				Qty:&nbsp;{{qtyPurchased}}
+			</p>
+			<p class="location">
+				{{location.locationName}}&nbsp;({{location.locationType.locationType}})<br/>
+				{{location.locationCity}} {{#if location.locationCity}},&nbsp;{{/if}}{{location.locationState}}
+			</p>
+		</li>
+	{{/each}}
+{{else}}
+	<h3>No Purchase History</h3>
+{{/if}}

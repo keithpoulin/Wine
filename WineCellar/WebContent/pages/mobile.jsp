@@ -49,8 +49,9 @@
 					<h3>Purchase Details</h3>
 					<ul data-role="listview"></ul>
 				</div>
-				<div id="tastingNotes" data-role="collapsible">
+				<div id="tastingNotes" data-role="collapsible" data-content-theme="c">
 					<h3>Tasting Notes</h3>
+					<ul data-role="listview"></ul>
 				</div>
 			</div>
 		</div><!-- /page_WineDetails -->

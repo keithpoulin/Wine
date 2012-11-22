@@ -37,9 +37,13 @@ function initializeEvents(){
 
 function displayWineDetail($target, wineId){
 	$target.html( t_wineDetail(data.getWineSummary(wineId)) );
-	$("#purchaseDetails").trigger("collapse");
-	var list =  t_purchaseDetails(data.getWineDetail(wineId));
-	$("#purchaseDetails").find("ul").html( list );
+	$("#purchaseDetails, #tastingNotes").trigger("collapse");
+	var purchaseDetails =  t_purchaseDetails(data.getWineDetail(wineId));
+	$("#purchaseDetails").find("ul").html( purchaseDetails );
+	
+	var tastingNotes = t_tastingNotes(data.getWineDetail(wineId));
+	$("#tastingNotes").find("ul").html( tastingNotes );
+	
 	try{
 		$("#purchaseDetails").find("ul").listview("refresh", true);
 	}catch(e){

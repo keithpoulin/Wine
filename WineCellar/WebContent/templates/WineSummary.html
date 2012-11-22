@@ -15,10 +15,10 @@
 		{{region.region}}
 	</p>					
 	<p>
-		Avg. Price: <span class='price avgPrice'>{{avgPrice}}</span> / <span class='priceUnit'>{{pricePer}}</span>
+		Avg. Price: <span class='price avgPrice'>{{money avgPrice}}</span> / <span class='priceUnit'>{{pricePer}}</span>
 	</p>
-	<p>List Price: </p>
-	<p>Avg Rating: {{avgRating}}</p>
+	<p>List Price: {{money listPrice}}</p>
+	<p>Avg Rating: {{formatRating avgRating}}</p>
 	<p>
 		Bottles On Hand: <span class='inventory'>{{qtyOnHand}}</span>
 	</p>

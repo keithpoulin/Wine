@@ -219,7 +219,6 @@ WineCellar.prototype.getUntastedWineSummaries = function(){
 	for(var key in wineCellarInventory) {
 		if(wineCellarInventory.hasOwnProperty(key)) {
 		    var wineInventory =  wineCellarInventory[key];
-	    	console.log(wineInventory.qtyPurchased + " == " + wineInventory.qtyOnHand);
 	    	if(wineInventory.qtyPurchased == wineInventory.qtyOnHand) {
 				var wineSummary = new WineSummary(this, this.getWine(wineInventory.wineId));
 				wineSummaries.push(wineSummary);    		

@@ -37,13 +37,13 @@
 		
 		
 		<!-- Start of #page_WineDetails -->
-		<div data-role="page" id="page_WineDetails" data-theme="a" data-add-back-btn="true">
+		<div data-role="page" id="page_WineDetails" data-add-back-btn="true">
 			<div data-role="header" >
 				<a data-icon="arrow-l" href="#page_WineSummaries" data-theme="b" data-transition="slide" data-direction="reverse">Back</a>
 				<h1>WineDetails</h1>
 				<a href="#page_EditDetail" data-theme="b">Edit</a>
 			</div>
-			<div data-role="content" data-theme="a">	
+			<div data-role="content">	
 				<div id="wineDetail"></div>
 				<div id="purchaseDetails" data-role="collapsible" data-content-theme="c">
 					<h3>Purchase Details</h3>
@@ -55,6 +55,19 @@
 				</div>
 			</div>
 		</div><!-- /page_WineDetails -->
+		
+		<!-- Start of #page_Search -->
+		<div data-role="page" id="page_Search" data-add-back-btn="true">
+			<div data-role="header">
+				<a data-icon="arrow-l" href="#page_MainMenu" data-theme="b" data-rel="back" data-direction="reverse">Cancel</a>
+				<h1>Search</h1>
+				<a href="page_WineSummaries" data-icon="search">Search</a>
+			</div>
+			<div data-role="content" data-theme="b">	
+				<p>This will be our search box </p>
+					
+			</div><!-- /content -->
+		</div><!-- /page page_Search -->
 		
 		
 		<!-- Start of #page_AddWine -->

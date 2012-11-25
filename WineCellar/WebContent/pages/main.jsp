@@ -2,13 +2,12 @@
 <html>
 	<head>
 		<title>Wine Cellar</title>
-		<link rel="stylesheet" href="/styles/main.css" />
 		<link rel="stylesheet" href="/styles/jquery-ui-active/jquery-ui.css" />
 		<jsp:include page="/templates/templates.jsp" />
+		<link rel="stylesheet" href="/styles/main.css" />
 	</head>
 	
 	<body>
-		
 		<div id="header" class="">
 			<h1 id="title">Poulin Wine Cellar</h1>
 		</div>	

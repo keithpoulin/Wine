@@ -35,7 +35,7 @@ function initializeTemplates(){
 }
 
 function initializeEvents(){
-	$("#wineSummaries").overscroll();
+//	$("#wineSummaries").overscroll();
 	
 	$("#userName, #userEmail").blur(function(){
 		data[$(this).attr("id")] = $(this).val();

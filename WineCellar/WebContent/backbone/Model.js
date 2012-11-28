@@ -1,3 +1,51 @@
+Backbone.Collection.prototype.update = function(colIn){  
+	var origCol = _.pluck(this.models, "attributes");
+	
+	for (var i=0; i < colIn.length; i++){
+		var modIn = colIn[i];
+	    var existing = this.get(modIn);
+	    if (existing) { 
+	    	existing.set(modIn); 
+	    }
+	    else { 
+	    	this.add(modIn); 
+	    }
+	}
+	
+//	remove missing models
+	var collection = this;
+	var toRemove = [];
+	_.each(origCol, function(model, index){
+		for (var i=0; i < origCol.length; i++){
+			if( _.isEqual(colIn[i], model)){
+				return true;
+			};
+		}
+		toRemove.push(collection.at(index));
+	});
+  
+	this.remove(toRemove);
+	return this;
+};
+
+Backbone.Model.prototype.update = function(modelIn){
+	console.log("updating");
+	if (typeof(modelIn) != "object"){
+		try{
+			modelIn = JSON.parse(modelIn);
+		}catch(e){
+			console.log(e.message);
+		}
+	}
+	for (var key in modelIn){
+		console.log(key);
+		if (this.get(key) instanceof Backbone.Collection){
+			this.get(key).update(modelIn[key]);
+		}
+	}
+	return this;
+};
+
 var WineSummaryCollection = Backbone.Collection.extend({
 	model: WineSummaryModel,
 	initialize: function(){
@@ -20,6 +68,9 @@ var WineSummaryCollection = Backbone.Collection.extend({
 });
 
 var WineSummaryModel = Backbone.Model.extend({
+	initialize: function(){
+		console.log(this);
+	},
 	defaults: function(){
 		return {
 			avgPrice: 0,
@@ -283,15 +334,26 @@ var WineCellarModel = Backbone.Model.extend({
 		this.set("locations", new LocationCollection(this.get("locations")));
 		this.set("locationTypes", new LocationTypeCollection(this.get("locationTypes")));
 		this.set("brands", new BrandCollection(this.get("brands")));
+
+//		this.vineyards =  nestCollection(this, 'vineyards',  new VineyardCollection(this.get("vineyards")));
+//		this.wines = nestCollection(this, "wines", new WineCollection(this.get("wines")));
+//		this.varietals = nestCollection(this, "varietals", new VarietalCollection(this.get("varietals")));
+//		this.tastingNotes = nestCollection(this, "tastingNotes", new TastingNoteCollection(this.get("tastingNotes")));
+//		this.regions = nestCollection(this, "regions", new RegionCollection(this.get("regions")));
+//		this.purchases = nestCollection(this, "purchases", new PurchaseCollection(this.get("purchases")));
+//		this.locations = nestCollection(this, "locations", new LocationCollection(this.get("locations")));
+//		this.locationTypes = nestCollection(this, "locationTypes", new LocationTypeCollection(this.get("locationTypes")));
+//		this.brands = nestCollection(this, "brands", new BrandCollection(this.get("brands")));
+		
 	},
 	defaults: function(){
 		return {};
 	}, fetchFromLocalStorage: function(){
 		if ("wineCellar" in localStorage){
-			this.constructor(JSON.parse(localStorage.wineCellar));
+			this.update(JSON.parse(localStorage.wineCellar));
 			return this;
 		}
-	}
+	} 
 });
 
 

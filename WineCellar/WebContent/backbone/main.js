@@ -13,7 +13,7 @@ function initialize(){
 	Vineyards.fetchFromLocalStorage();
 	window.WineList = new WineSummaryList();
 	window.WineCellar = new WineCellarModel();
-//	WineCellar.fetchFromLocalStorage();
+	WineCellar.fetchFromLocalStorage();
 }
 
 function setEvents(){

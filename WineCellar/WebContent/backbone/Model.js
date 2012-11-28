@@ -35,6 +35,7 @@ Backbone.Model.prototype.update = function(modelIn){
 			modelIn = JSON.parse(modelIn);
 		}catch(e){
 			console.log(e.message);
+			return false;
 		}
 	}
 	for (var key in modelIn){

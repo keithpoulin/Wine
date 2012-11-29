@@ -33,6 +33,24 @@ public abstract class AbstractData<T> {
 		}
 	}
 	
+	public List<T> select(int id) throws Exception {
+
+		Connection cn = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			cn = DriverManager.getConnection();
+			pstmt = cn.prepareCall(getSelectSql(id));
+			
+//			pstmt.setInt(1, id);
+			pstmt.execute();
+
+			return getObjects(pstmt.getResultSet());
+		} finally {
+			JdbcCloser.close(cn, pstmt);
+		}
+	}
+	
 	public int insert(T obj) throws Exception {
 		Connection cn = null;
 		PreparedStatement pstmt = null;
@@ -123,6 +141,26 @@ public abstract class AbstractData<T> {
 		return sb.toString();
 	}
 
+	protected String getSelectSql(int id) {
+		List<String> columnNames = getColumnNames();
+		String idColumnName = getIdColumnName();
+		StringBuilder sb = new StringBuilder();
+		String separator = "";
+		sb.append("SELECT *");
+//		for (String columnName : columnNames) {
+//			sb.append(separator);
+//			sb.append(columnName);
+//			sb.append(" = ?");
+//			separator = ", ";
+//		}
+		sb.append(" FROM ");
+		sb.append(getTableName());
+		sb.append(" WHERE ");
+		sb.append(idColumnName);
+		sb.append(" = " + String.valueOf(id));
+		return sb.toString();
+	}
+	
 	protected String getInsertSql() {
 		List<String> columnNames = getColumnNames();
 		String idColumnName = getIdColumnName();

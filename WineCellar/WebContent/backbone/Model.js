@@ -137,7 +137,33 @@ var WineModel = Backbone.Model.extend({
 	url: "/rest/WineCellar/wines/",
 	idAttribute: "wineId",
 	defaults: {
-
+		brandId: 1,
+		listPrice: 10,
+		regionId: 1,
+		varietalId: 1,		
+		vineyardId: 1,
+		vintageYear: 2006,
+		vineyard: {vineyardId: 1, vineyard: "bhalbha"},
+		brand: {brandId: 1, brandName: "neil"},
+		varietal: {varietalId: 1, varietal: "blah blha grapes"},
+		region: {regionId: 1, region: "neil"},
+		wineDescription: "it's okay",
+		inventoryNotes: "notes are here"
+		
+//	private int wineId;
+//	private int vineyardId;
+//	private int brandId;
+//	private int varietalId;
+//	private int regionId;
+//	private Vineyard vineyard;
+//	private Brand brand;
+//	private Varietal varietal;
+//	private Region region;
+//	private int vintageYear;
+//	private String wineDescription;
+//	private BigDecimal listPrice;
+//	private String inventoryNotes;
+		
 	}
 });
 

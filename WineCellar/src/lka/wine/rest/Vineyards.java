@@ -52,9 +52,8 @@ public class Vineyards extends AbstractRest{
 	 */
 	@Override
 	@PUT
-	@Path("{data}")
 	@Produces("text/plain")
-	public void put(@PathParam("data") String data) {
+	public void put(String data) {
 		Vineyard vineyard = gson.fromJson(data, Vineyard.class);
 		try {
 			new VineyardsTable().update(vineyard);
@@ -69,16 +68,15 @@ public class Vineyards extends AbstractRest{
 	 */
 	@Override
 	@POST
-	@Path("{data}")
 	@Produces("text/plain")
-	public int post(@PathParam("data") String data) {
+	public String post(String data) {
 		Vineyard vineyard = gson.fromJson(data, Vineyard.class);
 		try {
 			id = new VineyardsTable().insert(vineyard);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return id;
+		return String.valueOf(id);
 	}
 
 	@Override

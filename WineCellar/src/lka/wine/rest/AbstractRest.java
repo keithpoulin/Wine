@@ -1,5 +1,6 @@
 package lka.wine.rest;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -20,6 +21,8 @@ public abstract class AbstractRest {
 	public UriInfo uriInfo;
 	@Context
 	public Request request;
+	@Context
+	public HttpServletResponse response;
 	
 	private static final String dateFormat = "MMM dd, yyyy";
 	public Gson gson = new GsonBuilder().setDateFormat(dateFormat).create();
@@ -35,14 +38,12 @@ public abstract class AbstractRest {
 	public abstract String get(@PathParam("id") int id);
 
 	@PUT
-	@Path("{data}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public abstract void put(@PathParam("data") String data);
+	public abstract void put(String data);
 	
 	@POST
-	@Path("{data}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public abstract int post(@PathParam("data") String data);
+	public abstract String post(String data);
 	
 	@DELETE
 	@Path("{id}")

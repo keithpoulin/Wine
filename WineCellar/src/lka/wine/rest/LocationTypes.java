@@ -52,9 +52,8 @@ public class LocationTypes extends AbstractRest{
 	 */
 	@Override
 	@PUT
-	@Path("{data}")
 	@Produces("text/plain")
-	public void put(@PathParam("data") String data) {
+	public void put(String data) {
 		LocationType locationType = gson.fromJson(data, LocationType.class);
 		try {
 			new LocationTypesTable().update(locationType);
@@ -69,16 +68,15 @@ public class LocationTypes extends AbstractRest{
 	 */
 	@Override
 	@POST
-	@Path("{data}")
 	@Produces("text/plain")
-	public int post(@PathParam("data") String data) {
+	public String post(String data) {
 		LocationType locationType = gson.fromJson(data, LocationType.class);
 		try {
 			id = new LocationTypesTable().insert(locationType);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return id;
+		return String.valueOf(id);
 	}
 
 	@Override

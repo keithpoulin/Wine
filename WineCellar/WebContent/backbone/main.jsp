@@ -19,7 +19,6 @@
 		<script src="/js/lib/backbone/backbone-min.js" type="text/javascript"></script>
 		<script src="/js/lib/backbone/backbone-relational.js" type="text/javascript"></script>
 		<script src="/js/lib/backbone/backbone.localStorage.min.js" type="text/javascript"></script>
-		<script src="/js/lib/backbone/nesting.js" type="text/javascript"></script>
 		
 		<script src="/backbone/Model.js" type="text/javascript"></script>
 		<script src="/backbone/View.js" type="text/javascript"></script>

@@ -52,9 +52,8 @@ public class Regions extends AbstractRest{
 	 */
 	@Override
 	@PUT
-	@Path("{data}")
 	@Produces("text/plain")
-	public void put(@PathParam("data") String data) {
+	public void put(String data) {
 		Region region = gson.fromJson(data, Region.class);
 		try {
 			new RegionsTable().update(region);
@@ -69,16 +68,15 @@ public class Regions extends AbstractRest{
 	 */
 	@Override
 	@POST
-	@Path("{data}")
 	@Produces("text/plain")
-	public int post(@PathParam("data") String data) {
+	public String post(String data) {
 		Region region = gson.fromJson(data, Region.class);
 		try {
 			id = new RegionsTable().insert(region);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return id;
+		return String.valueOf(id);
 	}
 
 	@Override

@@ -44,9 +44,8 @@ public class WineCellar extends AbstractRest {
 	 */
 	@Override
 	@PUT
-	@Path("{data}")
 	@Produces("text/plain")
-	public void put(@PathParam("data") String data) {
+	public void put(String data) {
 		// TODO Auto-generated method stub
 	}
 
@@ -56,10 +55,9 @@ public class WineCellar extends AbstractRest {
 	 */
 	@Override
 	@POST
-	@Path("{data}")
 	@Produces("text/plain")
-	public int post(@PathParam("data") String data) {
-		return id;
+	public String post(String data) {
+		return String.valueOf(id);
 	}
 
 	/*

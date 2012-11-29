@@ -52,9 +52,8 @@ public class Varietals extends AbstractRest{
 	 */
 	@Override
 	@PUT
-	@Path("{data}")
 	@Produces("text/plain")
-	public void put(@PathParam("data") String data) {
+	public void put(String data) {
 		Varietal varietal = gson.fromJson(data, Varietal.class);
 		try {
 			new VarietalsTable().update(varietal);
@@ -71,14 +70,14 @@ public class Varietals extends AbstractRest{
 	@POST
 	@Path("{data}")
 	@Produces("text/plain")
-	public int post(@PathParam("data") String data) {
+	public String post(@PathParam("data") String data) {
 		Brand brand = gson.fromJson(data, Brand.class);
 		try {
 			id = new BrandsTable().insert(brand);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return id;
+		return String.valueOf(id);
 	}
 
 	@Override

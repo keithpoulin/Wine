@@ -52,9 +52,8 @@ public class Locations extends AbstractRest{
 	 */
 	@Override
 	@PUT
-	@Path("{data}")
 	@Produces("text/plain")
-	public void put(@PathParam("data") String data) {
+	public void put(String data) {
 		lka.wine.dao.Location location = gson.fromJson(data, lka.wine.dao.Location.class);
 		try {
 			new LocationsTable().update(location);
@@ -69,16 +68,15 @@ public class Locations extends AbstractRest{
 	 */
 	@Override
 	@POST
-	@Path("{data}")
 	@Produces("text/plain")
-	public int post(@PathParam("data") String data) {
+	public String post(String data) {
 		lka.wine.dao.Location location = gson.fromJson(data, lka.wine.dao.Location.class);
 		try {
 			id = new LocationsTable().insert(location);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return id;
+		return String.valueOf(id);
 	}
 
 	@Override

@@ -53,9 +53,8 @@ public class Purchases extends AbstractRest {
 	 */
 	@Override
 	@PUT
-	@Path("{data}")
 	@Produces("text/plain")
-	public void put(@PathParam("data") String data) {
+	public void put(String data) {
 		Purchase purchase = gson.fromJson(data, Purchase.class);
 		try {
 			new PurchasesTable().update(purchase);
@@ -70,16 +69,15 @@ public class Purchases extends AbstractRest {
 	 */
 	@Override
 	@POST
-	@Path("{data}")
 	@Produces("text/plain")
-	public int post(@PathParam("data") String data) {
+	public String post(String data) {
 		Purchase purchase = gson.fromJson(data, Purchase.class);
 		try {
 			id = new PurchasesTable().insert(purchase);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return id;
+		return String.valueOf(id);
 	}
 
 	@Override

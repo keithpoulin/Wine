@@ -1,5 +1,6 @@
 package lka.wine.rest;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -54,9 +55,8 @@ public class Wines extends AbstractRest{
 	 */
 	@Override
 	@PUT
-	@Path("{data}")
 	@Produces("text/plain")
-	public void put(@PathParam("data") String data) {
+	public void put(String data) {
 		Wine wine = gson.fromJson(data, Wine.class);
 		try {
 			new WinesTable().update(wine);
@@ -71,16 +71,16 @@ public class Wines extends AbstractRest{
 	 */
 	@Override
 	@POST
-//	@Path("{data}")
-//	@Produces("text/plain")
-	public int post(@PathParam("data") String data) {
+	@Produces(MediaType.TEXT_PLAIN)
+	public String post(String data) {
 		Wine wine = gson.fromJson(data, Wine.class);
 		try {
 			id = new WinesTable().insert(wine);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return id;
+		
+		return String.valueOf(id);
 	}
 
 	@Override

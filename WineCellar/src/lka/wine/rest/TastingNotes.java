@@ -52,9 +52,8 @@ public class TastingNotes extends AbstractRest {
 	 */
 	@Override
 	@PUT
-	@Path("{data}")
 	@Produces("text/plain")
-	public void put(@PathParam("data") String data) {
+	public void put(String data) {
 		TastingNote tastingNote = gson.fromJson(data, TastingNote.class);
 		try {
 			new TastingNotesTable().update(tastingNote);
@@ -69,16 +68,15 @@ public class TastingNotes extends AbstractRest {
 	 */
 	@Override
 	@POST
-	@Path("{data}")
 	@Produces("text/plain")
-	public int post(@PathParam("data") String data) {
+	public String post(String data) {
 		TastingNote tastingNote = gson.fromJson(data, TastingNote.class);
 		try {
 			id = new TastingNotesTable().insert(tastingNote);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return id;
+		return String.valueOf(id);
 	}
 
 	@Override

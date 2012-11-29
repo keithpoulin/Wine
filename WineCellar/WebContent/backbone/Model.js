@@ -134,6 +134,7 @@ var VineyardCollection = Backbone.Collection.extend({
 
 
 var WineModel = Backbone.Model.extend({
+	url: "/rest/WineCellar/wines/",
 	idAttribute: "wineId",
 	defaults: {
 
@@ -141,6 +142,7 @@ var WineModel = Backbone.Model.extend({
 });
 
 var WineCollection = Backbone.Collection.extend({
+	url: "/rest/WineCellar/wines",
 	model: WineModel,
 	initialize: function(){
 		

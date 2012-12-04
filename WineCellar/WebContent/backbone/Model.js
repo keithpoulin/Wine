@@ -1,76 +1,6 @@
-Backbone.Collection.prototype.update = function(colIn){  
-	var origCol = _.pluck(this.models, "attributes");
-	
-	for (var i=0; i < colIn.length; i++){
-		var modIn = colIn[i];
-	    var existing = this.get(modIn);
-	    if (existing) { 
-	    	existing.set(modIn); 
-	    }
-	    else { 
-	    	this.add(modIn); 
-	    }
-	}
-	
-//	remove missing models
-	var collection = this;
-	var toRemove = [];
-	_.each(origCol, function(model, index){
-		for (var i=0; i < origCol.length; i++){
-			if( _.isEqual(colIn[i], model)){
-				return true;
-			};
-		}
-		toRemove.push(collection.at(index));
-	});
-  
-	this.remove(toRemove);
-	return this;
-};
-
-Backbone.Model.prototype.update = function(modelIn){
-	console.log("updating");
-	if (typeof(modelIn) != "object"){
-		try{
-			modelIn = JSON.parse(modelIn);
-		}catch(e){
-			console.log(e.message);
-			return false;
-		}
-	}
-	for (var key in modelIn){
-		console.log(key);
-		if (this.get(key) instanceof Backbone.Collection){
-			this.get(key).update(modelIn[key]);
-		}
-	}
-	return this;
-};
-
-var WineSummaryCollection = Backbone.Collection.extend({
-	model: WineSummaryModel,
-	initialize: function(){
-		
-	},
-	fetchFromLocalStorage: function(){
-		if ("wineSummaries" in localStorage){
-			var summaries = JSON.parse(localStorage.wineSummaries);
-			for (var i=0; i< summaries.length; i++){
-				this.add(new WineSummaryModel(summaries[i]));
-			}
-		}
-	},
-	toJsonString: function(){
-		return JSON.stringify(this.toJSON());
-	},
-	saveToLocalStorage: function(){
-		localStorage.wineSummaries = this.toJsonString();
-	}
-});
-
 var WineSummaryModel = Backbone.Model.extend({
+	urlRoot: "/rest/WineCellar/wineSummaries",
 	initialize: function(){
-		console.log(this);
 	},
 	defaults: function(){
 		return {
@@ -98,16 +28,40 @@ var WineSummaryModel = Backbone.Model.extend({
 	idAttribute: "wineId"
 });
 
-var WineDetailCollection = Backbone.Collection.extend({
-	
+
+var WineSummaryCollection = Backbone.Collection.extend({
+	url: "/rest/WineCellar/wineSummaries",
+	model: WineSummaryModel,
+	initialize: function(){
+		
+	},
+	fetchFromLocalStorage: function(){
+		if ("wineSummaries" in localStorage){
+			var summaries = JSON.parse(localStorage.wineSummaries);
+			for (var i=0; i< summaries.length; i++){
+				this.add(new WineSummaryModel(summaries[i]));
+			}
+		}
+	},
+	toJsonString: function(){
+		return JSON.stringify(this.toJSON());
+	},
+	saveToLocalStorage: function(){
+		localStorage.wineSummaries = this.toJsonString();
+	}
 });
+
 
 var WineDetailModel = Backbone.RelationalModel.extend({
-	
+	urlRoot: "/rest/WineCellar/wineDetails"
 });
 
+var WineDetailCollection = Backbone.Collection.extend({
+	url: "/rest/WineCellar/wineDetails"
+});
 
 var VineyardModel = Backbone.Model.extend({
+	urlRoot: "/rest/WineCellar/vineyards",
 	idAttribute: "vineyardId",
 	defaults: {
 
@@ -115,6 +69,7 @@ var VineyardModel = Backbone.Model.extend({
 });
 
 var VineyardCollection = Backbone.Collection.extend({
+	url: "/rest/WineCellar/vineyards",
 	model: VineyardModel,
 	initialize: function(){
 		
@@ -134,7 +89,7 @@ var VineyardCollection = Backbone.Collection.extend({
 
 
 var WineModel = Backbone.Model.extend({
-	url: "/rest/WineCellar/wines/",
+	urlRoot: "/rest/WineCellar/wines",
 	idAttribute: "wineId",
 	defaults: {
 		brandId: 1,
@@ -187,12 +142,16 @@ var WineCollection = Backbone.Collection.extend({
 
 
 var VarietalModel = Backbone.Model.extend({
+	urlRoot: "/rest/WineCellar/varietals",
 	idAttribute: "varietalId",
 	defaults: {
+		varietal: "Pino Noir",
+		type: "Red"
 	}
 });
 
 var VarietalCollection = Backbone.Collection.extend({
+	url: "/rest/WineCellar/varietals",
 	model: VarietalModel,
 	initialize: function(){
 		
@@ -211,6 +170,7 @@ var VarietalCollection = Backbone.Collection.extend({
 
 
 var TastingNoteModel = Backbone.Model.extend({
+	urlRoot: "/rest/WineCellar/tastingNotes",
 	idAttribute: "tastingNoteId",
 	defaults: {
 
@@ -218,6 +178,7 @@ var TastingNoteModel = Backbone.Model.extend({
 });
 
 var TastingNoteCollection = Backbone.Collection.extend({
+	url: "/rest/WineCellar/tastingNotes",
 	model: TastingNoteModel,
 	initialize: function(){
 		
@@ -236,12 +197,14 @@ var TastingNoteCollection = Backbone.Collection.extend({
 
 
 var RegionModel = Backbone.Model.extend({
+	urlRoot: "/rest/WineCellar/regions",
 	idAttribute: "regionId",
 	defaults: {
 	}
 });
 
 var RegionCollection = Backbone.Collection.extend({
+	url: "/rest/WineCellar/regions",
 	model: RegionModel,
 	initialize: function(){
 		
@@ -259,12 +222,14 @@ var RegionCollection = Backbone.Collection.extend({
 });
 
 var PurchaseModel = Backbone.Model.extend({
+	urlRoot: "/rest/WineCellar/purchases",
 	idAttribute: "purchaseId",
 	defaults: {
 	}
 });
 
 var PurchaseCollection = Backbone.Collection.extend({
+	url: "/rest/WineCellar/purchases",
 	model: PurchaseModel,
 	initialize: function(){
 		
@@ -282,12 +247,14 @@ var PurchaseCollection = Backbone.Collection.extend({
 });
 
 var LocationModel = Backbone.Model.extend({
+	urlRoot: "/rest/WineCellar/locations",
 	idAttribute: "locationId",
 	defaults: {
 	}
 });
 
 var LocationCollection = Backbone.Collection.extend({
+	url: "/rest/WineCellar/locations",
 	model: LocationModel,
 	initialize: function(){
 		
@@ -305,12 +272,14 @@ var LocationCollection = Backbone.Collection.extend({
 });
 
 var LocationTypeModel = Backbone.Model.extend({
+	urlRoot: "/rest/WineCellar/locationTypes",
 	idAttribute: "locationTypeId",
 	defaults: {
 	}
 });
 
 var LocationTypeCollection = Backbone.Collection.extend({
+	url: "/rest/WineCellar/locationTypes",
 	model: LocationTypeModel,
 	initialize: function(){
 		
@@ -329,12 +298,14 @@ var LocationTypeCollection = Backbone.Collection.extend({
 
 
 var BrandModel = Backbone.Model.extend({
+	urlRoot: "/rest/WineCellar/brands",
 	idAttribute: "brandId",
 	defaults: {
 	}
 });
 
 var BrandCollection = Backbone.Collection.extend({
+	url: "/rest/WineCellar/brands",
 	model: BrandModel,
 	initialize: function(){
 		
@@ -353,6 +324,7 @@ var BrandCollection = Backbone.Collection.extend({
 
 
 var WineCellarModel = Backbone.Model.extend({
+	urlRoot: "/rest/WineCellar",
 	initialize: function(){
 		this.set("vineyards", new VineyardCollection(this.get("vineyards")));
 		this.set("wines", new WineCollection(this.get("wines")));
@@ -363,7 +335,9 @@ var WineCellarModel = Backbone.Model.extend({
 		this.set("locations", new LocationCollection(this.get("locations")));
 		this.set("locationTypes", new LocationTypeCollection(this.get("locationTypes")));
 		this.set("brands", new BrandCollection(this.get("brands")));
-
+		
+		this.get("brands").on("change", showAlert("there has been a change in the brands"));
+		
 //		this.vineyards =  nestCollection(this, 'vineyards',  new VineyardCollection(this.get("vineyards")));
 //		this.wines = nestCollection(this, "wines", new WineCollection(this.get("wines")));
 //		this.varietals = nestCollection(this, "varietals", new VarietalCollection(this.get("varietals")));
@@ -382,8 +356,29 @@ var WineCellarModel = Backbone.Model.extend({
 			this.update(JSON.parse(localStorage.wineCellar));
 			return this;
 		}
-	} 
+	},fetch: function(){
+		var cellar = this;
+		$.ajax({
+			url: "/rest/WineCellar",
+			data: {},
+			dataType: "json",
+			success: function(resp){
+				for (var key in cellar.attributes){
+					if (key in resp){
+						console.log("updating " + key + "....");
+						cellar.get(key).update(resp[key]);
+					}else{
+						console.log(key + " not in Reponse");
+					}
+				}
+				
+			}
+		});
+	}
 });
 
+function showAlert(message){
+	alert(message);
+}
 
 

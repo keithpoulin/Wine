@@ -10,10 +10,10 @@ function initialize(){
 
 	//window.WineSummaries = new WineSummaryCollection();
 	window.Vineyards = new VineyardCollection();
-	Vineyards.fetchFromLocalStorage();
+//	Vineyards.fetchFromLocalStorage();
 	window.WineList = new WineSummaryList();
 	window.WineCellar = new WineCellarModel();
-	WineCellar.fetchFromLocalStorage();
+//	WineCellar.fetchFromLocalStorage();
 }
 
 function setEvents(){

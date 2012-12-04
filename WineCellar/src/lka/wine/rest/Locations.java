@@ -2,6 +2,7 @@ package lka.wine.rest;
 
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -9,6 +10,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import lka.wine.jdbc.*;
 
@@ -38,7 +40,7 @@ public class Locations extends AbstractRest{
 	@Produces("application/json")
 	public String get(@PathParam("id") int id) {
 		try {
-			List<lka.wine.dao.Location> location = new LocationsTable().select(id);
+			Object location = new LocationsTable().select(id);
 			return gson.toJson(location);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -52,6 +54,8 @@ public class Locations extends AbstractRest{
 	 */
 	@Override
 	@PUT
+	@Path("{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("text/plain")
 	public void put(String data) {
 		lka.wine.dao.Location location = gson.fromJson(data, lka.wine.dao.Location.class);
@@ -70,13 +74,16 @@ public class Locations extends AbstractRest{
 	@POST
 	@Produces("text/plain")
 	public String post(String data) {
-		lka.wine.dao.Location location = gson.fromJson(data, lka.wine.dao.Location.class);
+		
 		try {
+			lka.wine.dao.Location location = gson.fromJson(data, lka.wine.dao.Location.class);
 			id = new LocationsTable().insert(location);
+			location.setLocationId(id);
+			return gson.toJson(location);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return String.valueOf(id);
+		return "error" + id;
 	}
 
 	@Override

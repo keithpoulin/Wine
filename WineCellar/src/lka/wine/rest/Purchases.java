@@ -2,6 +2,7 @@ package lka.wine.rest;
 
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -9,6 +10,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import lka.wine.dao.Purchase;
 import lka.wine.jdbc.PurchasesTable;
@@ -39,7 +41,7 @@ public class Purchases extends AbstractRest {
 	@Produces("application/json")
 	public String get(@PathParam("id") int id) {
 		try {
-			List<Purchase> purchases = new PurchasesTable().select(id);
+			Object purchases = new PurchasesTable().select(id);
 			return gson.toJson(purchases);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -53,6 +55,8 @@ public class Purchases extends AbstractRest {
 	 */
 	@Override
 	@PUT
+	@Path("{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("text/plain")
 	public void put(String data) {
 		Purchase purchase = gson.fromJson(data, Purchase.class);
@@ -69,15 +73,19 @@ public class Purchases extends AbstractRest {
 	 */
 	@Override
 	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("text/plain")
 	public String post(String data) {
-		Purchase purchase = gson.fromJson(data, Purchase.class);
+		
 		try {
+			Purchase purchase = gson.fromJson(data, Purchase.class);
 			id = new PurchasesTable().insert(purchase);
+			purchase.setPurchaseId(id);
+			return gson.toJson(purchase);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return String.valueOf(id);
+		return "error: " + id;
 	}
 
 	@Override

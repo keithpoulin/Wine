@@ -1,5 +1,6 @@
 package lka.wine.rest;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -7,6 +8,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import lka.wine.jdbc.WineCellarQuery;
 
@@ -44,6 +46,8 @@ public class WineCellar extends AbstractRest {
 	 */
 	@Override
 	@PUT
+	@Path("{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("text/plain")
 	public void put(String data) {
 		// TODO Auto-generated method stub
@@ -55,9 +59,10 @@ public class WineCellar extends AbstractRest {
 	 */
 	@Override
 	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("text/plain")
 	public String post(String data) {
-		return String.valueOf(id);
+		return "action not allowed";
 	}
 
 	/*

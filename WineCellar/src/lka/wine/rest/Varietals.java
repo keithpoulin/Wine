@@ -2,6 +2,7 @@ package lka.wine.rest;
 
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -9,6 +10,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import lka.wine.dao.*;
 import lka.wine.jdbc.*;
@@ -38,7 +40,7 @@ public class Varietals extends AbstractRest{
 	@Produces("application/json")
 	public String get(@PathParam("id") int id) {
 		try {
-			List<Varietal> varietals = new VarietalsTable().select(id);
+			Object varietals = new VarietalsTable().select(id);
 			return gson.toJson(varietals);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -52,6 +54,8 @@ public class Varietals extends AbstractRest{
 	 */
 	@Override
 	@PUT
+	@Path("{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("text/plain")
 	public void put(String data) {
 		Varietal varietal = gson.fromJson(data, Varietal.class);
@@ -68,16 +72,18 @@ public class Varietals extends AbstractRest{
 	 */
 	@Override
 	@POST
-	@Path("{data}")
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("text/plain")
-	public String post(@PathParam("data") String data) {
-		Brand brand = gson.fromJson(data, Brand.class);
+	public String post(String data) {		
 		try {
-			id = new BrandsTable().insert(brand);
+			Varietal varietal = gson.fromJson(data, Varietal.class);
+			id = new VarietalsTable().insert(varietal);
+			varietal.setVarietalId(id);
+			return gson.toJson(varietal);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return String.valueOf(id);
+		return "error: " + id;
 	}
 
 	@Override
@@ -85,7 +91,7 @@ public class Varietals extends AbstractRest{
 	@Path("{id}")
 	public void delete(@PathParam("id") int id) {
 		try {
-			new BrandsTable().delete(id);
+			new VarietalsTable().delete(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	

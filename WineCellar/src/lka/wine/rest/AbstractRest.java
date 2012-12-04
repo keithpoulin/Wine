@@ -1,6 +1,7 @@
 package lka.wine.rest;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -32,16 +33,18 @@ public abstract class AbstractRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	public abstract String getAll();
 	
-	@GET
-	@Path("{id}")
+	@GET @Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public abstract String get(@PathParam("id") int id);
 
 	@PUT
+	@Path("{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public abstract void put(String data);
 	
 	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public abstract String post(String data);
 	

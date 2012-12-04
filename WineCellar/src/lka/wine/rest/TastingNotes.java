@@ -2,6 +2,7 @@ package lka.wine.rest;
 
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -9,6 +10,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import lka.wine.dao.TastingNote;
 import lka.wine.jdbc.TastingNotesTable;
@@ -52,6 +54,8 @@ public class TastingNotes extends AbstractRest {
 	 */
 	@Override
 	@PUT
+	@Path("{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("text/plain")
 	public void put(String data) {
 		TastingNote tastingNote = gson.fromJson(data, TastingNote.class);
@@ -68,15 +72,18 @@ public class TastingNotes extends AbstractRest {
 	 */
 	@Override
 	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("text/plain")
-	public String post(String data) {
-		TastingNote tastingNote = gson.fromJson(data, TastingNote.class);
+	public String post(String data) {		
 		try {
+			TastingNote tastingNote = gson.fromJson(data, TastingNote.class);
 			id = new TastingNotesTable().insert(tastingNote);
+			tastingNote.setTastingNoteId(id);
+			return gson.toJson(tastingNote);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return String.valueOf(id);
+		return "error: " + id;
 	}
 
 	@Override

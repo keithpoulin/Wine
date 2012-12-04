@@ -2,6 +2,7 @@ package lka.wine.rest;
 
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -9,6 +10,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import lka.wine.dao.Region;
 import lka.wine.jdbc.RegionsTable;
@@ -38,7 +40,7 @@ public class Regions extends AbstractRest{
 	@Produces("application/json")
 	public String get(@PathParam("id") int id) {
 		try {
-			List<Region> regions = new RegionsTable().select(id);
+			Object regions = new RegionsTable().select(id);
 			return gson.toJson(regions);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -52,6 +54,8 @@ public class Regions extends AbstractRest{
 	 */
 	@Override
 	@PUT
+	@Path("{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("text/plain")
 	public void put(String data) {
 		Region region = gson.fromJson(data, Region.class);
@@ -68,15 +72,19 @@ public class Regions extends AbstractRest{
 	 */
 	@Override
 	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("text/plain")
 	public String post(String data) {
-		Region region = gson.fromJson(data, Region.class);
+		
 		try {
+			Region region = gson.fromJson(data, Region.class);
 			id = new RegionsTable().insert(region);
+			region.setRegionId(id);
+			return gson.toJson(region);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return String.valueOf(id);
+		return "error: " + id;
 	}
 
 	@Override

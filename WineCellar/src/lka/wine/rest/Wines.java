@@ -1,6 +1,5 @@
 package lka.wine.rest;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -32,16 +31,12 @@ public class Wines extends AbstractRest{
 		return null;
 	}
 
-	/**
-	 * Currently unsupported
-	 */
 	@Override
-	@GET
-	@Path("{id}")
+	@GET @Path("{id}")
 	@Produces("application/json")
 	public String get(@PathParam("id") int id) {
 		try {
-			List<Wine> wines = new WinesTable().select(id);
+			Object wines = new WinesTable().select(id);
 			return gson.toJson(wines);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -51,10 +46,10 @@ public class Wines extends AbstractRest{
 
 	/**
 	 *Update: as called for by backbone.js 
-	 *Currently unsupported
 	 */
 	@Override
-	@PUT
+	@PUT @Path("{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("text/plain")
 	public void put(String data) {
 		Wine wine = gson.fromJson(data, Wine.class);
@@ -67,20 +62,22 @@ public class Wines extends AbstractRest{
 
 	/**
 	 *Create: as called for by backbone.js 
-	 *Currently unsupported
 	 */
 	@Override
 	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String post(String data) {
-		Wine wine = gson.fromJson(data, Wine.class);
+	public String post(String data) {		
 		try {
+			Wine wine = gson.fromJson(data, Wine.class);
 			id = new WinesTable().insert(wine);
+			wine.setWineId(id);
+			return gson.toJson(wine);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return String.valueOf(id);
+		return "error: " + id;
 	}
 
 	@Override

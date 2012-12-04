@@ -48,6 +48,7 @@ var WineSummaryView = Backbone.View.extend({
 		this.$el.removeClass("editing");
 		$("#input_title").val("");
 		this.model.collection.saveToLocalStorage();
+		this.model.save();
 	}
 });
 

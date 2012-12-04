@@ -33,7 +33,7 @@ public abstract class AbstractData<T> {
 		}
 	}
 	
-	public List<T> select(int id) throws Exception {
+	public Object select(int id) throws Exception {
 
 		Connection cn = null;
 		PreparedStatement pstmt = null;
@@ -45,7 +45,7 @@ public abstract class AbstractData<T> {
 //			pstmt.setInt(1, id);
 			pstmt.execute();
 
-			return getObjects(pstmt.getResultSet());
+			return getObjects(pstmt.getResultSet()).get(0);
 		} finally {
 			JdbcCloser.close(cn, pstmt);
 		}

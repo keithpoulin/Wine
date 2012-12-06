@@ -11,10 +11,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-import lka.wine.dao.Wine;
 import lka.wine.dao.WineSummary;
 import lka.wine.jdbc.WineSummaryView;
-import lka.wine.jdbc.WinesTable;
 
 @Path("WineCellar/wineSummaries")
 public class WineSummaries extends AbstractRest {

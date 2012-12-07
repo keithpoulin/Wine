@@ -1,12 +1,6 @@
 /**
  * HTML Templates
  */
-//var t_wineSummary = Handlebars.compile($("#t_wineSummary").html());
-//var t_purchaseDetails = Handlebars.compile($("#t_m_PurchaseDetails").html());
-//var t_tastingNotes = Handlebars.compile($("#t_m_TastingNotes").html());
-//var t_wineDetail = Handlebars.compile($("#t_m_WineDetail").html());
-//var t_wineApp = Handlebars.compile($("#t_WineApp").html());
-
 var t_standard = {
 		wineSummary: Handlebars.compile($("#t_wineSummary").html()),
 		purchaseDetails: Handlebars.compile($("#t_m_PurchaseDetails").html()),
@@ -84,7 +78,6 @@ var WineSummaryView = Backbone.View.extend({
 	initialize: function(){
 		 this.model.bind('change', this.render, this);
 		 this.model.bind('destroy', this.remove, this);
-//		 this.attributes.wineId = this.model.get("wineId");
 	},
 	render: function(){
 		this.$el.html(this.template(this.model.toJSON()));	
@@ -93,9 +86,6 @@ var WineSummaryView = Backbone.View.extend({
 	},
 	events: {
 		
-	},	
-	attributes: {
-//		wineId: this.model.get("id")
 	}
 });
 

@@ -9,8 +9,6 @@
 	<body>
 		<div id="appView"></div>
 		
-		
-		
 		<script src="/js/lib/jquery-1.8.2.js" type="text/javascript"></script>
 		<script src="/js/lib/backbone/underscore-min.js" type="text/javascript"></script>
 		<script src="/js/lib/backbone/backbone-min.js" type="text/javascript"></script>

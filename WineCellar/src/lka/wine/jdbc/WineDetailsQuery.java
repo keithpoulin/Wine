@@ -9,11 +9,12 @@ import lka.wine.dao.PurchaseDetail;
 import lka.wine.dao.TastingNote;
 import lka.wine.dao.WineDetails;
 
-public class WineDetailsQuery {
-	public List<WineDetails> select(int wineId) throws Exception {	
+public class WineDetailsQuery implements Restable<WineDetails> {
+	public WineDetails select(int wineId) throws Exception {	
 		List<TastingNote> tastingNotes = new TastingNotesTable().selectByWineId(wineId);
 		List<PurchaseDetail> purchaseDetails = new PurchaseDetailsView().selectByWineId(wineId);
-		return getWineDetails(tastingNotes, purchaseDetails);
+		List<WineDetails> wineDetails = getWineDetails(tastingNotes, purchaseDetails);
+		return wineDetails.size() > 0 ? wineDetails.get(0) :  null;
 	}
 	
 	public List<WineDetails> select() throws Exception {	
@@ -55,5 +56,29 @@ public class WineDetailsQuery {
 			}
 		}
 		return new ArrayList<WineDetails>(wineDetails.values());	
+	}
+
+	@Override
+	public int insert(WineDetails obj) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int update(WineDetails obj) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int delete(WineDetails obj) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int delete(int id) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

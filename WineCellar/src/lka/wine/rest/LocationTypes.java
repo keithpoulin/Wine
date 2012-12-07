@@ -6,7 +6,7 @@ import lka.wine.dao.LocationType;
 import lka.wine.jdbc.LocationTypesTable;
 
 @Path("/WineCellar/locationTypes")
-public class LocationTypes extends RestBase<LocationType, LocationTypesTable> {
+public class LocationTypes extends RestWriter<LocationType, LocationTypesTable> {
 
 	public LocationTypes() {
 		super(LocationType.class, LocationTypesTable.class);

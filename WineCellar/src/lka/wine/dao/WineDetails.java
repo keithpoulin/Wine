@@ -2,7 +2,7 @@ package lka.wine.dao;
 
 import java.util.List;
 
-public class WineDetails {
+public class WineDetails extends AbstractDao {
 	private int wineId;
 	private List<PurchaseDetail> purchaseDetails;
 	private List<TastingNote> tastingNotes;
@@ -24,6 +24,14 @@ public class WineDetails {
 	}
 	public void setTastingNotes(List<TastingNote> tastingNotes) {
 		this.tastingNotes = tastingNotes;
+	}
+	@Override
+	public int getId() {
+		return getWineId();
+	}
+	@Override
+	public void setId(int id) {
+		setWineId(id);
 	}
 	
 }

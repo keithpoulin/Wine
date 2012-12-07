@@ -2,7 +2,7 @@ package lka.wine.dao;
 
 import java.util.List;
 
-public class WineCellar {
+public class WineCellar extends AbstractDao {
 	List<Brand> brands;
 	List<Location> locations;
 	List<LocationType> locationTypes;
@@ -66,6 +66,14 @@ public class WineCellar {
 	}
 	public void setWines(List<Wine> wines) {
 		this.wines = wines;
+	}
+	@Override
+	public int getId() {
+		throw new UnsupportedOperationException();
+	}
+	@Override
+	public void setId(int id) {
+		throw new UnsupportedOperationException();
 	}
 	
 }

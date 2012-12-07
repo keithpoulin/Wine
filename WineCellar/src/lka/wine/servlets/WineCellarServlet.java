@@ -88,7 +88,7 @@ public class WineCellarServlet extends HttpServlet {
 				response.getWriter().write(gson.toJson(wines));
 				break;
 			case WINE_CELLAR:
-				WineCellar wineCellar = new WineCellarQuery().select();
+				List<WineCellar> wineCellar = new WineCellarQuery().select();
 				response.getWriter().write(gson.toJson(wineCellar));
 				break;
 			default:

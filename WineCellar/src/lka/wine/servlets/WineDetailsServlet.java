@@ -23,16 +23,19 @@ public class WineDetailsServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException {
 		try {
 			String wineId = request.getParameter("wineId");		
-			List<WineDetails> wineDetails = null;
 			if(wineId == null) {
+				List<WineDetails> wineDetails = null;
 				wineDetails = new WineDetailsQuery().select();				
+				Gson gson = new Gson();
+				response.getWriter().write(gson.toJson(wineDetails));			
 			}
 			else {
+				WineDetails wineDetails = null;
 				wineDetails = new WineDetailsQuery().select(Integer.parseInt(wineId));
+				Gson gson = new Gson();
+				response.getWriter().write(gson.toJson(wineDetails));			
 			}
 			
-			Gson gson = new Gson();
-			response.getWriter().write(gson.toJson(wineDetails));			
 		}
 		catch (Exception ex) {
 		    throw new ServletException(ex);

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lka.wine.dao.AbstractDao;
 
-public abstract class AbstractData<T> {
+public abstract class AbstractData<T> implements Restable<T> {
 
 	public abstract String getTableName();
 	public abstract String getIdColumnName();

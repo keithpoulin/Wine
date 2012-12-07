@@ -6,7 +6,7 @@ import lka.wine.dao.Purchase;
 import lka.wine.jdbc.PurchasesTable;
 
 @Path("/WineCellar/purchases")
-public class Purchases extends RestBase<Purchase, PurchasesTable> {
+public class Purchases extends RestWriter<Purchase, PurchasesTable> {
 
 	public Purchases() {
 		super(Purchase.class, PurchasesTable.class);

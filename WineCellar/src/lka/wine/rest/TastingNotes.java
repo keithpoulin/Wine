@@ -6,7 +6,7 @@ import lka.wine.dao.TastingNote;
 import lka.wine.jdbc.TastingNotesTable;
 
 @Path("/WineCellar/tastingNotes")
-public class TastingNotes extends RestBase<TastingNote, TastingNotesTable> {
+public class TastingNotes extends RestWriter<TastingNote, TastingNotesTable> {
 
 	public TastingNotes() {
 		super(TastingNote.class, TastingNotesTable.class);

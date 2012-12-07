@@ -16,7 +16,7 @@ import lka.wine.jdbc.TastingNotesTable;
 import lka.wine.jdbc.WinesTable;
 
 @Path("/WineCellar/wines")
-public class Wines extends RestBase<Wine, WinesTable> {
+public class Wines extends RestWriter<Wine, WinesTable> {
 
 	public Wines() {
 		super(Wine.class, WinesTable.class);

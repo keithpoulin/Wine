@@ -3,15 +3,10 @@ package lka.wine.rest;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
 import lka.wine.dao.Purchase;
 import lka.wine.dao.TastingNote;
@@ -21,36 +16,12 @@ import lka.wine.jdbc.TastingNotesTable;
 import lka.wine.jdbc.WinesTable;
 
 @Path("/WineCellar/wines")
-public class Wines extends AbstractRest{
+public class Wines extends RestBase<Wine, WinesTable> {
 
-	@Override
-	@GET
-	@Produces("application/json")
-	public String getAll() throws ServletException {
-		String json = null;
-		try {
-			List<Wine> wines = new WinesTable().select();
-			json = gson.toJson(wines);
-		} catch (Exception e) {
-		    throw new ServletException(e);
-		}
-		return json;
+	public Wines() {
+		super(Wine.class, WinesTable.class);
 	}
 
-	@Override
-	@GET @Path("{id}")
-	@Produces("application/json")
-	public String get(@PathParam("id") int id) throws ServletException {
-		String json = null;
-		try {
-			Wine wine = new WinesTable().select(id);
-			json =  gson.toJson(wine);
-		} catch (Exception e) {
-		    throw new ServletException(e);
-		}
-		return json;
-	}
-	
 	/**
 	 * Currently unsupported
 	 * @throws ServletException 
@@ -86,55 +57,6 @@ public class Wines extends AbstractRest{
 		    throw new ServletException(e);
 		}
 		return json;
-	}
-
-	/**
-	 *Update: as called for by backbone.js 
-	 * @throws ServletException 
-	 */
-	@Override
-	@PUT @Path("{id}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces("text/plain")
-	public void put(String data) throws ServletException {
-		Wine wine = gson.fromJson(data, Wine.class);
-		try {
-			new WinesTable().update(wine);
-		} catch (Exception e) {
-		    throw new ServletException(e);
-		}
-	}
-
-	/**
-	 *Create: as called for by backbone.js 
-	 * @throws ServletException 
-	 */
-	@Override
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.TEXT_PLAIN)
-	public String post(String data) throws ServletException {		
-		String json = null;
-		try {
-			Wine wine = gson.fromJson(data, Wine.class);
-			id = new WinesTable().insert(wine);
-			wine.setWineId(id);
-			json = gson.toJson(wine);
-		} catch (Exception e) {
-		    throw new ServletException(e);
-		}
-		return json;
-	}
-
-	@Override
-	@DELETE
-	@Path("{id}")
-	public void delete(@PathParam("id") int id) throws ServletException {
-		try {
-			new WinesTable().delete(id);
-		} catch (Exception e) {
-		    throw new ServletException(e);
-		}			
-	}
-
+	}	
 }
+

@@ -99,5 +99,9 @@ public class Wine extends AbstractDao {
 	public int getId() {
 		return getWineId();
 	}
+	@Override
+	public void setId(int id) {
+		setWineId(id);
+	}
 
 }

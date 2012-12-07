@@ -48,5 +48,9 @@ public class Location extends AbstractDao {
 	public int getId() {
 		return getLocationId();
 	}
+	@Override
+	public void setId(int id) {
+		setLocationId(id);
+	}
 	
 }

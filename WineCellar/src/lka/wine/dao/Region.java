@@ -27,5 +27,9 @@ public class Region extends AbstractDao {
 	public int getId() {
 		return getRegionId();
 	}
-	
+	@Override
+	public void setId(int id) {
+		setRegionId(id);
+	}
+
 }

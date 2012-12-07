@@ -79,5 +79,9 @@ public class Purchase extends AbstractDao {
 	public int getId() {
 		return getPurchaseId();
 	}
-	
+	@Override
+	public void setId(int id) {
+		setPurchaseId(id);
+	}
+
 }

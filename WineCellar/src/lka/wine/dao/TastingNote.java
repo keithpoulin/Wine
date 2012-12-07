@@ -50,5 +50,9 @@ public class TastingNote extends AbstractDao {
 	public int getId() {
 		return getTastingNoteId();
 	}
+	@Override
+	public void setId(int id) {
+		setTastingNoteId(id);
+	}
 	
 }

@@ -20,5 +20,9 @@ public class LocationType extends AbstractDao {
 	public int getId() {
 		return getLocationTypeId();
 	}
+	@Override
+	public void setId(int id) {
+		setLocationTypeId(id);
+	}
 	
 }

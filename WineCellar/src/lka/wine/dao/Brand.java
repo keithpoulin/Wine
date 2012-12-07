@@ -20,4 +20,8 @@ public class Brand extends AbstractDao {
 	public int getId() {
 		return getBrandId();
 	}
+	@Override
+	public void setId(int id) {
+		setBrandId(id);
+	}
 }

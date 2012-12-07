@@ -20,5 +20,9 @@ public class Vineyard extends AbstractDao {
 	public int getId() {
 		return getVineyardId();
 	}
-	
+	@Override
+	public void setId(int id) {
+		setVineyardId(id);
+	}
+
 }

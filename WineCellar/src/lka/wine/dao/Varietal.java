@@ -27,4 +27,8 @@ public class Varietal extends AbstractDao {
 	public int getId() {
 		return getVarietalId();
 	}
+	@Override
+	public void setId(int id) {
+		setVarietalId(id);
+	}
 }

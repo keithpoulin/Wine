@@ -335,34 +335,27 @@ var WineCellarModel = Backbone.Model.extend({
 		this.set("locations", new LocationCollection(this.get("locations")));
 		this.set("locationTypes", new LocationTypeCollection(this.get("locationTypes")));
 		this.set("brands", new BrandCollection(this.get("brands")));
-		
-		this.get("brands").on("change", showAlert("there has been a change in the brands"));
-		
-//		this.vineyards =  nestCollection(this, 'vineyards',  new VineyardCollection(this.get("vineyards")));
-//		this.wines = nestCollection(this, "wines", new WineCollection(this.get("wines")));
-//		this.varietals = nestCollection(this, "varietals", new VarietalCollection(this.get("varietals")));
-//		this.tastingNotes = nestCollection(this, "tastingNotes", new TastingNoteCollection(this.get("tastingNotes")));
-//		this.regions = nestCollection(this, "regions", new RegionCollection(this.get("regions")));
-//		this.purchases = nestCollection(this, "purchases", new PurchaseCollection(this.get("purchases")));
-//		this.locations = nestCollection(this, "locations", new LocationCollection(this.get("locations")));
-//		this.locationTypes = nestCollection(this, "locationTypes", new LocationTypeCollection(this.get("locationTypes")));
-//		this.brands = nestCollection(this, "brands", new BrandCollection(this.get("brands")));
-		
+		this.set("wineSummaries", new WineSummaryCollection(this.get("wineSummaries")));		
 	},
 	defaults: function(){
 		return {};
 	}, fetchFromLocalStorage: function(){
 		if ("wineCellar" in localStorage){
 			this.update(JSON.parse(localStorage.wineCellar));
-			return this;
 		}
+		if ("wineSummaries" in localStorage){
+			this.get("wineSummaries").update(JSON.parse(localStorage.wineSummaries));
+		}
+		return this;
 	},fetch: function(){
 		var cellar = this;
+		console.log("fetching data from server. Please wait...");
 		$.ajax({
 			url: "/rest/WineCellar",
 			data: {},
 			dataType: "json",
 			success: function(resp){
+				console.log("refreshing models...");
 				for (var key in cellar.attributes){
 					if (key in resp){
 						console.log("updating " + key + "....");
@@ -374,6 +367,8 @@ var WineCellarModel = Backbone.Model.extend({
 				
 			}
 		});
+		console.log("fetching wineSummaries...");
+		this.get("wineSummaries").fetch();
 	}
 });
 

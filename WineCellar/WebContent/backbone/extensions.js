@@ -29,7 +29,7 @@ Backbone.Collection.prototype.update = function(colIn){
 };
 
 Backbone.Model.prototype.update = function(modelIn){
-	console.log("updating");
+//	console.log("updating...");
 	if (typeof(modelIn) != "object"){
 		try{
 			modelIn = JSON.parse(modelIn);
@@ -39,7 +39,7 @@ Backbone.Model.prototype.update = function(modelIn){
 		}
 	}
 	for (var key in modelIn){
-		console.log(key);
+//		console.log(key);
 		if (this.get(key) instanceof Backbone.Collection){
 			this.get(key).update(modelIn[key]);
 		}

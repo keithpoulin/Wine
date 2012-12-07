@@ -7,11 +7,8 @@
 	</head>
 	
 	<body>
-		<select id="select_models"></select><br/>
-		<label for="input_title">Title</label><input id="input_title" />
-		<button id="saveVineyard">Save</button>
-		<div id="content"></div>
-		<ul id="listView"></ul>
+		<div id="appView"></div>
+		
 		
 		
 		<script src="/js/lib/jquery-1.8.2.js" type="text/javascript"></script>

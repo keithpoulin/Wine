@@ -26,3 +26,6 @@
 	<jsp:include page="m_PurchaseDetails.html" />
 </div>
 
+<div class="hidden" id="t_WineApp" type="text/x-handlebars-template">
+	<jsp:include page="WineApp.html" />
+</div>

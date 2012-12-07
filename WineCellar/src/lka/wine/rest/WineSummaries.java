@@ -2,6 +2,7 @@ package lka.wine.rest;
 
 import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -20,27 +21,29 @@ public class WineSummaries extends AbstractRest {
 	@Override
 	@GET
 	@Produces("application/json")
-	public String getAll() {
+	public String getAll() throws ServletException {
+		String json = null;
 		try {
 			List<WineSummary> wineSummaries = new WineSummaryView().select();
-			return gson.toJson(wineSummaries);
+			json = gson.toJson(wineSummaries);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}
-		return null;
+		return json;
 	}
 
 	@Override
 	@GET @Path("{id}")
 	@Produces("application/json")
-	public String get(@PathParam("id") int id) {
+	public String get(@PathParam("id") int id) throws ServletException {
+		String json = null;
 		try {
 			WineSummary wineSummary = new WineSummaryView().select(id);
-			return gson.toJson(wineSummary);
+			json = gson.toJson(wineSummary);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}
-		return null;
+		return json;
 	}
 
 	@Override
@@ -48,23 +51,23 @@ public class WineSummaries extends AbstractRest {
 	@Path("{id}")
 	@Consumes("application/json")
 	@Produces("text/plain")
-	public void put(String data) {
-		//NOT ALLOWED
+	public void put(String data) throws ServletException {
+	    throw new ServletException(new UnsupportedOperationException());
 	}
 
 	@Override
 	@POST
 	@Consumes("application/json")
 	@Produces("text/plain")
-	public String post(String data) {
-		return "action not allowed";
+	public String post(String data) throws ServletException {
+	    throw new ServletException(new UnsupportedOperationException());
 	}
 
 	@Override
 	@DELETE
 	@Path("{id}")
-	public void delete(@PathParam("id") int id) {
-		// NOT ALLOWED
+	public void delete(@PathParam("id") int id) throws ServletException {
+	    throw new ServletException(new UnsupportedOperationException());
 	}
 
 }

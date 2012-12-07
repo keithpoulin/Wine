@@ -2,6 +2,7 @@ package lka.wine.rest;
 
 import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -21,81 +22,86 @@ public class LocationTypes extends AbstractRest{
 	@Override
 	@GET
 	@Produces("application/json")
-	public String getAll() {
+	public String getAll() throws ServletException {
+		String json = null;
 		try {
 			List<LocationType> locationTypes = new LocationTypesTable().select();
-			return gson.toJson(locationTypes);
+			json = gson.toJson(locationTypes);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}
-		return null;
+		return json;
 	}
 
 	/**
 	 * Currently unsupported
+	 * @throws ServletException 
 	 */
 	@Override
 	@GET
 	@Path("{id}")
 	@Produces("application/json")
-	public String get(@PathParam("id") int id) {
+	public String get(@PathParam("id") int id) throws ServletException {
+		String json = null;
 		try {
 			LocationType locationType = new LocationTypesTable().select(id);
-			return gson.toJson(locationType);
+			json = gson.toJson(locationType);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}
-		return null;
+		return json;
 	}
 
 	/**
 	 *Update: as called for by backbone.js 
 	 *Currently unsupported
+	 * @throws ServletException 
 	 */
 	@Override
 	@PUT
 	@Path("{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("text/plain")
-	public void put(String data) {
+	public void put(String data) throws ServletException {
 		LocationType locationType = gson.fromJson(data, LocationType.class);
 		try {
 			new LocationTypesTable().update(locationType);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}
 	}
 
 	/**
 	 *Create: as called for by backbone.js 
 	 *Currently unsupported
+	 * @throws ServletException 
 	 */
 	@Override
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("text/plain")
-	public String post(String data) {
+	public String post(String data) throws ServletException {
+		String json = null;
 		try {
 			LocationType locationType = gson.fromJson(data, LocationType.class);
 			id = new LocationTypesTable().insert(locationType);
 			locationType.setLocationTypeId(id);
-			return gson.toJson(locationType);
+			json = gson.toJson(locationType);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}
-		return "error: " + id;
+		return json;
 	}
 
 	@Override
 	@DELETE
 	@Path("{id}")
-	public void delete(@PathParam("id") int id) {
+	public void delete(@PathParam("id") int id) throws ServletException {
 		try {
 			new LocationTypesTable().delete(id);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}	
-		
 	}
 
 }

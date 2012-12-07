@@ -2,6 +2,7 @@ package lka.wine.rest;
 
 import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -25,108 +26,115 @@ public class Wines extends AbstractRest{
 	@Override
 	@GET
 	@Produces("application/json")
-	public String getAll() {
+	public String getAll() throws ServletException {
+		String json = null;
 		try {
 			List<Wine> wines = new WinesTable().select();
-			return gson.toJson(wines);
+			json = gson.toJson(wines);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}
-		return null;
+		return json;
 	}
 
 	@Override
 	@GET @Path("{id}")
 	@Produces("application/json")
-	public String get(@PathParam("id") int id) {
+	public String get(@PathParam("id") int id) throws ServletException {
+		String json = null;
 		try {
 			Wine wine = new WinesTable().select(id);
-			return gson.toJson(wine);
+			json =  gson.toJson(wine);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}
-		return null;
+		return json;
 	}
 	
 	/**
 	 * Currently unsupported
+	 * @throws ServletException 
 	 */
 	@GET
 	@Path("{id}/purchases")
 	@Produces("application/json")
-	public String getByPurchases(@PathParam("id") int wineId) {
+	public String getByPurchases(@PathParam("id") int wineId) throws ServletException {
+		String json = null;
 		try {
 			List<Purchase> purchases = new PurchasesTable().selectByWineId(wineId);
-			return gson.toJson(purchases);
+			json =  gson.toJson(purchases);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}
-		return null;
+		return json;
 	}
 	
 
 	/**
 	 * Currently unsupported
+	 * @throws ServletException 
 	 */
 	@GET
 	@Path("{id}/tastingNotes")
 	@Produces("application/json")
-	public String getTastingNotes(@PathParam("id") int wineId) {
+	public String getTastingNotes(@PathParam("id") int wineId) throws ServletException {
+		String json = null;
 		try {
 			List<TastingNote> tastingNotes = new TastingNotesTable().selectByWineId(wineId);
-			return gson.toJson(tastingNotes);
+			json = gson.toJson(tastingNotes);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}
-		return null;
+		return json;
 	}
 
 	/**
 	 *Update: as called for by backbone.js 
+	 * @throws ServletException 
 	 */
 	@Override
 	@PUT @Path("{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("text/plain")
-	public void put(String data) {
+	public void put(String data) throws ServletException {
 		Wine wine = gson.fromJson(data, Wine.class);
 		try {
 			new WinesTable().update(wine);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}
 	}
 
 	/**
 	 *Create: as called for by backbone.js 
+	 * @throws ServletException 
 	 */
 	@Override
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String post(String data) {		
+	public String post(String data) throws ServletException {		
+		String json = null;
 		try {
 			Wine wine = gson.fromJson(data, Wine.class);
 			id = new WinesTable().insert(wine);
 			wine.setWineId(id);
-			return gson.toJson(wine);
+			json = gson.toJson(wine);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}
-		
-		return "error: " + id;
+		return json;
 	}
 
 	@Override
 	@DELETE
 	@Path("{id}")
-	public void delete(@PathParam("id") int id) {
+	public void delete(@PathParam("id") int id) throws ServletException {
 		try {
 			new WinesTable().delete(id);
 		} catch (Exception e) {
-			e.printStackTrace();
-		}	
-		
+		    throw new ServletException(e);
+		}			
 	}
 
 }

@@ -2,6 +2,7 @@ package lka.wine.rest;
 
 import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -21,64 +22,68 @@ public class WineDetails extends AbstractRest {
 	@Override
 	@GET
 	@Produces("application/json")
-	public String getAll() {
+	public String getAll() throws ServletException {
+		String json = null;
 		try {
 			List<lka.wine.dao.WineDetails> wineDetails = new WineDetailsQuery().select();
-			return gson.toJson(wineDetails);
+			json = gson.toJson(wineDetails);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}
-		return null;
+		return json;
 	}
 
 	/**
 	 * Currently unsupported
+	 * @throws ServletException 
 	 */
 	@Override
 	@GET
 	@Path("{id}")
 	@Produces("application/json")
-	public String get(@PathParam("id") int id) {
+	public String get(@PathParam("id") int id) throws ServletException {
+		String json = null;
 		try {
 			List<lka.wine.dao.WineDetails> wineDetails = new WineDetailsQuery().select(id);
-			return gson.toJson(wineDetails);
+			json = gson.toJson(wineDetails);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}
-		return null;
+		return json;
 	}
 
 	/**
 	 *Update: as called for by backbone.js 
 	 *Currently unsupported
+	 * @throws ServletException 
 	 */
 	@Override
 	@PUT
 	@Path("{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("text/plain")
-	public void put(String data) {
-
+	public void put(String data) throws ServletException {
+	    throw new ServletException(new UnsupportedOperationException());
 	}
 
 	/**
 	 *Create: as called for by backbone.js 
 	 *Currently unsupported
+	 * @throws ServletException 
 	 */
 	@Override
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("text/plain")
-	public String post(String data) {
-		return "action not allowed";
+	public String post(String data) throws ServletException {
+	    throw new ServletException(new UnsupportedOperationException());
 	}
 
 	@Override
 	@DELETE
 	@Path("{id}")
-	public void delete(@PathParam("id") int id) {
-	
+	public void delete(@PathParam("id") int id) throws ServletException {
+	    throw new ServletException(new UnsupportedOperationException());
 	}
-
 
 }

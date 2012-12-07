@@ -1,5 +1,6 @@
 package lka.wine.rest;
 
+import javax.servlet.ServletException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -18,14 +19,15 @@ public class WineCellar extends AbstractRest {
 	@Override
 	@GET
 	@Produces("application/json")
-	public String getAll() {
+	public String getAll() throws ServletException {
+		String json = null;
 		try {
 			lka.wine.dao.WineCellar wineCellar = new WineCellarQuery().select();
-			return gson.toJson(wineCellar);
+			json = gson.toJson(wineCellar);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}
-		return null;
+		return json;
 	}
 
 	/*
@@ -36,8 +38,8 @@ public class WineCellar extends AbstractRest {
 	@GET
 	@Path("{id}")
 	@Produces("application/json")
-	public String get(@PathParam("id") int id) {		
-		return null;
+	public String get(@PathParam("id") int id) throws ServletException {		
+	    throw new ServletException(new UnsupportedOperationException());
 	}
 
 	/*
@@ -49,8 +51,8 @@ public class WineCellar extends AbstractRest {
 	@Path("{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("text/plain")
-	public void put(String data) {
-		// TODO Auto-generated method stub
+	public void put(String data) throws ServletException {
+	    throw new ServletException(new UnsupportedOperationException());
 	}
 
 	/*
@@ -61,8 +63,8 @@ public class WineCellar extends AbstractRest {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("text/plain")
-	public String post(String data) {
-		return "action not allowed";
+	public String post(String data) throws ServletException {
+	    throw new ServletException(new UnsupportedOperationException());
 	}
 
 	/*
@@ -72,9 +74,8 @@ public class WineCellar extends AbstractRest {
 	@Override
 	@DELETE
 	@Path("{id}")
-	public void delete(@PathParam("id") int id) {
-		// TODO Auto-generated method stub
-		
+	public void delete(@PathParam("id") int id) throws ServletException {
+	    throw new ServletException(new UnsupportedOperationException());
 	}	
 	
 }

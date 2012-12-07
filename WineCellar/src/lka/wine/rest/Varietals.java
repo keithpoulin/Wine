@@ -2,6 +2,7 @@ package lka.wine.rest;
 
 import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -21,81 +22,86 @@ public class Varietals extends AbstractRest{
 	@Override
 	@GET
 	@Produces("application/json")
-	public String getAll() {
+	public String getAll() throws ServletException {
+		String json = null;
 		try {
 			List<Varietal> varietals = new VarietalsTable().select();
-			return gson.toJson(varietals);
+			json = gson.toJson(varietals);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}
-		return null;
+		return json;
 	}
 
 	/**
 	 * Currently unsupported
+	 * @throws ServletException 
 	 */
 	@Override
 	@GET
 	@Path("{id}")
 	@Produces("application/json")
-	public String get(@PathParam("id") int id) {
+	public String get(@PathParam("id") int id) throws ServletException {
+		String json = null;
 		try {
 			Varietal varietal = new VarietalsTable().select(id);
-			return gson.toJson(varietal);
+			json = gson.toJson(varietal);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}
-		return null;
+		return json;
 	}
 
 	/**
 	 *Update: as called for by backbone.js 
 	 *Currently unsupported
+	 * @throws ServletException 
 	 */
 	@Override
 	@PUT
 	@Path("{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("text/plain")
-	public void put(String data) {
+	public void put(String data) throws ServletException {
 		Varietal varietal = gson.fromJson(data, Varietal.class);
 		try {
 			new VarietalsTable().update(varietal);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}
 	}
 
 	/**
 	 *Create: as called for by backbone.js 
 	 *Currently unsupported
+	 * @throws ServletException 
 	 */
 	@Override
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("text/plain")
-	public String post(String data) {		
+	public String post(String data) throws ServletException {
+		String json = null;
 		try {
 			Varietal varietal = gson.fromJson(data, Varietal.class);
 			id = new VarietalsTable().insert(varietal);
 			varietal.setVarietalId(id);
-			return gson.toJson(varietal);
+			json = gson.toJson(varietal);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}
-		return "error: " + id;
+		return json;
 	}
 
 	@Override
 	@DELETE
 	@Path("{id}")
-	public void delete(@PathParam("id") int id) {
+	public void delete(@PathParam("id") int id) throws ServletException {
 		try {
 			new VarietalsTable().delete(id);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}	
-		
 	}
 
 }

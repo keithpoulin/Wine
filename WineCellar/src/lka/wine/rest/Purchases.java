@@ -2,6 +2,7 @@ package lka.wine.rest;
 
 import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -22,83 +23,86 @@ public class Purchases extends AbstractRest {
 	@Override
 	@GET
 	@Produces("application/json")
-	public String getAll() {
+	public String getAll() throws ServletException {
+		String json = null;
 		try {
 			List<Purchase> purchases = new PurchasesTable().select();
-			return gson.toJson(purchases);
+			json = gson.toJson(purchases);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}
-		return null;
+		return json;
 	}
 
 	/**
 	 * Currently unsupported
+	 * @throws ServletException 
 	 */
 	@Override
 	@GET
 	@Path("{id}")
 	@Produces("application/json")
-	public String get(@PathParam("id") int id) {
+	public String get(@PathParam("id") int id) throws ServletException {
+		String json = null;
 		try {
 			Object purchase = new PurchasesTable().select(id);
-			return gson.toJson(purchase);
+			json = gson.toJson(purchase);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}
-		return null;
+		return json;
 	}
 
 	/**
 	 *Update: as called for by backbone.js 
 	 *Currently unsupported
+	 * @throws ServletException 
 	 */
 	@Override
 	@PUT
 	@Path("{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("text/plain")
-	public void put(String data) {
+	public void put(String data) throws ServletException {
 		Purchase purchase = gson.fromJson(data, Purchase.class);
 		try {
 			new PurchasesTable().update(purchase);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}
 	}
 
 	/**
 	 *Create: as called for by backbone.js 
 	 *Currently unsupported
+	 * @throws ServletException 
 	 */
 	@Override
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("text/plain")
-	public String post(String data) {
-		
+	public String post(String data) throws ServletException {	
+		String json = null;
 		try {
 			Purchase purchase = gson.fromJson(data, Purchase.class);
 			id = new PurchasesTable().insert(purchase);
 			purchase.setPurchaseId(id);
-			return gson.toJson(purchase);
+			json = gson.toJson(purchase);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}
-		return "error: " + id;
+		return json;
 	}
 
 	@Override
 	@DELETE
 	@Path("{id}")
-	public void delete(@PathParam("id") int id) {
+	public void delete(@PathParam("id") int id) throws ServletException {
 		try {
 			new PurchasesTable().delete(id);
 		} catch (Exception e) {
-			e.printStackTrace();
-		}	
-		
+		    throw new ServletException(e);
+		}		
 	}
-
-
+	
 }

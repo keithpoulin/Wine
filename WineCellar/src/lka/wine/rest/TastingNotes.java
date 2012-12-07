@@ -2,6 +2,7 @@ package lka.wine.rest;
 
 import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -21,81 +22,86 @@ public class TastingNotes extends AbstractRest {
 	@Override
 	@GET
 	@Produces("application/json")
-	public String getAll() {
+	public String getAll() throws ServletException {
+		String json = null;
 		try {
 			List<TastingNote> tastingNotes = new TastingNotesTable().select();
-			return gson.toJson(tastingNotes);
+			json = gson.toJson(tastingNotes);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}
-		return null;
+		return json;
 	}
 
 	/**
 	 * Currently unsupported
+	 * @throws ServletException 
 	 */
 	@Override
 	@GET
 	@Path("{id}")
 	@Produces("application/json")
-	public String get(@PathParam("id") int id) {
+	public String get(@PathParam("id") int id) throws ServletException {
+		String json = null;
 		try {
 			TastingNote tastingNote = new TastingNotesTable().select(id);
-			return gson.toJson(tastingNote);
+			json = gson.toJson(tastingNote);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}
-		return null;
+		return json;
 	}
 
 	/**
 	 *Update: as called for by backbone.js 
 	 *Currently unsupported
+	 * @throws ServletException 
 	 */
 	@Override
 	@PUT
 	@Path("{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("text/plain")
-	public void put(String data) {
+	public void put(String data) throws ServletException {
 		TastingNote tastingNote = gson.fromJson(data, TastingNote.class);
 		try {
 			new TastingNotesTable().update(tastingNote);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}
 	}
 
 	/**
 	 *Create: as called for by backbone.js 
 	 *Currently unsupported
+	 * @throws ServletException 
 	 */
 	@Override
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces("text/plain")
-	public String post(String data) {		
+	public String post(String data) throws ServletException {
+		String json = null;
 		try {
 			TastingNote tastingNote = gson.fromJson(data, TastingNote.class);
 			id = new TastingNotesTable().insert(tastingNote);
 			tastingNote.setTastingNoteId(id);
-			return gson.toJson(tastingNote);
+			json = gson.toJson(tastingNote);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}
-		return "error: " + id;
+		return json;
 	}
 
 	@Override
 	@DELETE
 	@Path("{id}")
-	public void delete(@PathParam("id") int id) {
+	public void delete(@PathParam("id") int id) throws ServletException {
 		try {
 			new TastingNotesTable().delete(id);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    throw new ServletException(e);
 		}	
-		
 	}
 
 }

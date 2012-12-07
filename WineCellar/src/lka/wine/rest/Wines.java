@@ -52,9 +52,9 @@ public class Wines extends AbstractRest{
 	 * Currently unsupported
 	 */
 	@GET
-	@Path("{wineId}/purchases")
+	@Path("{id}/purchases")
 	@Produces("application/json")
-	public String getByPurchases(@PathParam("wineId") int wineId) {
+	public String getByPurchases(@PathParam("id") int wineId) {
 		try {
 			List<Purchase> purchases = new PurchasesTable().selectByWineId(wineId);
 			return gson.toJson(purchases);
@@ -69,9 +69,9 @@ public class Wines extends AbstractRest{
 	 * Currently unsupported
 	 */
 	@GET
-	@Path("{wineId}/tastingNotes")
+	@Path("{id}/tastingNotes")
 	@Produces("application/json")
-	public String getTastingNotes(@PathParam("wineId") int wineId) {
+	public String getTastingNotes(@PathParam("id") int wineId) {
 		try {
 			List<TastingNote> tastingNotes = new TastingNotesTable().selectByWineId(wineId);
 			return gson.toJson(tastingNotes);

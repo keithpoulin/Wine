@@ -10,7 +10,6 @@ import java.util.List;
 import com.google.common.base.Strings;
 
 import lka.wine.dao.Purchase;
-import lka.wine.dao.TastingNote;
 
 public class PurchasesTable extends AbstractData<Purchase> {
 

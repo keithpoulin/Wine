@@ -40,7 +40,7 @@ public class Brands extends AbstractRest {
 	@Produces("application/json")
 	public String get(@PathParam("id") int id) {
 		try {
-			Object brands = new BrandsTable().select(id);
+			Brand brands = new BrandsTable().select(id);
 			return gson.toJson(brands);
 		} catch (Exception e) {
 			e.printStackTrace();

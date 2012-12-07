@@ -40,7 +40,23 @@ public class TastingNotes extends AbstractRest {
 	@Produces("application/json")
 	public String get(@PathParam("id") int id) {
 		try {
-			List<TastingNote> tastingNotes = new TastingNotesTable().select(id);
+			TastingNote tastingNote = new TastingNotesTable().select(id);
+			return gson.toJson(tastingNote);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * Currently unsupported
+	 */
+	@GET
+	@Path("wine/{wineId}")
+	@Produces("application/json")
+	public String getByWineId(@PathParam("wineId") int wineId) {
+		try {
+			List<TastingNote> tastingNotes = new TastingNotesTable().selectByWineId(wineId);
 			return gson.toJson(tastingNotes);
 		} catch (Exception e) {
 			e.printStackTrace();

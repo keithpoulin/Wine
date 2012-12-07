@@ -11,8 +11,8 @@ import lka.wine.dao.WineDetails;
 
 public class WineDetailsQuery {
 	public List<WineDetails> select(int wineId) throws Exception {	
-		List<TastingNote> tastingNotes = new TastingNotesTable().select(wineId);
-		List<PurchaseDetail> purchaseDetails = new PurchaseDetailsView().select(wineId);
+		List<TastingNote> tastingNotes = new TastingNotesTable().selectByWineId(wineId);
+		List<PurchaseDetail> purchaseDetails = new PurchaseDetailsView().selectByWineId(wineId);
 		return getWineDetails(tastingNotes, purchaseDetails);
 	}
 	

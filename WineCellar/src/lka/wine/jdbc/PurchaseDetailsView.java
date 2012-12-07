@@ -47,7 +47,7 @@ public class PurchaseDetailsView extends AbstractData<PurchaseDetail> {
 		return purchaseDetail;
 	}
 	
-	public List<PurchaseDetail> select(int wineId) throws Exception {
+	public List<PurchaseDetail> selectByWineId(int wineId) throws Exception {
 		String sql = getSelectSql() + " WHERE WineID = ?";
 		Connection cn = null;
 		PreparedStatement pstmt = null;

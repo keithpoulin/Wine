@@ -40,8 +40,8 @@ public class Varietals extends AbstractRest{
 	@Produces("application/json")
 	public String get(@PathParam("id") int id) {
 		try {
-			Object varietals = new VarietalsTable().select(id);
-			return gson.toJson(varietals);
+			Varietal varietal = new VarietalsTable().select(id);
+			return gson.toJson(varietal);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

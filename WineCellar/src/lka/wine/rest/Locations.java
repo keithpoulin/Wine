@@ -40,7 +40,7 @@ public class Locations extends AbstractRest{
 	@Produces("application/json")
 	public String get(@PathParam("id") int id) {
 		try {
-			Object location = new LocationsTable().select(id);
+			lka.wine.dao.Location location = new LocationsTable().select(id);
 			return gson.toJson(location);
 		} catch (Exception e) {
 			e.printStackTrace();

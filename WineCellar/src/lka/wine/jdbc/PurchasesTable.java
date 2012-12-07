@@ -1,5 +1,6 @@
 package lka.wine.jdbc;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,6 +10,7 @@ import java.util.List;
 import com.google.common.base.Strings;
 
 import lka.wine.dao.Purchase;
+import lka.wine.dao.TastingNote;
 
 public class PurchasesTable extends AbstractData<Purchase> {
 
@@ -32,6 +34,24 @@ public class PurchasesTable extends AbstractData<Purchase> {
 		purchase.setInvLocation(Strings.nullToEmpty(rs.getString("InvLocation")));
 		return purchase;
 	}
+	
+	public List<Purchase> selectByWineId(int wineId) throws Exception {
+		String sql = getSelectSql() + " WHERE WineID = ?";
+		Connection cn = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			cn = DriverManager.getConnection();
+			pstmt = cn.prepareStatement(sql);
+			pstmt.setInt(1, wineId);
+			pstmt.execute();
+
+			return getObjects(pstmt.getResultSet());
+		} finally {
+			JdbcCloser.close(cn, pstmt);
+		}
+	}
+
 	
 	@Override
 	public String getTableName() {

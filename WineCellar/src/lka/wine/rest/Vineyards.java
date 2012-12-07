@@ -40,7 +40,7 @@ public class Vineyards extends AbstractRest{
 	@Produces("application/json")
 	public String get(@PathParam("id") int id) {
 		try {
-			Object vineyards = new VineyardsTable().select(id);
+			Vineyard vineyards = new VineyardsTable().select(id);
 			return gson.toJson(vineyards);
 		} catch (Exception e) {
 			e.printStackTrace();

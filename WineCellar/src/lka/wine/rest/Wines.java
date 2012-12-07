@@ -36,8 +36,8 @@ public class Wines extends AbstractRest{
 	@Produces("application/json")
 	public String get(@PathParam("id") int id) {
 		try {
-			Object wines = new WinesTable().select(id);
-			return gson.toJson(wines);
+			Wine wine = new WinesTable().select(id);
+			return gson.toJson(wine);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

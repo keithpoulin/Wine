@@ -40,8 +40,8 @@ public class LocationTypes extends AbstractRest{
 	@Produces("application/json")
 	public String get(@PathParam("id") int id) {
 		try {
-			Object locationTypes = new LocationTypesTable().select(id);
-			return gson.toJson(locationTypes);
+			LocationType locationType = new LocationTypesTable().select(id);
+			return gson.toJson(locationType);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

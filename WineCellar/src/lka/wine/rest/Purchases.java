@@ -41,7 +41,23 @@ public class Purchases extends AbstractRest {
 	@Produces("application/json")
 	public String get(@PathParam("id") int id) {
 		try {
-			Object purchases = new PurchasesTable().select(id);
+			Object purchase = new PurchasesTable().select(id);
+			return gson.toJson(purchase);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * Currently unsupported
+	 */
+	@GET
+	@Path("wine/{wineId}")
+	@Produces("application/json")
+	public String getByWineId(@PathParam("wineId") int wineId) {
+		try {
+			List<Purchase> purchases = new PurchasesTable().selectByWineId(wineId);
 			return gson.toJson(purchases);
 		} catch (Exception e) {
 			e.printStackTrace();

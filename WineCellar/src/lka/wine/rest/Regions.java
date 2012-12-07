@@ -40,8 +40,8 @@ public class Regions extends AbstractRest{
 	@Produces("application/json")
 	public String get(@PathParam("id") int id) {
 		try {
-			Object regions = new RegionsTable().select(id);
-			return gson.toJson(regions);
+			Region region = new RegionsTable().select(id);
+			return gson.toJson(region);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

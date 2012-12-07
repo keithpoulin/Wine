@@ -12,7 +12,11 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import lka.wine.dao.Purchase;
+import lka.wine.dao.TastingNote;
 import lka.wine.dao.Wine;
+import lka.wine.jdbc.PurchasesTable;
+import lka.wine.jdbc.TastingNotesTable;
 import lka.wine.jdbc.WinesTable;
 
 @Path("/WineCellar/wines")
@@ -38,6 +42,39 @@ public class Wines extends AbstractRest{
 		try {
 			Wine wine = new WinesTable().select(id);
 			return gson.toJson(wine);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * Currently unsupported
+	 */
+	@GET
+	@Path("{wineId}/purchases")
+	@Produces("application/json")
+	public String getByPurchases(@PathParam("wineId") int wineId) {
+		try {
+			List<Purchase> purchases = new PurchasesTable().selectByWineId(wineId);
+			return gson.toJson(purchases);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+
+	/**
+	 * Currently unsupported
+	 */
+	@GET
+	@Path("{wineId}/tastingNotes")
+	@Produces("application/json")
+	public String getTastingNotes(@PathParam("wineId") int wineId) {
+		try {
+			List<TastingNote> tastingNotes = new TastingNotesTable().selectByWineId(wineId);
+			return gson.toJson(tastingNotes);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

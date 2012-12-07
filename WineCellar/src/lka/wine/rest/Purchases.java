@@ -50,22 +50,6 @@ public class Purchases extends AbstractRest {
 	}
 
 	/**
-	 * Currently unsupported
-	 */
-	@GET
-	@Path("wine/{wineId}")
-	@Produces("application/json")
-	public String getByWineId(@PathParam("wineId") int wineId) {
-		try {
-			List<Purchase> purchases = new PurchasesTable().selectByWineId(wineId);
-			return gson.toJson(purchases);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	/**
 	 *Update: as called for by backbone.js 
 	 *Currently unsupported
 	 */

@@ -49,22 +49,6 @@ public class TastingNotes extends AbstractRest {
 	}
 
 	/**
-	 * Currently unsupported
-	 */
-	@GET
-	@Path("wine/{wineId}")
-	@Produces("application/json")
-	public String getByWineId(@PathParam("wineId") int wineId) {
-		try {
-			List<TastingNote> tastingNotes = new TastingNotesTable().selectByWineId(wineId);
-			return gson.toJson(tastingNotes);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	/**
 	 *Update: as called for by backbone.js 
 	 *Currently unsupported
 	 */

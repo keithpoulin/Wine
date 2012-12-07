@@ -10,7 +10,10 @@ Third Party Libraries:
 jQuery
 jQuery UI
 jQuery Mobile
-Backbone
-Backbone-relational
+Backbone.js
+Backbone-relational*
 Accounting.js
 Handlebars.js
+Jersey
+Amazon Web Toolkit (RDS - SQL Server, Elastic Beanstalk)
+LESS.js

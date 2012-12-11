@@ -16,6 +16,7 @@
 		<script src="/backbone/extensions.js" type="text/javascript"></script>
 				
 		<script src="/backbone/Model.js" type="text/javascript"></script>
+		<script src="/backbone/Model-Relational.js" type="text/javascript"></script>
 		<script src="/backbone/View.js" type="text/javascript"></script>
 		<script src="/backbone/Router.js" type="text/javascript"></script>
 		<script src="/backbone/main.js" type="text/javascript"></script>

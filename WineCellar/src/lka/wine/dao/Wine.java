@@ -8,10 +8,10 @@ public class Wine extends AbstractDao {
 	private int brandId;
 	private int varietalId;
 	private int regionId;
-	private Vineyard vineyard;
-	private Brand brand;
-	private Varietal varietal;
-	private Region region;
+	//private Vineyard vineyard;
+	//private Brand brand;
+	//private Varietal varietal;
+	//private Region region;
 	private int vintageYear;
 	private String wineDescription;
 	private BigDecimal listPrice;
@@ -47,6 +47,7 @@ public class Wine extends AbstractDao {
 	public void setRegionId(int regionId) {
 		this.regionId = regionId;
 	}
+	/*
 	public Vineyard getVineyard() {
 		return vineyard;
 	}
@@ -71,6 +72,7 @@ public class Wine extends AbstractDao {
 	public void setRegion(Region region) {
 		this.region = region;
 	}
+	*/
 	public int getVintageYear() {
 		return vintageYear;
 	}

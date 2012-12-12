@@ -68,10 +68,10 @@ public class WinesTable extends AbstractData<Wine> {
 		wine.setVarietalId(rs.getInt("VarietalID"));
 		wine.setRegionId(rs.getInt("RegionID"));
 		
-		wine.setVineyard(vineyardsMap.get(rs.getInt("VineyardID")));
-		wine.setBrand(brandsMap.get(rs.getInt("BrandID")));
-		wine.setVarietal(varietalsMap.get(rs.getInt("VarietalID")));
-		wine.setRegion(regionsMap.get(rs.getInt("RegionID")));
+		//wine.setVineyard(vineyardsMap.get(rs.getInt("VineyardID")));
+		//wine.setBrand(brandsMap.get(rs.getInt("BrandID")));
+		//wine.setVarietal(varietalsMap.get(rs.getInt("VarietalID")));
+		//wine.setRegion(regionsMap.get(rs.getInt("RegionID")));
 		wine.setVintageYear(rs.getInt("VintageYear"));
 		wine.setWineDescription(Strings.nullToEmpty(rs.getString("WineDescription")));
 		wine.setListPrice(rs.getBigDecimal("ListPrice"));
@@ -99,10 +99,14 @@ public class WinesTable extends AbstractData<Wine> {
 	public int setParameters(PreparedStatement pstmt, Wine obj)
 			throws SQLException {
 		int index = 1;
-		pstmt.setInt(index++, obj.getVineyard().getVineyardId());
-		pstmt.setInt(index++, obj.getBrand().getBrandId());
-		pstmt.setInt(index++, obj.getVarietal().getVarietalId());
-		pstmt.setInt(index++, obj.getRegion().getRegionId());
+		//pstmt.setInt(index++, obj.getVineyard().getVineyardId());
+		//pstmt.setInt(index++, obj.getBrand().getBrandId());
+		//pstmt.setInt(index++, obj.getVarietal().getVarietalId());
+		//pstmt.setInt(index++, obj.getRegion().getRegionId());
+		pstmt.setInt(index++, obj.getVineyardId());
+		pstmt.setInt(index++, obj.getBrandId());
+		pstmt.setInt(index++, obj.getVarietalId());
+		pstmt.setInt(index++, obj.getRegionId());
 		pstmt.setInt(index++, obj.getVintageYear());
 		pstmt.setString(index++, obj.getWineDescription());
 		pstmt.setBigDecimal(index++, obj.getListPrice());

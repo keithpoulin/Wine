@@ -121,7 +121,8 @@ var WineModel_rel = Backbone.RelationalModel.extend({
 		keySource: "brandId",
 		reverseRelation: {
 			type: Backbone.HasMany,
-			key: "wines"
+			key: "wines",
+			collectionType: "WineCollection_rel"
 		}
 	},{
 		type: Backbone.HasOne,
@@ -130,7 +131,8 @@ var WineModel_rel = Backbone.RelationalModel.extend({
 		keySource: "regionId",
 		reverseRelation: {
 			type: Backbone.HasMany,
-			key: "wines"
+			key: "wines",
+			collectionType: "WineCollection_rel"
 		}},{
 			type: Backbone.HasOne,
 			relatedModel: "VarietalModel_rel",
@@ -138,7 +140,8 @@ var WineModel_rel = Backbone.RelationalModel.extend({
 			keySource: "varietalId",
 			reverseRelation: {
 				type: Backbone.HasMany,
-				key: "wines"
+				key: "wines",
+				collectionType: "WineCollection_rel"				
 			}
 		},{
 			type: Backbone.HasOne,
@@ -147,19 +150,30 @@ var WineModel_rel = Backbone.RelationalModel.extend({
 			keySource: "vineyardId",
 			reverseRelation: {
 				type: Backbone.HasMany,
-				key: "wines"
+				key: "wines",
+				collectionType: "WineCollection_rel"
 			}
-		} /*, This one is not working properly yet... 		
-		{
+		}, {
 			type: Backbone.HasMany,
 			relatedModel: "PurchaseModel_rel",
 			key: "purchases",
 			collectionType: "PurchaseCollection_rel",
 			reverseRelation: {
 				key: "wines",
-				type: Backbone.HasOne
+				type: Backbone.HasOne,
+				keySource: "wineId"
 			}			
-		}*/
+		}, {
+			type: Backbone.HasMany,
+			relatedModel: "TastingNoteModel_rel",
+			key: "tastingNotes",
+			collectionType: "TastingNoteCollection_rel",
+			reverseRelation: {
+				key: "wines",
+				type: Backbone.HasOne,
+				keySource: "wineId"
+			}
+		}
 	]
 });
 
@@ -214,8 +228,12 @@ var TastingNoteModel_rel = Backbone.RelationalModel.extend({
 	urlRoot: "/rest/WineCellar/tastingNotes",
 	idAttribute: "tastingNoteId",
 	defaults: {
-
-	}
+		wineId: 0,
+		tastingDate: new Date(),
+		reviewedBy: "Default User",
+		review: "Default Tasting Note",
+		rating: 0
+	} 	
 });
 
 var TastingNoteCollection_rel = Backbone.Collection.extend({
@@ -266,7 +284,26 @@ var PurchaseModel_rel = Backbone.RelationalModel.extend({
 	urlRoot: "/rest/WineCellar/purchases",
 	idAttribute: "purchaseId",
 	defaults: {
-	}
+		locationId: 1,
+//		wineId: 1,
+		purchaseDate: new Date(),
+		price: 10,
+		pricePer: "Bottle",
+		qtyPurchased: 1,
+		priceNotes: "",
+		qtyOnHand: 1,
+		invLocation: ""
+	},relations: [{
+		type: Backbone.HasOne,
+		relatedModel: "LocationModel_rel",
+		key: "location",
+		keySource: "locationId",
+		reverseRelation: {
+			type: Backbone.HasMany,
+			key: "purchases",
+			collectionType: "PurchaseCollection_rel"
+		}
+	}]
 });
 
 var PurchaseCollection_rel = Backbone.Collection.extend({
@@ -291,7 +328,21 @@ var LocationModel_rel = Backbone.RelationalModel.extend({
 	urlRoot: "/rest/WineCellar/locations",
 	idAttribute: "locationId",
 	defaults: {
-	}
+		locationName: "Default Name",
+		locationCity: "Default City",
+		locationState: "CO",
+		locationTypeId: 0		
+	},relations: [{
+		type: Backbone.HasOne,
+		relatedModel: "LocationTypeModel_rel",
+		key: "locationType",
+		keySource: "locationTypeId",
+		reverseRelation: {
+			type: Backbone.HasMany,
+			key: "locations",
+			collectionType: "LocationCollection_rel"
+		}
+	}]
 });
 
 var LocationCollection_rel = Backbone.Collection.extend({
@@ -316,6 +367,7 @@ var LocationTypeModel_rel = Backbone.RelationalModel.extend({
 	urlRoot: "/rest/WineCellar/locationTypes",
 	idAttribute: "locationTypeId",
 	defaults: {
+		locationType: "Default LocationType"
 	}
 });
 
@@ -342,6 +394,7 @@ var BrandModel_rel = Backbone.RelationalModel.extend({
 	urlRoot: "/rest/WineCellar/brands",
 	idAttribute: "brandId",
 	defaults: {
+		brandName: "Deafult Brand"
 	}
 });
 

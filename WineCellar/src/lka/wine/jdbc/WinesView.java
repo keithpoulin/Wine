@@ -54,10 +54,10 @@ public class WinesView extends AbstractData<Wine> {
 		wine.setWineDescription(rs.getString("WineDescription"));
 		wine.setListPrice(rs.getBigDecimal("ListPrice"));
 		wine.setInventoryNotes(rs.getString("InventoryNotes"));
-		wine.setVineyard(vineyard);
-		wine.setBrand(brand);
-		wine.setVarietal(varietal);
-		wine.setRegion(region);
+		//wine.setVineyard(vineyard);
+		//wine.setBrand(brand);
+		//wine.setVarietal(varietal);
+		//wine.setRegion(region);
 	}
 
 	@Override
@@ -83,16 +83,16 @@ public class WinesView extends AbstractData<Wine> {
 		pstmt.setString(index++, obj.getWineDescription());
 		pstmt.setBigDecimal(index++, obj.getListPrice());
 		pstmt.setString(index++, obj.getInventoryNotes());
-		pstmt.setInt(index++, obj.getVineyard().getVineyardId());
-		pstmt.setString(index++, obj.getVineyard().getVineyard());
-		pstmt.setInt(index++, obj.getBrand().getBrandId());
-		pstmt.setString(index++, obj.getBrand().getBrandName());
-		pstmt.setInt(index++, obj.getVarietal().getVarietalId());
-		pstmt.setString(index++, obj.getVarietal().getVarietal());
-		pstmt.setString(index++, obj.getVarietal().getType());
-		pstmt.setInt(index++, obj.getRegion().getRegionId());
-		pstmt.setString(index++, obj.getRegion().getRegion());
-		pstmt.setString(index++, obj.getRegion().getSubRegion());
+		//pstmt.setInt(index++, obj.getVineyard().getVineyardId());
+		//pstmt.setString(index++, obj.getVineyard().getVineyard());
+		//pstmt.setInt(index++, obj.getBrand().getBrandId());
+		//pstmt.setString(index++, obj.getBrand().getBrandName());
+		//pstmt.setInt(index++, obj.getVarietal().getVarietalId());
+		//pstmt.setString(index++, obj.getVarietal().getVarietal());
+		//pstmt.setString(index++, obj.getVarietal().getType());
+		//pstmt.setInt(index++, obj.getRegion().getRegionId());
+		//pstmt.setString(index++, obj.getRegion().getRegion());
+		//pstmt.setString(index++, obj.getRegion().getSubRegion());
 		return index;	
 	}
 

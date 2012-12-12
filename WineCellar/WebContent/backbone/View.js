@@ -16,16 +16,16 @@ var t_mobile = {
 		wineApp: Handlebars.compile($("#t_WineApp").html())
 };
 
-var t = t_standard;
+var templates = t_standard;
 
 function useMobileTemplates(setting){
 	if (setting == undefined){
 		setting = false;
 	}
 	if (setting){
-		t = t_mobile;
+		templates = t_mobile;
 	}else{
-		t = t_standard;
+		templates = t_standard;
 	}
 }
 
@@ -47,7 +47,7 @@ var WineAppView = Backbone.View.extend({
 		
 		this.model.fetchFromLocalStorage();
 	}, 
-	template: t.wineApp,
+	template: templates.wineApp,
 	views: { },
 	addView: function(name, view){
 		if (!(name in this.views)){
@@ -74,7 +74,7 @@ var WineSummaryList = Backbone.View.extend({
 
 var WineSummaryView = Backbone.View.extend({
 	tagName: "li",
-	template: t.wineSummary,
+	template: templates.wineSummary,
 	initialize: function(){
 		 this.model.bind('change', this.render, this);
 		 this.model.bind('destroy', this.remove, this);

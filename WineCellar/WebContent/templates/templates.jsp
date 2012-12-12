@@ -4,7 +4,7 @@
 <script type="text/javascript" src="/js/lib/less-1.3.1.min.js"></script>
 <script type="text/javascript" src="/js/lib/accounting.min.js"></script>
 <script src="/js/lib/handlebars.js" type="text/javascript"></script>
-<script type="text/javascript" src="/templates/js/template.js"></script>
+<script type="text/javascript" src="/templates/js/handlebarsHelpers.js"></script>
 
 <div class="hidden" id="t_wineSummary" type="text/x-handlebars-template">
 	<jsp:include page="WineSummary.html" />

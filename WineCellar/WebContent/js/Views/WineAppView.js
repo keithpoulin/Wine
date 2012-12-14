@@ -2,17 +2,15 @@ var WineAppView = Backbone.View.extend({
 	initialize: function(){
 		useMobileTemplates(this.options.mobile);
 		this.$el.html(this.template());
-		var cellarModel = new WineCellarModel();
-		this.model = cellarModel;
 
+		var cellarModel = new WineCellarModel();
+		
+		this.model = cellarModel;
 		this.views["wineList"]=  new WineSummaryList({
 				model: this.model.get("wines"),
 				el: this.$el.find("#wineSummaries").get(0)
 			});
-			
-		if (this.options.autoFetch){			
-			cellarModel.fetch({add: true} );
-		}
+		cellarModel.load();
 	}, 
 	template: templates.wineApp,
 	views: {},

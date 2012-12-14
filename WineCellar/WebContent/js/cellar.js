@@ -2,7 +2,7 @@ $(document).ready(function(){
 	var viewOptions = {
 			el: "#appView",
 			mobile: true,
-			autoFetch: true
+			loadModels: true
 		};
 		
 		window.WineApp = new WineAppView(viewOptions);

@@ -16,5 +16,12 @@ var WineCellarModel = Backbone.Model.extend({
 				this.get(key).fetch();
 			}
 		}
+	}, load: function(){
+		console.log("loading models...");
+		for (var key in this.attributes){
+			if (this.attributes.hasOwnProperty(key)){
+				this.get(key).fetch({add: true});
+			}
+		}
 	}
 });

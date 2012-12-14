@@ -16,60 +16,65 @@ var WineModel = Backbone.RelationalModel.extend({
 		relatedModel: "BrandModel",
 		key: "brand",
 		keySource: "brandId",
+		includeInJSON: ["brandName", "brandId"],
 		reverseRelation: {
 			type: Backbone.HasMany,
 			key: "wines",
-			collectionType: "WineCollection"
-		}
+			collectionType: "WineCollection"			 
+		}		
 	},{
 		type: Backbone.HasOne,
 		relatedModel: "RegionModel",
 		key: "region",
 		keySource: "regionId",
+		includeInJSON: ["region", "subRegion", "regionId"],
 		reverseRelation: {
 			type: Backbone.HasMany,
 			key: "wines",
 			collectionType: "WineCollection"
-		}},{
-			type: Backbone.HasOne,
-			relatedModel: "VarietalModel",
-			key: "varietal",
-			keySource: "varietalId",
-			reverseRelation: {
-				type: Backbone.HasMany,
-				key: "wines",
-				collectionType: "WineCollection"				
-			}
-		},{
-			type: Backbone.HasOne,
-			relatedModel: "VineyardModel",
-			key: "vineyard",
-			keySource: "vineyardId",
-			reverseRelation: {
-				type: Backbone.HasMany,
-				key: "wines",
-				collectionType: "WineCollection"
-			}
-		}, {
+		}	
+	},{
+		type: Backbone.HasOne,
+		relatedModel: "VarietalModel",
+		key: "varietal",
+		keySource: "varietalId",
+		includeInJSON: ["varietal", "type", "varietalId"],
+		reverseRelation: {
 			type: Backbone.HasMany,
-			relatedModel: "PurchaseModel",
-			key: "purchases",
-			collectionType: "PurchaseCollection",
-			reverseRelation: {
-				key: "wines",
-				type: Backbone.HasOne,
-				keySource: "wineId"
-			}			
-		}, {
-			type: Backbone.HasMany,
-			relatedModel: "TastingNoteModel",
-			key: "tastingNotes",
-			collectionType: "TastingNoteCollection",
-			reverseRelation: {
-				key: "wines",
-				type: Backbone.HasOne,
-				keySource: "wineId"
-			}
+			key: "wines",
+			collectionType: "WineCollection"				
 		}
-	]
+	},{
+		type: Backbone.HasOne,
+		relatedModel: "VineyardModel",
+		key: "vineyard",
+		keySource: "vineyardId",
+		includeInJSON: ["vineyard", "vineyardId"],
+		reverseRelation: {
+			type: Backbone.HasMany,
+			key: "wines",
+			collectionType: "WineCollection"
+		}
+	}, {
+		type: Backbone.HasMany,
+		relatedModel: "PurchaseModel",
+		key: "purchases",
+		collectionType: "PurchaseCollection",
+		includeInJSON: ["purchaseId", "purchaseDate", "invLocation", "price", "priceNotes", "pricePer", "purchaseDate", "qtyOnHand", "qtyPurchased"],
+		reverseRelation: {
+			key: "wine",
+			type: Backbone.HasOne,
+			keySource: "wineId"
+		}			
+	}, {
+		type: Backbone.HasMany,
+		relatedModel: "TastingNoteModel",
+		key: "tastingNotes",
+		collectionType: "TastingNoteCollection",
+		reverseRelation: {
+			key: "wine",
+			type: Backbone.HasOne,
+			keySource: "wineId"
+		}
+	}]
 });

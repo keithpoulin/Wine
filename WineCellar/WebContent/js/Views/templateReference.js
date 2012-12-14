@@ -7,7 +7,7 @@ var t_standard = {
 		isMobile: false
 	};
 var t_mobile = {
-		wineSummary: Handlebars.compile($("#t_wineSummary").html()),
+		wineSummary: Handlebars.compile($("#t_m_wineSummary").html()),
 		purchaseDetails: Handlebars.compile($("#t_m_PurchaseDetails").html()),
 		tastingNotes: Handlebars.compile($("#t_m_TastingNotes").html()),
 		wineDetail: Handlebars.compile($("#t_m_WineDetail").html()),
@@ -15,7 +15,7 @@ var t_mobile = {
 		isMobile: true
 };
 
-var templates = t_standard;
+window.templates = t_mobile;
 
 function useMobileTemplates(setting){
 	if (setting == undefined){

@@ -2,8 +2,8 @@
 <html>
 	<head>
 		<title>Wine Cellar</title>
-		<link rel="stylesheet" href="/styles/jquery-ui-active/jquery-ui.css" />
 		<jsp:include page="/templates/templates.jsp" />
+		<link rel="stylesheet" href="/styles/jquery-ui-active/jquery-ui.css" />		
 		<link rel="stylesheet" href="/styles/main.css" />
 	</head>
 	

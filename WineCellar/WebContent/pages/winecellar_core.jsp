@@ -12,6 +12,7 @@
 <script src="/js/Models/VarietalModel.js" type="text/javascript"></script>
 <script src="/js/Models/VineyardModel.js" type="text/javascript"></script>
 <script src="/js/Models/WineModel.js" type="text/javascript"></script>
+<script src="/js/Models/WineCellarModel.js" type="text/javascript"></script>
 
 <script src="/js/Models/BrandCollection.js" type="text/javascript"></script>
 <script src="/js/Models/LocationCollection.js" type="text/javascript"></script>

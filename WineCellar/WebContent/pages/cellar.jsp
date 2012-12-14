@@ -2,10 +2,9 @@
 <html>
 	<head>
 		<title>Wine Cellar</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="/styles/mobile.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">		
 		<link rel="stylesheet" href="/styles/jquery-mobile/jquery.mobile-1.2.0.min.css" />
-		<jsp:include page="/templates/templates.jsp" />
+		<jsp:include page="/templates/templates.jsp" />	
 	</head>
 	
 	<body>

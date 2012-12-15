@@ -1,8 +1,10 @@
+<!-- Libraries/Dependencies -->
 <script src="/js/lib/backbone/underscore-min.js" type="text/javascript"></script>
 <script src="/js/lib/backbone/backbone-min.js" type="text/javascript"></script>
 <script src="/js/lib/backbone/backbone-relational.js" type="text/javascript"></script>
 
 <!-- Models need to be loaded before Collections -->
+<!-- Models -->
 <script src="/js/Models/BrandModel.js" type="text/javascript"></script>
 <script src="/js/Models/LocationModel.js" type="text/javascript"></script>
 <script src="/js/Models/LocationTypeModel.js" type="text/javascript"></script>
@@ -14,6 +16,7 @@
 <script src="/js/Models/WineModel.js" type="text/javascript"></script>
 <script src="/js/Models/WineCellarModel.js" type="text/javascript"></script>
 
+<!-- Collections -->
 <script src="/js/Models/BrandCollection.js" type="text/javascript"></script>
 <script src="/js/Models/LocationCollection.js" type="text/javascript"></script>
 <script src="/js/Models/LocationTypeCollection.js" type="text/javascript"></script>
@@ -24,6 +27,7 @@
 <script src="/js/Models/VineyardCollection.js" type="text/javascript"></script>
 <script src="/js/Models/WineCollection.js" type="text/javascript"></script>
 
+<!-- Views -->
 <script src="/js/Views/templateReference.js" type="text/javascript"></script>
 <script src="/js/Views/WineAppView.js" type="text/javascript"></script>
 <script src="/js/Views/WineSummaryList.js" type="text/javascript"></script>

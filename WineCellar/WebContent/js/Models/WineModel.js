@@ -15,6 +15,7 @@ var WineModel = Backbone.RelationalModel.extend({
 		type: Backbone.HasOne,
 		relatedModel: "BrandModel",
 		key: "brand",
+		keyDestination: "brand",
 		keySource: "brandId",
 		includeInJSON: ["brandName", "brandId"],
 		reverseRelation: {
@@ -26,6 +27,7 @@ var WineModel = Backbone.RelationalModel.extend({
 		type: Backbone.HasOne,
 		relatedModel: "RegionModel",
 		key: "region",
+		keyDestination: "region",
 		keySource: "regionId",
 		includeInJSON: ["region", "subRegion", "regionId"],
 		reverseRelation: {
@@ -37,6 +39,7 @@ var WineModel = Backbone.RelationalModel.extend({
 		type: Backbone.HasOne,
 		relatedModel: "VarietalModel",
 		key: "varietal",
+		keyDestination: "varietal",
 		keySource: "varietalId",
 		includeInJSON: ["varietal", "type", "varietalId"],
 		reverseRelation: {
@@ -48,6 +51,7 @@ var WineModel = Backbone.RelationalModel.extend({
 		type: Backbone.HasOne,
 		relatedModel: "VineyardModel",
 		key: "vineyard",
+		keyDestination: "vineyard",
 		keySource: "vineyardId",
 		includeInJSON: ["vineyard", "vineyardId"],
 		reverseRelation: {

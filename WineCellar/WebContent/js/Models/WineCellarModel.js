@@ -1,5 +1,6 @@
 var WineCellarModel = Backbone.Model.extend({
 	initialize: function(){
+			debugger;
 			this.set("brands", new BrandCollection() );
 			this.set("locations", new LocationCollection());
 			this.set("locationTypes", new LocationTypeCollection());

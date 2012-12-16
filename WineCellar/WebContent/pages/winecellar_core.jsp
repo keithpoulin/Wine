@@ -1,5 +1,5 @@
 <script src="/js/lib/backbone/underscore-min.js" type="text/javascript"></script>
-<script src="/js/lib/backbone/backbone-min.js" type="text/javascript"></script>
+<script src="/js/lib/backbone/backbone.js" type="text/javascript"></script>
 <script src="/js/lib/backbone/backbone-relational.js" type="text/javascript"></script>
 
 <!-- Models need to be loaded before Collections -->

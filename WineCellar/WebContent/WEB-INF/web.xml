@@ -8,7 +8,6 @@
 		<welcome-file>pages/main.jsp</welcome-file>
 	</welcome-file-list>
 
-
 	<servlet>
 		<servlet-name>Jersey REST Service</servlet-name>
 		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
@@ -23,35 +22,6 @@
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
 	
-	
-	<servlet>
-		<display-name>Apache-Axis Servlet</display-name>
-		<servlet-name>AxisServlet</servlet-name>
-		<servlet-class>org.apache.axis.transport.http.AxisServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>AxisServlet</servlet-name>
-		<url-pattern>/servlet/AxisServlet</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>AxisServlet</servlet-name>
-		<url-pattern>*.jws</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>AxisServlet</servlet-name>
-		<url-pattern>/services/*</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<display-name>Axis Admin Servlet</display-name>
-		<servlet-name>AdminServlet</servlet-name>
-		<servlet-class>org.apache.axis.transport.http.AdminServlet</servlet-class>
-		<load-on-startup>100</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>AdminServlet</servlet-name>
-		<url-pattern>/servlet/AdminServlet</url-pattern>
-	</servlet-mapping>
-
 	<servlet>
 		<servlet-name>mobilePage</servlet-name>
 		<jsp-file>/pages/mobile.jsp</jsp-file>
@@ -60,52 +30,6 @@
 		<servlet-name>mobilePage</servlet-name>
 		<url-pattern>/mobile</url-pattern>
 	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>getLookupData</servlet-name>
-		<servlet-class>lka.wine.servlets.LookupDataServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>getLookupData</servlet-name>
-		<url-pattern>/getLookupData</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>getWines</servlet-name>
-		<servlet-class>lka.wine.servlets.WineServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>getWines</servlet-name>
-		<url-pattern>/getWines</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>getWineSummary</servlet-name>
-		<servlet-class>lka.wine.servlets.WineSummaryServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>getWineSummary</servlet-name>
-		<url-pattern>/getWineSummary</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>getWineDetails</servlet-name>
-		<servlet-class>lka.wine.servlets.WineDetailsServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>getWineDetails</servlet-name>
-		<url-pattern>/getWineDetails</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>WineCellar</servlet-name>
-		<servlet-class>lka.wine.servlets.WineCellarServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>WineCellar</servlet-name>
-		<url-pattern>/WineCellar</url-pattern>
-	</servlet-mapping>
-
 
 	<servlet>
 		<servlet-name>getImage</servlet-name>

@@ -3,8 +3,8 @@
 	<head>
 		<title>Wine Cellar</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="/styles/mobile.css" />
-		<link rel="stylesheet" href="/styles/jquery-mobile/jquery.mobile-1.2.0.min.css" />
+		<link rel="stylesheet" href="/css/mobile.css" />
+		<link rel="stylesheet" href="/css/jquery-mobile/jquery.mobile-1.2.0.min.css" />
 		<jsp:include page="/templates/templates.jsp" />
 	</head>
 	

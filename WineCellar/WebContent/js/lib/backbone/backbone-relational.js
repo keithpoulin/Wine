@@ -1,3 +1,4 @@
+
 /**
  * Backbone-relational.js 0.6.0
  * (c) 2011 Paul Uithol
@@ -13,7 +14,7 @@
 	 * CommonJS shim
 	 **/
 	var _, Backbone, exports;
-	if ( typeof require !== 'undefined' ) {
+	if ( typeof window === 'undefined' ) {
 		_ = require( 'underscore' );
 		Backbone = require( 'backbone' );
 		exports = module.exports = Backbone;
@@ -407,7 +408,7 @@
 		}
 
 		if ( !this.checkPreconditions() ) {
-			return false;
+			return;
 		}
 
 		if ( instance ) {
@@ -541,7 +542,7 @@
 
 		/**
 		 * Set the related model(s) for this relation
-		 * @param {Backbone.Mode|Backbone.Collection} related
+		 * @param {Backbone.Model|Backbone.Collection} related
 		 * @param {Object} [options]
 		 */
 		setRelated: function( related, options ) {
@@ -897,7 +898,7 @@
 				if (!_.isArray( attr ) && attr !== undefined) {
 					attr = [ attr ];
 				}
-				var oldIds;
+
 				_.each( attr, function( attributes ) {
 					newIds[ attributes.id ] = true;
 				});
@@ -1194,12 +1195,12 @@
 					var model;
 
 					if ( _.isObject( item ) ) {
-						model = rel.relatedModel.build( item );
+						model = rel.relatedModel.findOrCreate( item );
 					}
 					else {
 						var attrs = {};
 						attrs[ rel.relatedModel.prototype.idAttribute ] = item;
-						model = rel.relatedModel.build( attrs );
+						model = rel.relatedModel.findOrCreate( attrs );
 					}
 
 					return model;
@@ -1674,11 +1675,11 @@
 			var dit = this, args = arguments;
 			
 			if (eventName === 'add') {
-				args = _.toArray(args);
+				args = _.toArray( args );
 				// the fourth argument in case of a regular add is the option object.
 				// we need to clone it, as it could be modified while we wait on the eventQueue to be unblocked
-				if (_.isObject(args[3])) {
-					args[3] = _.clone(args[3]);
+				if (_.isObject( args[3] ) ) {
+					args[3] = _.clone( args[3] );
 				}
 			}
 			

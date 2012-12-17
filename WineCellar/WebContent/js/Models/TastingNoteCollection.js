@@ -1,5 +1,14 @@
 var TastingNoteCollection = Backbone.Collection.extend({
-	url: "/rest/WineCellar/tastingNotes",
+	url: function(models){
+		var url = "/rest/WineCellar/tastingNotes";
+		if (models != undefined){
+			var wineId = models.get("wineId");
+			if (wineId != undefined && wineId != null){
+				url = "/rest/WineCellar/wines/" + wineId + "/tastingNotes";
+			}
+		}		
+		return url;
+	},
 	model: TastingNoteModel,
 	initialize: function(){
 		

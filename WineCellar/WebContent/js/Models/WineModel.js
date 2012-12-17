@@ -74,6 +74,7 @@ var WineModel = Backbone.RelationalModel.extend({
 		type: Backbone.HasMany,
 		relatedModel: "TastingNoteModel",
 		key: "tastingNotes",
+		keySource: "wineId",
 		collectionType: "TastingNoteCollection",
 		reverseRelation: {
 			key: "wine",

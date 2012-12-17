@@ -8,7 +8,7 @@ var WineAppView = Backbone.View.extend({
 		new LocationTypeCollection().fetch({add:true});
 		new PurchaseCollection().fetch({add:true});
 		new RegionCollection().fetch({add:true});
-		new TastingNoteCollection().fetch({add:true});
+		new TastingNoteCollection();//.fetch({add:true});
 		new VarietalCollection().fetch({add:true});
 		new VineyardCollection().fetch({add:true});
 		new WineCollection().fetch({add:true});

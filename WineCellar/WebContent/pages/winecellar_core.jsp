@@ -3,6 +3,9 @@
 <script src="/js/lib/backbone/backbone.js" type="text/javascript"></script>
 <script src="/js/lib/backbone/backbone-relational.js" type="text/javascript"></script>
 
+<!-- Extensions -->
+<script src="/js/Extensions/backbone-relational-extension.js" type="text/javascript" ></script>
+
 <!-- Models need to be loaded before Collections -->
 <!-- Models -->
 <script src="/js/Models/BrandModel.js" type="text/javascript"></script>

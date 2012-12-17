@@ -20,6 +20,7 @@ var WineAppView = Backbone.View.extend({
 			el: this.$el.find("#wineSummaries").get(0)
 		});
 		this.views["selectBrands"] = new SelectBrands({model: this.collections.brands, el: this.$el.find("#select_brands").get(0)});
+		this.views["selectVineyards"] = new SelectVineyards({model: this.collections.vineyards, el: this.$el.find("#select_vineyards").get(0)});
 		
 		this.collections.brands.fetch({add:true});
 		this.collections.locations.fetch({add:true});

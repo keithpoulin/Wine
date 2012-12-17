@@ -17,6 +17,7 @@ var t_mobile = {
 
 window.components = {
 	select_brands: Handlebars.compile($("#t_select_brands").html()),
+	select_vineyards: Handlebars.compile($("#t_select_vineyards").html())
 };
 
 window.templates = t_mobile;

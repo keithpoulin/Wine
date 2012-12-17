@@ -33,3 +33,7 @@
 <div class="hidden" id="t_select_brands" type="text/x-handlebars-template">
 	<jsp:include page="select_brands.html" />
 </div>
+
+<div class="hidden" id="t_select_vineyards" type="text/x-handlebars-template">
+	<jsp:include page="select_vineyards.html" />
+</div>

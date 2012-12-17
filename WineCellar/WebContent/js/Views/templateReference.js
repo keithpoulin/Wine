@@ -15,6 +15,10 @@ var t_mobile = {
 		isMobile: true
 };
 
+window.components = {
+	select_brands: Handlebars.compile($("#t_select_brands").html()),
+};
+
 window.templates = t_mobile;
 
 function useMobileTemplates(setting){

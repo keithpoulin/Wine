@@ -44,7 +44,9 @@ var WineAppView = Backbone.View.extend({
 		});
 		
 		for (var key in this.collections){
-			this.collections[key].fetch({add: true});
+			if (key != "purchases" && key != "tastingNotes"){
+				this.collections[key].fetch({add: true});
+			}
 		}
 	}, 
 	template: templates.wineApp,

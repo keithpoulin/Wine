@@ -1,0 +1,8 @@
+{{#each this}}
+	<option value={{this.regionId}}>
+		{{this.region}}
+		{{#if this.subRegion}}
+			- {{this.subRegion}}
+		{{/if}}
+	</option>
+{{/each}}

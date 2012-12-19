@@ -1,34 +1,51 @@
 var WineAppView = Backbone.View.extend({
 	initialize: function(){
-		useMobileTemplates(this.options.mobile);
 		this.$el.html(this.template());
 
 		this.collections = {
-			brands: new BrandCollection(),					//.fetch({add:true}),
-			locations: new LocationCollection(),			//.fetch({add:true}),
-			locationTypes: new LocationTypeCollection(),	//.fetch({add:true}),
-			purchases: new PurchaseCollection(),			//.fetch({add:true}),
-			regions: new RegionCollection(),				//.fetch({add:true}),
-			tastingNotes: new TastingNoteCollection(),		//.fetch({add:true}),
-			varietals: new VarietalCollection(),			//.fetch({add:true}),
-			vineyards: new VineyardCollection(), 			//.fetch({add:true}),
-			wines: new WineCollection()						//.fetch({add:true}),
+			brands: new BrandCollection(),				
+			locations: new LocationCollection(),		
+			locationTypes: new LocationTypeCollection(),	
+			purchases: new PurchaseCollection(),			
+			regions: new RegionCollection(),				
+			tastingNotes: new TastingNoteCollection(),		
+			varietals: new VarietalCollection(),			
+			vineyards: new VineyardCollection(), 			
+			wines: new WineCollection()	
 		};
 		
 		this.views["wineList"]=  new WineSummaryList({
 			model: Backbone.Relational.store.getCollection(WineModel),
 			el: this.$el.find("#wineSummaries").get(0)
 		});
-		this.views["selectBrands"] = new SelectBrands({model: this.collections.brands, el: this.$el.find("#select_brands").get(0)});
-		this.views["selectVineyards"] = new SelectVineyards({model: this.collections.vineyards, el: this.$el.find("#select_vineyards").get(0)});
+		this.views["selectBrands"] = new Select({
+			el: this.$el.find("#select_brands"), 
+			attributes:{multiple: "multiple"}, 
+			modelType: BrandModel,
+			template: components.select_brands
+		});
+		this.views["selectVineyards"] = new Select({
+			el: this.$el.find("#select_vineyards"), 
+			attributes:{multiple: "multiple"}, 
+			modelType: VineyardModel,
+			template: components.select_vineyards
+		});
+		this.views["selectVarietals"] = new Select({
+			el: this.$el.find("#select_varietals"),
+			attributes: {},
+			modelType: VarietalModel,
+			template: components.select_varietals
+		});
+		this.views["selectRegions"] = new Select({
+			el: this.$el.find("#select_regions"),
+			attributes: {},
+			modelType: RegionModel,
+			template: components.select_regions
+		});
 		
-		this.collections.brands.fetch({add:true});
-		this.collections.locations.fetch({add:true});
-		this.collections.locationTypes.fetch({add:true});
-		this.collections.regions.fetch({add:true});
-		this.collections.varietals.fetch({add:true});
-		this.collections.vineyards.fetch({add:true});
-		this.collections.wines.fetch({add:true});
+		for (var key in this.collections){
+			this.collections[key].fetch({add: true});
+		}
 	}, 
 	template: templates.wineApp,
 	views: {},

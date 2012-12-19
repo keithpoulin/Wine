@@ -8,8 +8,7 @@
 		<link rel="stylesheet" href="/css/main.css">
 	</head>
 	
-	<body>
-		<h1 class="msg_loading">Loading Models... Please wait</h1>
+	<body>		
 		<div id="appView"></div>				
 		
 		<script src="/js/lib/jquery-1.8.2.js" type="text/javascript"></script>

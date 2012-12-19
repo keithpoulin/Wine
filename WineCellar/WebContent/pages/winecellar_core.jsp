@@ -35,5 +35,4 @@
 <script src="/js/Views/WineAppView.js" type="text/javascript"></script>
 <script src="/js/Views/WineSummaryList.js" type="text/javascript"></script>
 <script src="/js/Views/WineSummaryView.js" type="text/javascript"></script>
-<script src="/js/Views/SelectBrands.js" type="text/javascript"></script>
-<script src="/js/Views/SelectVineyards.js" type="text/javascript"></script>
+<script src="/js/Views/Select.js" type="text/javascript"></script>

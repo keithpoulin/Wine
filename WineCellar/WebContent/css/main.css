@@ -15,7 +15,22 @@
 	float: left;
 }
 
+#wineSummaries li{
+	padding: 5px;
+	border-bottom: 1px solid gray;
+}
+
+#wineSummaries li:hover{
+	background: lightskyblue;
+}
+
 #components{
-	width: 300px;
+	width: 250px;
 	float: left;
+	text-align:center
+}
+
+select {
+	width: 200px;
+	height: 200px;
 }

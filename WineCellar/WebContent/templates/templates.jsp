@@ -37,3 +37,11 @@
 <div class="hidden" id="t_select_vineyards" type="text/x-handlebars-template">
 	<jsp:include page="select_vineyards.html" />
 </div>
+
+<div class="hidden" id="t_select_varietals" type="text/x-handlebars-template">
+	<jsp:include page="select_varietals.html" />
+</div>
+
+<div class="hidden" id="t_select_regions" type="text/x-handlebars-template">
+	<jsp:include page="select_regions.html" />
+</div>

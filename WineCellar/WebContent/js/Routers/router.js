@@ -10,6 +10,6 @@ var Router = Backbone.Router.extend({
 	showDetails : function(wineId) {
 		console.log("getting details for wineId: " + wineId);
 		this.appView.views.wineDetail.setWineId(wineId);
-		
+		document.title = "Wine Cellar | Wine " + wineId;
 	}
 });

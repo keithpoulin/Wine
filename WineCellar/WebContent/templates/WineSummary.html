@@ -1,8 +1,10 @@
-<a href="#wineSummary{{wineId}}" data-transition="slide" class="wineSummary">	
+<a href="#wineDetails/{{wineId}}" data-transition="slide" class="wineSummary">	
 	<!-- <img src="/getImage?wineId={{wineId}}" class="floatLeft" /> -->
 	<p>
 		<span class='vineyard' data-vineyardId="{{vineyard.vineyardId}}">{{vineyard.vineyard}}</span>
-		<span class='vintageYear'> ({{vintageYear}})</span>
+		{{#if vintageYear}}
+			<span class='vintageYear'> ({{vintageYear}})</span>
+		{{/if}}
 	</p>
 	<p>
 		<span class="brand">{{brand.brandName}}</span>
@@ -13,14 +15,42 @@
 		 </span> 
 	</p>
 	<p>
-		{{region.region}}
+		{{region.region}} 
+		{{#if region.subRegion}}
+			- {{region.subRegion}}
+		{{/if}}
 	</p>					
 	<p>
-		Avg. Price: <span class='price avgPrice'>{{avgPrice}}</span> / <span class='priceUnit'>{{pricePer}}</span>
+		Avg. Price: 
+		<span class='price avgPrice'> 
+			{{#if avgPrice}}
+				{{avgPrice}}</span> / <span class='priceUnit'>{{pricePer}}
+			{{else}}
+				N/A
+			{{/if}}
+		</span>
+			
 	</p>
-	<p>List Price: {{money listPrice}}</p>
-	<p>Avg Rating: {{formatRating avgRating}}</p>
+	<p>List Price: 
+		{{#if listPrice}}
+			{{money listPrice}}
+		{{else}}
+			N/A
+		{{/if}}
+	</p>
+	<p>Avg Rating: 
+		{{#if avgRating}}
+			{{formatRating avgRating}}
+		{{else}}
+			N/A
+		{{/if}}
+	</p>
 	<p class="{{checkInventory qtyOnHand}}">
-		Bottles On Hand: <span class='inventory'>{{qtyOnHand}}</span>
+		Bottles On Hand: 
+			{{#if qtyOnHand}}
+				<span class='inventory'>{{qtyOnHand}}</span>
+			{{else}}
+				N/A
+			{{/if}}
 	</p>
 </a>

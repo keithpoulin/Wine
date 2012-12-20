@@ -4,7 +4,6 @@
 		<title>Wine Cellar</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">		
 		<!-- <link rel="stylesheet" href="/css/jquery-mobile/jquery.mobile-1.2.0.min.css" /> -->
-		<!-- <link rel="stylesheet" href="/templates/css/WineSummary.less" /> -->
 		<link rel="stylesheet/less" href="/templates/css/template_styles.less" />
 		<link rel="stylesheet" href="/css/main.css" />
 	</head>

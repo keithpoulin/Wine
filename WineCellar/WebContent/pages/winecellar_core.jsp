@@ -18,6 +18,9 @@
 <script src="/templates/js/handlebarsHelpers.js" type="text/javascript" ></script>
 <script src="/templates/js/templates.js" type="text/javascript"></script>
 
+<!-- Routers -->
+<script src="/js/Routers/router.js" type="text/javascript"></script>
+
 <!-- Models -->
 <script src="/js/Models/BrandModel.js" type="text/javascript"></script>
 <script src="/js/Models/LocationModel.js" type="text/javascript"></script>
@@ -45,4 +48,5 @@
 <script src="/js/Views/WineAppView.js" type="text/javascript"></script>
 <script src="/js/Views/WineSummaryList.js" type="text/javascript"></script>
 <script src="/js/Views/WineSummaryView.js" type="text/javascript"></script>
+<script src="/js/Views/WineDetailView.js" type="text/javascript"></script>
 <script src="/js/Views/Select.js" type="text/javascript"></script>

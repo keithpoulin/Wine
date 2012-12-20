@@ -3,19 +3,10 @@ var WineModel = Backbone.RelationalModel.extend({
 	idAttribute: "wineId",
 	initialize: function(){
 		var wineId = this.get("wineId");
-		this.set("purchaseSource", wineId);
-		this.set("tastingNoteSource", wineId);
+		this.set("purchaseParentSource", wineId);
+		this.set("tastingNoteParentSource", wineId);
 	},
-	defaults: {
-		brandId: 1,
-		listPrice: 10,
-		regionId: 1,
-		varietalId: 1,		
-		vineyardId: 1,
-		vintageYear: 2006,
-		wineDescription: "Default Description",
-		inventoryNotes: "Default Note"
-	},
+	defaults: {},
 	relations: [{
 		type: Backbone.HasOne,
 		relatedModel: "BrandModel",
@@ -68,7 +59,8 @@ var WineModel = Backbone.RelationalModel.extend({
 		type: Backbone.HasMany,
 		relatedModel: "PurchaseModel",
 		key: "purchases",
-		keySource: "purchaseSource",
+		keySource: "purchaseParentSource",
+		keyDestination: "purchases",
 		collectionType: "PurchaseCollection",
 		includeInJSON: ["purchaseId", "purchaseDate", "invLocation", "price", "priceNotes", "pricePer", "purchaseDate", "qtyOnHand", "qtyPurchased"],
 		reverseRelation: {
@@ -80,7 +72,8 @@ var WineModel = Backbone.RelationalModel.extend({
 		type: Backbone.HasMany,
 		relatedModel: "TastingNoteModel",
 		key: "tastingNotes",
-		keySource: "tastingNoteSource",
+		keySource: "tastingNoteParentSource",
+		keyDestination: "tastingNotes",
 		collectionType: "TastingNoteCollection",
 		reverseRelation: {
 			key: "wine",

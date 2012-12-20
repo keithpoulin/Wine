@@ -13,7 +13,7 @@ var WineAppView = Backbone.View.extend({
 			vineyards: new VineyardCollection(), 			
 			wines: new WineCollection()	
 		};
-		
+				
 		this.views["wineList"]=  new WineSummaryList({
 			model: Backbone.Relational.store.getCollection(WineModel),
 			el: this.$el.find("#wineSummaries").get(0)
@@ -43,11 +43,17 @@ var WineAppView = Backbone.View.extend({
 			template: templates.select_regions
 		});
 		
+		this.views["wineDetail"] = new WineDetailView({el: "#wineDetail"}); 
+		
 		for (var key in this.collections){
 			if (key != "purchases" && key != "tastingNotes"){
 				this.collections[key].fetch({add: true});
 			}
 		}
+		
+		router = new Router({appView: this});
+		Backbone.history.start();
+		
 	}, 
 	template: templates.wineApp,
 	views: {},

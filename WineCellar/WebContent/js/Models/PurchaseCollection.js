@@ -1,5 +1,14 @@
 var PurchaseCollection = Backbone.Collection.extend({
-	url: "/rest/WineCellar/purchases",
+	url: function(models){
+		var url = "/rest/WineCellar/purchases";
+		if (models != undefined){
+			var wineId = models.get("wineId");
+			if (wineId != undefined && wineId != null){
+				url = "/rest/WineCellar/wines/" + wineId + "/purchases";
+			}
+		}		
+		return url;
+	},
 	model: PurchaseModel,
 	initialize: function(){
 		

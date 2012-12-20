@@ -1,6 +1,5 @@
 var WineSummaryView = Backbone.View.extend({
 	tagName: "li",
-//	id: this.model.get("wineId"),
 	template: templates.wineSummary,
 	initialize: function(){
 		this.attributes.id = "wineSummary" + this.model.get("wineId");

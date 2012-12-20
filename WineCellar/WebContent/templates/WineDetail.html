@@ -1,7 +1,7 @@
-<img class="bottleImg" alt="bottle" wineId="{{wineId}}" src="/getImage?wineId={{wineId}}" />
+<img class="bottleImg" alt="bottle" data-wineId="{{wineId}}" src="/getImage?wineId={{wineId}}" />
 
 <h2>
-	<span class="vineyard" vineyardId="{{vineyard.vineyardId}}">{{vineyard.vineyard}}</span>
+	<span class="vineyard" data-vineyardId="{{vineyard.vineyardId}}">{{vineyard.vineyard}}</span>
 	{{#if vintageYear}}
 		<span class="vinetageYear">&nbsp;({{vintageYear}})</span>
 	{{/if}}	
@@ -9,7 +9,7 @@
 <p class="brand">{{brand.brandName}}</p>
 
 <p class="{{varietal.type}}">
-	<span class="varietal" varietalId="{{varietal.varietalId}}">{{varietal.varietal}}</span><span class="varietalType">&nbsp;({{varietal.type}})</span>
+	<span class="varietal" data-varietalId="{{varietal.varietalId}}">{{varietal.varietal}}</span><span class="varietalType">&nbsp;({{varietal.type}})</span>
 </p>
 
 {{#if region.region}}

@@ -1,7 +1,6 @@
 var WineSummaryList = Backbone.View.extend({
 	initialize: function(){				
-		this.model.bind("add", this.addOne, this);
-		
+		this.model.bind("add", this.addOne, this);		
 	},
 	addOne: function(summary, context){
 		var view = new WineSummaryView({model: summary, attributes: {wineId: summary.get("wineId")}});		

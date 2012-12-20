@@ -8,8 +8,7 @@
 		<jsp:include page="/templates/templates.jsp" />
 	</head>
 	
-	<body>
-		
+	<body>		
 		<!-- Start of #page_MainMenu -->
 		<div data-role="page" id="page_MainMenu">
 			<div data-role="header">

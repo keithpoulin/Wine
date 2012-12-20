@@ -1,4 +1,9 @@
+<!-- Styles and DOM elements (No JavaScript) -->
+<jsp:include page="/templates/templates.jsp" />	
+
 <!-- Libraries/Dependencies -->
+<script src="/js/lib/jquery-1.8.2.js" type="text/javascript"></script>
+<!-- <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script> -->
 <script src="/js/lib/backbone/underscore-min.js" type="text/javascript"></script>
 <script src="/js/lib/backbone/backbone.js" type="text/javascript"></script>
 <script src="/js/lib/backbone/backbone-relational.js" type="text/javascript"></script>
@@ -6,7 +11,13 @@
 <!-- Extensions -->
 <script src="/js/Extensions/backbone-relational-extension.js" type="text/javascript" ></script>
 
-<!-- Models need to be loaded before Collections -->
+<!-- Template Resources -->
+<script src="/js/lib/less-1.3.1.min.js" type="text/javascript" ></script>
+<script src="/js/lib/accounting.min.js" type="text/javascript" ></script>
+<script src="/js/lib/handlebars.js" type="text/javascript"></script>
+<script src="/templates/js/handlebarsHelpers.js" type="text/javascript" ></script>
+<script src="/templates/js/templates.js" type="text/javascript"></script>
+
 <!-- Models -->
 <script src="/js/Models/BrandModel.js" type="text/javascript"></script>
 <script src="/js/Models/LocationModel.js" type="text/javascript"></script>
@@ -31,7 +42,6 @@
 <script src="/js/Models/WineCollection.js" type="text/javascript"></script>
 
 <!-- Views -->
-<script src="/js/Views/templateReference.js" type="text/javascript"></script>
 <script src="/js/Views/WineAppView.js" type="text/javascript"></script>
 <script src="/js/Views/WineSummaryList.js" type="text/javascript"></script>
 <script src="/js/Views/WineSummaryView.js" type="text/javascript"></script>

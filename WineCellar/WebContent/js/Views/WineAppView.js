@@ -22,25 +22,25 @@ var WineAppView = Backbone.View.extend({
 			el: this.$el.find("#select_brands"), 
 			attributes:{multiple: "multiple"}, 
 			modelType: BrandModel,
-			template: components.select_brands
+			template: templates.select_brands
 		});
 		this.views["selectVineyards"] = new Select({
 			el: this.$el.find("#select_vineyards"), 
 			attributes:{multiple: "multiple"}, 
 			modelType: VineyardModel,
-			template: components.select_vineyards
+			template: templates.select_vineyards
 		});
 		this.views["selectVarietals"] = new Select({
 			el: this.$el.find("#select_varietals"),
 			attributes: {},
 			modelType: VarietalModel,
-			template: components.select_varietals
+			template: templates.select_varietals
 		});
 		this.views["selectRegions"] = new Select({
 			el: this.$el.find("#select_regions"),
 			attributes: {},
 			modelType: RegionModel,
-			template: components.select_regions
+			template: templates.select_regions
 		});
 		
 		for (var key in this.collections){

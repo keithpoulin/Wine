@@ -6,12 +6,12 @@
 	<jsp:include page="WineDetail.html" />
 </div>
 
-<div class="hidden" id="t_TastingNotes">
-	<jsp:include page="TastingNotes.html"/>
+<div class="hidden" id="t_TastingNoteList">
+	<jsp:include page="TastingNoteList.html"/>
 </div>
 
-<div class="hidden" id="t_m_PurchaseDetails">
-	<jsp:include page="PurchaseDetails.html" />
+<div class="hidden" id="t_PurchaseList">
+	<jsp:include page="PurchaseList.html" />
 </div>
 
 <div class="hidden" id="t_WineApp">

@@ -1,5 +1,5 @@
 /**
- * A View for a select list. You must pass a model and a template for it to function properly. 
+ * A View for a select element. You must pass a model and a template for it to function properly. 
  * It is also recommended that you pass an "el" element as well
  * @params Hash of options. 
  * @requires model OR modelType

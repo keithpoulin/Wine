@@ -1,5 +1,5 @@
 <!-- Styles and DOM elements (No JavaScript) -->
-<jsp:include page="/templates/templates.jsp" />	
+<div id="templates"><jsp:include page="/templates/templates.jsp" /></div>	
 
 <!-- Libraries/Dependencies -->
 <script src="/js/lib/jquery-1.8.2.js" type="text/javascript"></script>
@@ -17,7 +17,9 @@
 <script src="/js/lib/handlebars.js" type="text/javascript"></script>
 <script src="/templates/js/handlebarsHelpers.js" type="text/javascript" ></script>
 <script src="/templates/js/templates.js" type="text/javascript"></script>
-
+<script type="text/javascript">
+	$("#templates").remove();
+</script>
 <!-- Routers -->
 <script src="/js/Routers/router.js" type="text/javascript"></script>
 
@@ -50,3 +52,4 @@
 <script src="/js/Views/WineSummaryView.js" type="text/javascript"></script>
 <script src="/js/Views/WineDetailView.js" type="text/javascript"></script>
 <script src="/js/Views/Select.js" type="text/javascript"></script>
+<script src="/js/Views/ListView.js" type="text/javascript"></script>

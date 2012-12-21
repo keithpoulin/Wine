@@ -1,7 +1,7 @@
 window.templates = {
 	wineSummary: Handlebars.compile($("#t_wineSummary").html()),
-	purchaseDetails: Handlebars.compile($("#t_PurchaseDetails").html()),
-	tastingNotes: Handlebars.compile($("#t_TastingNotes").html()),
+	purchaseList: Handlebars.compile($("#t_PurchaseList").html()),
+	tastingNoteList: Handlebars.compile($("#t_TastingNoteList").html()),
 	wineDetail: Handlebars.compile($("#t_WineDetail").html()),
 	wineApp: Handlebars.compile($("#t_WineApp").html()),
 	
@@ -10,5 +10,3 @@ window.templates = {
 	select_varietals: Handlebars.compile($("#t_select_varietals").html()),
 	select_regions: Handlebars.compile($("#t_select_regions").html())
 };
-
-

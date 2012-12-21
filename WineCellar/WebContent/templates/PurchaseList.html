@@ -1,5 +1,5 @@
-{{#if purchaseDetails}}
-	{{#each purchaseDetails}}
+{{#if purchases}}
+	{{#each purchases}}
 		<li data-purchaseId="{{purchaseId}}">			
 			<p class="date">
 				{{purchaseDate}}
@@ -12,7 +12,9 @@
 				Qty:&nbsp;{{qtyPurchased}}
 			</p>
 			<p class="location">
+			{{#if location}}
 				{{location.locationName}}&nbsp;({{location.locationType.locationType}})<br/>
+			{{/if}}
 				{{location.locationCity}} {{#if location.locationCity}},&nbsp;{{/if}}{{location.locationState}}
 			</p>
 		</li>

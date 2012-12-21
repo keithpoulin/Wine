@@ -1,7 +1,6 @@
 var WineAppView = Backbone.View.extend({
 	initialize: function(){
-		this.$el.html(this.template());
-
+		this.$el.html(this.template());		
 		this.collections = {
 			brands: new BrandCollection(),				
 			locations: new LocationCollection(),		
@@ -43,7 +42,7 @@ var WineAppView = Backbone.View.extend({
 			template: templates.select_regions
 		});
 		
-		this.views["wineDetail"] = new WineDetailView({el: "#wineDetail"}); 
+		this.views["wineDetail"] = new WineDetailView({el: this.$el.find(" > #wineDetail")}); 
 		
 		for (var key in this.collections){
 			if (key != "purchases" && key != "tastingNotes"){

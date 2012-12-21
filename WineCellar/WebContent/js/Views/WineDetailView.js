@@ -2,6 +2,8 @@ var WineDetailView = Backbone.View.extend({
 	tagName: "div",
 	template: templates.wineDetail,
 	initialize: function(){
+		this.$el.hide();
+		
 		this.wineId = null;
 		this.collection =  Backbone.Relational.store.getCollection(WineModel);
 		this.collection.on("add", this.onAdd, this);
@@ -20,6 +22,7 @@ var WineDetailView = Backbone.View.extend({
 //			el: "ul.tastingNoteList",
 			selector: "ul.tastingNoteList"
 		}); 
+		
 	},
 	views: {},
 	setModel: function(model){		
@@ -47,10 +50,10 @@ var WineDetailView = Backbone.View.extend({
 		this.wineId = wineId;
 		var wineModel = this.collection.get(wineId);
 		this.setModel( wineModel );
+		this.$el.show();
 	},
 	render: function(){		
-		this.$el.html( this.template( this.model.toJSON() ) );
-		
+		this.$el.html( this.template( this.model.toJSON() ) );		
 		return this;
 	},
 	onAdd: function(model, collection, options){

@@ -1,21 +1,32 @@
-{{#if purchases}}
-	{{#each purchases}}
+{{#if this}}
+	{{#each this}}
 		<li data-purchaseId="{{purchaseId}}">			
 			<p class="date">
 				{{purchaseDate}}
 			</p>
 			
 			<p>
-				<span class="price" >{{money price}}</span> / {{pricePer}} 		
+				<span class="price" >{{money price}}</span> 
+				{{#if pricePer}}
+					/ {{pricePer}}
+				{{/if}} 		
 			</p>
 			<p>
-				Qty:&nbsp;{{qtyPurchased}}
+				Qty: {{qtyPurchased}}
 			</p>
 			<p class="location">
 			{{#if location}}
-				{{location.locationName}}&nbsp;({{location.locationType.locationType}})<br/>
+				{{location.locationName}}
+				{{#if location.locationType.attributes.locationType}}
+					({{location.locationType.attributes.locationType}})
+				{{/if}}
 			{{/if}}
-				{{location.locationCity}} {{#if location.locationCity}},&nbsp;{{/if}}{{location.locationState}}
+			{{#if location.locationCity}}
+				{{location.locationCity}}
+			{{/if}}
+			{{#if location.locationState}}
+				, {{location.locationState}}
+			{{/if}}
 			</p>
 		</li>
 	{{/each}}

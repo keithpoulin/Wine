@@ -11,6 +11,8 @@ var LocationModel = Backbone.RelationalModel.extend({
 		relatedModel: "LocationTypeModel",
 		key: "locationType",
 		keySource: "locationTypeId",
+		keyDestination: "locationType",
+		includeInJSON: ["locationType", "locationTypeId"],
 		reverseRelation: {
 			type: Backbone.HasMany,
 			key: "locations",

@@ -22,23 +22,48 @@
 {{/if}}
 
 <p class="rating maxRating">
-	Max Rating:&nbsp;{{formatRating maxRating}}
+	Max Rating:&nbsp;
+	{{#if maxRating}}
+		{{formatRating maxRating}}
+	{{else}}
+		N/A
+	{{/if}}
 </p>
 
 <p class="rating minRating">
-	Max Rating:&nbsp;{{formatRating minRating}}
+	Min Rating:&nbsp;
+	{{#if minRating}}
+		{{formatRating minRating}}
+	{{else}}
+		N/A
+	{{/if}}	
 </p>
 
 <p class="rating avgRating">
-	Avg Rating:&nbsp;{{formatRating avgRating}}
+	Avg Rating:&nbsp;
+	{{#if avgRating}}	
+		{{formatRating avgRating}}
+	{{else}}
+		N/A
+	{{/if}}	
 </p>
 
 <p class="price avgPrice">
-	Avg Price:&nbsp;{{money avgPrice}} 
+	Avg Price:&nbsp;
+	{{#if avgPrice}}
+		{{money avgPrice}}
+	 {{else}}
+		N/A
+	{{/if}}
 </p>
 
 <p class="price listPrice">
-	List Price:&nbsp;{{money listPrice}}
+	List Price:&nbsp;
+	{{#if listPrice}}
+		{{money listPrice}}
+	{{else}}
+		N/A
+	{{/if}}	
 </p>
 
 <p class="{{checkInventory qtyOnHand}}">

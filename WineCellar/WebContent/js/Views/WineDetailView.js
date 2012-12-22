@@ -19,11 +19,11 @@ var WineDetailView = Backbone.View.extend({
 		
 		this.views["tastingNotes"] = new ListView({
 			template: templates.tastingNoteList, 
-//			el: "ul.tastingNoteList",
 			selector: "ul.tastingNoteList"
 		}); 
 		
 	},
+	stats: {},
 	views: {},
 	setModel: function(model){		
 		if (model != undefined){
@@ -31,34 +31,93 @@ var WineDetailView = Backbone.View.extend({
 			var success = function(model, response, options){
 				console.log("success function called");
 				for (var key in context.views){
-					context.views[key].render();
+					context.calculateStats();
+					context.render();
+					context.views[key].render();					
 				}
 			};
 			model.fetchChildren("tastingNotes", {success: success}, true);
 			model.fetchChildren("purchases", {success: success}, true);
 			this.model = model;
 			this.model.on("change", this.render, this);
-			this.views.purchases.setModel(model);
-			this.views.tastingNotes.setModel(model);
-			this.render();	
-			
-		}
-		
+			this.model.on("all", this.calculateStats, this);
+			this.views.purchases.setModel(model.get("purchases"));
+			this.views.tastingNotes.setModel(model.get("tastingNotes"));		
+		}		
 		return this;
 	},
 	setWineId: function(wineId){		
+		this.$el.hide();
 		this.wineId = wineId;
 		var wineModel = this.collection.get(wineId);
-		this.setModel( wineModel );
-		this.$el.show();
+		this.setModel( wineModel );		
 	},
 	render: function(){		
-		this.$el.html( this.template( this.model.toJSON() ) );		
+		this.$el.html( this.template( _.extend(this.model.toJSON(), this.stats )) );
+		for (var key in this.views){
+			this.views[key].render();
+		}
+		this.$el.show();
 		return this;
 	},
 	onAdd: function(model, collection, options){
 		if (model.get("wineId") == this.wineId){
 			this.setModel(model);
 		}
+	}, calculateStats: function(){
+		var stats = this.stats;
+		stats.ratings = _.map(this.model.attributes.tastingNotes.models, function(note){
+			return note.get("rating");
+		});
+		
+		_.extend(stats, (function (){
+			var l = stats.ratings.length;
+			var value = 0;
+			var min = stats.ratings[0]; 
+			var max = stats.ratings[0];
+			for (var i = 0; i< stats.ratings.length; i++){
+				value = value + stats.ratings[i];
+				if (stats.ratings[i] == 0){
+					l--;
+				}
+				if (stats.ratings[i] > max){
+					max = stats.ratings[i];
+				}else if ( stats.ratings[i] < min){
+					min = stats.ratings[i];
+				}
+			}
+			return {avgRating: (value/l).toFixed(1), minRating: min, maxRating: max} ;
+		})());
+		
+		stats.qtyOnHand = _.reduce(_.map(this.model.attributes.purchases.models, function(purchase){
+			return purchase.get("qtyOnHand");
+		}), function(memo, qty){
+			return memo + qty; 
+		}, 0);
+		
+		stats.prices = _.map(this.model.attributes.purchases.models, function(purchase){
+			if (purchase.get("pricePer").toUpperCase() == "BOTTLE"){
+				return purchase.get("price");
+			}			
+		});
+		
+		_.extend(stats, (function(){
+			var l = stats.prices.length;
+			var value = 0;
+			var min = stats.prices[0]; 
+			var max = stats.prices[0];
+			for (var i = 0; i< stats.prices.length; i++){
+				value = value + stats.prices[i];
+				if (stats.prices[i] == 0){
+					l--;
+				}
+				if (stats.prices[i] > max){
+					max = stats.prices[i];
+				}else if ( stats.prices[i] < min){
+					min = stats.prices[i];
+				}
+			}
+			return {avgPrice: (value/stats.prices.length).toFixed(3), maxPrice: max, minPrice: min};
+		})() );
 	}
 });

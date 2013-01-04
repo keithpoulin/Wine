@@ -9,7 +9,7 @@
 	</head>
 	
 	<body>		
-		<h1>Wine Cellar lkjdad</h1>
+		<h1>Wine Cellar</h1>
         <div id="appView"></div>
 
 		<jsp:include page="winecellar_core.jsp"/>

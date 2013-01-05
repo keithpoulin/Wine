@@ -9,6 +9,7 @@
 	</head>
 	
 	<body>		
+		<h1>WineCellar</h1>
 		<div id="appView"></div>				
 
 		<jsp:include page="winecellar_core.jsp"/>

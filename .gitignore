@@ -1,1 +1,5 @@
 /WineCellar/build
+/WineCellar/dist
+/WineCellar/.classpath
+/WineCellar/.project
+/WineCellar/.settings/*

@@ -6,6 +6,7 @@ import java.util.List;
 import lka.wine.dao.WineCellar;
 
 public class WineCellarQuery implements Restable<WineCellar> {
+	@Override
 	public List<WineCellar> select() throws Exception {	
 		
 		List<WineCellar> wineCellars = new ArrayList<WineCellar>();

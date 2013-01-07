@@ -17,6 +17,7 @@ public abstract class AbstractData<T> implements Restable<T> {
 	public abstract T getObject(ResultSet rs) throws SQLException;
 	public abstract int setParameters(PreparedStatement pstmt, T obj) throws SQLException;
 	
+	@Override
 	public List<T> select() throws Exception {
 
 		Connection cn = null;
@@ -33,6 +34,7 @@ public abstract class AbstractData<T> implements Restable<T> {
 		}
 	}
 	
+	@Override
 	public T select(int id) throws Exception {
 
 		Connection cn = null;
@@ -57,6 +59,7 @@ public abstract class AbstractData<T> implements Restable<T> {
 		}
 	}
 	
+	@Override
 	public int insert(T obj) throws Exception {
 		Connection cn = null;
 		PreparedStatement pstmt = null;
@@ -76,6 +79,7 @@ public abstract class AbstractData<T> implements Restable<T> {
 		}		
 	}
 	
+	@Override
 	public int update(T obj) throws Exception {
 		Connection cn = null;
 		PreparedStatement pstmt = null;
@@ -93,11 +97,13 @@ public abstract class AbstractData<T> implements Restable<T> {
 		}		
 	}
 	
+	@Override
 	public int delete(T obj) throws Exception {
 		return delete (((AbstractDao)obj).getId());
 	}
 
 	
+	@Override
 	public int delete(int id) throws Exception {
 		Connection cn = null;
 		PreparedStatement pstmt = null;

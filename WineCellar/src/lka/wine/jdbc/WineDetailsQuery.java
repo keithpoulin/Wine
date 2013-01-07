@@ -10,6 +10,7 @@ import lka.wine.dao.TastingNote;
 import lka.wine.dao.WineDetails;
 
 public class WineDetailsQuery implements Restable<WineDetails> {
+	@Override
 	public WineDetails select(int wineId) throws Exception {	
 		List<TastingNote> tastingNotes = new TastingNotesTable().selectByWineId(wineId);
 		List<PurchaseDetail> purchaseDetails = new PurchaseDetailsView().selectByWineId(wineId);
@@ -17,6 +18,7 @@ public class WineDetailsQuery implements Restable<WineDetails> {
 		return wineDetails.size() > 0 ? wineDetails.get(0) :  null;
 	}
 	
+	@Override
 	public List<WineDetails> select() throws Exception {	
 		List<TastingNote> tastingNotes = new TastingNotesTable().select();
 		List<PurchaseDetail> purchaseDetails = new PurchaseDetailsView().select();

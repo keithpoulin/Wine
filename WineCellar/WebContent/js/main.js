@@ -7,22 +7,27 @@ function initialize() {
 	ajaxSetup();
 	
 	$("#submitLogin").click(function(){
-		login($("#username").val(), $("#password").val());
+		login($("#userId").val(), $("#password").val());
 		checkPermissions();
 	});
 	
-	if (getCookie("user") != null){
+	if (getCookie("userId") != null){
+		$("#userId").val(getCookie("userId"));
 		checkPermissions();
+		
 	}
 }
 
 function startApp(permission){
-	if (permission == "ADMIN"){		
+	if (permission == "1"){		
+		notice("");
 		if (WineApp == null){
 			WineApp = new WineAppView({
 				el : "#appView"
 			});
-		}		
+		}else{		
+			window.location = "";
+		}			
 	}
 }
 
@@ -51,8 +56,8 @@ function checkPermissions() {
 	
 }
 
-function login(username, password){
-	setCookie("user", username, 30);
+function login(userId, password){
+	setCookie("userId", userId, 30);
 }
 
 function setCookie(c_name, value, exdays) {
@@ -81,13 +86,17 @@ function ajaxSetup(){
 		statusCode : {
 			401 : function() {
 				// 401 -- FORBIDDEN
-//				alert("Reached 401");
+				notice("You do not have the required permissions.");
 				
 			},
 			403 : function() {
 				// 403 -- UNAUTHORIZED
-//				alert("Reached 403");
+				notice("You are unauthorized to view this application.");
 			}
 		}
 	});
+}
+
+function notice(msg){
+	$("#notice").html(msg);
 }

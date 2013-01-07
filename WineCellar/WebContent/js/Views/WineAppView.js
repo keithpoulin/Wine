@@ -50,9 +50,7 @@ var WineAppView = Backbone.View.extend({
 			}
 		}
 		
-		router = new Router({appView: this});
-		Backbone.history.start();
-		
+		this.router = new Router({appView: this});				
 	}, 
 	template: templates.wineApp,
 	views: {},
@@ -63,6 +61,12 @@ var WineAppView = Backbone.View.extend({
 		}else{ alert("View with name: " + name + " already exists......"); }	
 	},
 	render: function(){
-		
+		for (var key in this.views){
+			this.views[key].render();
+		}
+	},
+	refreshAll: function(){
+		this.render();
+		this.views.wineList.addAll();
 	}
 });

@@ -12,13 +12,14 @@
 	<body>		
 		
 		<header id="header">
-			<label for="username">UserName</label>
-			<input type="text" id="username"/>
+			<label for="userId">UserID</label>
+			<input type="text" id="userId"/>
 			
 			<label for="password">Password</label>
 			<input type="password" id="password" />
 			
 			<button id="submitLogin">Login</button>
+			<span id="notice"></span>
 		</header>
 		<div id="appView"></div>				
 

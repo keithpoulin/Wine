@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 	<head>
 		<title>Wine Cellar</title>
@@ -9,6 +10,16 @@
 	</head>
 	
 	<body>		
+		
+		<header id="header">
+			<label for="username">UserName</label>
+			<input type="text" id="username"/>
+			
+			<label for="password">Password</label>
+			<input type="password" id="password" />
+			
+			<button id="submitLogin">Login</button>
+		</header>
 		<div id="appView"></div>				
 
 		<jsp:include page="winecellar_core.jsp"/>

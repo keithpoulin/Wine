@@ -4,6 +4,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	id="WebApp_ID" version="2.5">
 	<display-name>WineCellar</display-name>
+
 	<welcome-file-list>
 		<welcome-file>pages/main.jsp</welcome-file>
 	</welcome-file-list>
@@ -15,13 +16,21 @@
 			<param-name>com.sun.jersey.config.property.packages</param-name>
 			<param-value>lka.wine.rest</param-value>
 		</init-param>
+		<init-param>
+			<param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
+			<param-value>lka.wine.filter.Filter</param-value>
+		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+
+
+
+
 	<servlet-mapping>
 		<servlet-name>Jersey REST Service</servlet-name>
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>mobilePage</servlet-name>
 		<jsp-file>/pages/mobile.jsp</jsp-file>

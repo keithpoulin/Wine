@@ -14,7 +14,7 @@ import com.google.common.base.Strings;
 public class UsersTable extends AbstractData<User> {
 
 	private final static String tableName = "Users";
-	private final static List<String> columnNames = Arrays.asList("UserID", "UserRole", "UserName", "Email" );
+	private final static List<String> columnNames = Arrays.asList("UserID", "UserRoleID", "UserName", "Email" );
 	
 	@Override
 	public String getTableName() {
@@ -36,7 +36,7 @@ public class UsersTable extends AbstractData<User> {
 		User user = new User();	
 		user.setUserId(rs.getInt("UserID"));
 		user.setUserName(Strings.nullToEmpty(rs.getString("UserName")));
-		user.setUserRole(rs.getInt("UserRole"));
+		user.setUserRoleId(rs.getInt("UserRoleID"));
 		user.setEmail(Strings.nullToEmpty(rs.getString("Email")));
 		return user;
 	}
@@ -45,7 +45,9 @@ public class UsersTable extends AbstractData<User> {
 	public int setParameters(PreparedStatement pstmt, User obj)
 			throws SQLException {
 		int index = 1;
+		pstmt.setInt(index++, obj.getUserRoleId());
 		pstmt.setString(index++, obj.getUserName());
+		pstmt.setString(index++, obj.getEmail());
 		return index;
 	}
 

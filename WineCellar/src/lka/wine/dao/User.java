@@ -5,7 +5,7 @@ public class User extends AbstractDao {
 	private int userId;
 	private String userName;
 	private String email;
-	private int userRole;
+	private int userRoleId;
 	
 	
 	public int getUserId() {
@@ -32,12 +32,12 @@ public class User extends AbstractDao {
 		this.email = email;
 	}
 
-	public int getUserRole() {
-		return userRole;
+	public int getUserRoleId() {
+		return userRoleId;
 	}
 
-	public void setUserRole(int userRole) {
-		this.userRole = userRole;
+	public void setUserRoleId(int userRoleId) {
+		this.userRoleId = userRoleId;
 	}
 
 	@Override

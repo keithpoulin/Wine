@@ -34,6 +34,8 @@
 <script src="/js/Models/VineyardModel.js" type="text/javascript"></script>
 <script src="/js/Models/WineModel.js" type="text/javascript"></script>
 <script src="/js/Models/WineCellarModel.js" type="text/javascript"></script>
+<script src="/js/Models/UserModel.js" type="text/javascript"></script>
+<script src="/js/Models/UserRoleModel.js" type="text/javascript"></script>
 
 <!-- Collections -->
 <script src="/js/Models/BrandCollection.js" type="text/javascript"></script>
@@ -45,6 +47,7 @@
 <script src="/js/Models/VarietalCollection.js" type="text/javascript"></script>
 <script src="/js/Models/VineyardCollection.js" type="text/javascript"></script>
 <script src="/js/Models/WineCollection.js" type="text/javascript"></script>
+<script src="/js/Models/UserRoleCollection.js" type="text/javascript"></script>
 
 <!-- Views -->
 <script src="/js/Views/WineAppView.js" type="text/javascript"></script>

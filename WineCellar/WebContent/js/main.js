@@ -1,10 +1,16 @@
 $(document).ready(function() {
+	notice("document ready..");
 	window.WineApp = null;
-	initialize();
+	var userRoles = new UserRoleCollection();
+	userRoles.fetch({success: initialize});
 });
 
 function initialize() {
-	ajaxSetup();
+	
+	notice("initializing...");
+	window.user = new UserModel();
+	
+	ajaxSetup();	
 	
 	$("#submitLogin").click(function(){
 		login($("#userId").val(), $("#password").val());
@@ -18,17 +24,27 @@ function initialize() {
 	}
 }
 
-function startApp(permission){
-	if (permission == "1"){		
-		notice("");
-		if (WineApp == null){
-			WineApp = new WineAppView({
-				el : "#appView"
-			});
-		}else{		
-			window.location = "";
-		}			
+function processRole(user){
+	if (user.isAdmin()){		
+		notice(user.get("userName") + ", You are an Admin");
+		startApp();			
+	}else if (user.getRole() == "READ"){
+		notice(user.get("userName") + ", You are READ only");
+		startApp();
+	} else{
+		notice(user.get("userName") + ", You do not have permission to view this application.");
+		stopApp();
 	}
+}
+
+function startApp(){	
+	if (WineApp == null){
+		WineApp = new WineAppView({
+			el : "#appView"
+		});
+	}else{		
+		window.location = "";
+	}	
 }
 
 function stopApp(){
@@ -42,14 +58,11 @@ function checkPermissions() {
 		url: "/rest/login",
 		dataType: "json",
 		success: function(resp){
-			console.log("SUCCESS");
-			console.log(resp);
-			startApp(resp.role);
+			user.set(resp);
+			processRole(user);
 		}
 		,
 		error: function(resp){
-			console.log("ERROR:");
-			console.log(resp);
 			stopApp();
 		}
 	});

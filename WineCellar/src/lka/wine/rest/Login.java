@@ -7,6 +7,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import com.google.gson.Gson;
+
 import lka.wine.dao.User;
 import lka.wine.jdbc.UsersTable;
 
@@ -25,7 +27,8 @@ public class Login{
 		result = "{\"role\": \"" + "3" + "\"}";
 		try {
 			user= UsersTable.class.newInstance().select(userId);
-			result = "{\"role\": \"" + String.valueOf(user.getUserRole()) + "\"}";
+//			result = "{\"role\": \"" + String.valueOf(user.getUserRole()) + "\"}";
+			result = new Gson().toJson(user);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -5,6 +5,11 @@
 @gray: #6A6A61;
 @typered: #A5071F;
 
+@summary_height: 142px;
+@summary_width: 400px;
+@components_width: 200px;
+
+
 .clear{
 	clear:both;
 }
@@ -16,4 +21,16 @@
 
 .hidden{
 	display: none;
+}
+
+.loading div.ajaxLoader{
+	display: inline;
+}
+
+.quick-gradient (@origin: left, @alpha: 0.2) {
+    background-image: -webkit-linear-gradient(@origin, rgba(0,0,0,0.0), rgba(0,0,0,@alpha));
+    background-image: -moz-linear-gradient(@origin, rgba(0,0,0,0.0), rgba(0,0,0,@alpha));
+    background-image: -o-linear-gradient(@origin, rgba(0,0,0,0.0), rgba(0,0,0,@alpha));
+    background-image: -ms-linear-gradient(@origin, rgba(0,0,0,0.0), rgba(0,0,0,@alpha));
+    background-image: linear-gradient(@origin, rgba(0,0,0,0.0), rgba(0,0,0,@alpha));
 }

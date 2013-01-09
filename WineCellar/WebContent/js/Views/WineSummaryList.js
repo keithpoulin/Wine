@@ -13,5 +13,14 @@ var WineSummaryList = Backbone.View.extend({
 		for (var i=0; i< this.model.length; i++){
 			this.addOne(this.model.at(i), this);
 		}
-	}, views: []
+	}, views: [],
+	getView: function(wineId){
+		var view = null;
+		for (var i=0; i< this.views.length; i++){
+			if (this.views[i].model.wineId == wineId){
+				view  = this.views[i];
+			}
+		}
+		return view;
+	}
 });

@@ -47,9 +47,9 @@ var WineDetailView = Backbone.View.extend({
 		return this;
 	},
 	setWineId: function(wineId){		
-		debugger;
-		this.$el.hide();
-		this.wineId = wineId;
+//		this.$el.hide();
+		$("div.wineDetail.ajaxLoader").show();
+		this.wineId = wineId;		
 		var wineModel = this.collection.get(wineId);
 		this.setModel( wineModel );		
 	},
@@ -59,6 +59,8 @@ var WineDetailView = Backbone.View.extend({
 			this.views[key].render();
 		}
 		this.$el.show();
+		this.$el.css("display", "block");
+		$("div.wineDetail.ajaxLoader").hide();
 		return this;
 	},
 	onAdd: function(model, collection, options){

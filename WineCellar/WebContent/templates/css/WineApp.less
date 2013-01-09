@@ -1,6 +1,9 @@
+@import "/templates/css/common.less";
+
 #wineSummaries{
-	width: 400px;
+	width: @summary_width;
 	float: left;
+	margin-left: 10px;
 }
 
 #wineSummaries li{
@@ -13,7 +16,7 @@
 }
 
 #components{
-	width: 250px;
+	width: @components_width;
 	float: left;
 	text-align:center
 }
@@ -24,7 +27,9 @@ select {
 }
 
 #wineDetail{
-	float: left;
+	position: fixed;
+	left: @components_width + @summary_width + 15;
+	top: 30px;
 	width: 400px;
 	border: 1px solid black;
 	padding: 5px;

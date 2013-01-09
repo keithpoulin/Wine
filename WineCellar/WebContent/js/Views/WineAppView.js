@@ -50,7 +50,8 @@ var WineAppView = Backbone.View.extend({
 			}
 		}
 		
-		this.router = new Router({appView: this});				
+		this.router = new Router({appView: this});
+		Backbone.history.start();
 	}, 
 	template: templates.wineApp,
 	views: {},

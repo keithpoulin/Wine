@@ -47,6 +47,7 @@ var WineDetailView = Backbone.View.extend({
 		return this;
 	},
 	setWineId: function(wineId){		
+		debugger;
 		this.$el.hide();
 		this.wineId = wineId;
 		var wineModel = this.collection.get(wineId);

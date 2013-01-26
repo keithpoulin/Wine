@@ -33,3 +33,11 @@
 <div class="hidden" id="t_select_regions">
 	<jsp:include page="select_regions.html" />
 </div>
+
+<div class="hidden" id="t_formAddTastingNote">
+	<jsp:include page="formAddTastingNote.html" />
+</div>
+
+<div class="hidden" id="t_formAddPurchase">
+	<jsp:include page="formAddPurchase.html"/>
+</div>

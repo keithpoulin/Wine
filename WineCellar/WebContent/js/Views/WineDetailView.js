@@ -2,6 +2,8 @@ var WineDetailView = Backbone.View.extend({
 	tagName: "div",
 	template: templates.wineDetail,
 	initialize: function(){
+		_.bindAll(this);
+		
 		this.$el.hide();
 		
 		this.wineId = null;
@@ -22,6 +24,18 @@ var WineDetailView = Backbone.View.extend({
 			selector: "ul.tastingNoteList"
 		}); 
 		
+		this.views["addTastingNote"] = new CreateItemView({
+			$el: this.$(".createItemPopup"),
+			attributes: { id: "addTastingNoteForm"},
+			template: templates.formAddTastingNote
+		});
+		
+		this.views["addPurchase"] = new CreateItemView({
+			$el: this.$(".createItemPopup"), 
+			attributes: {id: "addPurchaseForm"},
+			template: templates.formAddPurchase
+		});
+ 		
 	},
 	stats: {},
 	views: {},
@@ -47,7 +61,6 @@ var WineDetailView = Backbone.View.extend({
 		return this;
 	},
 	setWineId: function(wineId){		
-//		this.$el.hide();
 		$("div.wineDetail.ajaxLoader").show();
 		this.wineId = wineId;		
 		var wineModel = this.collection.get(wineId);
@@ -55,6 +68,23 @@ var WineDetailView = Backbone.View.extend({
 	},
 	render: function(){		
 		this.$el.html( this.template( _.extend(this.model.toJSON(), this.stats )) );
+		
+		var tastingContext = this.views.addTastingNote;
+		var purchaseContext = this.views.addPurchase;
+		tastingContext.setElement(this.$(".createItemPopup")); 
+		purchaseContext.setElement(this.$(".createItemPopup"));
+		
+		purchaseContext.close();
+		tastingContext.close();
+		
+		this.$(".addTastingNoteBtn").on("click", function(){
+			tastingContext.open();
+		});
+		
+		this.$(".addPurchaseBtn").on("click", function(){
+			purchaseContext.open();
+		});
+	
 		for (var key in this.views){
 			this.views[key].render();
 		}

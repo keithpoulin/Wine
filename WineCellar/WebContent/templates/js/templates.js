@@ -8,5 +8,9 @@ window.templates = {
 	select_brands: Handlebars.compile($("#t_select_brands").html()),
 	select_vineyards: Handlebars.compile($("#t_select_vineyards").html()),
 	select_varietals: Handlebars.compile($("#t_select_varietals").html()),
-	select_regions: Handlebars.compile($("#t_select_regions").html())
+	select_regions: Handlebars.compile($("#t_select_regions").html()),
+	
+	formAddTastingNote: Handlebars.compile($("#t_formAddTastingNote").html()),
+	formAddPurchase: Handlebars.compile($("#t_formAddPurchase").html())
 };
+

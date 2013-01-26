@@ -56,3 +56,4 @@
 <script src="/js/Views/WineDetailView.js" type="text/javascript"></script>
 <script src="/js/Views/Select.js" type="text/javascript"></script>
 <script src="/js/Views/ListView.js" type="text/javascript"></script>
+<script src="/js/Views/CreateItemView.js" type="text/javascript"></script>

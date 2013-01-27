@@ -7,7 +7,8 @@ $(document).ready(function() {
 		login(3, "password");
 	}
 	var userRoles = new UserRoleCollection();
-	userRoles.fetch({success: initialize});
+	userRoles.fetch();
+	initialize();
 });
 
 function initialize() {	
@@ -70,6 +71,7 @@ function checkPermissions() {
 		url: "/rest/login",
 		dataType: "json",
 		success: function(resp){
+			user = new UserModel();
 			user.set(resp);
 			processRole(user);
 		}
@@ -111,12 +113,12 @@ function ajaxSetup(){
 		statusCode : {
 			401 : function() {
 				// 401 -- FORBIDDEN
-				notice("You do not have the required permissions.");
+				notice("You do not have the required permissions to use this applicaion. Please try to log in.");
 				
 			},
 			403 : function() {
 				// 403 -- UNAUTHORIZED
-				notice("You are unauthorized to view this application.");
+				notice("You are unauthorized to view this application. Please try to log in.");
 			}
 		}
 	});

@@ -5,11 +5,12 @@ var Router = Backbone.Router.extend({
 		}
 	},
 	routes : {
-		"wineDetails/:wineId" : "showDetails"
+		"wineDetail?:wineId" : "showDetails"
 	},
 	showDetails : function(wineId) {
-		console.log("getting details for wineId: " + wineId);
-		this.appView.views.wineDetail.setWineId(wineId);
-		document.title = "Wine Cellar | Wine " + wineId;
+//		console.log("getting details for wineId: " + wineId);
+//		this.appView.views.wineDetail.setWineId(wineId);
+//		document.title = "Wine Cellar | Wine " + wineId;
+//		$.mobile.changePage("#wineDetail");
 	}
 });

@@ -42,7 +42,7 @@ var WineAppView = Backbone.View.extend({
 		});
 		
 		this.views["wineDetail"] = new WineDetailView({
-			el: $("#wineDetail")
+			el: $("#wineDetail div.content")
 		}); 
 		
 		for (var key in this.collections){

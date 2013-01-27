@@ -74,7 +74,13 @@
 			<div data-role="footer"></div>
 		</div>
 		
-		<div id="wineDetail" data-role="page"></div>
+		<div id="wineDetail" data-role="page">
+			<div data-role="header">
+				<a data-rel="back" data-icon="arrow-l">Back</a>
+				<h1>Wine Details</h1>
+			</div>
+			<div data-role="content" class="content"></div>
+		</div>
 						
 		<jsp:include page="winecellar_core.jsp"/>
 		<script src="/js/main.js" type="text/javascript"></script>

@@ -36,8 +36,10 @@ var CreateItemView = Backbone.View.extend({
 	close: function(){
 		this.$el.hide();
 	},
-	submit: function(){
-		alert("you submitted your data");
+	submit: function(){		
+		var item = new this.modelType();
+		console.log(item);
+		alert("Item:" + item.toJSON() );
 		this.close();
 	}
 

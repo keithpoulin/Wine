@@ -26,12 +26,14 @@ var WineDetailView = Backbone.View.extend({
 		
 		this.views["addTastingNote"] = new CreateItemView({
 			$el: this.$(".createItemPopup"),
+			modelType: TastingNoteModel,
 			attributes: { id: "addTastingNoteForm"},
 			template: templates.formAddTastingNote
 		});
 		
 		this.views["addPurchase"] = new CreateItemView({
 			$el: this.$(".createItemPopup"), 
+			modelType: PurchaseModel,
 			attributes: {id: "addPurchaseForm"},
 			template: templates.formAddPurchase
 		});

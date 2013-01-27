@@ -11,6 +11,6 @@ window.templates = {
 	select_regions: Handlebars.compile($("#t_select_regions").html()),
 	
 	formAddTastingNote: Handlebars.compile($("#t_formAddTastingNote").html()),
-	formAddPurchase: Handlebars.compile($("#t_formAddPurchase").html())
+	formAddPurchase: Handlebars.compile($("#t_formAddPurchase").html()),
 };
 

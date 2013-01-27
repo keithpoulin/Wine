@@ -1,13 +1,20 @@
 var WineSummaryList = Backbone.View.extend({
 	initialize: function(){				
-		this.model.bind("add", this.addOne, this);		
+		this.model.bind("add", this.addOne, this);	
+		this.count = 0;
 	},
 	addOne: function(summary, context){
-		var view = new WineSummaryView({model: summary, attributes: {wineId: summary.get("wineId")}});		
+		var view = new WineSummaryView({
+			model: summary, 
+			attributes: {
+				wineId: summary.get("wineId")
+			}
+		});		
 		view.render();
 		this.$el.append(view.$el);
 		this.views.push(view);
 		$(".msg_loading").hide();
+//		this.refresh();
 	},
 	addAll: function() {
 		for (var i=0; i< this.model.length; i++){
@@ -22,5 +29,15 @@ var WineSummaryList = Backbone.View.extend({
 			}
 		}
 		return view;
+	}, render: function(){		
+
+	}, refresh: function(){
+		console.log("refreshing");
+		if (this.count == 0){
+			this.$el.listview();
+		}else{
+			this.$el.listview("refresh");
+		}		
+		this.count = this.count + 1;
 	}
 });

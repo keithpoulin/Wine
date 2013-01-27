@@ -1,50 +1,62 @@
 $(document).ready(function() {
-	notice("document ready..");
+	notice("Loading Application..");
+	window.clicked = false;
 	window.WineApp = null;
+	$("#continue").hide();
+	if (getCookie("userId") == null){
+		login(3, "password");
+	}
 	var userRoles = new UserRoleCollection();
 	userRoles.fetch({success: initialize});
 });
 
-function initialize() {
-	
-	notice("initializing...");
-	window.user = new UserModel();
-	
-	ajaxSetup();	
-	
+function initialize() {	
+	window.user = new UserModel();	
+	ajaxSetup();		
 	$("#submitLogin").click(function(){
+		clicked = true;
+		notice("Logging in. Please wait...");
 		login($("#userId").val(), $("#password").val());
-		checkPermissions();
+		checkPermissions();		
 	});
 	
 	if (getCookie("userId") != null){
 		$("#userId").val(getCookie("userId"));
-		checkPermissions();
-		
+		checkPermissions();		
 	}
 }
 
 function processRole(user){
 	if (user.isAdmin()){		
-		notice(user.get("userName") + ", You are an Admin");
-		startApp();			
-	}else if (user.getRole() == "READ"){
-		notice(user.get("userName") + ", You are READ only");
+		notice("Hello, " + user.get("userName") + "<br/>Role: Admin");
 		startApp();
+		console.log("logged in as Admin");
+		if (clicked){
+			$.mobile.changePage("#mainMenu");
+		}
+		$("#continue").show();
+	}else if (user.getRole() == "READ"){
+		notice("Hello, " + user.get("userName") + "<br/>Role: Read-Only");
+		startApp();
+		console.log("logged in as Read-only");
+		if (clicked){
+			$.mobile.changePage("#mainMenu");
+		}
+		$("#continue").show();
 	} else{
-		notice(user.get("userName") + ", You do not have permission to view this application.");
+		notice("Hello, " + user.get("userName") + "<br/>You do not have permission to view this application.");
 		stopApp();
+		$("#continue").hide();
+		console.log("logged in as Unauthorized");
 	}
 }
 
 function startApp(){	
 	if (WineApp == null){
-		WineApp = new WineAppView({
-			el : "#appView"
-		});
+		WineApp = new WineAppView();
 	}else{		
-		window.location = "";
-	}	
+		//window.location = "";
+	}
 }
 
 function stopApp(){

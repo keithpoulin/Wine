@@ -1,4 +1,16 @@
-<div id="components">
+<div id="mainMenu" data-role="page" data-title="Main Menu">
+	<div data-role="header">
+		<a data-rel="back">back</a>
+		<h1>Menu</h1>
+	</div>
+	<div data-role="content">
+		<a href="#login">Login</a>
+		<a href="#wineSummaries">Wine Summaries</a>		
+	</div>
+	<div data-role="footer"></div>
+</div>
+
+<div id="components" data-role="page">
 	<label for="select_brands">Brands: </label><br/>
 	<select class="select_brands" id="select_brands"></select><br/>
 	
@@ -11,6 +23,17 @@
 	<label for="select_regions">Regions:</label><br/>
 	<select class="select_regions" id="select_regions"></select><br/>
 </div>
-<h1 class="msg_loading">Loading Models... Please wait</h1>
-<ul id="wineSummaries"></ul>
-<div id="wineDetail"></div>
+<!-- <h1 class="msg_loading">Loading Models... Please wait</h1> -->
+
+<div id="wineSummaries" data-role="page">
+	<div data-role="header">
+		<a data-rel="back">back</a>
+		<h1>Wines</h1>
+	</div>
+	<div data-role="content" class="content">
+		<ul data-role="listview"></ul>
+	</div>
+	<div data-role="footer"></div>
+</div>
+
+<div id="wineDetail" data-role="page"></div>

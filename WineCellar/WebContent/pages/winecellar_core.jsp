@@ -1,9 +1,10 @@
 <!-- Styles and DOM elements (No JavaScript) -->
-<div id="templates"><jsp:include page="/templates/templates.jsp" /></div>	
+<div id="templates"><jsp:include page="/templates/templates.jsp" /></div>
 
 <!-- Libraries/Dependencies -->
 <script src="/js/lib/jquery.js" type="text/javascript"></script>
-<!-- <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script> -->
+<script src="/js/custom-scripting.js" type="text/javascript"></script>
+<script src="/js/lib/jquery.mobile-1.3.0-beta.1/jquery.mobile-1.3.0-beta.1.js"></script> 
 <script src="/js/lib/backbone/underscore-min.js" type="text/javascript"></script>
 <script src="/js/lib/backbone/backbone.js" type="text/javascript"></script>
 <script src="/js/lib/backbone/backbone-relational.js" type="text/javascript"></script>
@@ -20,6 +21,7 @@
 <script type="text/javascript">
 	$("#templates").remove();
 </script>
+
 <!-- Routers -->
 <script src="/js/Routers/router.js" type="text/javascript"></script>
 

@@ -1,6 +1,5 @@
 var WineAppView = Backbone.View.extend({
 	initialize: function(){
-		this.$el.html(this.template());		
 		this.collections = {
 			brands: new BrandCollection(),				
 			locations: new LocationCollection(),		
@@ -15,41 +14,43 @@ var WineAppView = Backbone.View.extend({
 				
 		this.views["wineList"]=  new WineSummaryList({
 			model: Backbone.Relational.store.getCollection(WineModel),
-			el: this.$el.find("#wineSummaries").get(0)
+			el: $("#wineSummaryList")
 		});
 		this.views["selectBrands"] = new Select({
-			el: this.$el.find("#select_brands"), 
+			el: $("#select_brands"), 
 			attributes:{multiple: "multiple"}, 
 			modelType: BrandModel,
 			template: templates.select_brands
 		});
 		this.views["selectVineyards"] = new Select({
-			el: this.$el.find("#select_vineyards"), 
+			el: $("#select_vineyards"), 
 			attributes:{multiple: "multiple"}, 
 			modelType: VineyardModel,
 			template: templates.select_vineyards
 		});
 		this.views["selectVarietals"] = new Select({
-			el: this.$el.find("#select_varietals"),
+			el: $("#select_varietals"),
 			attributes: {},
 			modelType: VarietalModel,
 			template: templates.select_varietals
 		});
 		this.views["selectRegions"] = new Select({
-			el: this.$el.find("#select_regions"),
+			el: $("#select_regions"),
 			attributes: {},
 			modelType: RegionModel,
 			template: templates.select_regions
 		});
 		
-		this.views["wineDetail"] = new WineDetailView({el: this.$el.find(" > #wineDetail")}); 
+		this.views["wineDetail"] = new WineDetailView({
+			el: $("#wineDetail")
+		}); 
 		
 		for (var key in this.collections){
 			if (key != "purchases" && key != "tastingNotes"){
 				this.collections[key].fetch({add: true});
 			}
-		}
-		
+		}		
+		this.setListeners();
 		this.router = new Router({appView: this});
 		Backbone.history.start();
 	}, 
@@ -62,12 +63,15 @@ var WineAppView = Backbone.View.extend({
 		}else{ alert("View with name: " + name + " already exists......"); }	
 	},
 	render: function(){
-		for (var key in this.views){
-			this.views[key].render();
-		}
+//		for (var key in this.views){
+//			this.views[key].render();
+//		}
 	},
 	refreshAll: function(){
 		this.render();
 		this.views.wineList.addAll();
+	}, setListeners: function(){
+//		var context = this;
+
 	}
 });

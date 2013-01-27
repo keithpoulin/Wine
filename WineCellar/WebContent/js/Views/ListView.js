@@ -12,7 +12,7 @@ var ListView = Backbone.View.extend({
 
 		this.template = this.options.template;
 		for (var key in this.attributes){
-			//this.$el.attr(key, this.attributes[key]);
+			this.$el.attr(key, this.attributes[key]);
 		}
 	},
 	render: function(){

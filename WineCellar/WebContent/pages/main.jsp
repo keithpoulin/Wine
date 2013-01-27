@@ -12,7 +12,7 @@
 	<body>		
 		<div id="login" data-role="page">
 			<div data-role="header">
-				<a data-rel="back">Back</a>
+				<a data-rel="back" data-icon="arrow-l">Back</a>
 				<h1>Login</h1>
 			</div>
 			<div data-role="content">
@@ -24,14 +24,14 @@
 				<input type="password" id="password" placeholder="Password" disabled="disabled"/>	
 							
 				<button id="submitLogin">Login</button>				
-				<a href="#mainMenu" id="continue" data-role="button">Main Menu</a>
+				<a href="#mainMenu" id="continue" data-role="button" data-icon="home" class="hidden">Main Menu</a>
 			</div>
 			
 		</div>				
 		
 		<div id="mainMenu" data-role="page" data-title="Main Menu">
 			<div data-role="header">
-				<a data-rel="back">Back</a>
+				<a data-rel="back" data-icon="arrow-l">Back</a>
 				<h1>Menu</h1>
 			</div>
 			<div data-role="content">
@@ -46,7 +46,7 @@
 		
 		<div id="components" data-role="page">
 			<div data-role="header">
-				<a data-rel="back">Back</a>
+				<a data-rel="back" data-icon="arrow-l">Back</a>
 				<h1>Components</h1>
 			</div>
 			<label for="select_brands">Brands: </label><br/>
@@ -65,7 +65,7 @@
 		
 		<div id="wineSummaries" data-role="page">
 			<div data-role="header">
-				<a data-rel="back">Back</a>
+				<a data-rel="back" data-icon="arrow-l">Back</a>
 				<h1>Wines</h1>
 			</div>
 			<div data-role="content" class="content">

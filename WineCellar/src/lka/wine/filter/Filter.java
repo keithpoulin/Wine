@@ -20,7 +20,7 @@ public class Filter implements ContainerRequestFilter {
 
 		Map<String, Cookie> cookies = req.getCookies();
 		String userId = cookies.get("userId").getValue();
-		
+		System.out.println("req.getPath()" + req.getPath());
 		User user = null;		
 		try {
 			user= UsersTable.class.newInstance().select(Integer.valueOf(userId));
@@ -35,7 +35,7 @@ public class Filter implements ContainerRequestFilter {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if (user != null){
+		if (req.getPath().equalsIgnoreCase("UserRoles") || user != null){
 			containerRequest = req;
 		}else{
 			throw new WebApplicationException(Response.Status.UNAUTHORIZED);

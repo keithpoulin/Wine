@@ -1,9 +1,15 @@
 var WineSummaryList = Backbone.View.extend({
 	initialize: function(){				
 		this.model.bind("add", this.addOne, this);	
-		this.count = 0;
+		var context = this;
+		this.count = 0;		
+		this.initialized = false;
+		this.model.on("fetched", function(){
+			context.refresh();
+		});
 	},
 	addOne: function(summary, context){
+		this.count = this.count + 1;
 		var view = new WineSummaryView({
 			model: summary, 
 			attributes: {
@@ -31,13 +37,13 @@ var WineSummaryList = Backbone.View.extend({
 		return view;
 	}, render: function(){		
 
-	}, refresh: function(){
+	}, refresh: function(){		
 		console.log("refreshing");
-		if (this.count == 0){
-			this.$el.listview();
-		}else{
-			this.$el.listview("refresh");
-		}		
-		this.count = this.count + 1;
+		try{
+			this.$el.listview("refresh", true);
+		}catch(e){
+			console.log("failed to refresh listview");
+		}
+		this.initialized = true;
 	}
 });

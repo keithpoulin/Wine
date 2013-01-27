@@ -1,6 +1,7 @@
 var WineAppView = Backbone.View.extend({
 	initialize: function(){
 		this.collections = {
+			wines: new WineCollection()	,
 			brands: new BrandCollection(),				
 			locations: new LocationCollection(),		
 			locationTypes: new LocationTypeCollection(),	
@@ -8,10 +9,9 @@ var WineAppView = Backbone.View.extend({
 			regions: new RegionCollection(),				
 			tastingNotes: new TastingNoteCollection(),		
 			varietals: new VarietalCollection(),			
-			vineyards: new VineyardCollection(), 			
-			wines: new WineCollection()	
+			vineyards: new VineyardCollection(),						
 		};
-				
+		
 		this.views["wineList"]=  new WineSummaryList({
 			model: Backbone.Relational.store.getCollection(WineModel),
 			el: $("#wineSummaryList")
@@ -46,9 +46,22 @@ var WineAppView = Backbone.View.extend({
 		}); 
 		
 		for (var key in this.collections){
-			if (key != "purchases" && key != "tastingNotes"){
-				this.collections[key].fetch({add: true});
-			}
+//			if (key != "purchases" && key != "tastingNotes"){
+				this.collections[key].fetch({add: true, success: function(collection){
+					collection.trigger("fetched");
+					var url = "";
+					if (typeof(collection.url) == "function"){
+						url = collection.url();
+					}else {
+						url = collection.url;
+					}
+					console.log("triggering fetched for " + url.split("/")[3]);
+					if (collection.url == "/rest/WineCellar/wines"){
+						Backbone.Relational.store.getCollection(WineModel).trigger("fetched");
+					}
+				}});
+//			}
+			
 		}		
 		this.setListeners();
 		this.router = new Router({appView: this});

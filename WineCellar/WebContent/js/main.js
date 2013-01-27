@@ -2,25 +2,29 @@ $(document).ready(function() {
 	notice("Loading Application..");
 	window.clicked = false;
 	window.WineApp = null;
-	$("#continue").hide();
+	ajaxSetup();
 	if (getCookie("userId") == null){
 		login(3, "password");
 	}
 	var userRoles = new UserRoleCollection();
-	userRoles.fetch();
-	initialize();
-});
-
-function initialize() {	
-	window.user = new UserModel();	
-	ajaxSetup();		
+	
+	userRoles.fetch({
+		success: function(){
+			initialize();
+		}
+	});
+	
 	$("#submitLogin").click(function(){
 		clicked = true;
 		notice("Logging in. Please wait...");
 		login($("#userId").val(), $("#password").val());
-		checkPermissions();		
+		checkPermissions();
+		$("#continue").addClass("hidden");
 	});
-	
+});
+
+function initialize() {	
+	window.user = new UserModel();	
 	if (getCookie("userId") != null){
 		$("#userId").val(getCookie("userId"));
 		checkPermissions();		
@@ -35,7 +39,7 @@ function processRole(user){
 		if (clicked){
 			$.mobile.changePage("#mainMenu");
 		}
-		$("#continue").show();
+		$("#continue").removeClass("hidden");
 	}else if (user.getRole() == "READ"){
 		notice("Hello, " + user.get("userName") + "<br/>Role: Read-Only");
 		startApp();
@@ -43,11 +47,11 @@ function processRole(user){
 		if (clicked){
 			$.mobile.changePage("#mainMenu");
 		}
-		$("#continue").show();
+		$("#continue").removeClass("hidden");
 	} else{
 		notice("Hello, " + user.get("userName") + "<br/>You do not have permission to view this application.");
 		stopApp();
-		$("#continue").hide();
+		$("#continue").addClass("hidden");
 		console.log("logged in as Unauthorized");
 	}
 }
@@ -113,8 +117,7 @@ function ajaxSetup(){
 		statusCode : {
 			401 : function() {
 				// 401 -- FORBIDDEN
-				notice("You do not have the required permissions to use this applicaion. Please try to log in.");
-				
+				notice("You do not have the required permissions to use this applicaion. Please try to log in.");				
 			},
 			403 : function() {
 				// 403 -- UNAUTHORIZED

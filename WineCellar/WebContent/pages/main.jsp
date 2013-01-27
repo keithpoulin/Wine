@@ -82,6 +82,13 @@
 			<div data-role="content" class="content"></div>
 		</div>
 						
+		<div id="addDialog" data-role="page">
+			<div data-role="header">
+				<h1>Create Item</h1>
+			</div>
+			<div data-role="content" class="content"></div>
+		</div>				
+						
 		<jsp:include page="winecellar_core.jsp"/>
 		<script src="/js/main.js" type="text/javascript"></script>
 		

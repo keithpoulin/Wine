@@ -7,9 +7,7 @@ var CreateItemView = Backbone.View.extend({
 	tagName: "div",
 	template: null,
 	modelType: null,
-	className: "createItemView",
 	initialize: function(){
-		_.bindAll(this);
 		this.modelType = this.options.modelType;
 		
 		this.template = this.options.template;
@@ -21,12 +19,8 @@ var CreateItemView = Backbone.View.extend({
 	render: function(){
 		var html = this.template();
 		this.$el.html(html);
-		this.$("button.formClose").on("click", this.close);
-		this.$("button.formSubmit").on("click", this.submit);
-		
+		this.$el.trigger("create");		
 		this.$("input.author").val(user.get("userName"));
-		
-		
 		return this;
 	},
 	open: function(){
@@ -34,7 +28,7 @@ var CreateItemView = Backbone.View.extend({
 		this.$el.show();
 	}, 
 	close: function(){
-		this.$el.hide();
+		this.$el.dialog("close");
 	},
 	submit: function(){		
 		var item = new this.modelType();

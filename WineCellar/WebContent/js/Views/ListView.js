@@ -21,6 +21,11 @@ var ListView = Backbone.View.extend({
 		this.setElement(this.options.selector);
 		var data = this.model.toJSON();
 		this.$el.html(this.template( data ));
+		try{			
+			this.$el.listview("refresh", true);		
+		}catch(e){
+			console.log("failed to refresh list");
+		}
 		return this;
 	},
 	events: {

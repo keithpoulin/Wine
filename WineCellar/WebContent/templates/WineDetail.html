@@ -71,17 +71,17 @@
 	Bottles On Hand:&nbsp;<span class="inventory">{{qtyOnHand}}</span>
 </p>
 
-<button class="addTastingNoteBtn">Add Tasting Note</button>
-<button class="addPurchaseBtn">Add Purchase</button>
+<a class="addTastingNoteBtn" href="#addDialog" data-rel="dialog" data-role="button" data-inline="true">Add Tasting Note</a>
+<a class="addPurchaseBtn" href="#addDialog" data-rel="dialog" data-role="button" data-inline="true">Add Purchase</a>
 
 <br class="clear"/>
 <h3>Purchases</h3>
-<ul class="purchaseList"></ul><hr/>
+<ul class="purchaseList" data-role="listview" data-inset="true" data-theme="d"></ul>
 
 <h3>Tastings</h3>
-<ul class="tastingNoteList" ></ul>
+<ul class="tastingNoteList" data-role="listview" data-inset="true" data-theme="d"></ul>
 
 
-<div class="createItemPopup"></div>
+<!-- <div class="createItemPopup"></div> -->
 <div class="ajaxLoader wineDetail"><img src="/images/gifs/ajax-loader.gif"/></div>
 <!-- </script> -->

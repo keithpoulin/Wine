@@ -37,7 +37,7 @@
 			<div data-role="content">
 				<ul data-role="listview" data-inset="true">
 					<li><a href="#login" id="menu_login">Login</a></li>
-					<li><a href="#wineSummaries" id="menu_wineSummaries">Wine Summaries</a></li>
+					<li><a href="#wineSummaries" id="menu_wineSummaries">Wine List<span class="ui-li-count" id="wineCount">0</span></a></li>
 					<li><a href="#components" id="menu_components">Components</a></li>
 				</ul>
 			</div>

@@ -3,6 +3,7 @@
 
 <!-- Libraries/Dependencies -->
 <script src="/js/lib/jquery.js" type="text/javascript"></script>
+<script src="/js/lib/jquery-ui-datepicker.js" type="text/javascript"></script>
 <script src="/js/custom-scripting.js" type="text/javascript"></script>
 <script src="/js/lib/jquery.mobile-1.3.0-beta.1/jquery.mobile-1.3.0-beta.1.js"></script> 
 <script src="/js/lib/backbone/underscore-min.js" type="text/javascript"></script>

@@ -48,10 +48,10 @@ public class RestWriter <R extends AbstractDao, T extends AbstractData<R>> exten
 	public String post(String data) throws ServletException {
 		String json = null;
 		try {
-			R brand = gson.fromJson(data, clazzR);
-			int id = clazzT.newInstance().insert(brand);
-			brand.setId(id);
-			json = gson.toJson(brand);
+			R model = gson.fromJson(data, clazzR);
+			int id = clazzT.newInstance().insert(model);
+			model.setId(id);
+			json = gson.toJson(model);
 		} catch (Exception e) {
 		    throw new ServletException(e);
 		}

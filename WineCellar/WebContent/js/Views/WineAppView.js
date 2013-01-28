@@ -12,6 +12,8 @@ var WineAppView = Backbone.View.extend({
 			vineyards: new VineyardCollection(),						
 		};
 		
+		this.collections.wines.bind("fetched add", this.render, this);
+		
 		this.views["wineList"]=  new WineSummaryList({
 			model: Backbone.Relational.store.getCollection(WineModel),
 			el: $("#wineSummaryList")
@@ -79,6 +81,7 @@ var WineAppView = Backbone.View.extend({
 //		for (var key in this.views){
 //			this.views[key].render();
 //		}
+		$("#wineCount").html(this.collections.wines.length);
 	},
 	refreshAll: function(){
 		this.render();

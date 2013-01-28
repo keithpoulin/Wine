@@ -27,13 +27,15 @@ var WineDetailView = Backbone.View.extend({
 		this.views["addTastingNote"] = new CreateItemView({
 			el: $("#addDialog div.content"),
 			modelType: TastingNoteModel,
-			template: templates.formAddTastingNote
+			template: templates.formAddTastingNote, 
+			wineId: this.wineId
 		});
 		
 		this.views["addPurchase"] = new CreateItemView({ 
 			el: $("#addDialog div.content"),
 			modelType: PurchaseModel,
-			template: templates.formAddPurchase
+			template: templates.formAddPurchase,
+			wineId: this.wineId
 		});
  		
 	},
@@ -56,7 +58,9 @@ var WineDetailView = Backbone.View.extend({
 			this.model.on("change", this.render, this);
 			this.model.on("all", this.calculateStats, this);
 			this.views.purchases.setModel(model.get("purchases"));
-			this.views.tastingNotes.setModel(model.get("tastingNotes"));		
+			this.views.tastingNotes.setModel(model.get("tastingNotes"));
+			this.views.addPurchase.setWineId(this.wineId);
+			this.views.addTastingNote.setWineId(this.wineId);
 		}		
 		return this;
 	},

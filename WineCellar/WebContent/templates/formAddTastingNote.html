@@ -1,13 +1,19 @@
 
-<label for="formTastingDate">Tasting Date</label><br/>
-<input id="formTastingDate" type="date"/><br/>
-
-<label for="formTastingNote">Note</label><br/>
-<textarea id="formTastingNote" placeholder="Tasting Note"></textarea><br/>
-
-<label for="formNoteAuthor">Author</label><br/>
-<input id="formNoteAuthor" class="author" /><br/> 
+<div data-role="fieldcontain">
+	<label for="formTastingDate">Date</label>
+	<input id="formTastingDate" name="tastingDate" type="date"/>
+	
+	<label for="formTastingRating">Rating</label>
+	<input id="formTastingRating" name="rating" type="range" value="0" max="10" min="0" step="1" data-highlight="true" />
+	
+	<label for="formTastingNote">Note</label>
+	<textarea id="formTastingNote" placeholder="Tasting Note" name="review" data-clear-btn="true"></textarea>
+	
+	<label for="formNoteAuthor" >Author</label>
+	<input id="formNoteAuthor" class="author" name="reviewedBy" data-clear-btn="true"/>
+</div>
 
 
 <a href="#wineDetail" data-rel="back" data-role="button" data-inline="true" class="formClose">Close</a>
+<!-- <a href="#wineDetail" data-rel="back" data-role="back" data-inline="true" class="formSubmit">Submit</a> -->
 <button class="formSubmit">Submit</button>

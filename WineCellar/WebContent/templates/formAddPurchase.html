@@ -1,18 +1,18 @@
+<div data-role="fieldcontain">
+	<label for="formPurchaseDate">Date</label>
+	<input id="formPurchaseDate" type="date"/>
+	
+	<label for="formPurchasePrice">Price ($)</label>
+	<input id="formPurchasePrice" class="currency" type="number" data-clear-btn="true" pattern="^\d+(\.|\,)\d{2}$"/>
+	
+	<label for="formPurchasePer" data-clear-btn="true">Unit</label>
+	<input id="formPurchasePer" list="priceTypes" data-clear-btn="true"/>
+	<datalist id="priceTypes">
+		<option value="Bottle" />
+		<option value="Glass" />
+		<option value="Case" />
+	</datalist>
+</div>
 
-<label for="formPurchaseDate">Purchase Date</label><br/>
-<input id="formPurchaseDate" type="date"/><br/>
-
-<label for="formPurchasePrice">Price</label><br/>
-$<input id="formPurchasePrice" type="number"/><br/>
-
-<label for="formPurchasePer">Purchase Per</label><br/>
-<input id="formPurchasePer" list="priceTypes"/>
-<datalist id="priceTypes">
-	<option value="Bottle" />
-	<option value="Glass" />
-	<option value="Case" />
-</datalist>
-
-<br/>
 <a href="#wineDetail" data-rel="back" data-role="button" data-inline="true" class="formClose">Close</a>
-<button class="formSubmit">Submit</button>
+<a href="#wineDetail" data-role="button" data-inline="true" class="formSubmit">Submit</a>

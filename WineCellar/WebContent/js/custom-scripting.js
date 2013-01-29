@@ -16,6 +16,7 @@ $(document).on( "pagebeforechange", function( e, data ) {
 				console.log("setting WineId to " + wineId);
 				WineApp.views.wineDetail.setWineId(wineId);
 				$.mobile.changePage( $("#wineDetail"), {dataUrl: u.hash});
+				WineApp.views.wineDetail.render();
 			}catch(e){
 				console.log("failed to set wineId");
 			}

@@ -10,25 +10,25 @@ var CreateItemView = Backbone.View.extend({
 	initialize: function(){
 		this.modelType = this.options.modelType;
 		this.template = this.options.template;
+		this.data = this.options.data;
 		this.wineId = this.options.wineId;
 		for (var key in this.attributes){
 			this.$el.attr(key, this.attributes[key]);
 		}		
 	},
 	render: function(){
-		var html = this.template();
+		var html = this.template(this.data.toJSON());
 		this.$el.html(html);
-		this.$el.trigger("create");		
+		this.$el.trigger("create");
 		this.$("input.author").val(user.get("userName"));
 		this.setEvents();
 		return this;
 	},
 	open: function(){
 		this.render();
-		this.$el.show();
 	}, 
 	close: function(){
-		this.$el.dialog("close");
+		$("#addDialog").dialog("close");
 	},
 	submit: function(){		
 		var item = new this.modelType();
@@ -38,13 +38,19 @@ var CreateItemView = Backbone.View.extend({
 			var value=  obj.val();
 			if (obj.attr("type") == "date"){
 				value = $.datepicker.formatDate("M dd, yy", new Date(value));
+			}else if (obj.hasClass("number")){
+				value = Number( obj.val() );
 			}
+			if (name == "locationId"){
+				item.set("locationSource", value);
+			}
+			
 			item.set(name, value);			
 		});
-		item.set("wineId", this.wineId);
-		console.log(item);
+		item.set("wineId", Number(this.wineId));
+		item.set("wineSource", Number(this.wineId));
 		item.save();
-//		this.close();
+		this.close();
 	}, setEvents: function(){
 		var context = this;
 		
@@ -57,6 +63,8 @@ var CreateItemView = Backbone.View.extend({
 		});
 	}, setWineId: function(id){
 		this.wineId = id;
+	}, createView: function(){
+		$("#addDialog").trigger("create");
 	}
 
 });

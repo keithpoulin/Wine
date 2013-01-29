@@ -1,6 +1,10 @@
 var PurchaseModel = Backbone.RelationalModel.extend({
 	urlRoot: "/rest/WineCellar/purchases",
 	idAttribute: "purchaseId",
+	initialize: function(){
+		this.set("wineSource", this.get("wineId") );
+		this.set("locationSource", this.get("locationId"));
+	},
 	defaults: {
 		locationId: 1,
 //		wineId: 1,
@@ -15,9 +19,9 @@ var PurchaseModel = Backbone.RelationalModel.extend({
 		type: Backbone.HasOne,
 		relatedModel: "LocationModel",
 		key: "location",
-		keySource: "locationId",
+		keySource: "locationSource",
 		keyDestination: "location",
-		includeInJSON: ["locationName", "locationCity", "locationState", "locationType", "locationId"],
+		includeInJSON: ["locationName", "locationCity", "locationState", "locationId", "locationType"],
 		reverseRelation: {
 			type: Backbone.HasMany,
 			key: "purchases",

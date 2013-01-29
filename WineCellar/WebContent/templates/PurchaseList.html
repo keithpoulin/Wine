@@ -14,18 +14,24 @@
 			<p>
 				Qty: {{qtyPurchased}}
 			</p>
-			<p class="location">
-			{{#if location}}
-				{{location.locationName}}
-				{{#if location.locationType.attributes.locationType}}
-					({{location.locationType.attributes.locationType}})
+			
+			<p class="priceNotes">
+				{{#if priceNotes}}
+					{{priceNotes}}
 				{{/if}}
-			{{/if}}
-			{{#if location.locationCity}}
-				{{location.locationCity}}
-			{{/if}}
-			{{#if location.locationState}}
-				, {{location.locationState}}
+			</p>
+			<p class="location">
+				{{#if location}}
+					{{location.locationName}}
+					{{#if location.locationType}}
+						({{location.locationType}})
+					{{/if}}
+				{{/if}}
+				{{#if location.locationCity}}
+					{{location.locationCity}}
+				{{/if}}
+				{{#if location.locationState}}
+					, {{location.locationState}}
 			{{/if}}
 			</p>
 		</li>

@@ -1,18 +1,50 @@
 <div data-role="fieldcontain">
 	<label for="formPurchaseDate">Date</label>
-	<input id="formPurchaseDate" type="date"/>
+	<input id="formPurchaseDate" type="date" name="purchaseDate"/>
 	
 	<label for="formPurchasePrice">Price ($)</label>
-	<input id="formPurchasePrice" class="currency" type="number" data-clear-btn="true" pattern="^\d+(\.|\,)\d{2}$"/>
+	<input id="formPurchasePrice" name="price" class="currency" type="number" data-clear-btn="true" pattern="^\d+(\.|\,)\d{2}$"/>
 	
-	<label for="formPurchasePer" data-clear-btn="true">Unit</label>
-	<input id="formPurchasePer" list="priceTypes" data-clear-btn="true"/>
+	<label for="formPurchasePer" >Unit</label>
+	<input id="formPurchasePer" name="pricePer" list="priceTypes" data-clear-btn="true"/>
 	<datalist id="priceTypes">
 		<option value="Bottle" />
 		<option value="Glass" />
 		<option value="Case" />
 	</datalist>
+	
+	<label for="purchaseQty">Qty</label>
+	<input id="purchaseQty" name="qtyPurchased" class="number" data-clear-btn="true" type="number"/>
+	
+	<label for="priceNotes">Note</label>
+	<textarea id="priceNotes" name="priceNotes" data-clear-btn="true"></textarea>
+	
+	<label for="inventoryLocation">Inventory Location</label>
+	<input name="invLocation" id="inventoryLocation"/>
+	
+	<label for="purchaseLocation">Location</label>
+	<!-- <input id="purchaseLocation" value="1" class="number" name="locationId"/> -->
+	<select id="purchaseLocation">
+		{{#each this}}
+			<option value="{{this.locationId}}">
+				{{#if this.locationName}}
+						{{this.locationName}}
+						{{#if this.locationType}}
+							({{this.locationType}})
+						{{/if}}
+					{{/if}}
+					{{#if this.locationCity}}
+						{{this.locationCity}}
+					{{/if}}
+					{{#if this.locationState}}
+						, {{this.locationState}}
+				{{/if}}
+			</option>
+		{{/each}}
+	</select>
+	
+	
 </div>
 
-<a href="#wineDetail" data-rel="back" data-role="button" data-inline="true" class="formClose">Close</a>
-<a href="#wineDetail" data-role="button" data-inline="true" class="formSubmit">Submit</a>
+<a href="#wineDetail" data-rel="back" data-role="button" class="formClose hidden">Close</a>
+<button class="formSubmit">Submit</button>

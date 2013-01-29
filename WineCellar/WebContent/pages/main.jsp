@@ -82,7 +82,7 @@
 			<div data-role="content" class="content"></div>
 		</div>
 						
-		<div id="addDialog" data-role="page">
+		<div id="addDialog" data-role="dialog">
 			<div data-role="header">
 				<h1>Create Item</h1>
 			</div>

@@ -62,11 +62,11 @@ var WineModel = Backbone.RelationalModel.extend({
 		keySource: "purchaseParentSource",
 		keyDestination: "purchases",
 		collectionType: "PurchaseCollection",
-		includeInJSON: ["purchaseId", "purchaseDate", "invLocation", "price", "priceNotes", "pricePer", "purchaseDate", "qtyOnHand", "qtyPurchased"],
+		includeInJSON: ["purchaseId", "purchaseDate", "invLocation", "price", "priceNotes", "pricePer", "purchaseDate", "qtyOnHand", "qtyPurchased, locationId"],
 		reverseRelation: {
 			key: "wine",
 			type: Backbone.HasOne,
-			keySource: "wineId"
+			keySource: "wineSource"
 		}			
 	}, {
 		type: Backbone.HasMany,
@@ -75,10 +75,11 @@ var WineModel = Backbone.RelationalModel.extend({
 		keySource: "tastingNoteParentSource",
 		keyDestination: "tastingNotes",
 		collectionType: "TastingNoteCollection",
+		includeInJSON: ["tastingDate", "tastingNoteId", "reviewedBy", "review", "rating"],
 		reverseRelation: {
 			key: "wine",
 			type: Backbone.HasOne,
-			keySource: "wineId"
+			keySource: "wineSource"			
 		}
 	}]
 });

@@ -28,14 +28,15 @@ var WineDetailView = Backbone.View.extend({
 			el: $("#addDialog div.content"),
 			modelType: TastingNoteModel,
 			template: templates.formAddTastingNote, 
-			wineId: this.wineId
+			wineId: this.wineId			
 		});
 		
 		this.views["addPurchase"] = new CreateItemView({ 
 			el: $("#addDialog div.content"),
 			modelType: PurchaseModel,
 			template: templates.formAddPurchase,
-			wineId: this.wineId
+			wineId: this.wineId,
+			data: Backbone.Relational.store.getCollection(LocationModel)
 		});
  		
 	},
@@ -43,17 +44,6 @@ var WineDetailView = Backbone.View.extend({
 	views: {},
 	setModel: function(model){		
 		if (model != undefined){
-			var context = this;
-			var success = function(model, response, options){
-				console.log("success function called");
-				for (var key in context.views){
-					context.calculateStats();
-					context.render();
-					context.views[key].render();					
-				}
-			};
-			model.fetchChildren("tastingNotes", {success: success}, true);
-			model.fetchChildren("purchases", {success: success}, true);
 			this.model = model;
 			this.model.on("change", this.render, this);
 			this.model.on("all", this.calculateStats, this);
@@ -61,6 +51,7 @@ var WineDetailView = Backbone.View.extend({
 			this.views.tastingNotes.setModel(model.get("tastingNotes"));
 			this.views.addPurchase.setWineId(this.wineId);
 			this.views.addTastingNote.setWineId(this.wineId);
+			this.calculateStats();
 		}		
 		return this;
 	},
@@ -78,19 +69,26 @@ var WineDetailView = Backbone.View.extend({
 		var purchaseContext = this.views.addPurchase;
 
 		this.$(".addTastingNoteBtn").on("click", function(){
-			tastingContext.render();
+			setTimeout(function(){
+				tastingContext.render();
+			}, 20);
 		});
 		
 		this.$(".addPurchaseBtn").on("click", function(){
 			purchaseContext.render();
 		});
 	
-		for (var key in this.views){
-			this.views[key].render();
-		}
+//		for (var key in this.views){
+//			this.views[key].render();
+//		}
 		this.$el.show();
 		this.$el.css("display", "block");
 		$("div.wineDetail.ajaxLoader").hide();
+		
+		this.views.purchases.render();
+		this.views.tastingNotes.render();		
+		
+		
 		return this;
 	},
 	onAdd: function(model, collection, options){

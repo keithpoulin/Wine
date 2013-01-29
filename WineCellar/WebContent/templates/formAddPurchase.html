@@ -24,7 +24,7 @@
 	
 	<label for="purchaseLocation">Location</label>
 	<!-- <input id="purchaseLocation" value="1" class="number" name="locationId"/> -->
-	<select id="purchaseLocation">
+	<select id="purchaseLocation" name="locationId" class="number">
 		{{#each this}}
 			<option value="{{this.locationId}}">
 				{{#if this.locationName}}

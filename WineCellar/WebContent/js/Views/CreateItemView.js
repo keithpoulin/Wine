@@ -17,7 +17,12 @@ var CreateItemView = Backbone.View.extend({
 		}		
 	},
 	render: function(){
-		var html = this.template(this.data.toJSON());
+		var html = null;
+		if (this.data != undefined && this.data != null){
+			html = this.template(this.data.toJSON());
+		}else{
+			html = this.template();
+		}		
 		this.$el.html(html);
 		this.$el.trigger("create");
 		this.$("input.author").val(user.get("userName"));
@@ -32,7 +37,7 @@ var CreateItemView = Backbone.View.extend({
 	},
 	submit: function(){		
 		var item = new this.modelType();
-		this.$("input, textarea").each(function(){			
+		this.$("input, textarea, select").each(function(){			
 			var obj = $(this);
 			var name = obj.attr("name");
 			var value=  obj.val();
